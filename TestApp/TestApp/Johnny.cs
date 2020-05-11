@@ -8,9 +8,13 @@ namespace TestApp
 {
     class Johnny
     {
+
+       
         public int AddTwoNumbers(int a, int b)
         {
-            return "woot woot";
+
+            return a * b;
+
         }
     }
 }
