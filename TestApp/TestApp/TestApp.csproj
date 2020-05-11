@@ -119,9 +119,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Johnny.cs" />
+    <Compile Include="Julia.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="obj\ARM\Debug\App.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +133,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="obj\ARM\Debug\XamlSaveStateFile.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -153,6 +157,15 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.9</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\ARM\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\ARM\Debug\TestApp.csprojAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\ARM\Debug\" />
+    <Folder Include="obj\ARM\Debug\intermediatexaml\" />
+    <Folder Include="obj\ARM\Debug\TempPE\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
