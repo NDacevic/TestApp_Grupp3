@@ -126,6 +126,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Question.cs" />
+    <Compile Include="TeacherCreateViewModel.cs" />
     <Compile Include="TeacherGradeTestViewModel.cs" />
     <Compile Include="TeacherStudentViewModel.cs" />
   </ItemGroup>

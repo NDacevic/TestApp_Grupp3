@@ -19,7 +19,7 @@ namespace TestApp
         #region Constructors
         public TeacherStudentViewModel()
         {
-
+            //Created but left empty intentionally in case it will be used in the future
         }
         #endregion
 
