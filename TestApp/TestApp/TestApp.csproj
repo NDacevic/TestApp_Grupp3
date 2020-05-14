@@ -120,16 +120,38 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Johnny.cs" />
-    <Compile Include="Julia.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\Student.cs" />
+    <Compile Include="Model\StudentQuestionAnswer.cs" />
+    <Compile Include="Model\Teacher.cs" />
+    <Compile Include="Model\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Question.cs" />
-    <Compile Include="TeacherCreateViewModel.cs" />
-    <Compile Include="TeacherGradeTestViewModel.cs" />
-    <Compile Include="TeacherStudentViewModel.cs" />
+    <Compile Include="Model\Question.cs" />
+    <Compile Include="ViewModel\TeacherCreateViewModel.cs" />
+    <Compile Include="ViewModel\TeacherGradeTestViewModel.cs" />
+    <Compile Include="ViewModel\TeacherStudentViewModel.cs" />
+    <Compile Include="ViewModel\StudentViewModel.cs" />
+    <Compile Include="View\Student\AvailableTestsView.xaml.cs">
+      <DependentUpon>AvailableTestsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Student\MainPageStudentView.xaml.cs">
+      <DependentUpon>MainPageStudentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Teacher\CreateQuestionView.xaml.cs">
+      <DependentUpon>CreateQuestionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Teacher\MainPageTeacherView.xaml.cs">
+      <DependentUpon>MainPageTeacherView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Student\HistoricalTestsView.xaml.cs">
+      <DependentUpon>HistoricalTestsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Student\WriteTestView.xaml.cs">
+      <DependentUpon>WriteTestView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -154,6 +176,30 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Student\AvailableTestsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Student\MainPageStudentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Teacher\CreateQuestionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Teacher\MainPageTeacherView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Student\HistoricalTestsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Student\WriteTestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
