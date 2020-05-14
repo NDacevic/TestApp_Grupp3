@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestApp
 {
-    class Question
+    public class Question
     {
         #region Constant Fields
         #endregion

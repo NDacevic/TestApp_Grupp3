@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace TestApp
 {
-    public class TeacherGradeTestViewModel
+    public class TeacherStudentViewModel
     {
         #region Constant Fields
         #endregion
 
         #region Fields
-        private static TeacherGradeTestViewModel instance = null;
+        private static TeacherStudentViewModel instance = null;
         private static readonly object padlock = new object();
         #endregion
 
         #region Constructors
-        public TeacherGradeTestViewModel()
+        public TeacherStudentViewModel()
         {
 
         }
@@ -30,7 +30,7 @@ namespace TestApp
         #endregion
 
         #region Properties
-        public static TeacherGradeTestViewModel Instance
+        public TeacherStudentViewModel Instance
         {
             get
             {
@@ -38,7 +38,7 @@ namespace TestApp
                 {
                     if (instance==null)
                     {
-                        instance = new TeacherGradeTestViewModel();
+                        instance = new TeacherStudentViewModel();
                     }
                     return instance;
                 }
@@ -47,22 +47,16 @@ namespace TestApp
         #endregion
 
         #region Methods
-        public void GradeTextQuestion()
+        public void GetStudents()
         {
             throw new NotImplementedException();
         }
 
-        public void GetUngradedTest()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void GetUngradedQuestion()
+        public void DisplayStudentResult()
         {
             throw new NotImplementedException();
         }
         #endregion
-
 
     }
 }
