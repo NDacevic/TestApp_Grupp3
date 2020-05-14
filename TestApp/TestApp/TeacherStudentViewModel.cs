@@ -30,7 +30,7 @@ namespace TestApp
         #endregion
 
         #region Properties
-        public TeacherStudentViewModel Instance
+        public static TeacherStudentViewModel Instance
         {
             get
             {
