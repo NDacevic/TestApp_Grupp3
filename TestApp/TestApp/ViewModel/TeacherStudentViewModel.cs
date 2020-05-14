@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestApp
+namespace TestApp.ViewModel
 {
-    public class TeacherCreateViewModel
+    public class TeacherStudentViewModel
     {
         #region Constant Fields
         #endregion
 
         #region Fields
-        private static TeacherCreateViewModel instance = null;
+        private static TeacherStudentViewModel instance = null;
         private static readonly object padlock = new object();
         #endregion
 
         #region Constructors
-        public TeacherCreateViewModel()
+        public TeacherStudentViewModel()
         {
             //Created but left empty intentionally in case it will be used in the future
         }
@@ -30,7 +30,7 @@ namespace TestApp
         #endregion
 
         #region Properties
-        public static TeacherCreateViewModel Instance
+        public static TeacherStudentViewModel Instance
         {
             get
             {
@@ -38,34 +38,24 @@ namespace TestApp
                 {
                     if (instance==null)
                     {
-                        instance = new TeacherCreateViewModel();
+                        instance = new TeacherStudentViewModel();
                     }
                     return instance;
                 }
             }
         }
-        public Test CreatedTest { get; set; }
-        public Question CreatedQuestion { get; set; }
-        public List<Question> SubjectQuestions { get; set; }
-
         #endregion
 
         #region Methods
-        public void CreateTest()
+        public void GetStudents()
         {
             throw new NotImplementedException();
         }
 
-        public void CreateQuestion()
+        public void DisplayStudentResult()
         {
             throw new NotImplementedException();
         }
-
-        public void GetQuestionsForTestCreation()
-        {
-            throw new NotImplementedException();
-        }
-
         #endregion
 
     }
