@@ -12,15 +12,16 @@ namespace TestApp.Model
         #endregion
 
         #region Fields
-        private int TeacherId { get; set; }
+        
         private static Teacher instance = null;
-        private List<Student> Students { get; set; }
+       
         #endregion
 
         #region Constructors
         public Teacher ()
         {
-
+            TeacherId = 0;
+            Students = new List<Student>();
         }
         
         #endregion
@@ -44,7 +45,8 @@ namespace TestApp.Model
                 return instance;
             }
         }
-
+        public int TeacherId { get; set; }
+        public List<Student> Students { get; set; }
         #endregion
 
         #region Methods

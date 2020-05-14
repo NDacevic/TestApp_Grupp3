@@ -14,7 +14,7 @@ namespace TestApp.ViewModel
 
         #region Fields
         private static StudentViewModel instance = null;
-        private Student ActiveStudent { get; set; }
+        
         #endregion
 
         #region Constructors
@@ -42,6 +42,7 @@ namespace TestApp.ViewModel
                 return instance;
             }
         }
+        public Student ActiveStudent { get; set; }
         #endregion
 
         #region Methods

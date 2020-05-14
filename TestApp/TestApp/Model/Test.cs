@@ -12,21 +12,22 @@ namespace TestApp.Model
         #endregion
 
         #region Fields
-        private int TestId { get; set; }
-        private int Grade { get; set; }
-        private string CourseName { get; set; }
-        private int MaxPoints { get; set; }
-        private int TestTime { get; set; }
-        private bool IsActive { get; set; }
-        private List<Question> Questions { get; set; }
-        private bool IsTestGrades { get; set; }
-        private DateTime StartDate { get; set; }
-        private List<StudentQuestionAnswer> Result { get; set; }
+
         #endregion
 
         #region Constructors
-        public Test ()
+        public Test (int testId, int grade, string courseName, int maxPoints, int testTime, bool isActive, bool isTestGraded, DateTime startDate)
         {
+            TestId = testId;
+            Grade = grade;
+            CourseName = courseName;
+            MaxPoints = maxPoints;
+            TestTime = testTime;
+            IsActive = isActive;
+            Questions = new List<Question>();
+            IsTestGraded = isTestGraded;
+            StartDate = startDate;
+            Result = new List<StudentQuestionAnswer>();
 
         }
         #endregion
@@ -38,6 +39,16 @@ namespace TestApp.Model
         #endregion
 
         #region Properties
+        public int TestId { get; set; }
+        public int Grade { get; set; }
+        public string CourseName { get; set; }
+        public int MaxPoints { get; set; }
+        public int TestTime { get; set; }
+        public bool IsActive { get; set; }
+        public List<Question> Questions { get; set; }
+        public bool IsTestGraded { get; set; }
+        public DateTime StartDate { get; set; }
+        public List<StudentQuestionAnswer> Result { get; set; }
         #endregion
 
         #region Methods
