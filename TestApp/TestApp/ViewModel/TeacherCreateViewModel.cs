@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
 
-namespace TestApp
+
+namespace TestApp.ViewModel
 {
     public class TeacherCreateViewModel
     {
