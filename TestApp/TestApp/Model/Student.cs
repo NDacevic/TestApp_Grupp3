@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestApp.Model
 {
-    public class Student
+    public class Student : Person
     {
         #region Constant Fields
         #endregion
@@ -16,7 +16,7 @@ namespace TestApp.Model
         #endregion
 
         #region Constructors
-        public Student (int studentId, List<Test> writtenTests)
+        public Student (int studentId, string firstName, string lastName, string email, string password, int classId,  List<Test> writtenTests) : base(firstName, lastName, email, password, classId)
         {
             StudentId = studentId;
             WrittenTests = writtenTests;
