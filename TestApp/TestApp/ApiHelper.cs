@@ -4,6 +4,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using TestApp.Model;
+using Windows.UI.Popups;
 
 namespace TestApp
 {
@@ -73,9 +75,16 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void PostCreatedQuestion()
+        public async void PostCreatedQuestion(Question question)
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
         }
 
         public void GetQuestion()
