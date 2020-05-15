@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -77,6 +78,7 @@ namespace TestApp
 
         public async void PostCreatedQuestion(Question question)
         {
+            jsonString = JsonConvert.SerializeObject(question);
             try
             {
                 throw new NotImplementedException();
