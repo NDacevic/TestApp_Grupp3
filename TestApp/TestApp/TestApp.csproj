@@ -120,9 +120,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-
+    <Compile Include="Model\TestResult.cs" />
     <Compile Include="View\MainPage.xaml.cs">
-
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Person.cs" />
@@ -150,6 +149,12 @@
     <Compile Include="View\Teacher\CreateQuestionView.xaml.cs">
       <DependentUpon>CreateQuestionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Teacher\CreateTestView.xaml.cs">
+      <DependentUpon>CreateTestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Teacher\GradeTestView.xaml.cs">
+      <DependentUpon>GradeTestView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Teacher\MainPageTeacherView.xaml.cs">
       <DependentUpon>MainPageTeacherView.xaml</DependentUpon>
     </Compile>
@@ -158,6 +163,9 @@
     </Compile>
     <Compile Include="View\Student\WriteTestView.xaml.cs">
       <DependentUpon>WriteTestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Teacher\StudentResultView.xaml.cs">
+      <DependentUpon>StudentResultView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -197,6 +205,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Teacher\CreateTestView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Teacher\GradeTestView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Teacher\MainPageTeacherView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -208,6 +224,10 @@
     <Page Include="View\Student\WriteTestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Teacher\StudentResultView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
