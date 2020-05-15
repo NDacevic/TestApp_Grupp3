@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TestApp.View.Teacher"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:data="using:System"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -14,10 +14,82 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel>
-            <TextBlock Text="Question" FontSize="20"></TextBlock>
-            <TextBox Height="400"/>
-
-            <Button x:Name="bttn_CreateQuestion" Content="Create"/>
+            <StackPanel
+                Orientation="Horizontal">
+                <TextBlock
+                    Text="Question type"
+                    />
+                <ComboBox
+                    x:Name="comboBox_QuestionType"
+                    x:DefaultBindMode="OneWay"
+                    
+                    Width="300"
+                    SelectionChanged="ComboBox_SelectionChanged">
+                    <ComboBoxItem Content="Multiple Choice"/>
+                    <ComboBoxItem Content="Text"/>
+                </ComboBox>
+                <TextBlock
+                    Text="Points"
+                    />
+                <TextBox
+                    x:Name="textBox_QuestionPoints"
+                    />
+                <TextBlock
+                    Text="Course"
+                    />
+                <ComboBox
+                    x:Name="comboBox_CourseNames"
+                    x:DefaultBindMode="OneWay"
+                    >
+                </ComboBox>
+                <ListView Width="100"/>
+            </StackPanel>
+            <TextBlock
+                Text="Question"
+                FontSize="20"
+                />
+            <TextBox 
+                x:Name="textBox_questionText"
+                Height="400"     
+                />
+            <Grid
+                x:Name="grid_MultipleChoiceAnswers"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel
+                    Grid.Column="0"
+                    >
+                    <TextBlock
+                        Text="Correct Answer"/>
+                    <TextBox
+                        x:Name="textBox_CorrectAnswer"/>
+                </StackPanel>
+                <StackPanel
+                    Grid.Column="1"
+                    >
+                    <TextBlock
+                        Text="Incorrect Answer"/>
+                    <TextBox
+                        x:Name="textBox_IncorrectAnswer1"/>
+                </StackPanel>
+                <StackPanel
+                    Grid.Column="2"
+                    >
+                    <TextBlock
+                        Text="Incorrect Answer"/>
+                    <TextBox
+                        x:Name="textBox_IncorrectAnswer2"/>
+                </StackPanel>
+            </Grid>
+            <Button 
+                x:Name="bttn_CreateQuestion"
+                Content="Create"
+                Click="CreateQuestionClick"
+                />
         </StackPanel>
     </Grid>
 </Page>
