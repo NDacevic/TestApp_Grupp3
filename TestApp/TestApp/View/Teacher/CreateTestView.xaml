@@ -5,10 +5,59 @@
     xmlns:local="using:TestApp.View.Teacher"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:TestApp.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Filtrera ämne"/>
+                <TextBlock Text="Filtrera frågetyp" Margin="50,0,0,0"/>
+                <TextBlock Text="Filtrera poäng" Margin="30,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox Width="110" 
+                          x:Name="FilterCourseComboBox"
+                          ItemsSource="{x:Bind teacherCreateViewModels.CourseName}"
+                          x:DefaultBindMode="OneWay"
+                          PlaceholderText="Visar alla"/>
+                <ComboBox Width="110"
+                          x:Name="FilterQuestionTypeComboBox"
+                          ItemsSource="{x:Bind teacherCreateViewModels.QuestionType}"
+                          x:DefaultBindMode="OneWay"
+                          PlaceholderText="Visar alla"
+                          Margin="20,0,0,0"/>
+                <ComboBox Width="110"
+                          x:Name="FilterQuestionPointComboBox"
+                          ItemsSource="{x:Bind teacherCreateViewModels.QuestionPoint}"
+                          x:DefaultBindMode="OneWay"
+                          PlaceholderText="Visar alla"
+                          Margin="20,0,0,0"/>
+                
+                <Button   x:Name="AddQuestionToTest_Btn"
+                          Content="Lägg till fråga på prov"
+                          Margin="200,0,0,0"
+                          Click="AddQuestionToTest_Btn_Click"/> 
+            </StackPanel>
+         
+                
+           
+        </StackPanel>
 
+        <ListView BorderBrush="Black" BorderThickness="2" Margin="0,100,0,200" ItemsSource="{x:Bind teacherCreateViewModels.SubjectQuestions}" x:Name="DisplayQuestionsGridView">
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="displayQuestionsGridView">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{x:Bind }"/>
+                        <TextBlock Text="{x:Bind }"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

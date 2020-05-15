@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -23,8 +24,10 @@ namespace TestApp.View.Teacher
     /// </summary>
     public sealed partial class CreateTestView : Page
     {
-
+        
         TeacherCreateViewModel teacherCreateViewModels  = TeacherCreateViewModel.Instance; //Skapar referens
+        
+
         public CreateTestView()
         {
             this.InitializeComponent();
@@ -33,6 +36,10 @@ namespace TestApp.View.Teacher
             this.DataContext = teacherCreateViewModels.SubjectQuestions;
         }
 
-    
+        private void AddQuestionToTest_Btn_Click(object sender, RoutedEventArgs e)
+        {
+            
+
+        }
     }
 }

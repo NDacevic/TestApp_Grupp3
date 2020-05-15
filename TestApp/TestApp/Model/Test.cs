@@ -30,6 +30,10 @@ namespace TestApp.Model
             Result = new List<StudentQuestionAnswer>();
 
         }
+        public Test() //Created this to be able to create a test object without serializing it /Johnny
+        {
+
+        }
         #endregion
 
         #region Delegates
