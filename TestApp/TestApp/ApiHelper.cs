@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
@@ -28,7 +30,9 @@ namespace TestApp
         #region Constructors
         public ApiHelper()
         {
-            //Created but left empty intentionally in case it will be used in the future
+            httpClient.BaseAddress = new Uri(@"https://localhost:5000/api/");
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
         #endregion
 
@@ -66,9 +70,12 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void GetAllTests()
+        public async Task<List<Test>> GetAllTests()
         {
-            throw new NotImplementedException();
+            jsonString = await httpClient.GetStringAsync("Tests");
+            var tests = JsonConvert.DeserializeObject<List<Test>>(jsonString);
+            return tests;
+
         }
 
         public void DeleteTest()

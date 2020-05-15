@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.Model;
+using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +25,31 @@ namespace TestApp.View.Student
     /// </summary>
     public sealed partial class AvailableTestsView : Page
     {
+        #region Constant Fields
+        #endregion
+
+        #region Fields
+        #endregion
+
+        #region Constructors
         public AvailableTestsView()
         {
             this.InitializeComponent();
+            StudentViewModel.Instance.SeeActiveTests();
         }
+        #endregion
+
+        #region Delegates
+        #endregion
+
+        #region Events
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Methods
+        #endregion
+
     }
 }

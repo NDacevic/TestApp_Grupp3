@@ -16,13 +16,17 @@ namespace TestApp.Model
         #endregion
 
         #region Constructors
-        public Person (string firstName, string lastName, string email, string password, int classId)
+        public Person (string firstName, string lastName, string email, string password)
         {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             Password = password;
-            ClassId = classId;
+        }
+
+        public Person()
+        {
+
         }
 
         #endregion
@@ -38,8 +42,7 @@ namespace TestApp.Model
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int ClassId { get; set; }
-
+        
         #endregion
 
         #region Methods
