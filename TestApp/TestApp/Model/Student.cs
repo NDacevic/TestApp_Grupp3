@@ -16,7 +16,7 @@ namespace TestApp.Model
         #endregion
 
         #region Constructors
-        public Student (int studentId, string firstName, string lastName, string email, string password, int classId,  List<Test> writtenTests) : base(firstName, lastName, email, password, classId)
+        public Student (int studentId, string firstName, string lastName, string email, string password, List<Test> writtenTests) : base(firstName, lastName, email, password)
         {
             StudentId = studentId;
             WrittenTests = writtenTests;
@@ -32,6 +32,7 @@ namespace TestApp.Model
 
         #region Properties
         public int StudentId { get; set; }
+        public int ClassId { get; set; }
         public List<Test> WrittenTests { get; set; }
         #endregion
 

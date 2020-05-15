@@ -64,9 +64,9 @@ namespace TestApp.ViewModel
         {
 
         }
-        public void SeeActiveTests()
+        public async void SeeActiveTests()
         {
-            List<Test> allTests = ApiHelper.Instance.GetAllTests();
+            List<Test> allTests = await ApiHelper.Instance.GetAllTests();
             foreach (Test test in allTests)
             {
                 if (test.IsActive==true && test.Grade==activeStudent.ClassId)
