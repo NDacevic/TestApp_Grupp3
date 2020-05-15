@@ -12,19 +12,19 @@ namespace TestApp.Model
         #endregion
 
         #region Fields
-        private string FirstName { get; set; }
-        private string LastName { get; set; }
-        private string Email { get; set; }
-        private string Password { get; set; }
-        private int ClassId { get; set; }
+
         #endregion
 
         #region Constructors
-        public Person ()
+        public Person (string firstName, string lastName, string email, string password, int classId)
         {
-            
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Password = password;
+            ClassId = classId;
         }
-       
+
         #endregion
 
         #region Delegates
@@ -34,7 +34,12 @@ namespace TestApp.Model
         #endregion
 
         #region Properties
-        
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public int ClassId { get; set; }
+
         #endregion
 
         #region Methods

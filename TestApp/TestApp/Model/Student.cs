@@ -12,16 +12,16 @@ namespace TestApp.Model
         #endregion
 
         #region Fields
-        private int StudentId { get; set; }
-        private List<Test> WrittenTests { get; set; }
+
         #endregion
 
         #region Constructors
-        public Student ()
+        public Student (int studentId, List<Test> writtenTests)
         {
-
+            StudentId = studentId;
+            WrittenTests = writtenTests;
         }
-       
+
         #endregion
 
         #region Delegates
@@ -31,6 +31,8 @@ namespace TestApp.Model
         #endregion
 
         #region Properties
+        public int StudentId { get; set; }
+        public List<Test> WrittenTests { get; set; }
         #endregion
 
         #region Methods

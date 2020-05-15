@@ -12,14 +12,14 @@ namespace TestApp.Model
         #endregion
 
         #region Fields
-        private string Answer { get; set; }
-        private int TotalPoints { get; set; }
+
         #endregion
 
         #region Constructors
-        public StudentQuestionAnswer ()
+        public StudentQuestionAnswer (string answer, int totalpoints)
         {
-
+            Answer = answer;
+            TotalPoints = totalpoints;
         }
         #endregion
 
@@ -30,6 +30,8 @@ namespace TestApp.Model
         #endregion
 
         #region Properties
+        public string Answer { get; set; }
+        public int TotalPoints { get; set; }
         #endregion
 
         #region Methods
