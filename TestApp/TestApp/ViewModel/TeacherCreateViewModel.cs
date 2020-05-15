@@ -62,7 +62,8 @@ namespace TestApp.ViewModel
         {
             try
             {
-                throw new NotImplementedException();
+                ApiHelper.Instance.PostCreatedQuestion(CreatedQuestion);
+                CreatedQuestion = null;
             }
             catch (Exception exc)
             {
