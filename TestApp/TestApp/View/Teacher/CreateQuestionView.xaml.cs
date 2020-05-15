@@ -43,7 +43,7 @@ namespace TestApp.View.Teacher
                 if(comboBox_QuestionType.Text == "Multiple Choice")
                     createInstance.CreatedQuestion = new Question(0, comboBox_QuestionType.Text, textBox_questionText.Text, textBox_CorrectAnswer.Text,textBox_IncorrectAnswer1.Text, textBox_IncorrectAnswer2.Text, comboBox_CourseNames.Text, points);
                 else if (comboBox_QuestionType.Text == "Text")
-                    createInstance.CreatedQuestion = new Question(0, comboBox_QuestionType.Text, textBox_questionText.Text, null, null, null, comboBox_CourseNames, points);
+                    createInstance.CreatedQuestion = new Question(0, comboBox_QuestionType.Text, textBox_questionText.Text, null, null, null, comboBox_CourseNames.Text, points);
                 createInstance.CreateQuestion();
 
             }
