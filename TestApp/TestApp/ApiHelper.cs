@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -83,12 +84,35 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Converts the question object to a Json string and posts it to the API for writing into the database
+        /// </summary>
+        /// <param name="question"></param>
         public async void PostCreatedQuestion(Question question)
         {
-            jsonString = JsonConvert.SerializeObject(question);
             try
             {
-                throw new NotImplementedException();
+                //Convert the object to a json string.
+                jsonString = JsonConvert.SerializeObject(question);
+
+                //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
+                using (HttpContent content = new StringContent(jsonString))
+                {
+                    //Call the api and send the Json string.
+                    HttpResponseMessage response = await httpClient.PostAsync("question", content);
+
+                    //Check if it is successfull. In that case display a message telling the user.
+                    //Otherwise throw an error and tell the user that the question was not posted.
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await new MessageDialog("Question saved successfully").ShowAsync();
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                        throw new HttpRequestException("Question was not saved. Contact an admin for help");
+                    }
+                }
             }
             catch (Exception exc)
             {

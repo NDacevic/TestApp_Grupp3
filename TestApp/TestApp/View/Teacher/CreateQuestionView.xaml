@@ -40,7 +40,7 @@
                     x:Name="comboBox_QuestionType"
                     x:DefaultBindMode="OneWay"
                     
-                    SelectionChanged="ComboBox_SelectionChanged"
+                    SelectionChanged="ComboBox_QuestionType_SelectionChanged"
                     >
                         <ComboBoxItem
                             Content="Multiple Choice"

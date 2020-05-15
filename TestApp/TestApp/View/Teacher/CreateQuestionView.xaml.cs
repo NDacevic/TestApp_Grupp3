@@ -33,6 +33,12 @@ namespace TestApp.View.Teacher
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Formats the information in the different boxes and appends them to the CreatedQuestion object.
+        /// Then it calls the CreateQuestion() method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void CreateQuestionClick(object sender, RoutedEventArgs e)
         {
             try
@@ -53,7 +59,12 @@ namespace TestApp.View.Teacher
             }
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        /// <summary>
+        /// Controls the showing and hiding of the textboxes pertaining to a multiple choice question.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox_QuestionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(comboBox_QuestionType.Text == "Multiple Choice")
             {

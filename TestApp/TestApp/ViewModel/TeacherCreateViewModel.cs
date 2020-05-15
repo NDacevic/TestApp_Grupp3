@@ -21,6 +21,7 @@ namespace TestApp.ViewModel
         #region Constructors
         public TeacherCreateViewModel()
         {
+            //Hardcoded questions intended for testing. These will be removed when the database is up and running.
             SubjectQuestions.Add(new Question(1, "Flervalsfråga", "Vad heter huvudstaden i Sverige?", "Stockholm", "Göteborg", "Malmö", "Geografi", 5));
             SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vilket år startade 1:a världskriget?","1914","1915","1912","Historia", 5));
             SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vilket år startade 2:a världskriget?", "1939", "1940", "1930", "Historia", 5));
@@ -68,6 +69,10 @@ namespace TestApp.ViewModel
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Calls the PostCreatedQuestion APIHelper method and submits the created question.
+        /// After that it resets the created question to null
+        /// </summary>
         public async void CreateQuestion()
         {
             try
