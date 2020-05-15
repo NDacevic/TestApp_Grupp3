@@ -71,10 +71,9 @@ namespace TestApp.ViewModel
             {
                 if (test.IsActive==true && test.Grade==activeStudent.ClassId)
                 {
-
+                     ActiveTests.Add(test);
                 }
             }
-            //Sort out the ones where IsActive=true and where Student.classId=Test.Grade
         }
         #endregion
     }

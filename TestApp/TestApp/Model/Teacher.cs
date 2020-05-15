@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestApp.Model
 {
-    public class Teacher
+    public class Teacher : Person
     {
         #region Constant Fields
         #endregion
@@ -18,10 +18,15 @@ namespace TestApp.Model
         #endregion
 
         #region Constructors
-        public Teacher ()
+        public Teacher (int teacherId, string firstName, string lastName, string email, string password) :base(firstName, lastName, email, password)
         {
-            TeacherId = 0;
+            TeacherId = teacherId;
             Students = new List<Student>();
+        }
+
+        public Teacher() : base()
+        {
+            //Used for Singleton
         }
         
         #endregion
