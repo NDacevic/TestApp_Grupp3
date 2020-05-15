@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using TestApp.Model;
 
 namespace TestApp
 {
@@ -63,7 +65,7 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void GetAllTests()
+        public List<Test> GetAllTests()
         {
             throw new NotImplementedException();
         }

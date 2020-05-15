@@ -29,7 +29,6 @@ namespace TestApp.View.Student
         #endregion
 
         #region Fields
-        private ObservableCollection<Test> availableTests = new ObservableCollection<Test>();
         #endregion
 
         #region Constructors
@@ -37,7 +36,6 @@ namespace TestApp.View.Student
         {
             this.InitializeComponent();
             StudentViewModel.Instance.SeeActiveTests();
-            availableTests = StudentViewModel.Instance.ActiveTests;
         }
         #endregion
 

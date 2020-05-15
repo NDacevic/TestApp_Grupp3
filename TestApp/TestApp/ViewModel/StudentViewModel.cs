@@ -15,6 +15,7 @@ namespace TestApp.ViewModel
 
         #region Fields
         private static StudentViewModel instance = null;
+        private Student activeStudent;
         
         #endregion
 
@@ -65,9 +66,14 @@ namespace TestApp.ViewModel
         }
         public void SeeActiveTests()
         {
-            //Responsible Developer: MO
-            //Call API to Get all tests
-            //Sort out the ones where IsActive=true and where Student.classId=Test.Grade
+            List<Test> allTests = ApiHelper.Instance.GetAllTests();
+            foreach (Test test in allTests)
+            {
+                if (test.IsActive==true && test.Grade==activeStudent.ClassId)
+                {
+                     ActiveTests.Add(test);
+                }
+            }
         }
         #endregion
     }
