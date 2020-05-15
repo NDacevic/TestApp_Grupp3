@@ -129,11 +129,6 @@
     <Compile Include="Model\StudentQuestionAnswer.cs" />
     <Compile Include="Model\Teacher.cs" />
     <Compile Include="Model\Test.cs" />
-    <Compile Include="obj\ARM\Debug\App.g.cs" />
-    <Compile Include="obj\ARM\Debug\App.g.i.cs" />
-    <Compile Include="obj\ARM\Debug\MainPage.g.cs" />
-    <Compile Include="obj\ARM\Debug\MainPage.g.i.cs" />
-    <Compile Include="obj\ARM\Debug\XamlTypeInfo.g.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Question.cs" />
     <Compile Include="ViewModel\TeacherCreateViewModel.cs" />
@@ -237,13 +232,6 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="obj\project.assets.json" />
-    <None Include="obj\TestApp.csproj.nuget.cache" />
-    <None Include="obj\TestApp.csproj.nuget.dgspec.json" />
-    <None Include="obj\TestApp.csproj.nuget.g.props" />
-    <None Include="obj\TestApp.csproj.nuget.g.targets" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
