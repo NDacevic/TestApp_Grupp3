@@ -15,7 +15,7 @@ namespace TestApp.Model
         #endregion
 
         #region Constructors
-        public Question(int questionId, string questionType, string testQuestion, string correctAnswer, string incorrectAnswer1, string incorrectAnswer2, string courseName, int point, int time)
+        public Question(int questionId, string questionType, string testQuestion, string correctAnswer, string incorrectAnswer1, string incorrectAnswer2, string courseName, int point)
         {
             QuestionID = questionId;
             QuestionType = questionType;
@@ -25,7 +25,6 @@ namespace TestApp.Model
             IncorrectAnswer2 = incorrectAnswer2;
             CourseName = courseName;
             Point = point;
-            Time = time;
         }
         #endregion
 
@@ -44,7 +43,6 @@ namespace TestApp.Model
         public string IncorrectAnswer2 { get; set; }
         public string CourseName { get; set; }
         public int Point { get; set; }
-        public int Time { get; set; }
         #endregion
 
         #region Methods
