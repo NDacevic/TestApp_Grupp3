@@ -172,13 +172,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\ARM\Debug\AppxManifest.xml" />
-    <Content Include="bin\ARM\Debug\Core\AppxManifest.xml" />
-    <Content Include="bin\ARM\Debug\Core\TestApp.exe" />
-    <Content Include="bin\ARM\Debug\System.Runtime.dll" />
-    <Content Include="bin\ARM\Debug\TestApp.exe" />
-    <Content Include="bin\ARM\Debug\TestApp.pdb" />
-    <Content Include="bin\ARM\Debug\TestApp.xr.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
