@@ -5,10 +5,46 @@
     xmlns:local="using:TestApp.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:TestApp.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Text="Activa prov:"
+            Grid.Row="0"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            FontSize="48"/>
+        <ListView
+            Name="Lv_AvailableTests"
+            Grid.Row="1"
+            Grid.Column="1"
+            ItemsSource="{x:Bind availableTests}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="data:Test">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{x:Bind CourseName}"/>
+                        <TextBlock Text="{x:Bind Grade}"/>
+                        <TextBlock Text="{x:Bind StartDate}"/>
+                        <TextBlock Text="{x:Bind TestTime}"/>
+                        <TextBlock Text="{x:Bind MaxPoints}"/>
+                    </StackPanel>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </Grid>
 </Page>

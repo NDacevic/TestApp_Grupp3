@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,10 @@ namespace TestApp.ViewModel
                 return instance;
             }
         }
+
+        //Property used to store all currently active tests, later used to populate the Listview ActiveTests on AvailableTestsView
+        public ObservableCollection<Test> ActiveTests { get; internal set; }      
+        
         public Student ActiveStudent { get; set; }
         #endregion
 
@@ -58,9 +63,11 @@ namespace TestApp.ViewModel
         {
 
         }
-        public void SeeActiveTest()
+        public void SeeActiveTests()
         {
-
+            //Responsible Developer: MO
+            //Call API to Get all tests
+            //Sort out the ones where IsActive=true and where Student.classId=Test.Grade
         }
         #endregion
     }
