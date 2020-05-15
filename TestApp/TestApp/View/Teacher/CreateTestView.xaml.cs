@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +23,16 @@ namespace TestApp.View.Teacher
     /// </summary>
     public sealed partial class CreateTestView : Page
     {
+
+        TeacherCreateViewModel teacherCreateViewModels  = TeacherCreateViewModel.Instance; //Skapar referens
         public CreateTestView()
         {
             this.InitializeComponent();
+
+            this.DataContext = teacherCreateViewModels;
+            this.DataContext = teacherCreateViewModels.SubjectQuestions;
         }
+
+    
     }
 }

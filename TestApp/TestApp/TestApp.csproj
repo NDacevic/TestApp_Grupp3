@@ -120,9 +120,11 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-
+    <Compile Include="Model\TestResult.cs" />
+    <Compile Include="View\LogInView.xaml.cs">
+      <DependentUpon>LogInView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainPage.xaml.cs">
-
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Person.cs" />
@@ -150,6 +152,12 @@
     <Compile Include="View\Teacher\CreateQuestionView.xaml.cs">
       <DependentUpon>CreateQuestionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Teacher\CreateTestView.xaml.cs">
+      <DependentUpon>CreateTestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Teacher\GradeTestView.xaml.cs">
+      <DependentUpon>GradeTestView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Teacher\MainPageTeacherView.xaml.cs">
       <DependentUpon>MainPageTeacherView.xaml</DependentUpon>
     </Compile>
@@ -159,6 +167,9 @@
     <Compile Include="View\Student\WriteTestView.xaml.cs">
       <DependentUpon>WriteTestView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Teacher\StudentResultView.xaml.cs">
+      <DependentUpon>StudentResultView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -166,6 +177,13 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\ARM\Debug\AppxManifest.xml" />
+    <Content Include="bin\ARM\Debug\Core\AppxManifest.xml" />
+    <Content Include="bin\ARM\Debug\Core\TestApp.exe" />
+    <Content Include="bin\ARM\Debug\System.Runtime.dll" />
+    <Content Include="bin\ARM\Debug\TestApp.exe" />
+    <Content Include="bin\ARM\Debug\TestApp.pdb" />
+    <Content Include="bin\ARM\Debug\TestApp.xr.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -181,6 +199,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\LogInView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -197,6 +219,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Teacher\CreateTestView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Teacher\GradeTestView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Teacher\MainPageTeacherView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -209,6 +239,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Teacher\StudentResultView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
@@ -219,6 +253,11 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\ARM\Debug\App.xbf" />
+    <None Include="bin\ARM\Debug\MainPage.xbf" />
+    <None Include="bin\ARM\Debug\Microsoft.UI.Xaml.Markup.winmd" />
+    <None Include="bin\ARM\Debug\resources.pri" />
+    <None Include="bin\ARM\Debug\TestApp.build.appxrecipe" />
     <None Include="obj\project.assets.json" />
     <None Include="obj\TestApp.csproj.nuget.cache" />
     <None Include="obj\TestApp.csproj.nuget.dgspec.json" />
