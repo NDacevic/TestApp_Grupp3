@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TestApp.View.Teacher"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:data="using:System"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:sys="using:System"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -17,16 +18,36 @@
             <StackPanel
                 Orientation="Horizontal">
                 <TextBlock
+                    Text="Course"
+                    />
+                <ComboBox
+                    x:Name="comboBox_CourseNames"
+                    x:DefaultBindMode="OneWay"
+                    ItemsSource="{x:Bind createInstance.CourseName}"
+                    >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate
+                            x:DataType="sys:String"
+                            >
+                            
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <TextBlock
                     Text="Question type"
                     />
                 <ComboBox
                     x:Name="comboBox_QuestionType"
                     x:DefaultBindMode="OneWay"
                     
-                    Width="300"
-                    SelectionChanged="ComboBox_SelectionChanged">
-                    <ComboBoxItem Content="Multiple Choice"/>
-                    <ComboBoxItem Content="Text"/>
+                    SelectionChanged="ComboBox_SelectionChanged"
+                    >
+                        <ComboBoxItem
+                            Content="Multiple Choice"
+                            />
+                        <ComboBoxItem 
+                            Content="Text"
+                            />
                 </ComboBox>
                 <TextBlock
                     Text="Points"
@@ -34,14 +55,6 @@
                 <TextBox
                     x:Name="textBox_QuestionPoints"
                     />
-                <TextBlock
-                    Text="Course"
-                    />
-                <ComboBox
-                    x:Name="comboBox_CourseNames"
-                    x:DefaultBindMode="OneWay"
-                    >
-                </ComboBox>
                 <ListView Width="100"/>
             </StackPanel>
             <TextBlock
