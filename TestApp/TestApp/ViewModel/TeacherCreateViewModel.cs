@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
-
+using Windows.UI.Popups;
 
 namespace TestApp.ViewModel
 {
@@ -58,9 +58,16 @@ namespace TestApp.ViewModel
             throw new NotImplementedException();
         }
 
-        public void CreateQuestion()
+        public async void CreateQuestion()
         {
-            throw new NotImplementedException();
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
         }
 
         public void GetQuestionsForTestCreation()
