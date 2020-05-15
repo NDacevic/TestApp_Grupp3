@@ -70,22 +70,39 @@ namespace TestApp.ViewModel
         public Test CreatedTest { get; set; }
         public Question CreatedQuestion { get; set; }
         public List<Question> SubjectQuestions { get; set; }
-        public List<string> CourseName { get; set; } //Used for a dropdown combobox with course name in CreateTestView
+        public List<string> CourseName { get; set; } //Used for a dropdown combobox with course name in CreateTestView and CreateQuestionView
         public List<string> QuestionType { get; set; } //Used for a dropdown combobox with question type in CreateTestView
-        public List<int> QuestionPoint { get; set; } //Used for a dropdown combobox with question point in CreateTestView
-        
+        public List<int> QuestionPoint { get; set; } //Used for a dropdown combobox with question point in CreateTestView and CreateQuestionView
+
         #endregion
 
         #region Methods
-        public void CreateTest()
+        public async void CreateTestToDB()
         {
+            try
+            {
+                ApiHelper.Instance.PostCreatedTestAsync(CreatedTest);
+                CreatedTest = null;
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
+
             throw new NotImplementedException();
         }
-        public void AddQuestionToTest(Question question) //Recieves a question and adds it to the Tests list of questions
+        public void AddQuestionToTest(Question question) //Adding question that the user choose
         {
-            CreatedTest = new Test();
+            CreatedTest = new Test(); 
+            CreatedTest.Questions.Add(question);
+
             throw new NotImplementedException();
 
+        }
+        public void RemoveQuestionFromTest(Question question) //Removing question that the user choose
+        {
+            CreatedTest.Questions.Remove(question);
+            throw new NotImplementedException();
         }
 
         /// <summary>
