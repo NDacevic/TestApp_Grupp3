@@ -9,6 +9,15 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <TextBlock Text="Question" FontSize="20"></TextBlock>
+            <TextBox Height="400"/>
 
+            <Button x:Name="bttn_CreateQuestion" Content="Create"/>
+        </StackPanel>
     </Grid>
 </Page>
