@@ -61,8 +61,29 @@ namespace TestApp
         #endregion
 
         #region Methods
-        public void PostCreatedTest()
+        public async Task PostCreatedTestAsync(Test test)
         {
+            //Convert the object to a json string.
+            jsonString = JsonConvert.SerializeObject(test);
+
+            //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
+            using (HttpContent content = new StringContent(jsonString))
+            {
+                //Call the api and send the Json string.
+                HttpResponseMessage response = await httpClient.PostAsync("test", content);
+
+                //Check if it is successfull. In that case display a message telling the user.
+                //Otherwise throw an error and tell the user that the question was not posted.
+                if (response.IsSuccessStatusCode)
+                {
+                    await new MessageDialog("Test saved successfully").ShowAsync();
+                }
+                else
+                {
+                    Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                    throw new HttpRequestException("Test was not saved. Contact an admin for help");
+                }
+            }
             throw new NotImplementedException();
         }
 

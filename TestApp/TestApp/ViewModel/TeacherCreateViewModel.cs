@@ -14,6 +14,7 @@ namespace TestApp.ViewModel
         #endregion
 
         #region Fields
+        
         private static TeacherCreateViewModel instance = null;
         private static readonly object padlock = new object();
         #endregion
@@ -28,9 +29,19 @@ namespace TestApp.ViewModel
             SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vilket år dog Olof Palme?", "1986", "1987", "Han lever forfarande", "Historia", 5));
             SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vad är pi?", "3.14", "3.11", "11", "Matematik", 5));
 
-            CourseName = new List<string> //Dropdown för ämne på CreateTestView, ska bindas till en combobox
+            CourseName = new List<string> //Used for a dropdown combobox to filter school subject in CreateTestView and to easy apply subject to a question
             {
                 "Historia","Svenska","Matematik","Engelska","Geografi"
+            };
+
+            QuestionType = new List<string> //Used for a dropdown to filter question type in CreateTestView
+            {
+                "Flervalsfråga","Fritext"
+            };
+
+            QuestionPoint = new List<int> //Used for a dropdown to filter question point in CreateTestView and to easy choose point when creating a question
+            {
+                1,2,5,10
             };
         }
         #endregion
@@ -59,13 +70,38 @@ namespace TestApp.ViewModel
         public Test CreatedTest { get; set; }
         public Question CreatedQuestion { get; set; }
         public List<Question> SubjectQuestions { get; set; }
-        public List<string> CourseName { get; set; } //Dropdown för ämne på CreateTestView
-        
+        public List<string> CourseName { get; set; } //Used for a dropdown combobox with course name in CreateTestView and CreateQuestionView
+        public List<string> QuestionType { get; set; } //Used for a dropdown combobox with question type in CreateTestView
+        public List<int> QuestionPoint { get; set; } //Used for a dropdown combobox with question point in CreateTestView and CreateQuestionView
+
         #endregion
 
         #region Methods
-        public void CreateTest()
+        public async void CreateTestToDB()
         {
+            try
+            {
+                ApiHelper.Instance.PostCreatedTestAsync(CreatedTest);
+                CreatedTest = null;
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
+
+            throw new NotImplementedException();
+        }
+        public void AddQuestionToTest(Question question) //Adding question that the user choose
+        {
+            CreatedTest = new Test(); 
+            CreatedTest.Questions.Add(question);
+
+            throw new NotImplementedException();
+
+        }
+        public void RemoveQuestionFromTest(Question question) //Removing question that the user choose
+        {
+            CreatedTest.Questions.Remove(question);
             throw new NotImplementedException();
         }
 
@@ -85,6 +121,7 @@ namespace TestApp.ViewModel
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
+        
 
         public void GetQuestionsForTestCreation()
         {

@@ -3,12 +3,154 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TestApp.View.Teacher"
+    
+    xmlns:data="using:TestApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="40,0,0,0">
+                <TextBlock Text="Filtrera ämne"/>
+                <TextBlock Text="Filtrera frågetyp"
+                           Margin="50,0,0,0"/>
+                <TextBlock Text="Filtrera poäng"
+                           Margin="30,0,0,0"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal"
+                        Margin="40,0,0,0">
+                <ComboBox Width="110" 
+                          x:Name="FilterCourseComboBox"
+                          ItemsSource="{x:Bind teacherCreateViewModels.CourseName}"
+                          x:DefaultBindMode="OneWay"
+                          PlaceholderText="Visar alla"/>
+                <ComboBox Width="110"
+                          x:Name="FilterQuestionTypeComboBox"
+                          ItemsSource="{x:Bind teacherCreateViewModels.QuestionType}"
+                          x:DefaultBindMode="OneWay"
+                          PlaceholderText="Visar alla"
+                          Margin="20,0,0,0"/>
+                <ComboBox Width="110"
+                          x:Name="FilterQuestionPointComboBox"
+                          ItemsSource="{x:Bind teacherCreateViewModels.QuestionPoint}"
+                          x:DefaultBindMode="OneWay"
+                          PlaceholderText="Visar alla"
+                          Margin="20,0,0,0"/>
+                
+                <Button   x:Name="AddQuestionToTest_Btn"
+                          Content="Lägg till fråga"
+                          Margin="40,0,0,0"
+                          Click="AddQuestionToTest_Btn_Click" Width="109"/>
 
+                <Button   x:Name="RemoveQuestionFromTest_Btn"
+                          Content="Ta bort fråga"
+                          Margin="15,0,0,0"/>
+            </StackPanel>
+         
+                
+           
+        </StackPanel>
+
+        <ListView BorderBrush="Black"
+                  BorderThickness="2"
+                  Margin="40,100,40,200"
+                  ItemsSource="{x:Bind teacherCreateViewModels.SubjectQuestions}"
+                  x:Name="DisplayQuestionsListView"
+                  x:DefaultBindMode="TwoWay">
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="displayQuestionsListView">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Ämne"/>
+                        <TextBlock Text="Fråga"/>
+                        <TextBlock Text="Frågetyp"/>
+                        <TextBlock Text="Poäng"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView Grid.Column="1"
+                  BorderBrush="Black"
+                  BorderThickness="2"
+                  Margin="40,100,40,200"
+                  ItemsSource="{x:Bind teacherCreateViewModels.CreatedTest.Questions}"
+                  x:Name="DisplayAddedQuestionsListView"
+                  x:DefaultBindMode="TwoWay">
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="displayAddedQuestionsListView">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Ämne"/>
+                        <TextBlock Text="Fråga"/>
+                        <TextBlock Text="Frågetyp"/>
+                        <TextBlock Text="Poäng"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Grid.Column="1">
+            <StackPanel Orientation="Horizontal"
+                        Margin="40,0,0,0">
+                <TextBlock Text="Ämne för prov"/>
+                <TextBlock Text="Årskurs"
+                           Margin="30,0,0,0"/>
+                <TextBlock Text="Maxpoäng"
+                           Margin="33,0,0,0"/>
+                <TextBlock Text="Datum och tid för prov"
+                           Margin="14,0,0,0"/>
+                <TextBlock Text="Provtid (min)"
+                           Margin="90,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="40,0,0,0">
+                <ComboBox Width="104" 
+                          x:Name="ChooseCourseComboBox"
+                          ItemsSource="{x:Bind teacherCreateViewModels.CourseName}"
+                          x:DefaultBindMode="OneWay"
+                          PlaceholderText="Välj ämne"/>
+                <TextBox  x:Name="ChooseGrade_txtBox" 
+                          Margin="15,0,0,0"
+                          PlaceholderText="Ex.7"/>
+                <TextBox x:Name="MaxPointTest"
+                           Margin="15,0,0,0"
+                           Text="{x:Bind teacherCreateViewModels.CreatedTest.MaxPoints}"
+                           PlaceholderText="0.0"
+                           TextAlignment="Right"/>
+                
+                <CalendarDatePicker x:Name="TestDatePicker"
+                                    Margin="15,0,0,0"
+                                    PlaceholderText="Datum"
+                                    FirstDayOfWeek="Monday" Width="83"/>
+                
+                <TimePicker         x:Name="TestTimePicker"
+                                    Margin="10,0,0,0"
+                                    ClockIdentifier="24HourClock" Width="123"
+                                    />
+                <TextBox            x:Name="TestTime_txtBox"
+                                    PlaceholderText="0.0"
+                                    Margin="15,0,0,0"/>
+
+                <Button             x:Name="CreateTest_btn"
+                                    Content="Skapa prov"
+                                    Margin="15,0,0,0"
+                                    Click="CreateTest_btn_Click"/>
+
+
+
+
+
+
+            </StackPanel>
+        </StackPanel>
+        
     </Grid>
 </Page>
