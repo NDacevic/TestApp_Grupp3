@@ -23,7 +23,7 @@ namespace TestApp.Model
         #endregion
 
         #region Fields
-
+        private int maxPoints;
         #endregion
 
         #region Constructors
@@ -32,7 +32,7 @@ namespace TestApp.Model
             TestId = testId;
             Grade = grade;
             CourseName = courseName;
-            MaxPoints = maxPoints;
+            this.maxPoints = maxPoints;
             TestDuration = testDuration;
             IsActive = isActive;
             Questions = new ObservableCollection<Question>(); //Changed List->Obs.Coll.Johnny
@@ -56,9 +56,7 @@ namespace TestApp.Model
         #region Properties
         public int TestId { get; set; }
         public int Grade { get; set; }
-        public string CourseName { get; set; }
-
-        private int maxPoints;
+        public string CourseName { get; set; }      
         public int TestDuration { get; set; }
         public bool IsActive { get; set; }
         public ObservableCollection<Question> Questions { get; set; }
