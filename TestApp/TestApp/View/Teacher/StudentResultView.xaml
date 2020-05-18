@@ -30,8 +30,12 @@
             BorderBrush="Black"
             BorderThickness="2">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="data:Test">
-                    <TextBlock Text="{x:Bind CourseName}"/>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="TestId"/>
+                        <TextBlock Text="CourseName"/>
+                        <TextBlock Text="Grade"/>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
             
@@ -46,7 +50,10 @@
             BorderThickness="2">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="List med elever samt poäng"/>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Student name"/>
+                        <TextBlock Text="Student test score"/>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
 
