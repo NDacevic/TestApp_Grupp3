@@ -99,10 +99,20 @@ namespace TestApp
         public async Task<List<Test>> GetAllTests()
         {
             //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
-            jsonString = await httpClient.GetStringAsync("Tests");
-            //Convert jsonString to list of Test objects
-            var tests = JsonConvert.DeserializeObject<List<Test>>(jsonString);
-            return tests;
+            HttpResponseMessage response = await httpClient.GetAsync("Tests");
+
+            if (response.IsSuccessStatusCode)
+            {
+                jsonString = response.Content.ReadAsStringAsync().Result;
+                //Convert jsonString to list of Test objects
+                var tests = JsonConvert.DeserializeObject<List<Test>>(jsonString);
+                return tests;
+            }
+            else
+            {
+                throw new HttpRequestException("No tests retrieved from database. Contact an admin for help.");
+            }
+            
         }
 
         public void DeleteTest()

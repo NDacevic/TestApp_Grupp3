@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
+using Windows.UI.Popups;
 
 namespace TestApp.ViewModel
 {
@@ -69,16 +70,24 @@ namespace TestApp.ViewModel
         /// </summary>
         public async void SeeActiveTests()
         {
-            //Temporary list to hold all tests
-            List<Test> allTests = await ApiHelper.Instance.GetAllTests();
-            
-            //Loop through and keep all tests that are active and for the correct grade/year
-            foreach (Test test in allTests)
+            //Tries to contact API to get all Tests
+            try
             {
-                if (test.IsActive==true && test.Grade==activeStudent.ClassId)
+                //Temporary list to hold all tests
+                List<Test> allTests = await ApiHelper.Instance.GetAllTests();
+
+                //Loop through and keep all tests that are active and for the correct grade/year
+                foreach (Test test in allTests)
                 {
-                     ActiveTests.Add(test);
+                    if (test.IsActive == true && test.Grade == activeStudent.ClassId)
+                    {
+                        ActiveTests.Add(test);
+                    }
                 }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
             }
         }
         #endregion
