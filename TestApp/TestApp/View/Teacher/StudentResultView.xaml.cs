@@ -28,6 +28,16 @@ namespace TestApp.View.Teacher
         public StudentResultView()
         {
             this.InitializeComponent();
+            GetAllTests();
+        }
+        private void GetAllTests()
+        {
+            TeacherStudentViewModel.Instance.DisplayAllTests();
+        }
+        private void GetTestResult()
+        {
+            Test test = (Test)Lv_AllTests.SelectedItem;
+            TeacherStudentViewModel.Instance.DisplayStudentResult(test.TestId);
         }
     }
 }

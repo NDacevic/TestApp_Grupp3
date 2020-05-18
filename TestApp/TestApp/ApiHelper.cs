@@ -165,10 +165,16 @@ namespace TestApp
         {
             throw new NotImplementedException();
         }
-
-        public void GetAllTestResults()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<TestResult>> GetAllTestResults(int testId)
         {
-            throw new NotImplementedException();
+            jsonString = await httpClient.GetStringAsync("TestResults/"+ testId);
+            var testResults = JsonConvert.DeserializeObject<List<TestResult>>(jsonString);
+            return testResults;
+ 
         }
 
         public void PostStudent()

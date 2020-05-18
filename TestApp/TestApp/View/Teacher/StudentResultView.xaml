@@ -22,7 +22,7 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <ListView 
-            x:Name="AllTests_ListView"
+            x:Name="Lv_AllTests"
             ItemsSource="{x:Bind model:TeacherStudentViewModel.Instance.AllTests}"
             x:DefaultBindMode="TwoWay"
             Grid.Column="0" 
@@ -30,18 +30,18 @@
             BorderBrush="Black"
             BorderThickness="2">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="data:TestResult">
+                <DataTemplate x:DataType="data:Test">
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="TestId"/>
-                        <TextBlock Text="CourseName"/>
-                        <TextBlock Text="Grade"/>
+                        <TextBlock Text="{x:Bind TestId}"/>
+                        <TextBlock Text="{x:Bind CourseName}"/>
+                        <TextBlock Text="{x:Bind Grade}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
             
         </ListView>
         <ListView 
-            x:Name="IndividualTestResult_ListView"
+            x:Name="Lv_IndividualTestResult"
             ItemsSource="{x:Bind model:TeacherStudentViewModel.Instance.StudentTestResults}"
             x:DefaultBindMode="TwoWay"
             Grid.Column="2" 
@@ -49,10 +49,11 @@
             BorderBrush="Black"
             BorderThickness="2">
             <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Student name"/>
-                        <TextBlock Text="Student test score"/>
+                <DataTemplate x:DataType="data:TestResult">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{x:Bind TestId}"/>
+                        <TextBlock Text="{x:Bind StudentId}"/>
+                        <TextBlock Text="{x:Bind TotalPoints}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -22,9 +22,7 @@ namespace TestApp.ViewModel
         public TeacherStudentViewModel()
         {
             AllTests = new ObservableCollection<Test>();
-            AllTests.Add(new Test(1, 7, "Svenska", 50, 60, false, true, DateTime.Now));
             StudentTestResults = new ObservableCollection<TestResult>();
-            StudentTestResults.Add(new TestResult(1, 1, 30));
         }
         #endregion
 
@@ -58,10 +56,37 @@ namespace TestApp.ViewModel
         {
             throw new NotImplementedException();
         }
-
-        public void DisplayStudentResult()
+        public async void DisplayAllTests()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var tests = await ApiHelper.Instance.GetAllTests();
+
+                foreach (Test t in tests)
+                {
+                    AllTests.Add(t);
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        public async void DisplayStudentResult(int testId)
+        {
+            try
+            {
+                var testResults = await ApiHelper.Instance.GetAllTestResults(testId);
+                foreach (TestResult ts in testResults)
+                {
+                    StudentTestResults.Add(ts);
+                }
+            }
+            catch
+            {
+
+            }
         }
         #endregion
 
