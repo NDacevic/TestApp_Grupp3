@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,13 +10,21 @@ using Windows.UI.Popups;
 
 namespace TestApp.ViewModel
 {
-    public class TeacherCreateViewModel
+    public class TeacherCreateViewModel:INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged(string caller = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(caller));
+            }
+        }
         #region Constant Fields
         #endregion
 
         #region Fields
-        
+
         private static TeacherCreateViewModel instance = null;
         private static readonly object padlock = new object();
         #endregion
