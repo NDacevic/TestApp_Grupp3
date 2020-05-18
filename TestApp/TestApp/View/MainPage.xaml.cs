@@ -9,6 +9,7 @@ using TestApp.View.Teacher;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -31,7 +32,7 @@ namespace TestApp
             this.InitializeComponent();
         }
 
-        private void Button_NavigateToPage(object sender, NavigationEventArgs e)
+        private void Button_NavigateToPage(object sender, RoutedEventArgs e)
         {
             if (sender == bttn_HistoricalTestsViewNavigate)
                 mainFrame.Navigate(typeof(HistoricalTestsView));
@@ -49,7 +50,7 @@ namespace TestApp
                 mainFrame.Navigate(typeof(MainPageTeacherView));
             else if (sender == bttn_StudentResultViewNavigate)
                 mainFrame.Navigate(typeof(StudentResultView));
-            else if( sender == bttn_LogInViewNavigate)
+            else if (sender == bttn_LogInViewNavigate)
                 mainFrame.Navigate(typeof(LogInView));
         }
     }

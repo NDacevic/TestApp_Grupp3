@@ -6,10 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    MaxWidth="1920"
+    MaxHeight="1080">
 
     <SplitView
-         DisplayMode="CompactInline"
+        DisplayMode="CompactOverlay"
         CompactPaneLength="300">
         <SplitView.Pane>
             <StackPanel
@@ -24,36 +26,47 @@
                 <Button
                     x:Name="bttn_HistoricalTestsViewNavigate"
                     Content="HistoricalTestsView"
+                    Click="Button_NavigateToPage"
                     />
                 <Button
                     x:Name="bttn_MainPageStudentViewNavigate"
                     Content="MainPageStudentView"
+                    Click="Button_NavigateToPage"
                     />
                 <Button
                     x:Name="bttn_WriteTestViewNavigate"
-                    Content="WriteTestView"/>
+                    Content="WriteTestView"
+                    Click="Button_NavigateToPage"
+                    />
                 <Button
                     x:Name="bttn_CreateQuestionViewNavigate"
-                    Content="CreateQuestionView"/>
+                    Content="CreateQuestionView"
+                    Click="Button_NavigateToPage"
+                    />
                 <Button
                     x:Name="bttn_CreateTestViewNavigate"
                     Content="CreateTestView"
+                    Click="Button_NavigateToPage"
                     />
                 <Button
                     x:Name="bttn_GradeTestViewNavigate"
                     Content="GradeTestView"
+                    Click="Button_NavigateToPage"
                     />
                 <Button
                     x:Name="bttn_MainPageTeacherViewNavigate"
                     Content="MainPageTeacherView"
+                    Click="Button_NavigateToPage"
                     />
                 <Button
                     x:Name="bttn_StudentResultViewNavigate"
                     Content="StudentResultView"
+                    Click="Button_NavigateToPage"
                     />
                 <Button
                     x:Name="bttn_LogInViewNavigate"
                     Content="LogInView"
+                    Click="Button_NavigateToPage"
                     />
             </StackPanel>
         </SplitView.Pane>
