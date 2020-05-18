@@ -32,6 +32,9 @@ namespace TestApp.View.Teacher
         public CreateQuestionView()
         {
             this.InitializeComponent();
+
+            comboBox_CourseNames.SelectedIndex = 0;
+            comboBox_QuestionType.SelectedIndex = 0;
         }
 
         /// <summary>
