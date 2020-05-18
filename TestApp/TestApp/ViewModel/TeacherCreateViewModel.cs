@@ -22,6 +22,10 @@ namespace TestApp.ViewModel
         #region Constructors
         public TeacherCreateViewModel()
         {
+            //Added this row because the app crashes due to "null reference exception" - Nebbe
+            SubjectQuestions = new List<Question>();
+
+
             //Hardcoded questions intended for testing. These will be removed when the database is up and running.
             SubjectQuestions.Add(new Question(1, "Flervalsfråga", "Vad heter huvudstaden i Sverige?", "Stockholm", "Göteborg", "Malmö", "Geografi", 5));
             SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vilket år startade 1:a världskriget?","1914","1915","1912","Historia", 5));
