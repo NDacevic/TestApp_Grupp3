@@ -50,7 +50,7 @@ namespace TestApp.Model
         /// Tells the Json converter that it shouldn't use the ID property when serializing.
         /// </summary>
         /// <returns></returns>
-        public bool ShouldSerializeQuestionId() => false;        
+        public bool ShouldSerializeQuestionId() => false; //TODO: Change later? //MO       
         #endregion
 
 

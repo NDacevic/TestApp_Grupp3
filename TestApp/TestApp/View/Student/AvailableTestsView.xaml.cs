@@ -35,6 +35,7 @@ namespace TestApp.View.Student
         public AvailableTestsView()
         {
             this.InitializeComponent();
+            //Call method to set the Property that binds to this page's ListView
             StudentViewModel.Instance.SeeActiveTests();
         }
         #endregion
