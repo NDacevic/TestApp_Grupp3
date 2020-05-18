@@ -92,12 +92,17 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets Json string from API and converts it to List of Test objects
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Test>> GetAllTests()
         {
+            //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
             jsonString = await httpClient.GetStringAsync("Tests");
+            //Convert jsonString to list of Test objects
             var tests = JsonConvert.DeserializeObject<List<Test>>(jsonString);
             return tests;
-
         }
 
         public void DeleteTest()

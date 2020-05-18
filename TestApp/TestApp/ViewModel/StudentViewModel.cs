@@ -64,9 +64,15 @@ namespace TestApp.ViewModel
         {
 
         }
+        /// <summary>
+        /// Method that takes all tests from the database and saves the wanted tests to an OC, for list display
+        /// </summary>
         public async void SeeActiveTests()
         {
+            //Temporary list to hold all tests
             List<Test> allTests = await ApiHelper.Instance.GetAllTests();
+            
+            //Loop through and keep all tests that are active and for the correct grade/year
             foreach (Test test in allTests)
             {
                 if (test.IsActive==true && test.Grade==activeStudent.ClassId)

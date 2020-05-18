@@ -27,6 +27,7 @@ namespace TestApp.ViewModel
             CreatedTest.Questions = new ObservableCollection<Question>();
             SubjectQuestions = new ObservableCollection<Question>();
 
+
             //Hardcoded questions intended for testing. These will be removed when the database is up and running.
             SubjectQuestions.Add(new Question(1, "Flervalsfråga", "Vad heter huvudstaden i Sverige?", "Stockholm", "Göteborg", "Malmö", "Geografi", 5));
             SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vilket år startade 1:a världskriget?","1914","1915","1912","Historia", 5));
