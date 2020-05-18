@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,9 @@ namespace TestApp.ViewModel
         #region Constructors
         public TeacherCreateViewModel()
         {
-            //Added this row because the app crashes due to "null reference exception" - Nebbe
-            SubjectQuestions = new List<Question>();
+            CreatedTest = new Test(); //Creating a test object once you enter the page.
+            CreatedTest.Questions = new ObservableCollection<Question>();
+            SubjectQuestions = new ObservableCollection<Question>();
 
 
             //Hardcoded questions intended for testing. These will be removed when the database is up and running.
@@ -73,7 +75,7 @@ namespace TestApp.ViewModel
         }
         public Test CreatedTest { get; set; }
         public Question CreatedQuestion { get; set; }
-        public List<Question> SubjectQuestions { get; set; }
+        public ObservableCollection<Question> SubjectQuestions { get; set; }
         public List<string> CourseName { get; set; } //Used for a dropdown combobox with course name in CreateTestView and CreateQuestionView
         public List<string> QuestionType { get; set; } //Used for a dropdown combobox with question type in CreateTestView
         public List<int> QuestionPoint { get; set; } //Used for a dropdown combobox with question point in CreateTestView and CreateQuestionView
@@ -97,16 +99,14 @@ namespace TestApp.ViewModel
         }
         public void AddQuestionToTest(Question question) //Adding question that the user choose
         {
-            CreatedTest = new Test(); 
             CreatedTest.Questions.Add(question);
-
-            throw new NotImplementedException();
+            CreatedTest.MaxPoints += question.Point;
 
         }
         public void RemoveQuestionFromTest(Question question) //Removing question that the user choose
         {
             CreatedTest.Questions.Remove(question);
-            throw new NotImplementedException();
+            CreatedTest.MaxPoints -= question.Point;
         }
 
         /// <summary>
