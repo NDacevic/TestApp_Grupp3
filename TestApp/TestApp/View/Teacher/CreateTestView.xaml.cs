@@ -143,7 +143,7 @@ namespace TestApp.View.Teacher
                     {
 
                     }
-                    else if (filtered.Point.ToString() != FilterQuestionPointComboBox.SelectedValue.ToString()) //If the questions Point doesnt match, we remove it.
+                    else if (filtered.PointValue.ToString() != FilterQuestionPointComboBox.SelectedValue.ToString()) //If the questions Point doesnt match, we remove it.
                     {
                         teacherCreateViewModel.QuestionsToFilter.Remove(filtered);
                     }
