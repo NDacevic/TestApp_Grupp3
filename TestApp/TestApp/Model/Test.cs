@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -26,13 +27,13 @@ namespace TestApp.Model
         #endregion
 
         #region Constructors
-        public Test (int testId, int grade, string courseName, int maxPoints, int testTime, bool isActive, bool isTestGraded, DateTime startDate)
+        public Test (int testId, int grade, string courseName, int maxPoints, int testDuration, bool isActive, bool isTestGraded, DateTime startDate)
         {
             TestId = testId;
             Grade = grade;
             CourseName = courseName;
             MaxPoints = maxPoints;
-            TestTime = testTime;
+            TestDuration = testDuration;
             IsActive = isActive;
             Questions = new ObservableCollection<Question>(); //Changed List->Obs.Coll.Johnny
             IsTestGraded = isTestGraded;
@@ -58,7 +59,7 @@ namespace TestApp.Model
         public string CourseName { get; set; }
 
         private int maxPoints;
-        public int TestTime { get; set; }
+        public int TestDuration { get; set; }
         public bool IsActive { get; set; }
         public ObservableCollection<Question> Questions { get; set; }
         public bool IsTestGraded { get; set; }

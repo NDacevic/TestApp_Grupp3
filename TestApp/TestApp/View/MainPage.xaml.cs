@@ -52,6 +52,8 @@ namespace TestApp
                 mainFrame.Navigate(typeof(StudentResultView));
             else if (sender == bttn_LogInViewNavigate)
                 mainFrame.Navigate(typeof(LogInView));
+            else if (sender == bttn_AvailableTestsViewNavigate)
+                mainFrame.Navigate(typeof(AvailableTestsView));
         }
     }
 }

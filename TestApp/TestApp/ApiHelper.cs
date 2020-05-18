@@ -31,7 +31,7 @@ namespace TestApp
         #region Constructors
         public ApiHelper()
         {
-            httpClient.BaseAddress = new Uri(@"https://localhost:5000/api/");
+            httpClient.BaseAddress = new Uri(@"https://localhost:5001/api/");
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
