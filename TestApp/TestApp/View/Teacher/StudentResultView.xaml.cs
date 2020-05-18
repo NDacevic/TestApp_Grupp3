@@ -39,5 +39,17 @@ namespace TestApp.View.Teacher
             Test test = (Test)Lv_AllTests.SelectedItem;
             TeacherStudentViewModel.Instance.DisplayStudentResult(test.TestId);
         }
+
+        private void Bttn_SeeStudentResult_Click(object sender, RoutedEventArgs e) 
+        {
+            try
+            {
+                GetTestResult();
+            }
+            catch
+            {
+
+            }
+        }
     }
 }

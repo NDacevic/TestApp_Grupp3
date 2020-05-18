@@ -62,6 +62,7 @@
         <Button 
             x:Name="Bttn_SeeStudentResult" 
             Content="See student result"
-            Grid.Row="3"/>
+            Grid.Row="3"
+            Click="Bttn_SeeStudentResult_Click"/>
     </Grid>
 </Page>
