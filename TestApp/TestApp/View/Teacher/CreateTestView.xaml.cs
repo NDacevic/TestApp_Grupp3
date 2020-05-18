@@ -66,7 +66,7 @@ namespace TestApp.View.Teacher
 
             teacherCreateViewModel.CreatedTest.CourseName = ChooseCourseComboBox.SelectedValue.ToString();
             teacherCreateViewModel.CreatedTest.Grade = int.Parse(ChooseGrade_txtBox.Text); //Implement try catch
-            teacherCreateViewModel.CreatedTest.TestTime = int.Parse(TestTime_txtBox.Text); //Implement try catch
+            teacherCreateViewModel.CreatedTest.TestDuration = int.Parse(TestTime_txtBox.Text); //Implement try catch
             
             teacherCreateViewModel.CreateTestToDB();
            

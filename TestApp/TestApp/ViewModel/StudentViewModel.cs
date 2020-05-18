@@ -23,7 +23,10 @@ namespace TestApp.ViewModel
         #region Constructors
         public StudentViewModel ()
         {
-
+            ActiveTests = new ObservableCollection<Test>();
+            //Todo: Remove later when a student can log in
+            activeStudent = new Student(1, "Mikael", "Ollhage", "ja@ja.com","nej",7,null);
+            
         }
         #endregion
 
@@ -79,6 +82,7 @@ namespace TestApp.ViewModel
                 //Loop through and keep all tests that are active and for the correct grade/year
                 foreach (Test test in allTests)
                 {
+                    //Todo: kraschar eventuellt om ListView är tom
                     if (test.IsActive == true && test.Grade == activeStudent.ClassId)
                     {
                         ActiveTests.Add(test);
