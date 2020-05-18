@@ -1,9 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using TestApp.Model;
+using Windows.UI.Popups;
 
 namespace TestApp
 {
@@ -25,7 +31,9 @@ namespace TestApp
         #region Constructors
         public ApiHelper()
         {
-            //Created but left empty intentionally in case it will be used in the future
+            httpClient.BaseAddress = new Uri(@"https://localhost:5000/api/");
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
         #endregion
 
@@ -53,8 +61,29 @@ namespace TestApp
         #endregion
 
         #region Methods
-        public void PostCreatedTest()
+        public async Task PostCreatedTestAsync(Test test)
         {
+            //Convert the object to a json string.
+            jsonString = JsonConvert.SerializeObject(test);
+
+            //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
+            using (HttpContent content = new StringContent(jsonString))
+            {
+                //Call the api and send the Json string.
+                HttpResponseMessage response = await httpClient.PostAsync("test", content);
+
+                //Check if it is successfull. In that case display a message telling the user.
+                //Otherwise throw an error and tell the user that the question was not posted.
+                if (response.IsSuccessStatusCode)
+                {
+                    await new MessageDialog("Test saved successfully").ShowAsync();
+                }
+                else
+                {
+                    Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                    throw new HttpRequestException("Test was not saved. Contact an admin for help");
+                }
+            }
             throw new NotImplementedException();
         }
 
@@ -63,9 +92,12 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void GetAllTests()
+        public async Task<List<Test>> GetAllTests()
         {
-            throw new NotImplementedException();
+            jsonString = await httpClient.GetStringAsync("Tests");
+            var tests = JsonConvert.DeserializeObject<List<Test>>(jsonString);
+            return tests;
+
         }
 
         public void DeleteTest()
@@ -73,9 +105,40 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void PostCreatedQuestion()
+        /// <summary>
+        /// Converts the question object to a Json string and posts it to the API for writing into the database
+        /// </summary>
+        /// <param name="question"></param>
+        public async void PostCreatedQuestion(Question question)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //Convert the object to a json string.
+                jsonString = JsonConvert.SerializeObject(question);
+
+                //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
+                using (HttpContent content = new StringContent(jsonString))
+                {
+                    //Call the api and send the Json string.
+                    HttpResponseMessage response = await httpClient.PostAsync("question", content);
+
+                    //Check if it is successfull. In that case display a message telling the user.
+                    //Otherwise throw an error and tell the user that the question was not posted.
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await new MessageDialog("Question saved successfully").ShowAsync();
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                        throw new HttpRequestException("Question was not saved. Contact an admin for help");
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
         }
 
         public void GetQuestion()

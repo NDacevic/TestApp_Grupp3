@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace TestApp.ViewModel
 
         #region Fields
         private static StudentViewModel instance = null;
+        private Student activeStudent;
         
         #endregion
 
@@ -42,6 +44,10 @@ namespace TestApp.ViewModel
                 return instance;
             }
         }
+
+        //Property used to store all currently active tests, later used to populate the Listview ActiveTests on AvailableTestsView
+        public ObservableCollection<Test> ActiveTests { get; internal set; }      
+        
         public Student ActiveStudent { get; set; }
         #endregion
 
@@ -58,9 +64,16 @@ namespace TestApp.ViewModel
         {
 
         }
-        public void SeeActiveTest()
+        public async void SeeActiveTests()
         {
-
+            List<Test> allTests = await ApiHelper.Instance.GetAllTests();
+            foreach (Test test in allTests)
+            {
+                if (test.IsActive==true && test.Grade==activeStudent.ClassId)
+                {
+                     ActiveTests.Add(test);
+                }
+            }
         }
         #endregion
     }
