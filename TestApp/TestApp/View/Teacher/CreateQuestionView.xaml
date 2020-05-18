@@ -22,6 +22,9 @@
                 <ComboBox
                     x:Name="comboBox_CourseNames"
                     x:DefaultBindMode="OneWay"
+                    
+                    SelectedIndex="0"
+                    
                     ItemsSource="{x:Bind createInstance.CourseName}"
                     >
                     <ComboBox.ItemTemplate>
@@ -38,6 +41,8 @@
                 <ComboBox
                     x:Name="comboBox_QuestionType"
                     x:DefaultBindMode="OneWay"
+                    
+                    SelectedIndex="0"
                     
                     SelectionChanged="ComboBox_QuestionType_SelectionChanged"
                     >
