@@ -45,7 +45,7 @@ namespace TestApp.ViewModel
             SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vilket år dog Olof Palme?", "1986", "1987", "Han lever forfarande", "Historia", 5));
             SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vad är pi?", "3.14", "3.11", "11", "Matematik", 5));
             SubjectQuestions.Add(new Question(1, "Flervalsfråga", "Vad heter huvudstaden i England?", "London", "Göteborg", "Malmö", "Geografi", 10));
-            SubjectQuestions.Add(new Question(2, "Flervalsfråga", "När föddes Johnny", "1985", "1915", "1912", "Historia", 2));
+            SubjectQuestions.Add(new Question(2, "Flervalsfråga", "När föddes Johnny", "1985", "1915", "1912", "Svenska", 2));
             SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vad är 2*2+1?", "5", "4", "6", "Matematik", 1));
 
             foreach (Question questionTofilter in SubjectQuestions)
@@ -106,14 +106,17 @@ namespace TestApp.ViewModel
             try
             {
                 ApiHelper.Instance.PostCreatedTestAsync(CreatedTest);
+                CreatedTest.Questions = null;
                 CreatedTest = null;
+                
+                
             }
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
             }
-
-            throw new NotImplementedException();
+           
+           
         }
         public void AddQuestionToTest(Question question) //Adding question that the user choose
         {

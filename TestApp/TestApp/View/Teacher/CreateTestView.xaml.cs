@@ -44,6 +44,7 @@ namespace TestApp.View.Teacher
             this.InitializeComponent();
             this.DataContext = teacherCreateViewModel;
             this.DataContext = teacherCreateViewModel.SubjectQuestions;
+            
         }
 
         private void AddQuestionToTest_Btn_Click(object sender, RoutedEventArgs e) //Adding the question the user choose from the list to the test.

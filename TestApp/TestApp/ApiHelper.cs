@@ -74,7 +74,7 @@ namespace TestApp
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                 //Call the api and send the Json string.
-                HttpResponseMessage response = await httpClient.PostAsync("test", content);
+                HttpResponseMessage response = await httpClient.PostAsync("Tests", content);
 
                 //Check if it is successfull. In that case display a message telling the user.
                 //Otherwise throw an error and tell the user that the question was not posted.
@@ -88,7 +88,7 @@ namespace TestApp
                     throw new HttpRequestException("Test was not saved. Contact an admin for help");
                 }
             }
-            throw new NotImplementedException();
+        
         }
 
         public void GetTest()
