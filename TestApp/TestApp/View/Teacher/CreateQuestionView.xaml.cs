@@ -50,10 +50,13 @@ namespace TestApp.View.Teacher
                 if (!int.TryParse(textBox_QuestionPoints.Text, out int points))
                     throw new FormatException("Points total invalid. Use numbers only");
 
-                if(((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Multiple Choice")
-                    createInstance.CreatedQuestion = new Question(0, ((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString(), textBox_questionText.Text, textBox_CorrectAnswer.Text,textBox_IncorrectAnswer1.Text, textBox_IncorrectAnswer2.Text, ((ComboBoxItem)comboBox_CourseNames.SelectedValue).Content.ToString(), points);
+                string selectedQuestionType = ((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString();
+                string selectedCourse = comboBox_CourseNames.SelectedValue.ToString();
+
+                if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Multiple Choice")
+                    createInstance.CreatedQuestion = new Question(0, selectedQuestionType, textBox_questionText.Text, textBox_CorrectAnswer.Text,textBox_IncorrectAnswer1.Text, textBox_IncorrectAnswer2.Text, selectedCourse, points);
                 else if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Text")
-                    createInstance.CreatedQuestion = new Question(0, ((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString(), textBox_questionText.Text, null, null, null, ((ComboBoxItem)comboBox_CourseNames.SelectedValue).Content.ToString(), points);
+                    createInstance.CreatedQuestion = new Question(0, selectedQuestionType, textBox_questionText.Text, null, null, null, selectedCourse, points);
                 createInstance.CreateQuestion();
 
             }
