@@ -27,7 +27,7 @@ namespace TestApp.Model
         #endregion
 
         #region Constructors
-        public Test (int testId, int grade, string courseName, int maxPoints, int testDuration, bool isActive, bool isTestGraded, DateTime startDate)
+        public Test (int testId, int grade, string courseName, int maxPoints, int testDuration, bool isActive, bool isTestGraded, DateTimeOffset startDate)
         {
             TestId = testId;
             Grade = grade;
@@ -61,7 +61,7 @@ namespace TestApp.Model
         public bool IsActive { get; set; }
         public ObservableCollection<Question> Questions { get; set; }
         public bool IsTestGraded { get; set; }
-        public DateTime StartDate { get; set; }
+        public DateTimeOffset StartDate { get; set; }
         public List<StudentQuestionAnswer> Result { get; set; }
         public int MaxPoints
         {
