@@ -120,7 +120,8 @@
                            Margin="15,0,0,0"
                            Text="{x:Bind teacherCreateViewModel.CreatedTest.MaxPoints}"
                            PlaceholderText="0.0"
-                           TextAlignment="Right"/>
+                           TextAlignment="Right"
+                           x:DefaultBindMode="TwoWay"/>
                 
                 <CalendarDatePicker x:Name="TestDatePicker"
                                     Margin="15,0,0,0"
