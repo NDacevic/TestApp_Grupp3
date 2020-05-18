@@ -8,7 +8,57 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
-    </Grid>
+    <SplitView
+         DisplayMode="CompactInline"
+        CompactPaneLength="300">
+        <SplitView.Pane>
+            <StackPanel
+                Spacing="20">
+                <TextBlock
+                    Text="Navigate to Page"/>
+                <Button
+                    x:Name="bttn_AvailableTestsViewNavigate"
+                    Content="AvailableTestsView"
+                    Click="Button_NavigateToPage"
+                    />
+                <Button
+                    x:Name="bttn_HistoricalTestsViewNavigate"
+                    Content="HistoricalTestsView"
+                    />
+                <Button
+                    x:Name="bttn_MainPageStudentViewNavigate"
+                    Content="MainPageStudentView"
+                    />
+                <Button
+                    x:Name="bttn_WriteTestViewNavigate"
+                    Content="WriteTestView"/>
+                <Button
+                    x:Name="bttn_CreateQuestionViewNavigate"
+                    Content="CreateQuestionView"/>
+                <Button
+                    x:Name="bttn_CreateTestViewNavigate"
+                    Content="CreateTestView"
+                    />
+                <Button
+                    x:Name="bttn_GradeTestViewNavigate"
+                    Content="GradeTestView"
+                    />
+                <Button
+                    x:Name="bttn_MainPageTeacherViewNavigate"
+                    Content="MainPageTeacherView"
+                    />
+                <Button
+                    x:Name="bttn_StudentResultViewNavigate"
+                    Content="StudentResultView"
+                    />
+                <Button
+                    x:Name="bttn_LogInViewNavigate"
+                    Content="LogInView"
+                    />
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Frame x:Name="mainFrame"/>
+        </SplitView.Content>
+    </SplitView>
 </Page>
