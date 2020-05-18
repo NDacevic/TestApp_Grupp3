@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.ViewModel;
+using TestApp.Model;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,6 +24,7 @@ namespace TestApp.View.Teacher
     /// </summary>
     public sealed partial class StudentResultView : Page
     {
+        TeacherStudentViewModel teacherStudentViewModel { get; set; }
         public StudentResultView()
         {
             this.InitializeComponent();

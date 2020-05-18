@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TestApp.Model;
 
 namespace TestApp.ViewModel
 {
@@ -20,7 +21,10 @@ namespace TestApp.ViewModel
         #region Constructors
         public TeacherStudentViewModel()
         {
-            //Created but left empty intentionally in case it will be used in the future
+            AllTests = new ObservableCollection<Test>();
+            AllTests.Add(new Test(1, 7, "Svenska", 50, 60, false, true, DateTime.Now));
+            StudentTestResults = new ObservableCollection<TestResult>();
+            StudentTestResults.Add(new TestResult(1, 1, 30));
         }
         #endregion
 
@@ -45,6 +49,8 @@ namespace TestApp.ViewModel
                 }
             }
         }
+        public ObservableCollection<Test> AllTests { get; set; }
+        public ObservableCollection<TestResult> StudentTestResults { get; set; }
         #endregion
 
         #region Methods
