@@ -30,13 +30,15 @@
                           ItemsSource="{x:Bind teacherCreateViewModel.QuestionType}"
                           x:DefaultBindMode="OneWay"
                           PlaceholderText="Visar alla"
-                          Margin="0,0,0,0"/>
+                          Margin="0,0,0,0"
+                          SelectionChanged="FilterQuestionTypeComboBox_SelectionChanged"/>
                 <ComboBox Width="110"
                           x:Name="FilterQuestionPointComboBox"
                           ItemsSource="{x:Bind teacherCreateViewModel.QuestionPoint}"
                           x:DefaultBindMode="OneWay"
                           PlaceholderText="Visar alla"
-                          Margin="20,0,0,0"/>
+                          Margin="20,0,0,0"
+                          SelectionChanged="FilterQuestionPointComboBox_SelectionChanged"/>
                 
                 <Button   x:Name="AddQuestionToTest_Btn"
                           Content="Lägg till fråga"
@@ -56,7 +58,7 @@
         <ListView BorderBrush="Black"
                   BorderThickness="2"
                   Margin="40,100,40,200"
-                  ItemsSource="{x:Bind teacherCreateViewModel.SubjectQuestions}"
+                  ItemsSource="{x:Bind teacherCreateViewModel.QuestionsToFilter}"
                   x:Name="DisplayQuestionsListView"
                   x:DefaultBindMode="TwoWay">
             <ListView.ItemTemplate>
@@ -109,7 +111,8 @@
                           x:Name="ChooseCourseComboBox"
                           ItemsSource="{x:Bind teacherCreateViewModel.CourseName}"
                           x:DefaultBindMode="OneWay"
-                          PlaceholderText="Välj ämne"/>
+                          PlaceholderText="Välj ämne"
+                          SelectionChanged="ChooseCourseComboBox_SelectionChanged"/>
                 <TextBox  x:Name="ChooseGrade_txtBox" 
                           Margin="15,0,0,0"
                           PlaceholderText="Ex.7"/>
