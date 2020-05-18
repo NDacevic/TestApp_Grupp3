@@ -65,9 +65,9 @@
                 <DataTemplate x:Name="displayQuestionsListView" x:DataType="data:Question" >
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{x:Bind CourseName}"/>
-                        <TextBlock Text="{x:Bind TestQuestion}"/>
+                        <TextBlock Text="{x:Bind QuestionText}"/>
                         <TextBlock Text="{x:Bind QuestionType}"/>
-                        <TextBlock Text="{x:Bind Point}"/>
+                        <TextBlock Text="{x:Bind PointValue}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -84,9 +84,9 @@
                 <DataTemplate x:Name="displayAddedQuestionsListView" x:DataType="data:Question">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{x:Bind CourseName}"/>
-                        <TextBlock Text="{x:Bind TestQuestion}"/>
+                        <TextBlock Text="{x:Bind QuestionText}"/>
                         <TextBlock Text="{x:Bind QuestionType}"/>
-                        <TextBlock Text="{x:Bind Point}"/>
+                        <TextBlock Text="{x:Bind PointValue}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

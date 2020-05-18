@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -31,6 +32,9 @@ namespace TestApp.View.Teacher
         public CreateQuestionView()
         {
             this.InitializeComponent();
+
+            comboBox_CourseNames.SelectedIndex = 0;
+            comboBox_QuestionType.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -46,10 +50,10 @@ namespace TestApp.View.Teacher
                 if (!int.TryParse(textBox_QuestionPoints.Text, out int points))
                     throw new FormatException("Points total invalid. Use numbers only");
 
-                if(comboBox_QuestionType.Text == "Multiple Choice")
-                    createInstance.CreatedQuestion = new Question(0, comboBox_QuestionType.Text, textBox_questionText.Text, textBox_CorrectAnswer.Text,textBox_IncorrectAnswer1.Text, textBox_IncorrectAnswer2.Text, comboBox_CourseNames.Text, points);
-                else if (comboBox_QuestionType.Text == "Text")
-                    createInstance.CreatedQuestion = new Question(0, comboBox_QuestionType.Text, textBox_questionText.Text, null, null, null, comboBox_CourseNames.Text, points);
+                if(((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Multiple Choice")
+                    createInstance.CreatedQuestion = new Question(0, ((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString(), textBox_questionText.Text, textBox_CorrectAnswer.Text,textBox_IncorrectAnswer1.Text, textBox_IncorrectAnswer2.Text, ((ComboBoxItem)comboBox_CourseNames.SelectedValue).Content.ToString(), points);
+                else if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Text")
+                    createInstance.CreatedQuestion = new Question(0, ((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString(), textBox_questionText.Text, null, null, null, ((ComboBoxItem)comboBox_CourseNames.SelectedValue).Content.ToString(), points);
                 createInstance.CreateQuestion();
 
             }
@@ -66,11 +70,11 @@ namespace TestApp.View.Teacher
         /// <param name="e"></param>
         private void ComboBox_QuestionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(comboBox_QuestionType.Text == "Multiple Choice")
+            if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Multiple Choice")
             {
                 grid_MultipleChoiceAnswers.Visibility = Visibility.Visible;
             }
-            else if (comboBox_QuestionType.Text == "Text")
+            else if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Text")
             {
                 grid_MultipleChoiceAnswers.Visibility = Visibility.Collapsed;
             }

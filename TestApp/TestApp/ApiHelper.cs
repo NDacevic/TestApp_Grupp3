@@ -65,10 +65,14 @@ namespace TestApp
         {
             //Convert the object to a json string.
             jsonString = JsonConvert.SerializeObject(test);
+            Debug.WriteLine(test);
 
             //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
             using (HttpContent content = new StringContent(jsonString))
             {
+                //Set the type of content
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
                 //Call the api and send the Json string.
                 HttpResponseMessage response = await httpClient.PostAsync("test", content);
 
@@ -130,12 +134,15 @@ namespace TestApp
             {
                 //Convert the object to a json string.
                 jsonString = JsonConvert.SerializeObject(question);
-
+                Debug.WriteLine(jsonString);
                 //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
                 using (HttpContent content = new StringContent(jsonString))
                 {
+                    //Set the type of content
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
                     //Call the api and send the Json string.
-                    HttpResponseMessage response = await httpClient.PostAsync("question", content);
+                    HttpResponseMessage response = await httpClient.PostAsync("questions", content);
 
                     //Check if it is successfull. In that case display a message telling the user.
                     //Otherwise throw an error and tell the user that the question was not posted.

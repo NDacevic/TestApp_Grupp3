@@ -109,13 +109,13 @@ namespace TestApp.ViewModel
         public void AddQuestionToTest(Question question) //Adding question that the user choose
         {
             CreatedTest.Questions.Add(question);
-            CreatedTest.MaxPoints += question.Point;
+            CreatedTest.MaxPoints += question.PointValue;
 
         }
         public void RemoveQuestionFromTest(Question question) //Removing question that the user choose
         {
             CreatedTest.Questions.Remove(question);
-            CreatedTest.MaxPoints -= question.Point;
+            CreatedTest.MaxPoints -= question.PointValue;
         }
 
         /// <summary>

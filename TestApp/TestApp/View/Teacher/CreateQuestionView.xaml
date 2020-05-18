@@ -22,6 +22,7 @@
                 <ComboBox
                     x:Name="comboBox_CourseNames"
                     x:DefaultBindMode="OneWay"
+                    
                     ItemsSource="{x:Bind createInstance.CourseName}"
                     >
                     <ComboBox.ItemTemplate>
