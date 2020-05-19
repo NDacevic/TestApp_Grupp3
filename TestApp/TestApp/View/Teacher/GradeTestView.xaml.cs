@@ -36,7 +36,6 @@ namespace TestApp.View.Teacher
             this.InitializeComponent();
 
             GetTests();
-            Debug.WriteLine($"This many tests :{ungradedTests.Count}");
         }
 
         private async void GetTests()
