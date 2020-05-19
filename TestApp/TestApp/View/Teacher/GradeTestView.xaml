@@ -27,7 +27,6 @@
                         <Run Text=" åk"/>
                         <Run Text="{x:Bind Grade}"/>
                         <Run Text=", "/>
-                        <Run Text="{x:Bind Stud}"
                     </TextBlock>
                 </DataTemplate>
             </ListView.ItemTemplate>
