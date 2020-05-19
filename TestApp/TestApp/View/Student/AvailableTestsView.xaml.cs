@@ -8,6 +8,7 @@ using TestApp.Model;
 using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -52,14 +53,33 @@ namespace TestApp.View.Student
         #region Methods
         #endregion
 
+        /// <summary>
+        /// Navigation to WriteTestView using double click on ListView item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Lv_AvailableTests_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {            
             Frame.Navigate(typeof(WriteTestView), sender as Test);
         }
 
+        /// <summary>
+        /// Navigation to WriteTestView using button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Bttn_TakeTest_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(WriteTestView), Lv_AvailableTests.SelectedItem);
+            //Navigation using button is only possible if a test is selected
+            if (Lv_AvailableTests.SelectedItem!=null)
+            {
+                Frame.Navigate(typeof(WriteTestView), Lv_AvailableTests.SelectedItem);
+            }
+            else
+            {
+                _ = new MessageDialog("Vänligen välj ett prov att skriva.").ShowAsync();
+            }
+            
         }
     }
 }

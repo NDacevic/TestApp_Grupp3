@@ -89,11 +89,12 @@ namespace TestApp.ViewModel
                     }
                 }
             }
-            catch (Exception exc)
+            catch (Exception)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                await new MessageDialog("No tests retrieved from database. Contact an admin for help.").ShowAsync();
             }
         }
+
         #endregion
     }
 }
