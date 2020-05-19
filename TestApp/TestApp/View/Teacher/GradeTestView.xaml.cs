@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.Model;
+using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +24,20 @@ namespace TestApp.View.Teacher
     /// </summary>
     public sealed partial class GradeTestView : Page
     {
+        TeacherGradeTestViewModel gradeInstance = TeacherGradeTestViewModel.Instance;
+        Model.Teacher teacherInstance = Model.Teacher.Instance;
+        List<Test> ungradedTests;
+
         public GradeTestView()
         {
             this.InitializeComponent();
+
+            GetTests();
+        }
+
+        private async void GetTests()
+        {
+            ungradedTests = await gradeInstance.GetUngradedTests();
         }
     }
 }
