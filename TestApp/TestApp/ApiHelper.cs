@@ -163,9 +163,26 @@ namespace TestApp
             }
         }
 
-        public void GetQuestion()
+        public async Task<ObservableCollection<Question>> GetQuestion(string course)
         {
-            throw new NotImplementedException();
+            //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
+            HttpResponseMessage response = await httpClient.GetAsync($"Questions/{course}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                jsonString = response.Content.ReadAsStringAsync().Result;
+                //Convert jsonString to list of Test objects
+                var question = JsonConvert.DeserializeObject<ObservableCollection<Question>>(jsonString);
+                return question;
+            }
+            else
+            {
+                throw new HttpRequestException("No tests retrieved from database. Contact an admin for help.");
+            }
+            
+
+           
+           
         }
 
         public void GetAllQuestions()
