@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -7,6 +9,7 @@ using TestApp.Model;
 using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,18 +29,22 @@ namespace TestApp.View.Teacher
     {
         TeacherGradeTestViewModel gradeInstance = TeacherGradeTestViewModel.Instance;
         Model.Teacher teacherInstance = Model.Teacher.Instance;
-        List<Test> ungradedTests;
+        ObservableCollection<Test> ungradedTests = new ObservableCollection<Test>();
 
         public GradeTestView()
         {
             this.InitializeComponent();
 
             GetTests();
+            Debug.WriteLine($"This many tests :{ungradedTests.Count}");
         }
 
         private async void GetTests()
         {
-            ungradedTests = await gradeInstance.GetUngradedTests();
+            List<Test> tempTests = await gradeInstance.GetUngradedTests();
+
+            foreach (var x in tempTests)
+                ungradedTests.Add(x);
         }
     }
 }
