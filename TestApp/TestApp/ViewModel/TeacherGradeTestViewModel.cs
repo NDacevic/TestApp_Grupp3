@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TestApp.Model;
 
 namespace TestApp.ViewModel
 
@@ -54,9 +54,11 @@ namespace TestApp.ViewModel
             throw new NotImplementedException();
         }
 
-        public void GetUngradedTest()
+        public async Task<List<Test>> GetUngradedTests()
         {
-            throw new NotImplementedException();
+            List<Test> allTests = await ApiHelper.Instance.GetAllTests();
+            List<Test> ungradedTests = allTests.Where(x => x.IsTestGraded == false).Select(x => x).ToList();
+            return ungradedTests;
         }
 
         public void GetUngradedQuestion()
