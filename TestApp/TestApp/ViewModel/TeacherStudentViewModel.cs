@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
+using Windows.UI.Popups;
 
 namespace TestApp.ViewModel
 {
@@ -65,18 +66,21 @@ namespace TestApp.ViewModel
             {
                 var tests = await ApiHelper.Instance.GetAllTests();
 
-                foreach (Test t in tests)
+                if(GradedTests.Count == 0)
                 {
-                    if (t.IsTestGraded == true)
+                    foreach (Test t in tests)
                     {
-                        GradedTests.Add(t);
+                        if (t.IsTestGraded == true)
+                        {
+                            GradedTests.Add(t);
+                        }
+
                     }
-                    
                 }
             }
-            catch
+            catch (Exception exc)
             {
-
+                await new MessageDialog(exc.Message).ShowAsync();
             }
         }
         /// <summary>
@@ -94,9 +98,9 @@ namespace TestApp.ViewModel
                     StudentTestResults.Add(ts);
                 }
             }
-            catch
+            catch (Exception exc)
             {
-
+                await new MessageDialog(exc.Message).ShowAsync();
             }
         }
         #endregion
