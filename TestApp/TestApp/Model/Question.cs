@@ -43,6 +43,11 @@ namespace TestApp.Model
         public string IncorrectAnswer2 { get; set; }
         public int PointValue { get; set; }
         public string CourseName { get; set; }
+        public string QuestionSummary
+        {
+            get { return $"[{CourseName}] Fråga: {QuestionText} [{QuestionType}] Poäng: {PointValue}"; }
+
+        }
         #endregion
 
         #region Methods

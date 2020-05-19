@@ -44,6 +44,7 @@ namespace TestApp.View.Teacher
             this.InitializeComponent();
             this.DataContext = teacherCreateViewModel;
             this.DataContext = teacherCreateViewModel.SubjectQuestions;
+            
         }
 
         private void AddQuestionToTest_Btn_Click(object sender, RoutedEventArgs e) //Adding the question the user choose from the list to the test.
@@ -68,18 +69,31 @@ namespace TestApp.View.Teacher
             }   }
         }
 
-        //Setting the test up
+     
         private void CreateTest_btn_Click(object sender, RoutedEventArgs e)
         {
-            //TO DO: Fix Datetime
-
-            teacherCreateViewModel.CreatedTest.CourseName = ChooseCourseComboBox.SelectedValue.ToString();
-            teacherCreateViewModel.CreatedTest.Grade = int.Parse(ChooseGrade_txtBox.Text); //Implement try catch
-            teacherCreateViewModel.CreatedTest.TestDuration = int.Parse(TestTime_txtBox.Text); //Implement try catch
             
-            teacherCreateViewModel.CreateTestToDB();
+           
+            try
+            {
+                teacherCreateViewModel.CreatedTest.CourseName = ChooseCourseComboBox.SelectedValue.ToString();
+                teacherCreateViewModel.CreatedTest.Grade = int.Parse(ChooseGrade_txtBox.Text); 
+                teacherCreateViewModel.CreatedTest.TestDuration = int.Parse(TestTime_txtBox.Text);
+                AddDateAndTimeToTest();
+                teacherCreateViewModel.CreateTestToDB();
+            }
+            catch(NullReferenceException)
+            {
+                DisplayFieldsAreEmpty();
+            }
+            catch(FormatException)
+            {
+                DisplayFieldsAreEmpty();
+            }
+            
            
         }
+       
 
         private void RemoveQuestionFromTest_Btn_Click(object sender, RoutedEventArgs e)
         {
@@ -159,6 +173,51 @@ namespace TestApp.View.Teacher
                 }
             }
         }
+        private void AddDateAndTimeToTest()
+        {
+            //Setting date and time of when the Test starts.
+            try
+            {
+                DateTimeOffset dateAndTime;
+                dateAndTime = new DateTimeOffset(TestDatePicker.Date.Value.Year, TestDatePicker.Date.Value.Month, TestDatePicker.Date.Value.Day
+                    , TestDatePicker.Date.Value.Hour, TestDatePicker.Date.Value.Minute, TestDatePicker.Date.Value.Second,
+                                                 new TimeSpan(TestTimePicker.Time.Hours, TestTimePicker.Time.Minutes, TestTimePicker.Time.Seconds));
+
+                if(TestTimePicker.Time.Hours==0) 
+                {
+                    DisplayInvalidTimeForTest();
+                }
+                else
+                {
+                    teacherCreateViewModel.CreatedTest.StartDate = dateAndTime;
+                }
+            }
+            catch(InvalidOperationException)
+            {
+                DisplayFieldsAreEmpty();
+            }
+
+        }
+        private async void DisplayInvalidTimeForTest()
+        {
+            ContentDialog warning = new ContentDialog
+            {
+                Title = "Varning",
+                Content = "Var vänlig se över datum och tid för prov",
+                CloseButtonText = "Ok"
+            };
+            await warning.ShowAsync();
+        }
+        private async void DisplayFieldsAreEmpty()//Informs user that it can´t continue untill all fields are filled out
+        {
+            ContentDialog warning = new ContentDialog
+            {
+                Title = "Varning",
+                Content = "Var vänlig se till att alla fälten är fyllda",
+                CloseButtonText = "Ok"
+            };
+            await warning.ShowAsync();
+        }
         private async void DisplayNoSubjectWarning() //Asks the user to choose a subject before trying to filter or adding a question.
         {
             ContentDialog warning = new ContentDialog
@@ -179,6 +238,24 @@ namespace TestApp.View.Teacher
             };
             await warning.ShowAsync();
         }
+        private void TestDatePicker_CalendarViewDayItemChanging(CalendarView sender, CalendarViewDayItemChangingEventArgs e)
+        {
+           
+            //Greying out Sundays,Saturdays and days prior to Today, so the user can´t set wrong date.
+            if (e.Item.Date < DateTime.Today)
+            {
+                e.Item.IsBlackout = true;
+            }
+            if(e.Item.Date.DayOfWeek.ToString()=="Sunday") 
+            {
+                e.Item.IsBlackout = true;
+            }
+            if(e.Item.Date.DayOfWeek.ToString() == "Saturday")
+            {
+                e.Item.IsBlackout = true;
+            }
+        }
 
+      
     }
 }

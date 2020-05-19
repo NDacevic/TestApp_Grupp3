@@ -49,6 +49,12 @@
                           Content="Ta bort fråga"
                           Margin="15,0,0,0"
                           Click="RemoveQuestionFromTest_Btn_Click"/>
+                
+                <Button   x:Name="CreateTest_btn"
+                          Content="Skapa prov"
+                          Margin="15,0,0,0"
+                          Click="CreateTest_btn_Click"/>
+
             </StackPanel>
          
                 
@@ -60,14 +66,11 @@
                   Margin="40,100,40,200"
                   ItemsSource="{x:Bind teacherCreateViewModel.QuestionsToFilter}"
                   x:Name="DisplayQuestionsListView"
-                  x:DefaultBindMode="TwoWay">
+                  >
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="displayQuestionsListView" x:DataType="data:Question" >
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{x:Bind CourseName}"/>
-                        <TextBlock Text="{x:Bind QuestionText}"/>
-                        <TextBlock Text="{x:Bind QuestionType}"/>
-                        <TextBlock Text="{x:Bind PointValue}"/>
+                        <TextBlock Text="{x:Bind QuestionSummary}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -79,14 +82,11 @@
                   Margin="40,100,40,200"
                   ItemsSource="{x:Bind teacherCreateViewModel.CreatedTest.Questions}"
                   x:Name="DisplayAddedQuestionsListView"
-                  x:DefaultBindMode="TwoWay">
+                  >
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="displayAddedQuestionsListView" x:DataType="data:Question">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{x:Bind CourseName}"/>
-                        <TextBlock Text="{x:Bind QuestionText}"/>
-                        <TextBlock Text="{x:Bind QuestionType}"/>
-                        <TextBlock Text="{x:Bind PointValue}"/>
+                        <TextBlock Text="{x:Bind QuestionSummary}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -121,12 +121,12 @@
                            Text="{x:Bind teacherCreateViewModel.CreatedTest.MaxPoints}"
                            PlaceholderText="0.0"
                            TextAlignment="Right"
-                           x:DefaultBindMode="TwoWay"/>
+                           x:DefaultBindMode="TwoWay" IsReadOnly="True"/>
                 
                 <CalendarDatePicker x:Name="TestDatePicker"
                                     Margin="15,0,0,0"
                                     PlaceholderText="Datum"
-                                    FirstDayOfWeek="Monday" Width="83"/>
+                                    FirstDayOfWeek="Monday" Width="83" CalendarViewDayItemChanging="TestDatePicker_CalendarViewDayItemChanging"/>
                 
                 <TimePicker         x:Name="TestTimePicker"
                                     Margin="10,0,0,0"
@@ -136,11 +136,7 @@
                                     PlaceholderText="0.0"
                                     Margin="15,0,0,0"/>
 
-                <Button             x:Name="CreateTest_btn"
-                                    Content="Skapa prov"
-                                    Margin="15,0,0,0"
-                                    Click="CreateTest_btn_Click"/>
-
+              
 
 
 
