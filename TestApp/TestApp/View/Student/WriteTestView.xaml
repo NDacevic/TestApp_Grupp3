@@ -3,11 +3,37 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TestApp.View"
+    xmlns:l="using:TestApp.View.Student"
+    xmlns:data="using:TestApp.Model"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <DataTemplate 
+            x:Key="MultipleChoiceAnswerItemTemplate"
+            x:DataType="data:Question">
+            <TextBlock></TextBlock>
+        </DataTemplate>
+
+        <DataTemplate 
+            x:Key="TextAnswerItemTemplate"
+            x:DataType="data:Question">
+            <TextBlock></TextBlock>
+        </DataTemplate>
+
+        <l:MyDataTemplateSelector
+            x:Key="MyDataTemplateSelector"
+            MultipleChoiceAnswer="{StaticResource MultipleChoiceAnswerItemTemplate}"
+            TextAnswer="{StaticResource TextAnswerItemTemplate}">
+        </l:MyDataTemplateSelector>
+
+
+
+    </Page.Resources>
+    
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
