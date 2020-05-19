@@ -52,7 +52,24 @@ namespace TestApp.View.Student
             // e = selectedTest - MOllhage
         }
         #endregion
-
-
     }
+
+    public class MyDataTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate MultipleChoiceAnswer { get; set; }
+        public DataTemplate TextAnswer { get; set; }
+
+        protected override DataTemplate SelectTemplateCore(object item)
+        {
+            if (((Question)item).QuestionType == "Flerval")
+            {
+                return MultipleChoiceAnswer;
+            }
+            else
+            {
+                return TextAnswer;
+            }
+        }
+    }
+
 }

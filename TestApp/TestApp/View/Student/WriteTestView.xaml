@@ -9,6 +9,38 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+        <TextBlock
+            Text="Provinfo?"
+            Grid.Row="0"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            FontSize="48"/>
+        <ListView
+            Name="Lv_AvailableTests"
+            Grid.Row="2"
+            Grid.Column="1">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+             
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </Grid>
 </Page>
