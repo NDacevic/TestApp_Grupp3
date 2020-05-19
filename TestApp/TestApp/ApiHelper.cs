@@ -115,8 +115,7 @@ namespace TestApp
             else
             {
                 throw new HttpRequestException("No tests retrieved from database. Contact an admin for help.");
-            }
-            
+            }            
         }
 
         public void DeleteTest()
