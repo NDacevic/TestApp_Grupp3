@@ -166,15 +166,14 @@ namespace TestApp
             throw new NotImplementedException();
         }
         /// <summary>
-        /// 
+        /// Gets the test results for all students taking one test (filtered by TestId)
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List<TestResult></TestResult></returns>
         public async Task<List<TestResult>> GetAllTestResults(int testId)
         {
             jsonString = await httpClient.GetStringAsync("TestResults/"+ testId);
             var testResults = JsonConvert.DeserializeObject<List<TestResult>>(jsonString);
             return testResults;
- 
         }
 
         public void PostStudent()

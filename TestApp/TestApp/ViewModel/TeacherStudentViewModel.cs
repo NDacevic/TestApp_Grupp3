@@ -21,7 +21,7 @@ namespace TestApp.ViewModel
         #region Constructors
         public TeacherStudentViewModel()
         {
-            AllTests = new ObservableCollection<Test>();
+            GradedTests = new ObservableCollection<Test>();
             StudentTestResults = new ObservableCollection<TestResult>();
         }
         #endregion
@@ -47,7 +47,7 @@ namespace TestApp.ViewModel
                 }
             }
         }
-        public ObservableCollection<Test> AllTests { get; set; }
+        public ObservableCollection<Test> GradedTests { get; set; }
         public ObservableCollection<TestResult> StudentTestResults { get; set; }
         #endregion
 
@@ -56,6 +56,9 @@ namespace TestApp.ViewModel
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// Displays all tests that is already graded
+        /// </summary>
         public async void DisplayAllTests()
         {
             try
@@ -64,7 +67,11 @@ namespace TestApp.ViewModel
 
                 foreach (Test t in tests)
                 {
-                    AllTests.Add(t);
+                    if (t.IsTestGraded == true)
+                    {
+                        GradedTests.Add(t);
+                    }
+                    
                 }
             }
             catch
@@ -72,6 +79,10 @@ namespace TestApp.ViewModel
 
             }
         }
+        /// <summary>
+        /// Displays the test results for one chosen test in the StudentResultView
+        /// </summary>
+        /// <param name="testId"></param>
 
         public async void DisplayStudentResult(int testId)
         {
