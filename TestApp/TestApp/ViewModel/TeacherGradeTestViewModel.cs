@@ -58,6 +58,7 @@ namespace TestApp.ViewModel
         {
             List<Test> allTests = await ApiHelper.Instance.GetAllTests();
             List<Test> ungradedTests = allTests.Where(x => x.IsTestGraded == false).Select(x => x).ToList();
+            
             return ungradedTests;
         }
 
