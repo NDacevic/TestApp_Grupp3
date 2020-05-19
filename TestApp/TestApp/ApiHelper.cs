@@ -31,7 +31,7 @@ namespace TestApp
         #region Constructors
         public ApiHelper()
         {
-            httpClient.BaseAddress = new Uri(@"https://localhost:5000/api/");
+            httpClient.BaseAddress = new Uri(@"https://localhost:5001/api/");
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
@@ -65,12 +65,16 @@ namespace TestApp
         {
             //Convert the object to a json string.
             jsonString = JsonConvert.SerializeObject(test);
+            Debug.WriteLine(test);
 
             //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
             using (HttpContent content = new StringContent(jsonString))
             {
+                //Set the type of content
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
                 //Call the api and send the Json string.
-                HttpResponseMessage response = await httpClient.PostAsync("test", content);
+                HttpResponseMessage response = await httpClient.PostAsync("Tests", content);
 
                 //Check if it is successfull. In that case display a message telling the user.
                 //Otherwise throw an error and tell the user that the question was not posted.
@@ -84,7 +88,7 @@ namespace TestApp
                     throw new HttpRequestException("Test was not saved. Contact an admin for help");
                 }
             }
-            throw new NotImplementedException();
+        
         }
 
         public void GetTest()
@@ -92,12 +96,27 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets Json string from API and converts it to List of Test objects
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Test>> GetAllTests()
         {
-            jsonString = await httpClient.GetStringAsync("Tests");
-            var tests = JsonConvert.DeserializeObject<List<Test>>(jsonString);
-            return tests;
+            //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
+            HttpResponseMessage response = await httpClient.GetAsync("Tests");
 
+            if (response.IsSuccessStatusCode)
+            {
+                jsonString = response.Content.ReadAsStringAsync().Result;
+                //Convert jsonString to list of Test objects
+                var tests = JsonConvert.DeserializeObject<List<Test>>(jsonString);
+                return tests;
+            }
+            else
+            {
+                throw new HttpRequestException("No tests retrieved from database. Contact an admin for help.");
+            }
+            
         }
 
         public void DeleteTest()
@@ -115,12 +134,15 @@ namespace TestApp
             {
                 //Convert the object to a json string.
                 jsonString = JsonConvert.SerializeObject(question);
-
+                Debug.WriteLine(jsonString);
                 //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
                 using (HttpContent content = new StringContent(jsonString))
                 {
+                    //Set the type of content
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
                     //Call the api and send the Json string.
-                    HttpResponseMessage response = await httpClient.PostAsync("question", content);
+                    HttpResponseMessage response = await httpClient.PostAsync("questions", content);
 
                     //Check if it is successfull. In that case display a message telling the user.
                     //Otherwise throw an error and tell the user that the question was not posted.

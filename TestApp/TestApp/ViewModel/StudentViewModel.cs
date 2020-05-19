@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
+using Windows.UI.Popups;
 
 namespace TestApp.ViewModel
 {
@@ -22,7 +23,10 @@ namespace TestApp.ViewModel
         #region Constructors
         public StudentViewModel ()
         {
-
+            ActiveTests = new ObservableCollection<Test>();
+            //Todo: Remove later when a student can log in
+            activeStudent = new Student(1, "Mikael", "Ollhage", "ja@ja.com","nej",7,null);
+            
         }
         #endregion
 
@@ -64,15 +68,30 @@ namespace TestApp.ViewModel
         {
 
         }
+        /// <summary>
+        /// Method that takes all tests from the database and saves the wanted tests to an OC, for list display
+        /// </summary>
         public async void SeeActiveTests()
         {
-            List<Test> allTests = await ApiHelper.Instance.GetAllTests();
-            foreach (Test test in allTests)
+            //Tries to contact API to get all Tests
+            try
             {
-                if (test.IsActive==true && test.Grade==activeStudent.ClassId)
+                //Temporary list to hold all tests
+                List<Test> allTests = await ApiHelper.Instance.GetAllTests();
+
+                //Loop through and keep all tests that are active and for the correct grade/year
+                foreach (Test test in allTests)
                 {
-                     ActiveTests.Add(test);
+                    //Todo: kraschar eventuellt om ListView är tom
+                    if (test.IsActive == true && test.Grade == activeStudent.ClassId)
+                    {
+                        ActiveTests.Add(test);
+                    }
                 }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
             }
         }
         #endregion

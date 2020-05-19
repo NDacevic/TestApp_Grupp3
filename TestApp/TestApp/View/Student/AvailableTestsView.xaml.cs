@@ -35,6 +35,7 @@ namespace TestApp.View.Student
         public AvailableTestsView()
         {
             this.InitializeComponent();
+            //Call method to set the Property that binds to this page's ListView
             StudentViewModel.Instance.SeeActiveTests();
         }
         #endregion
@@ -51,5 +52,14 @@ namespace TestApp.View.Student
         #region Methods
         #endregion
 
+        private void Lv_AvailableTests_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {            
+            Frame.Navigate(typeof(WriteTestView), sender as Test);
+        }
+
+        private void Bttn_TakeTest_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(WriteTestView), Lv_AvailableTests.SelectedItem);
+        }
     }
 }

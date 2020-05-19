@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.Model;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +23,36 @@ namespace TestApp.View.Student
     /// </summary>
     public sealed partial class WriteTestView : Page
     {
+        #region Constant Fields
+        #endregion
+
+        #region Fields
+        private Test selectedTest; //For storing the Test object received from the previous page
+        #endregion
+
+        #region Constructors
         public WriteTestView()
         {
             this.InitializeComponent();
         }
+        #endregion
+
+        #region Delegates
+        #endregion
+
+        #region Events
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Methods
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            // e = selectedTest - MOllhage
+        }
+        #endregion
+
+
     }
 }
