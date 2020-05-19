@@ -38,16 +38,6 @@ namespace TestApp.ViewModel
             SubjectQuestions = new ObservableCollection<Question>(); //Populated from DB
             QuestionsToFilter = new ObservableCollection<Question>(); //This is the list we gonna use to filter the questions
 
-            //Hardcoded questions intended for testing. These will be removed when the database is up and running.
-            //SubjectQuestions.Add(new Question(1, "Flerval", "Vad heter huvudstaden i Sverige?", "Stockholm", "Göteborg", "Malmö", "Geografi", 5));
-            //SubjectQuestions.Add(new Question(2, "Flerval", "Vilket år startade 1:a världskriget?","1914","1915","1912","Historia", 5));
-            //SubjectQuestions.Add(new Question(2, "Flerval", "Vilket år startade 2:a världskriget?", "1939", "1940", "1930", "Historia", 5));
-            //SubjectQuestions.Add(new Question(2, "Flerval", "Vilket år dog Olof Palme?", "1986", "1987", "Han lever forfarande", "Historia", 5));
-            //SubjectQuestions.Add(new Question(2, "Flerval", "Vad är pi?", "3.14", "3.11", "11", "Matematik", 5));
-            //SubjectQuestions.Add(new Question(1, "Flerval", "Vad heter huvudstaden i England?", "London", "Göteborg", "Malmö", "Geografi", 10));
-            //SubjectQuestions.Add(new Question(2, "Flerval", "När föddes Johnny", "1985", "1915", "1912", "Svenska", 2));
-            //SubjectQuestions.Add(new Question(2, "Flerval", "Vad är 2*2+1?", "5", "4", "6", "Matematik", 1));
-
       
             CourseName = new List<string> //Used for a dropdown combobox to filter school subject in CreateTestView and to easy apply subject to a question
             {
@@ -115,11 +105,10 @@ namespace TestApp.ViewModel
         {
             try
             {
+                CreatedTest.IsActive = true;
                 ApiHelper.Instance.PostCreatedTestAsync(CreatedTest);
                 CreatedTest.Questions = null;
                 CreatedTest = null;
-                
-                
             }
             catch (Exception exc)
             {

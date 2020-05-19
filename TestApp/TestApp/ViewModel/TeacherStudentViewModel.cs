@@ -70,7 +70,7 @@ namespace TestApp.ViewModel
                 {
                     foreach (Test t in tests)
                     {
-                        if (t.IsTestGraded == true)
+                        if (t.IsGraded == true)
                         {
                             GradedTests.Add(t);
                         }
