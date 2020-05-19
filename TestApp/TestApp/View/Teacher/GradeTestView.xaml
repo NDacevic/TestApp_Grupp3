@@ -4,11 +4,34 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TestApp.View.Teacher"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:t="using:TestApp.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ListView
+            ItemsSource="{x:Bind ungradedTests}">
+            <ListView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="t:Test">
+                    <TextBlock>
+                        <Run Text="Id: "/>
+                        <Run Text="{x:Bind TestId}"/>
+                        <Run Text=" "/>
+                        <Run Text="{x:Bind CourseName}"/>
+                        <Run Text=" åk"/>
+                        <Run Text="{x:Bind Grade}"/>
+                        <Run Text=", "/>
+                        <Run Text="{x:Bind Stud}"
+                    </TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+        </ListView>
     </Grid>
 </Page>
