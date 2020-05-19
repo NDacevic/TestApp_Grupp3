@@ -52,9 +52,8 @@
                 <TextBlock
                     Text="Points"
                     />
-                <TextBox
-                    x:Name="textBox_QuestionPoints"
-                    />
+                <ComboBox
+                    x:Name="comboBox_QuestionPoints"/>
                 <ListView Width="100"/>
             </StackPanel>
             <TextBlock
