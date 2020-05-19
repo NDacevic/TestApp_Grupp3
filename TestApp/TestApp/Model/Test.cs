@@ -36,7 +36,7 @@ namespace TestApp.Model
             TestDuration = testDuration;
             IsActive = isActive;
             Questions = new ObservableCollection<Question>(); //Changed List->Obs.Coll.Johnny
-            IsTestGraded = isTestGraded;
+            IsGraded = isTestGraded;
             StartDate = startDate;
             Result = new List<StudentQuestionAnswer>();
 
@@ -60,7 +60,7 @@ namespace TestApp.Model
         public int TestDuration { get; set; }
         public bool IsActive { get; set; }
         public ObservableCollection<Question> Questions { get; set; }
-        public bool IsTestGraded { get; set; }
+        public bool IsGraded { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public List<StudentQuestionAnswer> Result { get; set; }
         public int MaxPoints

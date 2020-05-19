@@ -57,9 +57,9 @@ namespace TestApp.View.Teacher
                 string selectedQuestionType = ((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString();
                 string selectedCourse = comboBox_CourseNames.SelectedValue.ToString();
 
-                if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Multiple Choice")
+                if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Flerval")
                     createInstance.CreatedQuestion = new Question(0, selectedQuestionType, textBox_questionText.Text, textBox_CorrectAnswer.Text,textBox_IncorrectAnswer1.Text, textBox_IncorrectAnswer2.Text, selectedCourse, selectedPoint);
-                else if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Text")
+                else if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Fritext")
                     createInstance.CreatedQuestion = new Question(0, selectedQuestionType, textBox_questionText.Text, null, null, null, selectedCourse, selectedPoint);
                 createInstance.CreateQuestion();
 
@@ -79,11 +79,11 @@ namespace TestApp.View.Teacher
         {
             Debug.WriteLine(((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString());
 
-            if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Multiple Choice")
+            if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Flerval")
             {
                 grid_MultipleChoiceAnswers.Visibility = Visibility.Visible;
             }
-            else if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Text")
+            else if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Fritext")
             {
                 grid_MultipleChoiceAnswers.Visibility = Visibility.Collapsed;
             }

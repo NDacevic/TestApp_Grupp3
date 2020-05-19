@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.Model;
+using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,9 +27,23 @@ namespace TestApp.View.Teacher
     /// </summary>
     public sealed partial class GradeTestView : Page
     {
+        TeacherGradeTestViewModel gradeInstance = TeacherGradeTestViewModel.Instance;
+        Model.Teacher teacherInstance = Model.Teacher.Instance;
+        ObservableCollection<Test> ungradedTests = new ObservableCollection<Test>();
+
         public GradeTestView()
         {
             this.InitializeComponent();
+
+            GetTests();
+        }
+
+        private async void GetTests()
+        {
+            List<Test> tempTests = await gradeInstance.GetUngradedTests();
+
+            foreach (var x in tempTests)
+                ungradedTests.Add(x);
         }
     }
 }

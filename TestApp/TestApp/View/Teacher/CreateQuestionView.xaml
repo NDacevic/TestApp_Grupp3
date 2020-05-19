@@ -43,10 +43,10 @@
                     SelectionChanged="ComboBox_QuestionType_SelectionChanged"
                     >
                         <ComboBoxItem
-                            Content="Multiple Choice"
+                            Content="Flerval"
                             />
                         <ComboBoxItem 
-                            Content="Text"
+                            Content="Fritext"
                             />
                 </ComboBox>
                 <TextBlock
