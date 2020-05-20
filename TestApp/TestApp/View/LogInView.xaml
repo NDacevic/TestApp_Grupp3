@@ -18,32 +18,57 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions> 
-        <Border 
-            Grid.Row="1"
-            Grid.Column="1"
-            BorderThickness="5" 
-            BorderBrush="Black"/>
-        <StackPanel Grid.Column="1" Grid.Row="1">
-            <TextBlock
-                Text="Välkommen"
-                FontSize="42"
-                HorizontalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,100,0,0">
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1" Grid.Row="1" BorderBrush="#B4ACA4" BorderThickness="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock
+                    Text="Välkommen"
+                    FontSize="42"
+                    HorizontalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" >
                 <RadioButton 
-                Content="Elev" 
-                FontSize="22"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"/>
+                    Content="Elev" 
+                    FontSize="22"/>
                 <RadioButton
-                Content="Personal" 
-                FontSize="22"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"/>
-            </StackPanel>
-            
+                    Content="Lärare" 
+                    FontSize="22"/>
+                <RadioButton
+                    Content="Admin" 
+                    FontSize="22"/>
+                </StackPanel>
+                <TextBox 
+                    x:Name="Tb_InsertUserName" 
+                    PlaceholderText="Användarnamn"
+                    BorderBrush="#B4ACA4"
+                    BorderThickness="2"
+                    HorizontalAlignment="Center"
+                    Grid.Row="2"
+                    Margin="0,0,0,30"/>
+                <PasswordBox 
+                    x:Name="PB_InsertPassword" 
+                    PlaceholderText="Lösenord"
+                    BorderBrush="#B4ACA4"
+                    BorderThickness="2"
+                    Grid.Row="4" 
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,30"/>
+                <Button 
+                    x:Name="Bttn_Login" 
+                    Content="Logga In"
+                    BorderBrush="#B4ACA4"
+                    BorderThickness="2"
+                    Grid.Row="5" 
+                    HorizontalAlignment="Center"
+                    Padding="10,5"/>
+            </Grid>
         </StackPanel>
-        
-        
     </Grid>
 </Page>
