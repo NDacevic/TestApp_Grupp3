@@ -125,6 +125,7 @@
     <Compile Include="View\DeleteTestView.xaml.cs">
       <DependentUpon>DeleteTestView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyDataTemplateSelector.cs" />
     <Compile Include="View\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
     </Compile>
