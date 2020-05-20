@@ -30,6 +30,7 @@ namespace TestApp.View.Teacher
         TeacherGradeTestViewModel gradeInstance = TeacherGradeTestViewModel.Instance;
         Model.Employee teacherInstance = Model.Employee.Instance;
         ObservableCollection<Test> ungradedTests = new ObservableCollection<Test>();
+        ObservableCollection<Model.Student> studentList = new ObservableCollection<Model.Student>();
 
         public GradeTestView()
         {
@@ -44,6 +45,11 @@ namespace TestApp.View.Teacher
 
             foreach (var x in tempTests)
                 ungradedTests.Add(x);
+        }
+
+        private void InitialTestListClick(object sender, ItemClickEventArgs e)
+        {
+            var x = ((Test)e.ClickedItem).TestId;
         }
     }
 }
