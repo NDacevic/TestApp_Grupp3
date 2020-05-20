@@ -107,19 +107,21 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         Margin="40,0,0,0">
+                
                 <ComboBox Width="104" 
                           x:Name="ChooseCourseComboBox"
                           ItemsSource="{x:Bind teacherCreateViewModel.CourseName}"
                           x:DefaultBindMode="OneWay"
                           PlaceholderText="Välj ämne"
                           SelectionChanged="ChooseCourseComboBox_SelectionChanged"/>
+
                 <TextBox  x:Name="ChooseGrade_txtBox" 
                           Margin="15,0,0,0"
                           PlaceholderText="Ex.7"/>
                 <TextBox x:Name="MaxPointTest"
                            Margin="15,0,0,0"
                            Text="{x:Bind teacherCreateViewModel.CreatedTest.MaxPoints}"
-                           PlaceholderText="0.0"
+                           PlaceholderText="0"
                            TextAlignment="Right"
                            x:DefaultBindMode="TwoWay" IsReadOnly="True"/>
                 
