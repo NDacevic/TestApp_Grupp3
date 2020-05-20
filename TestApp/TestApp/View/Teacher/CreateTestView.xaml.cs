@@ -44,6 +44,7 @@ namespace TestApp.View.Teacher
             this.InitializeComponent();
             this.DataContext = teacherCreateViewModel;
             this.DataContext = teacherCreateViewModel.SubjectQuestions;
+          
             
         }
 
