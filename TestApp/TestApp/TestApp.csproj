@@ -122,6 +122,7 @@
     </Compile>
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\TestResult.cs" />
+    <Compile Include="MyDataTemplateSelector.cs" />
     <Compile Include="View\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
     </Compile>
