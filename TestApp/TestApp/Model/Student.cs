@@ -20,7 +20,7 @@ namespace TestApp.Model
         {
             StudentId = studentId;
             ClassId = classId;
-            WrittenTests = writtenTests;
+            Tests = writtenTests;
         }
 
         #endregion
@@ -34,7 +34,7 @@ namespace TestApp.Model
         #region Properties
         public int StudentId { get; set; }
         public int ClassId { get; set; }
-        public List<Test> WrittenTests { get; set; }
+        public List<Test> Tests { get; set; }
         #endregion
 
         #region Methods
