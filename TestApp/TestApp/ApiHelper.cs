@@ -80,12 +80,12 @@ namespace TestApp
                 //Otherwise throw an error and tell the user that the question was not posted.
                 if (response.IsSuccessStatusCode)
                 {
-                    await new MessageDialog("Test saved successfully").ShowAsync();
+                    await new MessageDialog("Provet har sparats").ShowAsync();
                 }
                 else
                 {
                     Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                    throw new HttpRequestException("Test was not saved. Contact an admin for help");
+                    throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
                 }
             }
         
