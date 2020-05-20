@@ -34,14 +34,11 @@
                     FontSize="42"
                     HorizontalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" >
-                <RadioButton 
+                    <RadioButton 
                     Content="Elev" 
                     FontSize="22"/>
-                <RadioButton
-                    Content="Lärare" 
-                    FontSize="22"/>
-                <RadioButton
-                    Content="Admin" 
+                    <RadioButton
+                    Content="Personal" 
                     FontSize="22"/>
                 </StackPanel>
                 <TextBox 
@@ -51,7 +48,7 @@
                     BorderThickness="2"
                     HorizontalAlignment="Center"
                     Grid.Row="2"
-                    Margin="0,0,0,30"/>
+                    Margin="0,0,0,20"/>
                 <PasswordBox 
                     x:Name="PB_InsertPassword" 
                     PlaceholderText="Lösenord"
