@@ -46,6 +46,8 @@ namespace TestApp.ViewModel
                 }
             }
         }
+
+        private List<Student> allStudents { get; set; }
         #endregion
 
         #region Methods
@@ -53,10 +55,18 @@ namespace TestApp.ViewModel
         {
             throw new NotImplementedException();
         }
+        public async Task DownloadStudents()
+        {
+            allStudents = await ApiHelper.Instance.GetAllStudents();
+        }
+        public List<Student> GetStudents()
+        {
+            return allStudents;
+        }
 
         public async Task<List<Test>> GetUngradedTests()
         {
-            List<Student> allStudents = await ApiHelper.Instance.GetAllStudents();
+            await DownloadStudents();
             List<Test> ungradedTests = new List<Test>();
 
             foreach (var student in allStudents)
@@ -70,7 +80,6 @@ namespace TestApp.ViewModel
                     }
                 }
             }
-
             
             return ungradedTests;
         }
