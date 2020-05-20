@@ -14,13 +14,72 @@
         <DataTemplate 
             x:Key="MultipleChoiceAnswerItemTemplate"
             x:DataType="data:Question">
-            <TextBlock></TextBlock>
+            <StackPanel>
+                <TextBlock 
+                    Name="TxtBl_QuestionID"
+                    Margin="0,20,0,0">
+                    <Run Text="Fråga: "/>
+                    <Run Text="{x:Bind QuestionID}"/>
+                </TextBlock>
+                
+                <TextBlock 
+                    Name="TxtBl_Question" 
+                    Margin="0,20,0,0"
+                    Text="{x:Bind QuestionText}"/>
+                
+                <TextBlock 
+                    Text="Svarsalternativ:"
+                    Margin="0,20,0,0"/>
+                               
+                <RadioButton 
+                    Name="RadioBttn_Top"  
+                    Content="{x:Bind CorrectAnswer}"/>
+                <RadioButton 
+                    Name="RadioBttn_Middle" 
+                    Content="{x:Bind IncorrectAnswer1}"/>
+                <RadioButton 
+                    Name="RadioBttn_Bottom" 
+                    Content="{x:Bind IncorrectAnswer2}"/>
+                
+                <Rectangle 
+                    Fill="Aquamarine" 
+                    Height="1" 
+                    Width="1000"
+                    HorizontalAlignment="Stretch" 
+                    Margin="0,20,0,0"/>
+
+            </StackPanel>
         </DataTemplate>
 
         <DataTemplate 
             x:Key="TextAnswerItemTemplate"
             x:DataType="data:Question">
-            <TextBlock></TextBlock>
+            <StackPanel>
+                <TextBlock 
+                    Name="TxtBl_QuestionID"
+                    Margin="0,20,0,0">
+                    <Run Text="Fråga: "/>
+                    <Run Text="{x:Bind QuestionID}"/>
+                </TextBlock>
+
+                <TextBlock 
+                    Name="TxtBl_Question" 
+                    Text="{x:Bind QuestionText}"
+                    Margin="0,20,0,0"/>
+                <TextBlock 
+                    Text="Ditt svar:"
+                    Margin="0,20,0,0"/>
+                <TextBox 
+                    Name="TxtBx_Answer"
+                    TextWrapping="Wrap"/>
+                
+                <Rectangle 
+                    Fill="Aquamarine" 
+                    Height="1" 
+                    Width="1000"
+                    HorizontalAlignment="Stretch" 
+                    Margin="0,20,0,0"/>
+            </StackPanel>
         </DataTemplate>
 
         <l:MyDataTemplateSelector
@@ -28,9 +87,6 @@
             MultipleChoiceAnswer="{StaticResource MultipleChoiceAnswerItemTemplate}"
             TextAnswer="{StaticResource TextAnswerItemTemplate}">
         </l:MyDataTemplateSelector>
-
-
-
     </Page.Resources>
     
     
@@ -38,8 +94,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="5*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -58,14 +113,10 @@
         <ListView
             Name="Lv_AvailableTests"
             Grid.Row="2"
-            Grid.Column="1">
-
-            <ListView.ItemTemplate>
-                <DataTemplate>
-             
-
-                </DataTemplate>
-            </ListView.ItemTemplate>
+            Grid.Column="1"
+            SelectionMode="None"
+            ItemsSource="{x:Bind selectedTest.Questions}"
+            ItemTemplateSelector="{StaticResource MyDataTemplateSelector}">
         </ListView>
 
     </Grid>

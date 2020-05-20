@@ -59,8 +59,8 @@ namespace TestApp.View.Student
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Lv_AvailableTests_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {            
-            Frame.Navigate(typeof(WriteTestView), sender as Test);
+        {
+            Frame.Navigate(typeof(WriteTestView), (sender as ListView).SelectedItem);
         }
 
         /// <summary>
