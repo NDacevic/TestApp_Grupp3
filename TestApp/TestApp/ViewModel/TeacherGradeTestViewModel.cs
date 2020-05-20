@@ -57,8 +57,21 @@ namespace TestApp.ViewModel
         public async Task<List<Test>> GetUngradedTests()
         {
             List<Student> allStudents = await ApiHelper.Instance.GetAllStudents();
-
             List<Test> ungradedTests = new List<Test>();
+
+            foreach (var student in allStudents)
+            {
+                foreach(var studentTest in student.Tests)
+                {
+                    if(!studentTest.IsGraded)
+                    {
+                        if (!ungradedTests.Any(test => test.TestId == studentTest.TestId))
+                            ungradedTests.Add(studentTest);
+                    }
+                }
+            }
+
+            
             return ungradedTests;
         }
 
