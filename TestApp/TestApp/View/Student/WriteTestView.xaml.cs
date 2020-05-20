@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -49,10 +50,27 @@ namespace TestApp.View.Student
         #region Methods
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            // e = selectedTest - MOllhage
+            selectedTest = (Test)e.Parameter;
         }
         #endregion
-
-
     }
+
+    public class MyDataTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate MultipleChoiceAnswer { get; set; }
+        public DataTemplate TextAnswer { get; set; }
+
+        protected override DataTemplate SelectTemplateCore(object item)
+        {
+            if (((Question)item).QuestionType == "Flerval")
+            {
+                return MultipleChoiceAnswer;
+            }
+            else
+            {
+                return TextAnswer;
+            }
+        }
+    }
+
 }
