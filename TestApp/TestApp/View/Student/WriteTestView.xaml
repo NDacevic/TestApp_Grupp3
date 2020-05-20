@@ -10,7 +10,9 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <!--................Resources to be used on this page................-->
     <Page.Resources>
+        <!--................DataTemplate for MultipleChoice questions................-->
         <DataTemplate 
             x:Key="MultipleChoiceAnswerItemTemplate"
             x:DataType="data:Question">
@@ -18,8 +20,9 @@
                 <TextBlock 
                     Name="TxtBl_QuestionID"
                     Margin="0,20,0,0">
-                    <Run Text="Fråga: "/>
+                    <Run Text="Fråga "/>
                     <Run Text="{x:Bind QuestionID}"/>
+                    <Run Text=":"/>
                 </TextBlock>
                 
                 <TextBlock 
@@ -51,6 +54,7 @@
             </StackPanel>
         </DataTemplate>
 
+        <!--................DataTemplate for Text questions................-->
         <DataTemplate 
             x:Key="TextAnswerItemTemplate"
             x:DataType="data:Question">
@@ -58,8 +62,9 @@
                 <TextBlock 
                     Name="TxtBl_QuestionID"
                     Margin="0,20,0,0">
-                    <Run Text="Fråga: "/>
+                    <Run Text="Fråga "/>
                     <Run Text="{x:Bind QuestionID}"/>
+                    <Run Text=":"/>
                 </TextBlock>
 
                 <TextBlock 
@@ -82,14 +87,15 @@
             </StackPanel>
         </DataTemplate>
 
+        <!--................Connection between DataTemplates and DataTemplateSelector................-->
         <l:MyDataTemplateSelector
             x:Key="MyDataTemplateSelector"
             MultipleChoiceAnswer="{StaticResource MultipleChoiceAnswerItemTemplate}"
             TextAnswer="{StaticResource TextAnswerItemTemplate}">
         </l:MyDataTemplateSelector>
     </Page.Resources>
-    
-    
+
+    <!--................Page design................-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -104,12 +110,21 @@
 
         </Grid.ColumnDefinitions>
         <TextBlock
-            Text="Provinfo?"
+            Text="{x:Bind selectedTest.CourseName}"
             Grid.Row="0"
             Grid.Column="1"
             HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            FontSize="48"/>
+            VerticalAlignment="Bottom"/>
+        <TextBlock
+            Text="{x:Bind selectedTest.Grade}"
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalAlignment="Left"/>
+        <TextBlock
+            Text="Timer så småningom"
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalAlignment="Right"/>
         <ListView
             Name="Lv_AvailableTests"
             Grid.Row="2"
@@ -118,6 +133,11 @@
             ItemsSource="{x:Bind selectedTest.Questions}"
             ItemTemplateSelector="{StaticResource MyDataTemplateSelector}">
         </ListView>
+        <Button
+            Content="Lämna in provet"
+            Grid.Column="1"
+            Grid.Row="3"
+            HorizontalAlignment="Right"/>
 
     </Grid>
 </Page>
