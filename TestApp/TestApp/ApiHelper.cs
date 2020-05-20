@@ -220,9 +220,19 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void GetAllStudents()
+        public async Task<List<Student>> GetAllStudents()
         {
-            throw new NotImplementedException();
+            List<Student> studentList = new List<Student>();
+            using (HttpResponseMessage response = await httpClient.GetAsync("students"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonString = await response.Content.ReadAsStringAsync();
+
+                    studentList = JsonConvert.DeserializeObject<List<Student>>(jsonString);
+                }
+            }
+            return studentList;
         }
 
         public void PostEmployee()
