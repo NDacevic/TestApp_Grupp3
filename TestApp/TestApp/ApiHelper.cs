@@ -170,18 +170,14 @@ namespace TestApp
             if (response.IsSuccessStatusCode)
             {
                 jsonString = response.Content.ReadAsStringAsync().Result;
-                //Convert jsonString to list of Test objects
+                //Convert jsonString to list of question objects
                 var question = JsonConvert.DeserializeObject<ObservableCollection<Question>>(jsonString);
                 return question;
             }
             else
             {
-                throw new HttpRequestException("No tests retrieved from database. Contact an admin for help.");
+                throw new HttpRequestException("No questions retrieved from database. Contact an admin for help.");
             }
-            
-
-           
-           
         }
 
         public void GetAllQuestions()
@@ -237,6 +233,24 @@ namespace TestApp
         public void GetEmployee()
         {
             throw new NotImplementedException();
+        }
+        
+        public async Task<List<Course>> GetAllCourses()
+        {
+            //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress
+            HttpResponseMessage response = await httpClient.GetAsync("Courses");
+
+            if (response.IsSuccessStatusCode)
+            {
+                jsonString = response.Content.ReadAsStringAsync().Result;
+                //Convert jsonString to list of courses objects
+                var courses = JsonConvert.DeserializeObject<List<Course>>(jsonString);
+                return courses;
+            }
+            else
+            {
+                throw new HttpRequestException("No courses retrieved from database. Contact an admin for help.");
+            }
         }
         #endregion
     }

@@ -34,16 +34,9 @@ namespace TestApp.ViewModel
         {
             CreatedTest = new Test(); //Creating a test object once you enter the page.
             CreatedTest.Questions = new ObservableCollection<Question>();
-
             SubjectQuestions = new ObservableCollection<Question>(); //Populated from DB
             QuestionsToFilter = new ObservableCollection<Question>(); //This is the list we gonna use to filter the questions
-
-      
-            CourseName = new List<string> //Used for a dropdown combobox to filter school subject in CreateTestView and to easy apply subject to a question
-            {
-                "Historia","Svenska","Matematik","Engelska","Geografi"
-            };
-
+            Courses = new List<Course>(); //Used for a dropdown combobox to filter school subject in CreateTestView and to easy apply subject to a question
             QuestionType = new List<string> //Used for a dropdown to filter question type in CreateTestView
             {
                 "Alla","Flerval","Fritext"
@@ -53,6 +46,7 @@ namespace TestApp.ViewModel
             {
                 "Alla","1","2","5","10"
             };
+            GetCoursesForList();//Method to populate our List<Course> with courses from DB
         }
         #endregion
 
@@ -82,12 +76,23 @@ namespace TestApp.ViewModel
         public ObservableCollection<Question> QuestionsToFilter { get; set; }
         public ObservableCollection<Question> SubjectQuestions { get; set; }
         public List<string> CourseName { get; set; } //Used for a dropdown combobox with course name in CreateTestView and CreateQuestionView
+        public List<Course> Courses { get; set; }
         public List<string> QuestionType { get; set; } //Used for a dropdown combobox with question type in CreateTestView
         public List<string> QuestionPoint { get; set; } //Used for a dropdown combobox with question point in CreateTestView and CreateQuestionView
 
         #endregion
 
         #region Methods
+        public async void GetCoursesForList() //Populating combobox with courses from DB
+        {
+            CourseName = new List<string>();
+            Courses = await ApiHelper.Instance.GetAllCourses();
+            foreach(Course course in Courses)
+            {
+                CourseName.Add(course.CourseName);
+            }
+        
+        }
 
         public async void GetQuestionsForTest(string course) 
         {
