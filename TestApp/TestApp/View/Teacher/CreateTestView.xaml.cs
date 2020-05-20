@@ -72,8 +72,6 @@ namespace TestApp.View.Teacher
      
         private void CreateTest_btn_Click(object sender, RoutedEventArgs e)
         {
-            
-           
             try
             {
                 teacherCreateViewModel.CreatedTest.CourseName = ChooseCourseComboBox.SelectedValue.ToString();
@@ -106,21 +104,14 @@ namespace TestApp.View.Teacher
 
         private void ChooseCourseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ResetQuestionList(); //We go to this method to "reset" our list of questions.
+            teacherCreateViewModel.GetQuestionsForTest(ChooseCourseComboBox.SelectedValue.ToString()); //Sending CourseName to method that´s gonna get all questions on that subject
 
-            foreach (var filtered in teacherCreateViewModel.QuestionsToFilter.ToList()) //Going through our alternative list of questions
-            {
-                if (filtered.CourseName != ChooseCourseComboBox.SelectedValue.ToString()) //If the questions CourseName doesnt match the choosen Course, we remove it.
-                {
-                    teacherCreateViewModel.QuestionsToFilter.Remove(filtered);
-                }
-            }
         }
         private void ResetQuestionList()
         {
             foreach (var subject in teacherCreateViewModel.SubjectQuestions) //Going through our list with questions.
             {
-                if (!teacherCreateViewModel.QuestionsToFilter.Contains(subject) && ChooseCourseComboBox.SelectedValue.ToString() == subject.CourseName) //We check if our QuestionsToFilter contain our subject question
+                if (!teacherCreateViewModel.QuestionsToFilter.Contains(subject)) //We check if our QuestionsToFilter contain our subject question
                 {
                     teacherCreateViewModel.QuestionsToFilter.Add(subject); //If not, we add it to the list.
                 }
@@ -178,18 +169,18 @@ namespace TestApp.View.Teacher
             //Setting date and time of when the Test starts.
             try
             {
-                DateTimeOffset dateAndTime;
+                DateTimeOffset dateAndTime; //Converting the choosen date and time given by the user to a DateTimeOffset object.
                 dateAndTime = new DateTimeOffset(TestDatePicker.Date.Value.Year, TestDatePicker.Date.Value.Month, TestDatePicker.Date.Value.Day
-                    , TestDatePicker.Date.Value.Hour, TestDatePicker.Date.Value.Minute, TestDatePicker.Date.Value.Second,
-                                                 new TimeSpan(TestTimePicker.Time.Hours, TestTimePicker.Time.Minutes, TestTimePicker.Time.Seconds));
+              , TestTimePicker.Time.Hours-2, TestTimePicker.Time.Minutes, TestTimePicker.Time.Seconds,
+                                         new TimeSpan(0, 0, 0));
 
-                if(TestTimePicker.Time.Hours==0) 
+                if (TestTimePicker.Time.Hours==0) 
                 {
                     DisplayInvalidTimeForTest();
                 }
                 else
                 {
-                    teacherCreateViewModel.CreatedTest.StartDate = dateAndTime;
+                    teacherCreateViewModel.CreatedTest.StartDate = dateAndTime; //We give our Test the given date and time.
                 }
             }
             catch(InvalidOperationException)
@@ -198,7 +189,7 @@ namespace TestApp.View.Teacher
             }
 
         }
-        private async void DisplayInvalidTimeForTest()
+        private async void DisplayInvalidTimeForTest() //Informs user that date or time is incorrect
         {
             ContentDialog warning = new ContentDialog
             {
@@ -241,7 +232,7 @@ namespace TestApp.View.Teacher
         private void TestDatePicker_CalendarViewDayItemChanging(CalendarView sender, CalendarViewDayItemChangingEventArgs e)
         {
            
-            //Greying out Sundays,Saturdays and days prior to Today, so the user can´t set wrong date.
+            //Greying out Sundays,Saturdays and days prior to today, so the user can´t set wrong date.
             if (e.Item.Date < DateTime.Today)
             {
                 e.Item.IsBlackout = true;

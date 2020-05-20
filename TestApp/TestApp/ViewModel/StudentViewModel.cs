@@ -73,6 +73,7 @@ namespace TestApp.ViewModel
         /// </summary>
         public async void SeeActiveTests()
         {
+            ActiveTests.Clear();
             //Tries to contact API to get all Tests
             try
             {

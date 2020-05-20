@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using TestApp.Model;
+using Windows.UI.Popups;
 
 namespace TestApp.ViewModel
 {
@@ -20,7 +22,8 @@ namespace TestApp.ViewModel
         #region Constructors
         public TeacherStudentViewModel()
         {
-            //Created but left empty intentionally in case it will be used in the future
+            GradedTests = new ObservableCollection<Test>();
+            StudentTestResults = new ObservableCollection<TestResult>();
         }
         #endregion
 
@@ -45,6 +48,8 @@ namespace TestApp.ViewModel
                 }
             }
         }
+        public ObservableCollection<Test> GradedTests { get; set; }
+        public ObservableCollection<TestResult> StudentTestResults { get; set; }
         #endregion
 
         #region Methods
@@ -52,10 +57,51 @@ namespace TestApp.ViewModel
         {
             throw new NotImplementedException();
         }
-
-        public void DisplayStudentResult()
+        /// <summary>
+        /// Displays all tests that is already graded
+        /// </summary>
+        public async void DisplayAllTests()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var tests = await ApiHelper.Instance.GetAllTests();
+
+                if(GradedTests.Count == 0)
+                {
+                    foreach (Test t in tests)
+                    {
+                        if (t.IsGraded == true)
+                        {
+                            GradedTests.Add(t);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
+        }
+        /// <summary>
+        /// Displays the test results for one chosen test in the StudentResultView
+        /// </summary>
+        /// <param name="testId"></param>
+
+        public async void DisplayStudentResult(int testId)
+        {
+            try
+            {
+                var testResults = await ApiHelper.Instance.GetAllTestResults(testId);
+                foreach (TestResult ts in testResults)
+                {
+                    StudentTestResults.Add(ts);
+                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
         }
         #endregion
 

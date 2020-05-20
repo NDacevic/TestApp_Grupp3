@@ -162,9 +162,26 @@ namespace TestApp
             }
         }
 
-        public void GetQuestion()
+        public async Task<ObservableCollection<Question>> GetQuestion(string course)
         {
-            throw new NotImplementedException();
+            //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
+            HttpResponseMessage response = await httpClient.GetAsync($"Questions/{course}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                jsonString = response.Content.ReadAsStringAsync().Result;
+                //Convert jsonString to list of Test objects
+                var question = JsonConvert.DeserializeObject<ObservableCollection<Question>>(jsonString);
+                return question;
+            }
+            else
+            {
+                throw new HttpRequestException("No tests retrieved from database. Contact an admin for help.");
+            }
+            
+
+           
+           
         }
 
         public void GetAllQuestions()
@@ -186,10 +203,15 @@ namespace TestApp
         {
             throw new NotImplementedException();
         }
-
-        public void GetAllTestResults()
+        /// <summary>
+        /// Gets the test results for all students taking one test (filtered by TestId)
+        /// </summary>
+        /// <returns>List<TestResult></TestResult></returns>
+        public async Task<List<TestResult>> GetAllTestResults(int testId)
         {
-            throw new NotImplementedException();
+            jsonString = await httpClient.GetStringAsync("TestResults/"+ testId);
+            var testResults = JsonConvert.DeserializeObject<List<TestResult>>(jsonString);
+            return testResults;
         }
 
         public void PostStudent()

@@ -38,20 +38,7 @@ namespace TestApp.ViewModel
             SubjectQuestions = new ObservableCollection<Question>(); //Populated from DB
             QuestionsToFilter = new ObservableCollection<Question>(); //This is the list we gonna use to filter the questions
 
-            //Hardcoded questions intended for testing. These will be removed when the database is up and running.
-            SubjectQuestions.Add(new Question(1, "Flervalsfråga", "Vad heter huvudstaden i Sverige?", "Stockholm", "Göteborg", "Malmö", "Geografi", 5));
-            SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vilket år startade 1:a världskriget?","1914","1915","1912","Historia", 5));
-            SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vilket år startade 2:a världskriget?", "1939", "1940", "1930", "Historia", 5));
-            SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vilket år dog Olof Palme?", "1986", "1987", "Han lever forfarande", "Historia", 5));
-            SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vad är pi?", "3.14", "3.11", "11", "Matematik", 5));
-            SubjectQuestions.Add(new Question(1, "Flervalsfråga", "Vad heter huvudstaden i England?", "London", "Göteborg", "Malmö", "Geografi", 10));
-            SubjectQuestions.Add(new Question(2, "Flervalsfråga", "När föddes Johnny", "1985", "1915", "1912", "Svenska", 2));
-            SubjectQuestions.Add(new Question(2, "Flervalsfråga", "Vad är 2*2+1?", "5", "4", "6", "Matematik", 1));
-
-            foreach (Question questionTofilter in SubjectQuestions)
-            {
-                QuestionsToFilter.Add(questionTofilter); //Populating the list with questions from SubjectQuestions
-            }
+      
             CourseName = new List<string> //Used for a dropdown combobox to filter school subject in CreateTestView and to easy apply subject to a question
             {
                 "Historia","Svenska","Matematik","Engelska","Geografi"
@@ -59,7 +46,7 @@ namespace TestApp.ViewModel
 
             QuestionType = new List<string> //Used for a dropdown to filter question type in CreateTestView
             {
-                "Alla","Flervalsfråga","Fritext"
+                "Alla","Flerval","Fritext"
             };
 
             QuestionPoint = new List<string> //Used for a dropdown to filter question point in CreateTestView and to easy choose point when creating a question
@@ -101,15 +88,27 @@ namespace TestApp.ViewModel
         #endregion
 
         #region Methods
+
+        public async void GetQuestionsForTest(string course) 
+        {
+           QuestionsToFilter.Clear(); //Everytime we want to change subject on the Test we clear the list with questions to filter.
+
+           SubjectQuestions = await ApiHelper.Instance.GetQuestion(course); //Send CourseName to ApiHelper and want a Obs.Coll in return.
+
+            foreach (Question questionTofilter in SubjectQuestions)
+            {
+                QuestionsToFilter.Add(questionTofilter); //Populating the list with questions from SubjectQuestions
+            }
+        }
+
         public async void CreateTestToDB()
         {
             try
             {
+                CreatedTest.IsActive = true;
                 ApiHelper.Instance.PostCreatedTestAsync(CreatedTest);
                 CreatedTest.Questions = null;
                 CreatedTest = null;
-                
-                
             }
             catch (Exception exc)
             {
