@@ -99,7 +99,7 @@
                 <TextBlock Text="Årskurs"
                            Margin="30,0,0,0"/>
                 <TextBlock Text="Maxpoäng"
-                           Margin="33,0,0,0"/>
+                           Margin="82,0,0,0"/>
                 <TextBlock Text="Datum och tid för prov"
                            Margin="14,0,0,0"/>
                 <TextBlock Text="Provtid (min)"
@@ -114,10 +114,14 @@
                           x:DefaultBindMode="OneWay"
                           PlaceholderText="Välj ämne"
                           SelectionChanged="ChooseCourseComboBox_SelectionChanged"/>
-
-                <TextBox  x:Name="ChooseGrade_txtBox" 
+                <ComboBox Width="auto" 
                           Margin="15,0,0,0"
-                          PlaceholderText="Ex.7"/>
+                          x:Name="ChooseGrade"
+                          ItemsSource="{x:Bind teacherCreateViewModel.Grades}"
+                          x:DefaultBindMode="OneWay"
+                          PlaceholderText="Välj årskurs"
+                      />
+               
                 <TextBox x:Name="MaxPointTest"
                            Margin="15,0,0,0"
                            Text="{x:Bind teacherCreateViewModel.CreatedTest.MaxPoints}"
