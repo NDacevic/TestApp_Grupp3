@@ -26,7 +26,7 @@ namespace TestApp.View.Teacher
     /// </summary>
     public sealed partial class CreateQuestionView : Page
     {
-        Model.Teacher teacherInstance = Model.Teacher.Instance;
+        Model.Employee teacherInstance = Model.Employee.Instance;
         TeacherCreateViewModel createInstance = TeacherCreateViewModel.Instance;
 
         public CreateQuestionView()

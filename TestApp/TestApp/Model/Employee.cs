@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace TestApp.Model
 {
-    public class Teacher : Person
+    public class Employee : Person
     {
         #region Constant Fields
         #endregion
 
         #region Fields
         
-        private static Teacher instance = null;
+        private static Employee instance = null;
        
         #endregion
 
         #region Constructors
-        public Teacher (int teacherId, string firstName, string lastName, string email, string password) :base(firstName, lastName, email, password)
+        public Employee (int EmployeeId, string firstName, string lastName, string email, string password) :base(firstName, lastName, email, password)
         {
-            TeacherId = teacherId;
+            EmployeId = EmployeeId;
             Students = new List<Student>();
         }
 
-        public Teacher() : base()
+        public Employee() : base()
         {
             //Used for Singleton
         }
@@ -39,18 +39,18 @@ namespace TestApp.Model
 
         #region Properties
  
-        public static Teacher Instance
+        public static Employee Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new Teacher();
+                    instance = new Employee();
                 }
                 return instance;
             }
         }
-        public int TeacherId { get; set; }
+        public int EmployeId { get; set; }
         public List<Student> Students { get; set; }
         #endregion
 
