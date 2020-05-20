@@ -45,6 +45,10 @@ namespace TestApp.View.Teacher
             this.DataContext = teacherCreateViewModel;
             this.DataContext = teacherCreateViewModel.SubjectQuestions;
 
+            foreach (var x in teacherCreateViewModel.Grades)
+                if (x.All(c => char.IsDigit(c)))
+                    ChooseGrade.Items.Add(x);
+
         }
 
         private void AddQuestionToTest_Btn_Click(object sender, RoutedEventArgs e) //Adding the question the user choose from the list to the test.
