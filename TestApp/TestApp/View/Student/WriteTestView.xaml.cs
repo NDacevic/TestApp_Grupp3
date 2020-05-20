@@ -48,6 +48,10 @@ namespace TestApp.View.Student
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Executes when this page is navigated to
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             selectedTest = (Test)e.Parameter;
@@ -55,11 +59,20 @@ namespace TestApp.View.Student
         #endregion
     }
 
+    /// <summary>
+    /// Class used to declare several different DataTemplates
+    /// </summary>
     public class MyDataTemplateSelector : DataTemplateSelector
     {
+        //One property per DataTemplate
         public DataTemplate MultipleChoiceAnswer { get; set; }
         public DataTemplate TextAnswer { get; set; }
 
+        /// <summary>
+        /// Method that returns the correct DataTemplate according to specific conditions
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         protected override DataTemplate SelectTemplateCore(object item)
         {
             if (((Question)item).QuestionType == "Flerval")
