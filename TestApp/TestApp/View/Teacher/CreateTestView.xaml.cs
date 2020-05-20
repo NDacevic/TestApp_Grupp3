@@ -44,8 +44,7 @@ namespace TestApp.View.Teacher
             this.InitializeComponent();
             this.DataContext = teacherCreateViewModel;
             this.DataContext = teacherCreateViewModel.SubjectQuestions;
-          
-            
+
         }
 
         private void AddQuestionToTest_Btn_Click(object sender, RoutedEventArgs e) //Adding the question the user choose from the list to the test.
@@ -75,8 +74,9 @@ namespace TestApp.View.Teacher
         {
             try
             {
+                //Populates the Test with the given values and sends it to the DB
                 teacherCreateViewModel.CreatedTest.CourseName = ChooseCourseComboBox.SelectedValue.ToString();
-                teacherCreateViewModel.CreatedTest.Grade = int.Parse(ChooseGrade_txtBox.Text); 
+                teacherCreateViewModel.CreatedTest.Grade = int.Parse(ChooseGrade.SelectedValue.ToString());
                 teacherCreateViewModel.CreatedTest.TestDuration = int.Parse(TestTime_txtBox.Text);
                 AddDateAndTimeToTest();
                 teacherCreateViewModel.CreateTestToDB();
@@ -89,10 +89,8 @@ namespace TestApp.View.Teacher
             {
                 DisplayFieldsAreEmpty();
             }
-            
            
         }
-       
 
         private void RemoveQuestionFromTest_Btn_Click(object sender, RoutedEventArgs e)
         {
@@ -105,6 +103,8 @@ namespace TestApp.View.Teacher
 
         private void ChooseCourseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            teacherCreateViewModel.CreatedTest.Questions.Clear(); //If there are questions added to the test and user changes subject, the list is reset.
+            teacherCreateViewModel.CreatedTest.MaxPoints = 0; //Test Maxpoints are reset if user changes subject.
             teacherCreateViewModel.GetQuestionsForTest(ChooseCourseComboBox.SelectedValue.ToString()); //Sending CourseName to method that´s gonna get all questions on that subject
 
         }
@@ -248,6 +248,6 @@ namespace TestApp.View.Teacher
             }
         }
 
-      
+     
     }
 }

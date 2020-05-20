@@ -1,0 +1,70 @@
+﻿<Page
+    x:Class="TestApp.View.DeleteTestView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TestApp.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:TestApp.Model"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="40,0,0,0">
+                <TextBlock Text="Filtrera ämne"
+                           Margin="0,0,0,0"/>
+                <TextBlock Text="Filtrera årskurs"
+                           Margin="63,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="40,0,0,0">
+                
+                <ComboBox Width="104" 
+                          x:Name="ChooseCourseComboBox"
+                          ItemsSource="{x:Bind teacherCreateViewModel.CourseName}"
+                          x:DefaultBindMode="OneWay"
+                          PlaceholderText="Välj ämne"
+                          SelectionChanged="ChooseCourseComboBox_SelectionChanged"/>
+                
+                <ComboBox Width="auto" 
+                          Margin="40,0,0,0"
+                          x:Name="ChooseGradeForTest"
+                          ItemsSource="{x:Bind teacherCreateViewModel.Grades}"
+                          x:DefaultBindMode="OneWay"
+                          PlaceholderText="Välj årskurs"
+                          SelectionChanged="ChooseGradeForTest_SelectionChanged"/>
+                <Button   x:Name="PickTestButton"
+                          Margin="40,0,0,0"
+                          Content="Välj prov"/>
+
+            </StackPanel>
+
+
+
+        </StackPanel>
+
+        <ListView BorderBrush="Black"
+                  BorderThickness="2"
+                  Margin="40,100,40,200"
+                  ItemsSource="{x:Bind teacherCreateViewModel.SubjectQuestions}"
+                  x:Name="DisplayQuestionsListView"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="displayQuestionsListView" x:DataType="data:Question" >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{x:Bind QuestionSummary}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+    </Grid>
+</Page>

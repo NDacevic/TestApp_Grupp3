@@ -46,6 +46,11 @@ namespace TestApp.ViewModel
             {
                 "Alla","1","2","5","10"
             };
+
+            Grades = new List<string> //Used for a dropdown to filter question point in CreateTestView and to easy choose point when creating a question
+            {
+                "Alla","7","8","9"
+            };
             GetCoursesForList();//Method to populate our List<Course> with courses from DB
         }
         #endregion
@@ -77,6 +82,7 @@ namespace TestApp.ViewModel
         public ObservableCollection<Question> SubjectQuestions { get; set; }
         public List<string> CourseName { get; set; } //Used for a dropdown combobox with course name in CreateTestView and CreateQuestionView
         public List<Course> Courses { get; set; }
+        public List<string> Grades { get; set; }
         public List<string> QuestionType { get; set; } //Used for a dropdown combobox with question type in CreateTestView
         public List<string> QuestionPoint { get; set; } //Used for a dropdown combobox with question point in CreateTestView and CreateQuestionView
 
@@ -112,8 +118,7 @@ namespace TestApp.ViewModel
             {
                 CreatedTest.IsActive = true;
                 ApiHelper.Instance.PostCreatedTestAsync(CreatedTest);
-                CreatedTest.Questions = null;
-                CreatedTest = null;
+                ResetTest();
             }
             catch (Exception exc)
             {
@@ -121,6 +126,16 @@ namespace TestApp.ViewModel
             }
            
            
+        }
+        public void ResetTest()//Method to reset the object after posting the Test to DB
+        {
+            CreatedTest.Questions.Clear();
+            QuestionsToFilter.Clear();
+            CreatedTest.Questions.Clear();
+           
+            
+
+
         }
         public void AddQuestionToTest(Question question) //Adding question that the user choose
         {
