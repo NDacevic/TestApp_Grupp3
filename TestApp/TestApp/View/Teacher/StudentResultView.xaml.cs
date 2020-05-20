@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.ViewModel;
+using TestApp.Model;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +24,32 @@ namespace TestApp.View.Teacher
     /// </summary>
     public sealed partial class StudentResultView : Page
     {
+        TeacherStudentViewModel teacherStudentViewModel { get; set; }
         public StudentResultView()
         {
             this.InitializeComponent();
+            GetAllTests();
+        }
+        private void GetAllTests()
+        {
+            TeacherStudentViewModel.Instance.DisplayAllTests();
+        }
+        private void GetTestResult()
+        {
+            Test test = (Test)Lv_AllTests.SelectedItem;
+            TeacherStudentViewModel.Instance.DisplayStudentResult(test.TestId);
+        }
+
+        private void Bttn_SeeStudentResult_Click(object sender, RoutedEventArgs e) 
+        {
+            try
+            {
+                GetTestResult();
+            }
+            catch
+            {
+
+            }
         }
     }
 }

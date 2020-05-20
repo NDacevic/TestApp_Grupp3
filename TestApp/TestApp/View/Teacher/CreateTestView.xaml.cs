@@ -171,10 +171,10 @@ namespace TestApp.View.Teacher
             {
                 DateTimeOffset dateAndTime; //Converting the choosen date and time given by the user to a DateTimeOffset object.
                 dateAndTime = new DateTimeOffset(TestDatePicker.Date.Value.Year, TestDatePicker.Date.Value.Month, TestDatePicker.Date.Value.Day
-                    , TestDatePicker.Date.Value.Hour, TestDatePicker.Date.Value.Minute, TestDatePicker.Date.Value.Second,
-                                                 new TimeSpan(TestTimePicker.Time.Hours, TestTimePicker.Time.Minutes, TestTimePicker.Time.Seconds));
+              , TestTimePicker.Time.Hours-2, TestTimePicker.Time.Minutes, TestTimePicker.Time.Seconds,
+                                         new TimeSpan(0, 0, 0));
 
-                if(TestTimePicker.Time.Hours==0) 
+                if (TestTimePicker.Time.Hours==0) 
                 {
                     DisplayInvalidTimeForTest();
                 }
