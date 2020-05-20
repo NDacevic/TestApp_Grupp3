@@ -131,7 +131,7 @@
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Student.cs" />
     <Compile Include="Model\StudentQuestionAnswer.cs" />
-    <Compile Include="Model\Teacher.cs" />
+    <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Question.cs" />
