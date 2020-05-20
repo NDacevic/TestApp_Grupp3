@@ -15,7 +15,13 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ListView
-            ItemsSource="{x:Bind ungradedTests}">
+            x:Name="listView_InitialTestList"
+            ItemClick="InitialTestListClick"
+            
+            ItemsSource="{x:Bind ungradedTests}"
+            SelectionMode="None"
+            IsItemClickEnabled="True"
+            >
             <ListView.ItemTemplate>
                 <DataTemplate
                     x:DataType="t:Test">
