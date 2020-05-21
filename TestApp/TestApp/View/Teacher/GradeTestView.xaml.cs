@@ -30,7 +30,7 @@ namespace TestApp.View.Teacher
         TeacherGradeTestViewModel gradeInstance = TeacherGradeTestViewModel.Instance;
         Model.Employee teacherInstance = Model.Employee.Instance;
         ObservableCollection<Test> ungradedTests = new ObservableCollection<Test>();
-        ObservableCollection<Model.Student> studentList = new ObservableCollection<Model.Student>();
+        ObservableCollection<Model.Student> studentsWithTestList = new ObservableCollection<Model.Student>();
 
         public GradeTestView()
         {
@@ -49,7 +49,18 @@ namespace TestApp.View.Teacher
 
         private void InitialTestListClick(object sender, ItemClickEventArgs e)
         {
-            var x = ((Test)e.ClickedItem).TestId;
+            var testId = ((Test)e.ClickedItem).TestId;
+
+            listView_InitialTestList.Visibility = Visibility.Collapsed;
+            listview_StudentsUngradedTestofType.Visibility = Visibility.Visible;
+
+            gradeInstance.PopulateStudentsWithTestList(testId, studentsWithTestList);
+
+        }
+
+        private void SelectStudentToGrade(object sender, ItemClickEventArgs e)
+        {
+
         }
     }
 }
