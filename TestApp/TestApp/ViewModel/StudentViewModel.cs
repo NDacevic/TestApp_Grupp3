@@ -89,7 +89,7 @@ namespace TestApp.ViewModel
                 //Loop through and keep all tests that are active and for the correct grade/year
                 foreach (Test test in allTests)
                 {
-                    //Todo: kraschar eventuellt om ListView är tom
+                    //Todo: kraschar eventuellt om ListView är tom. Testa!
                     if (test.IsActive == true && test.Grade == activeStudent.ClassId)
                     {
                         ActiveTests.Add(test);
@@ -138,8 +138,7 @@ namespace TestApp.ViewModel
             {
                 lv_allQuestions.IsEnabled = false;
                 _ = await new MessageDialog("Provet är avslutat. Dina svar är registrerade.").ShowAsync();
-                //ToDo: Kalla på metod som registrerar alla tomma svar
-                
+                //ToDo: Kalla på metod som registrerar alla tomma svar                
             }
 
             
