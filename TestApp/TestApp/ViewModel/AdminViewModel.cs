@@ -84,10 +84,13 @@ namespace TestApp.ViewModel
             {
                 if (!MyTests.Contains(subject)) //We check if our filtered list contains Test from original
                 {
-                    if (subject.CourseName == course) //Make sure that it also matches our choosen course
+                    if(course=="")
                     {
                         MyTests.Add(subject); //If not, we add it to the list.
-
+                    }
+                    else if(subject.CourseName==course)
+                    {
+                        MyTests.Add(subject);
                     }
                 }
             }
@@ -100,10 +103,12 @@ namespace TestApp.ViewModel
         public void DisplayQuestionsOnTest(Test test)
         {
             TestQuestions.Clear();
+
             foreach(Question q in test.Questions)
             {
                 TestQuestions.Add(q);
             }
+           
         }
     }
 }

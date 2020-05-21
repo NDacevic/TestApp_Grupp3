@@ -118,7 +118,7 @@ namespace TestApp.View.Teacher
             {
                 if (!teacherCreateViewModel.QuestionsToFilter.Contains(subject)) //We check if our QuestionsToFilter contain our subject question
                 {
-                    teacherCreateViewModel.QuestionsToFilter.Add(subject); //If not, we add it to the list.
+                    teacherCreateViewModel.QuestionsToFilter.Add(subject);
                 }
             }
         }
@@ -164,8 +164,9 @@ namespace TestApp.View.Teacher
                     }
                     else if (filtered.PointValue.ToString() != FilterQuestionPointComboBox.SelectedValue.ToString()) //If the questions Point doesnt match, we remove it.
                     {
-                        teacherCreateViewModel.QuestionsToFilter.Remove(filtered);
+                            teacherCreateViewModel.QuestionsToFilter.Remove(filtered);
                     }
+                   
                 }
             }
         }
