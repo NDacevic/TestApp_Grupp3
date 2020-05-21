@@ -5,7 +5,7 @@
     xmlns:local="using:TestApp.View.Teacher"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:t="using:TestApp.Model"
+    xmlns:models="using:TestApp.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -24,7 +24,7 @@
             >
             <ListView.ItemTemplate>
                 <DataTemplate
-                    x:DataType="t:Test">
+                    x:DataType="models:Test">
                     <TextBlock>
                         <Run Text="Id: "/>
                         <Run Text="{x:Bind TestId}"/>
@@ -36,7 +36,27 @@
                     </TextBlock>
                 </DataTemplate>
             </ListView.ItemTemplate>
+        </ListView>
+        <ListView
+            x:Name="listview_StudentsUngradedTestofType"
+            ItemClick="SelectStudentToGrade"
             
+            Visibility="Collapsed"
+            
+            ItemsSource="{x:Bind studentsWithTestList}"
+            SelectionMode="None"
+            IsItemClickEnabled="True"
+            >
+            <ListView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="models:Student">
+                    <TextBlock>
+                        <Run Text="{x:Bind FirstName}"/>
+                        <Run Text=" "/>
+                        <Run Text="{x:Bind LastName}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </Grid>
 </Page>
