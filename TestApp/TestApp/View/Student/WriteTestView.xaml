@@ -134,6 +134,7 @@
             ItemTemplateSelector="{StaticResource MyDataTemplateSelector}">
         </ListView>
         <Button
+            Name="Bttn_SubmitTest"
             Content="Lämna in provet"
             Grid.Column="1"
             Grid.Row="3"

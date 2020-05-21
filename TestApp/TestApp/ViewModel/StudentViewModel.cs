@@ -19,10 +19,12 @@ namespace TestApp.ViewModel
         #region Fields
         private static StudentViewModel instance = null;
         private Student activeStudent;
-        DispatcherTimer dispatcherTimer;
-        private int remainingTestDuration;           //used to keep track of the current test time
-        ListView lv_allQuestions;              //used to disable the listview when the timer reaches 0
-        private TextBlock txtBl_TestTimer;
+        private DispatcherTimer dispatcherTimer;
+        private int remainingTestDuration;          //used to keep track of the current test time
+        private ListView lv_allQuestions;           //used to disable the listview when the timer reaches 0
+        private TextBlock txtBl_TestTimer;          //used to continuously update the timer
+        private Button bttn_SubmitTest;             //used to disable the button when the timer reaches 0
+
 
         #endregion
 
@@ -30,7 +32,7 @@ namespace TestApp.ViewModel
         public StudentViewModel ()
         {
             ActiveTests = new ObservableCollection<Test>();
-            //Todo: Remove later when a student can log in
+            //Todo: Remove later when a student can log in - MO
             activeStudent = new Student(1, "Mikael", "Ollhage", "ja@ja.com","nej",7,null);
             
         }
@@ -64,15 +66,13 @@ namespace TestApp.ViewModel
         #region Methods
         public void FinishTest()
         {
-
+            //Todo: Spara alla svar i selectedTest.Result
+            
         }
-        public void StartTest()
-        {
 
-        }
         public void CheckResult()
         {
-
+            //Todo: Om alla frågor är MultipleChoice kan resultatet ges omgående
         }
         /// <summary>
         /// Method that takes all tests from the database and saves the wanted tests to an OC, for list display
@@ -89,7 +89,7 @@ namespace TestApp.ViewModel
                 //Loop through and keep all tests that are active and for the correct grade/year
                 foreach (Test test in allTests)
                 {
-                    //Todo: kraschar eventuellt om ListView är tom. Testa!
+                    //Todo: kraschar eventuellt om ListView är tom. Testa! - MO
                     if (test.IsActive == true && test.Grade == activeStudent.ClassId)
                     {
                         ActiveTests.Add(test);
@@ -107,22 +107,21 @@ namespace TestApp.ViewModel
         /// </summary>
         /// <param name="selectedTest"></param>
         /// <param name="TxtBl_TestTimer"></param>
-        public async void DispatcherTimerSetup(Test selectedTest, TextBlock txtBl_TestTimer, ListView lv_allQuestions)
+        public void DispatcherTimerSetup(Test selectedTest, TextBlock txtBl_TestTimer, ListView lv_allQuestions, Button bttn_SubmitTest)
         {
+            this.txtBl_TestTimer = txtBl_TestTimer;
+            this.lv_allQuestions = lv_allQuestions;
+            this.bttn_SubmitTest = bttn_SubmitTest;
+
             //Registers the test's start time
             TimeSpan startTime = selectedTest.StartDate.TimeOfDay;  
             //Registers the current time
             TimeSpan currentTime = DateTime.Now.TimeOfDay;
             //Calculates and registers how many minutes has elapsed since the test was supposed to start
-          
             int elapsedMinutes = (currentTime - startTime).Hours*60 + (currentTime - startTime).Minutes;
 
-            //Takes the TextBlock from WriteTestView and sets the ref to the local private field so it can be used in all methods in this class
-            this.txtBl_TestTimer = txtBl_TestTimer;
-            //Takes the ListView from WriteTestView and sets the ref to the local private field so it can be used in all methods in this class
-            this.lv_allQuestions = lv_allQuestions;
             dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
             //Sets that the timer should update once every minute
             dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
 
@@ -137,8 +136,9 @@ namespace TestApp.ViewModel
             else
             {
                 lv_allQuestions.IsEnabled = false;
-                _ = await new MessageDialog("Provet är avslutat. Dina svar är registrerade.").ShowAsync();
-                //ToDo: Kalla på metod som registrerar alla tomma svar                
+                bttn_SubmitTest.IsEnabled = false;
+                DisplayMessage("Provet är tyvärr redan avslutat. Dina svar är härmed registrerade.");
+                //ToDo: Kalla på metod som registrerar alla tomma svar - MO              
             }
 
             
@@ -149,7 +149,7 @@ namespace TestApp.ViewModel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        internal void dispatcherTimer_Tick(object sender, object e)
+        internal void DispatcherTimer_Tick(object sender, object e)
         {
             //reduces by 1 every minute
             remainingTestDuration -= 1;
@@ -159,8 +159,15 @@ namespace TestApp.ViewModel
             if (remainingTestDuration < 1)
             {
                 dispatcherTimer.Stop();
+                bttn_SubmitTest.IsEnabled = false;
                 lv_allQuestions.IsEnabled = false;
+                DisplayMessage("Provet är nu avslutat. Dina svar är härmed registrerade.");
             }
+        }
+
+        private async void DisplayMessage(string message)
+        {
+            _ = await new MessageDialog(message).ShowAsync();
         }
 
         #endregion

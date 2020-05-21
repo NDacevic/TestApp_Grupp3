@@ -16,10 +16,11 @@ namespace TestApp.Model
         #endregion
 
         #region Constructors
-        public StudentQuestionAnswer (string answer, int totalpoints)
+        public StudentQuestionAnswer (int studentId, int testId, int questionId, string answer, int totalpoints, bool isCorrect)
         {
             Answer = answer;
             TotalPoints = totalpoints;
+            IsCorrect = isCorrect;
         }
         #endregion
 
@@ -30,8 +31,12 @@ namespace TestApp.Model
         #endregion
 
         #region Properties
+        public int StudentId { get; set; }
+        public int TestId { get; set; }
+        public int QuestionId { get; set; }
         public string Answer { get; set; }
         public int TotalPoints { get; set; }
+        public bool IsCorrect { get; set; }
         #endregion
 
         #region Methods

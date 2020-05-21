@@ -195,6 +195,8 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
+        public void Post
+
         public void GetTestResult()
         {
             throw new NotImplementedException();
