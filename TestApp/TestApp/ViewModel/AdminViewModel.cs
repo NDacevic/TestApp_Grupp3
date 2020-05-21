@@ -11,7 +11,8 @@ namespace TestApp.ViewModel
     public class AdminViewModel
     {
         private static AdminViewModel instance = null;
-        public ObservableCollection<Test> myTests { get; set; }
+        public ObservableCollection<Test> MyTests { get; set; }
+        public ObservableCollection<Question> TestQuestions { get; set; }
 
         public List<Test> testList { get; set; } //Transfer to AdminViewModel
 
@@ -30,16 +31,17 @@ namespace TestApp.ViewModel
         public AdminViewModel()
         {
             testList = new List<Test>();
-            myTests = new ObservableCollection<Test>();
+            MyTests = new ObservableCollection<Test>();
+            TestQuestions = new ObservableCollection<Question>();
         }
         public async void DisplayTests()//Transfer this to AdminViewModel?
         {
             testList = await ApiHelper.Instance.GetAllTests(); //Populating List with Test from DB
             foreach (Test t in testList)
             {
-                if(!myTests.Contains(t))
+                if(!MyTests.Contains(t))
                 {
-                    myTests.Add(t);
+                    MyTests.Add(t);
                 }
                 
             }
@@ -48,31 +50,31 @@ namespace TestApp.ViewModel
         {
             foreach (Test subject in testList)
             {
-                if (!myTests.Contains(subject)) //We check if our filtered list contains Test from original
+                if (!MyTests.Contains(subject)) //We check if our filtered list contains Test from original
                 {
                     if (course == "" && subject.Grade == grade) //Make sure that it also matches our choosen course
                     {
-                        myTests.Add(subject); //If not, we add it to the list.
+                        MyTests.Add(subject); //If not, we add it to the list.
                     }
                     else if (grade == 0 && subject.CourseName == course)
                     {
-                        myTests.Add(subject);
+                        MyTests.Add(subject);
                     }
                     else if (subject.Grade == grade && subject.CourseName == course)
                     {
-                        myTests.Add(subject);
+                        MyTests.Add(subject);
                     }
                 }
             }
-            foreach (Test filterTest in myTests.ToList()) //This is if our list is populated with all tests
+            foreach (Test filterTest in MyTests.ToList()) //This is if our list is populated with all tests
             {
                 if (course != "" && filterTest.CourseName != course)
                 {
-                    myTests.Remove(filterTest);
+                    MyTests.Remove(filterTest);
                 }
                 if (grade != 0 && filterTest.Grade != grade)
                 {
-                    myTests.Remove(filterTest);
+                    MyTests.Remove(filterTest);
                 }
             }
         }
@@ -80,11 +82,11 @@ namespace TestApp.ViewModel
         {
             foreach (Test subject in testList)
             {
-                if (!myTests.Contains(subject)) //We check if our filtered list contains Test from original
+                if (!MyTests.Contains(subject)) //We check if our filtered list contains Test from original
                 {
                     if (subject.CourseName == course) //Make sure that it also matches our choosen course
                     {
-                        myTests.Add(subject); //If not, we add it to the list.
+                        MyTests.Add(subject); //If not, we add it to the list.
 
                     }
                 }
@@ -94,7 +96,14 @@ namespace TestApp.ViewModel
         public void DeleteTest(int id)
         {
             ApiHelper.Instance.DeleteTest(id);
-            DisplayTests();
+        }
+        public void DisplayQuestionsOnTest(Test test)
+        {
+            TestQuestions.Clear();
+            foreach(Question q in test.Questions)
+            {
+                TestQuestions.Add(q);
+            }
         }
     }
 }

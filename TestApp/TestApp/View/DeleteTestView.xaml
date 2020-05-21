@@ -59,7 +59,7 @@
         <ListView BorderBrush="Black"
                   BorderThickness="2"
                   Margin="20,100,0,150"
-                  ItemsSource="{x:Bind adminViewModel.myTests }"
+                  ItemsSource="{x:Bind adminViewModel.MyTests }"
                   x:Name="DisplayTestsLV"
                   >
             <ListView.ItemTemplate>
@@ -84,7 +84,29 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
-        
+
+        <GridView BorderBrush="Black"
+                  BorderThickness="2"
+                  Margin="20,100,0,150"
+                  ItemsSource="{x:Bind adminViewModel.TestQuestions }"
+                  x:Name="DisplayQuestionsLV"
+                  Grid.Column="1"
+                  >
+            <GridView.ItemTemplate>
+                <DataTemplate x:Name="displayQuestionsLV" x:DataType="data:Question" >
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel >
+                            <TextBlock>
+                            <Run Text="Prov ID: "/>
+                            <Run Text="{x:Bind QuestionSummary }"/>
+                            </TextBlock>
+                        </StackPanel>
+                  
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
+
     </Grid>
 </Page>

@@ -63,7 +63,7 @@ namespace TestApp.View
             }
         }
 
-        private void DeleteTestButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteTestButton_Click(object sender, RoutedEventArgs e) //Pick a Test and delete it
         {
             var selected = DisplayTestsLV.SelectedItems;
             foreach (Test selectedQuestion in selected)
@@ -73,9 +73,13 @@ namespace TestApp.View
 
         }
 
-        private void PickTestButton_Click(object sender, RoutedEventArgs e)
+        private void PickTestButton_Click(object sender, RoutedEventArgs e) //Pick a test and display its content
         {
-
+            var selected = DisplayTestsLV.SelectedItems;
+            foreach (Test selectedTest in selected)
+            {
+                adminViewModel.DisplayQuestionsOnTest(selectedTest);
+            }
         }
     }
 }
