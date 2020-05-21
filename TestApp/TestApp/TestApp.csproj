@@ -122,6 +122,7 @@
     </Compile>
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\TestResult.cs" />
+    <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="View\DeleteTestView.xaml.cs">
       <DependentUpon>DeleteTestView.xaml</DependentUpon>
     </Compile>
