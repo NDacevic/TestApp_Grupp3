@@ -60,6 +60,7 @@ namespace TestApp.View.Student
         /// <param name="e"></param>
         private void Lv_AvailableTests_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
+            //Todo: Tillåt bara detta om StartDatum=Dagens datum & currentTime=>StartTime
             Frame.Navigate(typeof(WriteTestView), (sender as ListView).SelectedItem);
         }
 
@@ -70,6 +71,8 @@ namespace TestApp.View.Student
         /// <param name="e"></param>
         private void Bttn_TakeTest_Click(object sender, RoutedEventArgs e)
         {
+
+            //Todo: Tillåt bara detta om StartDatum=Dagens datum & currentTime=>StartTime
             //Navigation using button is only possible if a test is selected
             if (Lv_AvailableTests.SelectedItem!=null)
             {
