@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,8 +89,16 @@ namespace TestApp.ViewModel
         {
             throw new NotImplementedException();
         }
+
+        public void PopulateStudentsWithTestList(int testId, ObservableCollection<Student> studentsWithTestList)
+        {
+            var tempStudentList = allStudents.Where(student => student.Tests.Any(test => test.TestId == testId && test.IsGraded == false)).Select(x => x).ToList();
+            foreach(var student in tempStudentList)
+            {
+                studentsWithTestList.Add(student);
+            }
+        }
+
         #endregion
-
-
     }
 }
