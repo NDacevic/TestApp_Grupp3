@@ -122,6 +122,10 @@
     </Compile>
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\TestResult.cs" />
+    <Compile Include="View\DeleteTestView.xaml.cs">
+      <DependentUpon>DeleteTestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MyDataTemplateSelector.cs" />
     <Compile Include="View\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
     </Compile>
@@ -188,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\DeleteTestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LogInView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

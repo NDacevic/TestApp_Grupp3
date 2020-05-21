@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TestApp.Model;
+using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -28,7 +29,8 @@ namespace TestApp.View.Student
         #endregion
 
         #region Fields
-        private Test selectedTest; //For storing the Test object received from the previous page
+        private Test selectedTest;
+
         #endregion
 
         #region Constructors
@@ -48,29 +50,21 @@ namespace TestApp.View.Student
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Executes when this page is navigated to
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //Saves the selected test from last page
             selectedTest = (Test)e.Parameter;
+            TxtBl_TestTimer.Text = $"Tid kvar: {selectedTest.TestDuration} min";
+
+            //Starts the timer instantly
+            StudentViewModel.Instance.DispatcherTimerSetup(selectedTest, TxtBl_TestTimer, Lv_AllQuestions);
         }
+
         #endregion
     }
-
-    public class MyDataTemplateSelector : DataTemplateSelector
-    {
-        public DataTemplate MultipleChoiceAnswer { get; set; }
-        public DataTemplate TextAnswer { get; set; }
-
-        protected override DataTemplate SelectTemplateCore(object item)
-        {
-            if (((Question)item).QuestionType == "Flerval")
-            {
-                return MultipleChoiceAnswer;
-            }
-            else
-            {
-                return TextAnswer;
-            }
-        }
-    }
-
+   
 }
