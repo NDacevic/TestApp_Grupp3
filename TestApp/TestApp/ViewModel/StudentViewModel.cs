@@ -114,6 +114,7 @@ namespace TestApp.ViewModel
             //Registers the current time
             TimeSpan currentTime = DateTime.Now.TimeOfDay;
             //Calculates and registers how many minutes has elapsed since the test was supposed to start
+          
             int elapsedMinutes = (currentTime - startTime).Hours*60 + (currentTime - startTime).Minutes;
 
             //Takes the TextBlock from WriteTestView and sets the ref to the local private field so it can be used in all methods in this class
@@ -126,7 +127,7 @@ namespace TestApp.ViewModel
             dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
 
             //Sets how many minutes is left of the test
-            remainingTestDuration = selectedTest.TestDuration - elapsedMinutes;
+            remainingTestDuration = elapsedMinutes > 0 ? selectedTest.TestDuration - elapsedMinutes : selectedTest.TestDuration;
 
             //Start test if there is time remaining, else register blank answers
             if (remainingTestDuration>0)
