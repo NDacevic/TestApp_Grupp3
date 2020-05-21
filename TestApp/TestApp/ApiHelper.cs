@@ -118,9 +118,19 @@ namespace TestApp
             }            
         }
 
-        public void DeleteTest()
+        public async void DeleteTest(int id)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = await httpClient.DeleteAsync($"Tests/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                await new MessageDialog("Provet har raderats").ShowAsync();
+            }
+            else
+            {
+                Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+            }
         }
 
         /// <summary>

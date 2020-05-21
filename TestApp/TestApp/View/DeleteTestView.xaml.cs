@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.Model;
 using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -23,18 +25,55 @@ namespace TestApp.View
     /// </summary>
     public sealed partial class DeleteTestView : Page
     {
-        TeacherCreateViewModel teacherCreateViewModel = new TeacherCreateViewModel();
+        AdminViewModel adminViewModel = new AdminViewModel();
+        TeacherCreateViewModel teacherCVM = TeacherCreateViewModel.Instance;
         public DeleteTestView()
         {
             this.InitializeComponent();
+            adminViewModel.DisplayTests();
         }
 
         private void ChooseCourseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+            if (ChooseGradeForTest.SelectedValue!= null && ChooseGradeForTest.SelectedValue!="Alla")
+            {
+                adminViewModel.FilterTests(ChooseCourseComboBox.SelectedValue.ToString(), int.Parse(ChooseGradeForTest.SelectedValue.ToString()));
+            }
+            else
+            {
+                adminViewModel.FilterTests(ChooseCourseComboBox.SelectedValue.ToString(), 0);
+            }
+
         }
 
         private void ChooseGradeForTest_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(ChooseGradeForTest.SelectedValue.ToString()=="Alla")
+            {
+                adminViewModel.FilterListByCourse(ChooseCourseComboBox.SelectedValue.ToString());
+            }
+            else if(ChooseCourseComboBox.SelectedValue!=null)
+            {
+                adminViewModel.FilterTests(ChooseCourseComboBox.SelectedValue.ToString(), int.Parse(ChooseGradeForTest.SelectedValue.ToString()));
+            }
+            else
+            {
+                adminViewModel.FilterTests("", int.Parse(ChooseGradeForTest.SelectedValue.ToString()));
+            }
+        }
+
+        private void DeleteTestButton_Click(object sender, RoutedEventArgs e)
+        {
+            var selected = DisplayTestsLV.SelectedItems;
+            foreach (Test selectedQuestion in selected)
+            {
+                adminViewModel.DeleteTest(selectedQuestion.TestId);
+            }
+
+        }
+
+        private void PickTestButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
