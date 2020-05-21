@@ -20,7 +20,7 @@ namespace TestApp.ViewModel
         private static StudentViewModel instance = null;
         private Student activeStudent;
         DispatcherTimer dispatcherTimer;
-        private int testDuration;           //used to keep track of the current test time
+        private int remainingTestDuration;           //used to keep track of the current test time
         ListView lv_allQuestions;              //used to disable the listview when the timer reaches 0
         private TextBlock txtBl_TestTimer;
 
@@ -107,8 +107,15 @@ namespace TestApp.ViewModel
         /// </summary>
         /// <param name="selectedTest"></param>
         /// <param name="TxtBl_TestTimer"></param>
-        public void DispatcherTimerSetup(Test selectedTest, TextBlock txtBl_TestTimer, ListView lv_allQuestions)
+        public async void DispatcherTimerSetup(Test selectedTest, TextBlock txtBl_TestTimer, ListView lv_allQuestions)
         {
+            //Registers the test's start time
+            TimeSpan startTime = selectedTest.StartDate.TimeOfDay;  
+            //Registers the current time
+            TimeSpan currentTime = DateTime.Now.TimeOfDay;
+            //Calculates and registers how many minutes has elapsed since the test was supposed to start
+            int elapsedMinutes = (currentTime - startTime).Hours*60 + (currentTime - startTime).Minutes;
+
             //Takes the TextBlock from WriteTestView and sets the ref to the local private field so it can be used in all methods in this class
             this.txtBl_TestTimer = txtBl_TestTimer;
             //Takes the ListView from WriteTestView and sets the ref to the local private field so it can be used in all methods in this class
@@ -117,8 +124,24 @@ namespace TestApp.ViewModel
             dispatcherTimer.Tick += dispatcherTimer_Tick;
             //Sets that the timer should update once every minute
             dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
-            testDuration = selectedTest.TestDuration;
-            dispatcherTimer.Start();
+
+            //Sets how many minutes is left of the test
+            remainingTestDuration = selectedTest.TestDuration - elapsedMinutes;
+
+            //Start test if there is time remaining, else register blank answers
+            if (remainingTestDuration>0)
+            {
+                dispatcherTimer.Start();
+            }
+            else
+            {
+                lv_allQuestions.IsEnabled = false;
+                _ = await new MessageDialog("Provet är avslutat. Dina svar är registrerade.").ShowAsync();
+                //ToDo: Kalla på metod som registrerar alla tomma svar
+                
+            }
+
+            
         }
 
         /// <summary>
@@ -129,11 +152,11 @@ namespace TestApp.ViewModel
         internal void dispatcherTimer_Tick(object sender, object e)
         {
             //reduces by 1 every minute
-            testDuration -= 1;
+            remainingTestDuration -= 1;
             //Gives TextBlock on WriteTestView new content
-            txtBl_TestTimer.Text = $"Tid kvar: {testDuration} min";
+            txtBl_TestTimer.Text = $"Tid kvar: {remainingTestDuration} min";
 
-            if (testDuration == 0)
+            if (remainingTestDuration < 1)
             {
                 dispatcherTimer.Stop();
                 lv_allQuestions.IsEnabled = false;
