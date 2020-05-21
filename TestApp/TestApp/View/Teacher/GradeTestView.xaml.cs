@@ -69,7 +69,7 @@ namespace TestApp.View.Teacher
             grid_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
             stackPanel_QuestionsForStudentAndTest.Visibility = Visibility.Visible;
 
-            gradeInstance.PopulateUngradedTestsForStudent(chosenTestId, chosenStudent, questionsForStudentAndTestList);
+            gradeInstance.PopulateUngradedQuestionsForStudent(chosenTestId, chosenStudent, questionsForStudentAndTestList);
         }
 
         private void FinishGrading(object sender, RoutedEventArgs e)

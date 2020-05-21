@@ -99,6 +99,13 @@ namespace TestApp.ViewModel
             }
         }
 
+        public void PopulateUngradedQuestionsForStudent(int chosenTestId, Model.Student chosenStudent, ObservableCollection<Question> questionsForStudentAndTestList)
+        {
+            var tempQuestionList = chosenStudent.Tests.Where(test => test.TestId == chosenTestId).Select(test => test.Questions).FirstOrDefault();
+            foreach (var question in tempQuestionList)
+                questionsForStudentAndTestList.Add(question);
+        }
+
         #endregion
     }
 }
