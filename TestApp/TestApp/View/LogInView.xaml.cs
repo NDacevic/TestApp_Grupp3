@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +26,23 @@ namespace TestApp.View
         public LogInView()
         {
             this.InitializeComponent();
+        }
+        public void CheckStudentEmail()
+        {
+
+        }
+        public void CheckEmployeeEmail()
+        {
+           
+        }
+
+        private void Bttn_Login_Click(object sender, RoutedEventArgs e)
+        {
+            string email = Tb_InsertEmail.Text;
+            LogInViewModel.Instance.GetStudent(email);
+            
+
+              
         }
     }
 }

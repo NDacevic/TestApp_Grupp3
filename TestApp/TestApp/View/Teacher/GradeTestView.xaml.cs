@@ -28,7 +28,7 @@ namespace TestApp.View.Teacher
     public sealed partial class GradeTestView : Page
     {
         TeacherGradeTestViewModel gradeInstance = TeacherGradeTestViewModel.Instance;
-        Model.Employee teacherInstance = Model.Employee.Instance;
+        Model.Employee teacherInstance = new Employee(); //TODO: Denna är ändrad av JS
         ObservableCollection<Test> ungradedTests = new ObservableCollection<Test>();
 
         public GradeTestView()

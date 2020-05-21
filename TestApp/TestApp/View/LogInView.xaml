@@ -34,28 +34,34 @@
                     FontSize="42"
                     HorizontalAlignment="Center"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" >
-                    <RadioButton 
-                    Content="Elev" 
-                    FontSize="22"/>
                     <RadioButton
-                    Content="Personal" 
-                    FontSize="22"/>
+                        x:Name="Rb_Student"
+                        Content="Elev" 
+                        FontSize="22"
+                        />
+                    <RadioButton
+                        x:Name="Rb_Employee"
+                        Content="Personal" 
+                        FontSize="22" />
                 </StackPanel>
                 <TextBox 
-                    x:Name="Tb_InsertUserName" 
-                    PlaceholderText="Användarnamn"
+                    x:Name="Tb_InsertEmail" 
+                    PlaceholderText="Email"
                     BorderBrush="#B4ACA4"
                     BorderThickness="2"
                     HorizontalAlignment="Center"
+                    TextAlignment="Left"
                     Grid.Row="2"
+                    Width="120"
                     Margin="0,0,0,20"/>
                 <PasswordBox 
                     x:Name="PB_InsertPassword" 
                     PlaceholderText="Lösenord"
                     BorderBrush="#B4ACA4"
                     BorderThickness="2"
+                    HorizontalAlignment="Center"                    
                     Grid.Row="4" 
-                    HorizontalAlignment="Center"
+                    Width="120"                   
                     Margin="0,0,0,30"/>
                 <Button 
                     x:Name="Bttn_Login" 
@@ -64,7 +70,8 @@
                     BorderThickness="2"
                     Grid.Row="5" 
                     HorizontalAlignment="Center"
-                    Padding="10,5"/>
+                    Padding="10,5"
+                    Click="Bttn_Login_Click"/>
             </Grid>
         </StackPanel>
     </Grid>
