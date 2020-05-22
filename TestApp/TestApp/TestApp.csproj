@@ -122,15 +122,12 @@
     </Compile>
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\TestResult.cs" />
-<<<<<<< HEAD
     <Compile Include="ViewModel\LogInViewModel.cs" />
-=======
     <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="View\DeleteTestView.xaml.cs">
       <DependentUpon>DeleteTestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyDataTemplateSelector.cs" />
->>>>>>> master
     <Compile Include="View\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
     </Compile>
