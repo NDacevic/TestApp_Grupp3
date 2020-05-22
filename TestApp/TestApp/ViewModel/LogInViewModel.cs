@@ -71,6 +71,28 @@ namespace TestApp.ViewModel
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         } 
+        //public bool CheckEmployeePassword (string insertedPassword) //Get ()
+        //{
+        //    if(ActiveEmployee.Password == insertedPassword)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+        //public bool CheckStudentPassword (string insertedPassword)
+        //{
+        //    if (ActiveStudent.Password == insertedPassword)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
         #endregion
     }
 }

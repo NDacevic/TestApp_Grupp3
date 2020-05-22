@@ -27,20 +27,9 @@ namespace TestApp.View
         {
             this.InitializeComponent();
         }
-        public void CheckStudentEmail()
-        {
-
-        }
-        public void CheckEmployeeEmail()
-        {
-           
-        }
 
         private void Bttn_Login_Click(object sender, RoutedEventArgs e)
         {
-            string email = Tb_InsertEmail.Text;
-            LogInViewModel.Instance.GetStudent(email);
-            
 
               
         }
