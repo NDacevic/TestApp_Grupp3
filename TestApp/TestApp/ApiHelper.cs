@@ -225,9 +225,11 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void GetStudent()
+        public async Task<Student> GetStudent(string email)
         {
-            throw new NotImplementedException();
+            jsonString = await httpClient.GetStringAsync("LogInStudents/" + email);
+            var student = JsonConvert.DeserializeObject<Student>(jsonString);
+            return student;
         }
 
         public async Task<List<Student>> GetAllStudents()
@@ -250,9 +252,11 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void GetEmployee()
+        public async Task<Employee> GetEmployee(string email)
         {
-            throw new NotImplementedException();
+            jsonString = await httpClient.GetStringAsync("LogInEmployees/" + email);
+            var employee = JsonConvert.DeserializeObject<Employee>(jsonString);
+            return employee;
         }
         
         public async Task<List<Course>> GetAllCourses()

@@ -17,7 +17,8 @@
 
         <StackPanel>
             <StackPanel Orientation="Horizontal"
-                        Margin="40,0,0,0">
+                        Margin="40,0,0,0"
+                        >
                 <TextBlock Text="Filtrera ämne"
                            Margin="0,0,0,0"/>
                 <TextBlock Text="Filtrera årskurs"
@@ -25,13 +26,14 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
-                        Margin="40,0,0,0">
+                        Margin="40,0,0,0"
+>   
                 
                 <ComboBox Width="104" 
-                          x:Name="ChooseCourseComboBox"
                           ItemsSource="{x:Bind teacherCVM.CourseName}"
                           x:DefaultBindMode="OneWay"
                           PlaceholderText="Välj ämne"
+                          x:Name="ChooseCourseComboBox"
                           SelectionChanged="ChooseCourseComboBox_SelectionChanged"/>
                 
                 <ComboBox Width="auto" 
@@ -59,7 +61,7 @@
         <ListView BorderBrush="Black"
                   BorderThickness="2"
                   Margin="20,100,0,150"
-                  ItemsSource="{x:Bind adminViewModel.myTests }"
+                  ItemsSource="{x:Bind adminViewModel.MyTests }"
                   x:Name="DisplayTestsLV"
                   >
             <ListView.ItemTemplate>
@@ -84,7 +86,86 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
-        
+
+        <GridView BorderBrush="Black"
+                  BorderThickness="2"
+                  Margin="20,100,0,150"
+                  ItemsSource="{x:Bind adminViewModel.TestQuestions }"
+                  x:Name="DisplayQuestionsLV"
+                  Grid.Column="1"
+                  >
+            <GridView.ItemTemplate>
+                <DataTemplate x:Name="displayQuestionsLV" x:DataType="data:Question" >
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" Width="400" Margin="0,15,0,0" >
+                            <TextBlock>
+                            <Run Text="Fråge ID: "/>
+                            <Run Text="{x:Bind QuestionID}"/>
+                            </TextBlock>
+                            <TextBlock>
+                            <Run Text="Typ av fråga: "/>
+                            <Run Text="{x:Bind QuestionType}"/>
+                            </TextBlock>
+                            <TextBlock>
+                            <Run Text="Fråga: "/>
+                            <Run Text="{x:Bind QuestionText }"/>
+                            </TextBlock>
+                            <TextBlock>
+                            <Run Text="Alternativ 1: "/>
+                            <Run Text="{x:Bind CorrectAnswer }"/>
+                            </TextBlock>
+                            <TextBlock>
+                            <Run Text="Alternativ 2: "/>
+                            <Run Text="{x:Bind IncorrectAnswer1 }"/>
+                            </TextBlock>
+                            <TextBlock>
+                            <Run Text="Alternativ 3: "/>
+                            <Run Text="{x:Bind IncorrectAnswer1 }"/>
+                            </TextBlock>
+                            <TextBlock>
+                            <Run Text="Frågans poängvärde: "/>
+                            <Run Text="{x:Bind PointValue }"/>
+                            </TextBlock>
+                        </StackPanel>
+                  
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+
+
+        <StackPanel Grid.Column="1">
+            <StackPanel Orientation="Horizontal"
+                        Margin="40,0,0,0"
+                        >
+                <TextBlock Text="Provets ämne"
+                           Margin="0,0,0,0"/>
+                <TextBlock Text="Årskurs"
+                           Margin="63,0,0,0"/>
+                <TextBlock Text="Datum för provet"
+                           Margin="63,0,0,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="60,0,0,0"
+>
+
+                <TextBlock x:Name="TestCourse"
+                           />
+                <TextBlock  x:Name="TestGrade"
+                           Margin="95,0,0,0"/>
+                <TextBlock x:Name="TestDate"
+                           Margin="110,0,0,0"
+                           
+                           />
+
+            </StackPanel>
+
+
+
+        </StackPanel>
+
+
+
     </Grid>
 </Page>

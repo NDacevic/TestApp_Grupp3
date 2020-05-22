@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography;
+using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +28,41 @@ namespace TestApp.View
         public LogInView()
         {
             this.InitializeComponent();
+        }
+        /// <summary>
+        /// Method checking email and password för the user trying to log in 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Bttn_Login_Click(object sender, RoutedEventArgs e)
+        {
+            string password = LogInViewModel.Instance.EncryptedPassword(PB_InsertPassword.ToString(), new SHA256CryptoServiceProvider());
+
+            if (Rb_Student.IsChecked == true)
+            {
+                LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
+                LogInViewModel.Instance.CheckStudentPassword(password);
+                
+            }
+            else if (Rb_Employee.IsChecked == true)
+            {
+                LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
+                LogInViewModel.Instance.CheckEmployeePassword(password);
+
+                //if(LogInViewModel.Instance.ActiveEmployee.Role = "Admin")
+                //{
+                //    Frame.Navigate(typeof(MainPageAdminViewxaml));
+                //}
+                //else if(LogInViewModel.Instance.ActiveEmployee.Role = "Teacher")
+                //{
+                //    Frame.Navigate(typeof(Teacher.MainPageTeacherView));
+                //}
+            }
+            else
+            {
+                new MessageDialog("Vänligen klicka i om du är student eller personal, tack!");
+            }
+              
         }
     }
 }
