@@ -164,11 +164,7 @@ namespace TestApp.ViewModel
         }
         
 
-        public void GetQuestionsForTestCreation()
-        {
-            throw new NotImplementedException();
-        }
-
+     
         #endregion
 
     }
