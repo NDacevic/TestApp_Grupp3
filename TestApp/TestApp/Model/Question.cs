@@ -48,6 +48,7 @@ namespace TestApp.Model
             get { return $"[{CourseName}] Fråga: {QuestionText} [{QuestionType}] Poäng: {PointValue}"; }
 
         }
+        public string Answer { get; set; } // Used only for easy storing of answers when returned from the database
         #endregion
 
         #region Methods

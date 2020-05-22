@@ -62,6 +62,7 @@ namespace TestApp.View.Student
 
             //Starts the timer instantly
             StudentViewModel.Instance.DispatcherTimerSetup(selectedTest, TxtBl_TestTimer, Lv_AllQuestions);
+            
         }
 
         #endregion

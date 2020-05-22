@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
@@ -70,29 +71,43 @@ namespace TestApp.ViewModel
             {
                 await new MessageDialog(exc.Message).ShowAsync();
             }
-        } 
-        //public bool CheckEmployeePassword (string insertedPassword) //Get ()
-        //{
-        //    if(ActiveEmployee.Password == insertedPassword)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-        //public bool CheckStudentPassword (string insertedPassword)
-        //{
-        //    if (ActiveStudent.Password == insertedPassword)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
+        }
+        /// <summary>
+        /// Encrypting the password using SHA256
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="algorithm"></param>
+        /// <returns></returns>
+        public string EncryptedPassword(string inputPassword, HashAlgorithm algorithm)
+        {
+            Byte[] passwordToBytes = Encoding.UTF8.GetBytes(inputPassword);
+
+            Byte[] hashedPasswordBytes = algorithm.ComputeHash(passwordToBytes);
+
+            return BitConverter.ToString(hashedPasswordBytes);
+        }
+        public bool CheckEmployeePassword(string insertedPassword) //Get ()
+        {
+            if (ActiveEmployee.Password == insertedPassword)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool CheckStudentPassword(string insertedPassword)
+        {
+            if (ActiveStudent.Password == insertedPassword)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         #endregion
     }
 }

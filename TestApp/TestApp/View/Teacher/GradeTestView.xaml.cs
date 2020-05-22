@@ -28,9 +28,18 @@ namespace TestApp.View.Teacher
     public sealed partial class GradeTestView : Page
     {
         TeacherGradeTestViewModel gradeInstance = TeacherGradeTestViewModel.Instance;
+<<<<<<< HEAD
         Model.Employee teacherInstance = new Employee(); //TODO: Denna är ändrad av JS
-        ObservableCollection<Test> ungradedTests = new ObservableCollection<Test>();
+=======
+        Model.Employee teacherInstance = Model.Employee.Instance;
 
+
+>>>>>>> master
+        ObservableCollection<Test> ungradedTests = new ObservableCollection<Test>();
+        ObservableCollection<Model.Student> studentsWithTestList = new ObservableCollection<Model.Student>();
+        ObservableCollection<Model.Question> questionsForStudentAndTestList = new ObservableCollection<Question>();
+
+        int chosenTestId = 0;
         public GradeTestView()
         {
             this.InitializeComponent();
@@ -44,6 +53,40 @@ namespace TestApp.View.Teacher
 
             foreach (var x in tempTests)
                 ungradedTests.Add(x);
+        }
+
+        private void InitialTestListClick(object sender, ItemClickEventArgs e)
+        {
+            chosenTestId = ((Test)e.ClickedItem).TestId;
+
+            grid_InitialTestList.Visibility = Visibility.Collapsed;
+            grid_StudentsUngradedTestofType.Visibility = Visibility.Visible;
+
+            gradeInstance.PopulateStudentsWithTestList(chosenTestId, studentsWithTestList);
+
+        }
+
+        private void SelectStudentToGrade(object sender, ItemClickEventArgs e)
+        {
+            Model.Student chosenStudent = ((Model.Student)e.ClickedItem);
+
+            grid_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
+            stackPanel_QuestionsForStudentAndTest.Visibility = Visibility.Visible;
+
+            gradeInstance.PopulateUngradedQuestionsForStudent(chosenTestId, chosenStudent, questionsForStudentAndTestList);
+        }
+
+        private void FinishGrading(object sender, RoutedEventArgs e)
+        {
+
+            ungradedTests.Clear();
+            studentsWithTestList.Clear();
+            questionsForStudentAndTestList.Clear();
+
+            grid_InitialTestList.Visibility = Visibility.Visible;
+            grid_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
+            stackPanel_QuestionsForStudentAndTest.Visibility = Visibility.Collapsed;
+
         }
     }
 }

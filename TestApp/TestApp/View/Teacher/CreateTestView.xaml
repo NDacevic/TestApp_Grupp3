@@ -117,8 +117,6 @@
                 <ComboBox Width="auto" 
                           Margin="15,0,0,0"
                           x:Name="ChooseGrade"
-                          ItemsSource="{x:Bind teacherCreateViewModel.Grades}"
-                          x:DefaultBindMode="OneWay"
                           PlaceholderText="Välj årskurs"
                       />
                

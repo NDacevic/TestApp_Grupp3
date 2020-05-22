@@ -5,7 +5,7 @@
     xmlns:local="using:TestApp.View.Teacher"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:t="using:TestApp.Model"
+    xmlns:models="using:TestApp.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -14,23 +14,121 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView
-            ItemsSource="{x:Bind ungradedTests}">
-            <ListView.ItemTemplate>
-                <DataTemplate
-                    x:DataType="t:Test">
-                    <TextBlock>
-                        <Run Text="Id: "/>
-                        <Run Text="{x:Bind TestId}"/>
-                        <Run Text=" "/>
-                        <Run Text="{x:Bind CourseName}"/>
-                        <Run Text=" åk"/>
-                        <Run Text="{x:Bind Grade}"/>
-                        <Run Text=", "/>
-                    </TextBlock>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+        <Grid 
+            x:Name="grid_InitialTestList"
+            >
+            <ListView
+                ItemClick="InitialTestListClick"
             
-        </ListView>
+                ItemsSource="{x:Bind ungradedTests}"
+                SelectionMode="None"
+                IsItemClickEnabled="True"
+                >
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel
+                            Spacing="30"
+                            />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate
+                        x:DataType="models:Test">
+                        <TextBlock>
+                            <Run Text="Id: "/>
+                            <Run Text="{x:Bind TestId}"/>
+                            <Run Text=" "/>
+                            <Run Text="{x:Bind CourseName}"/>
+                            <Run Text=" åk"/>
+                            <Run Text="{x:Bind Grade}"/>
+                            <Run Text=", "/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <Grid
+            x:Name="grid_StudentsUngradedTestofType"
+            Visibility="Collapsed"
+            >
+            <ListView
+                ItemClick="SelectStudentToGrade"
+            
+                ItemsSource="{x:Bind studentsWithTestList}"
+                
+                SelectionMode="None"
+                IsItemClickEnabled="True"
+                >
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel
+                            Spacing="30"
+                            />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate
+                        x:DataType="models:Student">
+                        <TextBlock>
+                            <Run Text="{x:Bind FirstName}"/>
+                            <Run Text=" "/>
+                            <Run Text="{x:Bind LastName}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <StackPanel
+            x:Name="stackPanel_QuestionsForStudentAndTest"
+            Visibility="Collapsed"
+            Spacing="30"
+            >
+            <ListView
+                ItemsSource="{x:Bind questionsForStudentAndTestList}"
+                SelectionMode="None"
+                IsItemClickEnabled="True"
+                >
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel
+                            Spacing="30"
+                            />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate
+                        x:DataType="models:Question">
+                        <StackPanel>
+                            <TextBlock
+                                Text="{x:Bind QuestionText}"/>
+                            <TextBlock
+                                Text="{x:Bind Answer}"/>
+                            <StackPanel
+                                Orientation="Horizontal">
+                                <RadioButton
+                                    x:Name="radioButton_QuestionCorrect"
+                                    Content="Rätt"
+                                    />
+                                <RadioButton
+                                    x:Name="radioButton_QuestionIncorrect"
+                                    Content="Fel"
+                                    />
+                                <RadioButton
+                                    x:Name="radioButton_QuestionUngraded"
+                                    Content="Orättad"
+                                    IsChecked="True"
+                                    />
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button
+                x:Name="bttn_FinishGrading"
+                Click="FinishGrading"
+                
+                Content="Färdig"
+                />
+        </StackPanel>
     </Grid>
 </Page>

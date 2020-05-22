@@ -132,10 +132,6 @@ namespace TestApp.ViewModel
             CreatedTest.Questions.Clear();
             QuestionsToFilter.Clear();
             CreatedTest.Questions.Clear();
-           
-            
-
-
         }
         public void AddQuestionToTest(Question question) //Adding question that the user choose
         {
@@ -148,6 +144,7 @@ namespace TestApp.ViewModel
             CreatedTest.Questions.Remove(question);
             CreatedTest.MaxPoints -= question.PointValue;
         }
+   
 
         /// <summary>
         /// Calls the PostCreatedQuestion APIHelper method and submits the created question.
