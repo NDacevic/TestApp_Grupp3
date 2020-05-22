@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TestApp.Model;
 using TestApp.ViewModel;
+using Windows.Devices.Radios;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -55,8 +56,8 @@ namespace TestApp.View.Teacher
         {
             chosenTestId = ((Test)e.ClickedItem).TestId;
 
-            grid_InitialTestList.Visibility = Visibility.Collapsed;
-            grid_StudentsUngradedTestofType.Visibility = Visibility.Visible;
+            scrollViewer_InitialTestList.Visibility = Visibility.Collapsed;
+            scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Visible;
 
             gradeInstance.PopulateStudentsWithTestList(chosenTestId, studentsWithTestList);
 
@@ -66,23 +67,42 @@ namespace TestApp.View.Teacher
         {
             Model.Student chosenStudent = ((Model.Student)e.ClickedItem);
 
-            grid_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
-            stackPanel_QuestionsForStudentAndTest.Visibility = Visibility.Visible;
+            scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
+            scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Visible;
 
             gradeInstance.PopulateUngradedQuestionsForStudent(chosenTestId, chosenStudent, questionsForStudentAndTestList);
         }
 
         private void FinishGrading(object sender, RoutedEventArgs e)
         {
+            foreach (var item in listView_QuestionsForStudentAndTest.Items)
+            {
+                var container = listView_QuestionsForStudentAndTest.ContainerFromItem(item);
+                var child = ListView.ItemsControlFromItemContainer(container);
+                Debug.WriteLine(child);
+            }
 
             ungradedTests.Clear();
             studentsWithTestList.Clear();
             questionsForStudentAndTestList.Clear();
 
-            grid_InitialTestList.Visibility = Visibility.Visible;
-            grid_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
-            stackPanel_QuestionsForStudentAndTest.Visibility = Visibility.Collapsed;
+            scrollViewer_InitialTestList.Visibility = Visibility.Visible;
+            scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
+            scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Collapsed;
 
+        }
+
+        public List<Control> AllChildren(DependencyObject parent)
+        {
+            var list = new List<Control>();
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is Control)
+                    list.Add(child as Control);
+                list.AddRange(AllChildren(child));
+            }
+            return list;
         }
     }
 }
