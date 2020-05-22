@@ -11,16 +11,13 @@ namespace TestApp.Model
         #region Constant Fields
         #endregion
 
-        #region Fields
-        
-        private static Employee instance = null;
-       
+        #region Fields      
         #endregion
 
         #region Constructors
-        public Employee (int EmployeeId, string firstName, string lastName, string email, string password) :base(firstName, lastName, email, password)
+        public Employee (int employeeId, string firstName, string lastName, string email, string password) :base(firstName, lastName, email, password)
         {
-            EmployeId = EmployeeId;
+            EmployeeId = employeeId;
             Students = new List<Student>();
         }
 
@@ -39,18 +36,7 @@ namespace TestApp.Model
 
         #region Properties
  
-        public static Employee Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new Employee();
-                }
-                return instance;
-            }
-        }
-        public int EmployeId { get; set; }
+        public int EmployeeId { get; set; }
         public List<Student> Students { get; set; }
         #endregion
 
