@@ -195,9 +195,9 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void PostQuestionAnswers()
+        public void PostQuestionAnswers(List<StudentQuestionAnswer> questionAnswers)
         {
-            throw new NotImplementedException();
+            //Todo Ollhage!
         }
 
         public void GetTestResult()
