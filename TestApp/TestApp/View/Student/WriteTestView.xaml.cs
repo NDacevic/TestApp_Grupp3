@@ -29,6 +29,7 @@ namespace TestApp.View.Student
         #endregion
 
         #region Fields
+        private Test selectedTest;  //used for binding
         #endregion
 
         #region Constructors
@@ -55,7 +56,7 @@ namespace TestApp.View.Student
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //Saves the selected test from last page
-            Test selectedTest = (Test)e.Parameter;
+            selectedTest = (Test)e.Parameter;
             TxtBl_TestTimer.Text = $"Tid kvar: {selectedTest.TestDuration} min";
 
             //Starts the timer instantly
@@ -63,6 +64,11 @@ namespace TestApp.View.Student
         }
 
         #endregion
+
+        private void Bttn_SubmitTest_Click(object sender, RoutedEventArgs e)
+        {
+            StudentViewModel.Instance.StopAndSubmitTest();
+        }
     }
    
 }

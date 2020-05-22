@@ -43,7 +43,10 @@
                 <RadioButton 
                     Name="RadioBttn_Bottom" 
                     Content="{x:Bind IncorrectAnswer2}"/>
-                
+                <RadioButton 
+                    Name="RadioBttn_Unanswered" 
+                    Content="Obesvarad"
+                    IsChecked="True"/>
                 <Rectangle 
                     Fill="Aquamarine" 
                     Height="1" 
@@ -138,7 +141,8 @@
             Content="Lämna in provet"
             Grid.Column="1"
             Grid.Row="3"
-            HorizontalAlignment="Right"/>
+            HorizontalAlignment="Right" Click="Bttn_SubmitTest_Click"
+            />
 
     </Grid>
 </Page>

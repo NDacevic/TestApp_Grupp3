@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using TestApp.Model;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace TestApp.ViewModel
 {
@@ -29,12 +31,12 @@ namespace TestApp.ViewModel
         #endregion
 
         #region Constructors
-        public StudentViewModel ()
+        public StudentViewModel()
         {
             ActiveTests = new ObservableCollection<Test>();
             //Todo: Remove later when a student can log in - MO
-            activeStudent = new Student(1, "Mikael", "Ollhage", "ja@ja.com","nej",7,null);
-            
+            activeStudent = new Student(1, "Mikael", "Ollhage", "ja@ja.com", "nej", 8, null);
+
         }
         #endregion
 
@@ -58,16 +60,60 @@ namespace TestApp.ViewModel
         }
 
         //Property used to store all currently active tests, later used to populate the Listview ActiveTests on AvailableTestsView
-        public ObservableCollection<Test> ActiveTests { get; internal set; }      
-        
+        public ObservableCollection<Test> ActiveTests { get; internal set; }
+
         public Student ActiveStudent { get; set; }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Saves all student answers
+        /// </summary>
         public void FinishTest()
         {
-            //Todo: Spara alla svar i selectedTest.Result
-            
+
+            DependencyObject container;
+            List<Control> children = new List<Control>();
+
+            for (int i = 0; i < lv_allQuestions.Items.Count; i++)
+            {
+               container = lv_allQuestions.ContainerFromIndex(i);
+               children.AddRange(AllChildren(container));
+            }
+
+            Debug.WriteLine("Test");
+
+        }
+
+        /// <summary>
+        /// Gets all controls for each row in the listview 
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <returns></returns>
+        public List<Control> AllChildren(DependencyObject parent)
+        {
+            var childList = new List<Control>();
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is Control)
+                {
+                    if (child.GetType().Name == "TextBox")
+                    {
+                        childList.Add(child as Control);
+                    }
+                    else if(child.GetType().Name == "RadioButton")
+                    {
+                        //Todo: IsChecked misses RadioButtons that were never clicked
+                        if (((RadioButton)(child as Control)).IsChecked==true)
+                        {
+                            childList.Add(child as Control);
+                        }
+                    }                                       
+                }
+                childList.AddRange(AllChildren(child));
+            }
+            return childList;
         }
 
         public void CheckResult()
@@ -114,11 +160,11 @@ namespace TestApp.ViewModel
             this.bttn_SubmitTest = bttn_SubmitTest;
 
             //Registers the test's start time
-            TimeSpan startTime = selectedTest.StartDate.TimeOfDay;  
+            TimeSpan startTime = selectedTest.StartDate.TimeOfDay;
             //Registers the current time
             TimeSpan currentTime = DateTime.Now.TimeOfDay;
             //Calculates and registers how many minutes has elapsed since the test was supposed to start
-            int elapsedMinutes = (currentTime - startTime).Hours*60 + (currentTime - startTime).Minutes;
+            int elapsedMinutes = (currentTime - startTime).Hours * 60 + (currentTime - startTime).Minutes;
 
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += DispatcherTimer_Tick;
@@ -129,19 +175,15 @@ namespace TestApp.ViewModel
             remainingTestDuration = elapsedMinutes > 0 ? selectedTest.TestDuration - elapsedMinutes : selectedTest.TestDuration;
 
             //Start test if there is time remaining, else register blank answers
-            if (remainingTestDuration>0)
+            if (remainingTestDuration > 0)
             {
                 dispatcherTimer.Start();
             }
             else
             {
-                lv_allQuestions.IsEnabled = false;
-                bttn_SubmitTest.IsEnabled = false;
-                DisplayMessage("Provet är tyvärr redan avslutat. Dina svar är härmed registrerade.");
-                //ToDo: Kalla på metod som registrerar alla tomma svar - MO              
+                //Todo: Testa om man kan kalla på denna som innehåller timer.Stop() trots att timern i detta fallet aldrig startats - MO
+                StopAndSubmitTest();
             }
-
-            
         }
 
         /// <summary>
@@ -156,18 +198,32 @@ namespace TestApp.ViewModel
             //Gives TextBlock on WriteTestView new content
             txtBl_TestTimer.Text = $"Tid kvar: {remainingTestDuration} min";
 
+            //If no test time is left
             if (remainingTestDuration < 1)
             {
-                dispatcherTimer.Stop();
-                bttn_SubmitTest.IsEnabled = false;
-                lv_allQuestions.IsEnabled = false;
-                DisplayMessage("Provet är nu avslutat. Dina svar är härmed registrerade.");
+                StopAndSubmitTest();
             }
         }
-
-        private async void DisplayMessage(string message)
+        /// <summary>
+        /// Displays a message
+        /// </summary>
+        /// <param name="message"></param>
+        private async Task DisplayMessage(string message)
         {
+            //Display anonymous message
             _ = await new MessageDialog(message).ShowAsync();
+        }
+
+        /// <summary>
+        /// Stops the test, disables manipulation controls, starts registration of answers
+        /// </summary>
+        public async void StopAndSubmitTest()
+        {
+            dispatcherTimer.Stop();
+            bttn_SubmitTest.IsEnabled = false;
+            lv_allQuestions.IsEnabled = false;
+            await DisplayMessage("Provet är nu avslutat. Dina svar är härmed registrerade.");
+            FinishTest();
         }
 
         #endregion

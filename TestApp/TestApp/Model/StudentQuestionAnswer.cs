@@ -20,7 +20,7 @@ namespace TestApp.Model
         {
             StudentId = studentId;
             TestId = testId;
-            QuestionId
+            QuestionId = questionId;
             Answer = answer;
             IsCorrect = isCorrect;
         }
