@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -46,6 +47,8 @@ namespace TestApp.ViewModel
                 }
             }
         }
+
+        private List<Student> allStudents { get; set; }
         #endregion
 
         #region Methods
@@ -53,11 +56,31 @@ namespace TestApp.ViewModel
         {
             throw new NotImplementedException();
         }
+        public async Task DownloadStudents()
+        {
+            allStudents = await ApiHelper.Instance.GetAllStudents();
+        }
+        public List<Student> GetStudents()
+        {
+            return allStudents;
+        }
 
         public async Task<List<Test>> GetUngradedTests()
         {
-            List<Test> allTests = await ApiHelper.Instance.GetAllTests();
-            List<Test> ungradedTests = allTests.Where(x => x.IsGraded == false).Select(x => x).ToList();
+            await DownloadStudents();
+            List<Test> ungradedTests = new List<Test>();
+
+            foreach (var student in allStudents)
+            {
+                foreach(var studentTest in student.Tests)
+                {
+                    if(!studentTest.IsGraded)
+                    {
+                        if (!ungradedTests.Any(test => test.TestId == studentTest.TestId))
+                            ungradedTests.Add(studentTest);
+                    }
+                }
+            }
             
             return ungradedTests;
         }
@@ -66,8 +89,23 @@ namespace TestApp.ViewModel
         {
             throw new NotImplementedException();
         }
+
+        public void PopulateStudentsWithTestList(int testId, ObservableCollection<Student> studentsWithTestList)
+        {
+            var tempStudentList = allStudents.Where(student => student.Tests.Any(test => test.TestId == testId && test.IsGraded == false)).Select(x => x).ToList();
+            foreach(var student in tempStudentList)
+            {
+                studentsWithTestList.Add(student);
+            }
+        }
+
+        public void PopulateUngradedQuestionsForStudent(int chosenTestId, Model.Student chosenStudent, ObservableCollection<Question> questionsForStudentAndTestList)
+        {
+            var tempQuestionList = chosenStudent.Tests.Where(test => test.TestId == chosenTestId).Select(test => test.Questions).FirstOrDefault();
+            foreach (var question in tempQuestionList)
+                questionsForStudentAndTestList.Add(question);
+        }
+
         #endregion
-
-
     }
 }

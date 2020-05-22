@@ -6,23 +6,20 @@ using System.Threading.Tasks;
 
 namespace TestApp.Model
 {
-    public class Student : Person
+    public class Role
     {
         #region Constant Fields
         #endregion
 
         #region Fields
-
         #endregion
 
         #region Constructors
-        public Student (int studentId, string firstName, string lastName, string email, string password,int classId, List<Test> tests) : base(firstName, lastName, email, password)
+        public Role (int roleId, string roleName)
         {
-            StudentId = studentId;
-            ClassId = classId;
-            Tests = tests;
+            RoleId = roleId;
+            RoleName = roleName;
         }
-
         #endregion
 
         #region Delegates
@@ -32,9 +29,8 @@ namespace TestApp.Model
         #endregion
 
         #region Properties
-        public int StudentId { get; set; }
-        public int ClassId { get; set; }
-        public List<Test> Tests { get; set; }
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
         #endregion
 
         #region Methods

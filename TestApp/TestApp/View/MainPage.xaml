@@ -73,6 +73,10 @@
                     Content="DeleteTestView"
                     Click="Button_NavigateToPage"
                     />
+                <Button
+                    x:Name="bttn_LogInView"
+                    Content="LogInView"
+                    Click="Button_NavigateToPage"/>
             </StackPanel>
         </SplitView.Pane>
         <SplitView.Content>

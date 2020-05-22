@@ -121,7 +121,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Course.cs" />
+    <Compile Include="Model\Role.cs" />
     <Compile Include="Model\TestResult.cs" />
+    <Compile Include="ViewModel\LogInViewModel.cs" />
+    <Compile Include="ViewModel\AdminViewModel.cs" />
     <Compile Include="View\DeleteTestView.xaml.cs">
       <DependentUpon>DeleteTestView.xaml</DependentUpon>
     </Compile>
@@ -143,6 +146,9 @@
     <Compile Include="ViewModel\TeacherGradeTestViewModel.cs" />
     <Compile Include="ViewModel\TeacherStudentViewModel.cs" />
     <Compile Include="ViewModel\StudentViewModel.cs" />
+    <Compile Include="View\Admin\MainPageAdminViewxaml.xaml.cs">
+      <DependentUpon>MainPageAdminViewxaml.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Student\AvailableTestsView.xaml.cs">
       <DependentUpon>AvailableTestsView.xaml</DependentUpon>
     </Compile>
@@ -193,8 +199,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="View\DeleteTestView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\LogInView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -203,6 +209,10 @@
     <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Admin\MainPageAdminViewxaml.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Student\AvailableTestsView.xaml">
       <SubType>Designer</SubType>

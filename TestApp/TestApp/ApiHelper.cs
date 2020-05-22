@@ -118,9 +118,19 @@ namespace TestApp
             }            
         }
 
-        public void DeleteTest()
+        public async void DeleteTest(int id)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = await httpClient.DeleteAsync($"Tests/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                await new MessageDialog("Provet har raderats").ShowAsync();
+            }
+            else
+            {
+                Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+            }
         }
 
         /// <summary>
@@ -220,14 +230,26 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void GetStudent()
+        public async Task<Student> GetStudent(string email)
         {
-            throw new NotImplementedException();
+            jsonString = await httpClient.GetStringAsync("LogInStudents/" + email);
+            var student = JsonConvert.DeserializeObject<Student>(jsonString);
+            return student;
         }
 
-        public void GetAllStudents()
+        public async Task<List<Student>> GetAllStudents()
         {
-            throw new NotImplementedException();
+            List<Student> studentList = new List<Student>();
+            using (HttpResponseMessage response = await httpClient.GetAsync("students"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonString = await response.Content.ReadAsStringAsync();
+
+                    studentList = JsonConvert.DeserializeObject<List<Student>>(jsonString);
+                }
+            }
+            return studentList;
         }
 
         public void PostEmployee()
@@ -235,9 +257,11 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void GetEmployee()
+        public async Task<Employee> GetEmployee(string email)
         {
-            throw new NotImplementedException();
+            jsonString = await httpClient.GetStringAsync("LogInEmployees/" + email);
+            var employee = JsonConvert.DeserializeObject<Employee>(jsonString);
+            return employee;
         }
         
         public async Task<List<Course>> GetAllCourses()
