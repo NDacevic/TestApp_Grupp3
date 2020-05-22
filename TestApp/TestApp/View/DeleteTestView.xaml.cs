@@ -51,7 +51,14 @@ namespace TestApp.View
         {
             if(ChooseGradeForTest.SelectedValue.ToString()=="Alla")
             {
-                adminViewModel.FilterListByCourse(ChooseCourseComboBox.SelectedValue.ToString());
+                if(ChooseCourseComboBox.SelectedValue==null)
+                {
+                    adminViewModel.FilterListByCourse("");
+                }
+                else
+                {
+                    adminViewModel.FilterListByCourse(ChooseCourseComboBox.SelectedValue.ToString());
+                }
             }
             else if(ChooseCourseComboBox.SelectedValue!=null)
             {
@@ -63,7 +70,7 @@ namespace TestApp.View
             }
         }
 
-        private void DeleteTestButton_Click(object sender, RoutedEventArgs e)
+        private void DeleteTestButton_Click(object sender, RoutedEventArgs e) //Pick a Test and delete it
         {
             var selected = DisplayTestsLV.SelectedItems;
             foreach (Test selectedQuestion in selected)
@@ -73,9 +80,16 @@ namespace TestApp.View
 
         }
 
-        private void PickTestButton_Click(object sender, RoutedEventArgs e)
+        private void PickTestButton_Click(object sender, RoutedEventArgs e) //Pick a test and display its content
         {
-
+            var selected = DisplayTestsLV.SelectedItems;
+            foreach (Test selectedTest in selected)
+            {
+                TestDate.Text = selectedTest.StartDate.ToString();
+                TestGrade.Text = selectedTest.Grade.ToString();
+                TestCourse.Text = selectedTest.CourseName;
+                adminViewModel.DisplayQuestionsOnTest(selectedTest);
+            }
         }
     }
 }
