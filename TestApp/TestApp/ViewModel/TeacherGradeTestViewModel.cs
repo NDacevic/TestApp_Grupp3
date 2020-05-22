@@ -106,6 +106,10 @@ namespace TestApp.ViewModel
                 questionsForStudentAndTestList.Add(question);
         }
 
+        public void FinishGradingTest(List<StudentQuestionAnswer> updatedSqaObjects)
+        {
+            ApiHelper.Instance.UpdateStudentQuestionAnswer(updatedSqaObjects);
+        }
         #endregion
     }
 }
