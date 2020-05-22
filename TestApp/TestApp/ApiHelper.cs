@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
@@ -284,17 +285,31 @@ namespace TestApp
         /// <param name=""></param>
         public async void UpdateStudentQuestionAnswer(List<StudentQuestionAnswer> sqaList)
         {
-            jsonString = JsonConvert.SerializeObject(sqaList);
-
-            HttpContent content = new StringContent(jsonString);
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-
-            using (HttpResponseMessage response = await httpClient.PutAsync("studentquestionanswers", content))
+            try
             {
-                if (response.IsSuccessStatusCode)
+                //Serialize object into a json string
+                jsonString = JsonConvert.SerializeObject(sqaList);
+
+                //setup the content
+                HttpContent content = new StringContent(jsonString);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                //send it off and display a message indicating success
+                using (HttpResponseMessage response = await httpClient.PutAsync("studentquestionanswers", content))
                 {
-                    Debug.WriteLine("Sending ok");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await new MessageDialog("Rättningen sparad!").ShowAsync();
+                    }
+                    else
+                    {
+                        throw new HttpRequestException($"Code: {response.StatusCode}, {response.ReasonPhrase}");
+                    }
                 }
+            }
+            catch(Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
             }
         }
         #endregion

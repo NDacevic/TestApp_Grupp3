@@ -44,6 +44,9 @@ namespace TestApp.View.Teacher
             GetTests();
         }
 
+        /// <summary>
+        /// Gets the tests and adds them to a global list
+        /// </summary>
         private async void GetTests()
         {
             List<Test> tempTests = await gradeInstance.GetUngradedTests();
@@ -52,6 +55,12 @@ namespace TestApp.View.Teacher
                 ungradedTests.Add(x);
         }
 
+        /// <summary>
+        /// When the user clicks a test. It saves the ID of the test.
+        /// It also shows the next listview and hides the current one.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InitialTestListClick(object sender, ItemClickEventArgs e)
         {
             chosenTestId = ((Test)e.ClickedItem).TestId;
@@ -59,10 +68,17 @@ namespace TestApp.View.Teacher
             scrollViewer_InitialTestList.Visibility = Visibility.Collapsed;
             scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Visible;
 
+            //call the method that populates the list used in the next listview
             gradeInstance.PopulateStudentsWithTestList(chosenTestId, studentsWithTestList);
 
         }
 
+        /// <summary>
+        /// When the user clicks a student in the list it saves the ID of the student.
+        /// It also shows the next listview and hides the current one.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectStudentToGrade(object sender, ItemClickEventArgs e)
         {
             Model.Student chosenStudent = ((Model.Student)e.ClickedItem);
@@ -71,14 +87,23 @@ namespace TestApp.View.Teacher
             scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
             scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Visible;
 
+            //call the method that populates the list used in the next listview
             gradeInstance.PopulateUngradedQuestionsForStudent(chosenTestId, chosenStudent, questionsForStudentAndTestList);
         }
 
+        /// <summary>
+        /// When the user has finished grading the questions they want to grade.
+        /// This method compiles the questions into a list and sends it off to the API for writing to the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FinishGrading(object sender, RoutedEventArgs e)
         {
+            //TODO: Move most of this method to the TeacherGradeViewModel class
             //TODO: Incomplete method. Waiting on the StudentQuestionAnswer Class to be implemented fully
             List<StudentQuestionAnswer> gradedQuestions = new List<StudentQuestionAnswer>();
             Question question;
+
             foreach (var item in listView_QuestionsForStudentAndTest.Items)
             {
                 question = (Question)item;
@@ -93,7 +118,7 @@ namespace TestApp.View.Teacher
                     }
                     else if (button.Name == "radioButton_QuestionIncorrect" && button.IsChecked == true)
                     {
-                        gradedQuestions.Add(new StudentQuestionAnswer(question.Answer, 0) {  }) //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
+                        gradedQuestions.Add(new StudentQuestionAnswer(question.Answer, 0) { }); //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
                     }
                 }
             }
@@ -108,8 +133,15 @@ namespace TestApp.View.Teacher
 
         }
 
+        /// <summary>
+        /// Goes through a UI element and gets all the children of it that are labeled as 'Controlls'
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <returns></returns>
         public List<Control> AllChildren(DependencyObject parent)
         {
+
+            //Todo: Move this method to another class
             var list = new List<Control>();
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
             {

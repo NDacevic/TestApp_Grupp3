@@ -52,19 +52,29 @@ namespace TestApp.ViewModel
         #endregion
 
         #region Methods
-        public void GradeTextQuestion()
-        {
-            throw new NotImplementedException();
-        }
+
+        /// <summary>
+        /// Calls the GetAllStudents Method in the APIHelper class
+        /// </summary>
+        /// <returns></returns>
         public async Task DownloadStudents()
         {
             allStudents = await ApiHelper.Instance.GetAllStudents();
         }
+
+        /// <summary>
+        /// Returns the list of all the students
+        /// </summary>
+        /// <returns></returns>
         public List<Student> GetStudents()
         {
             return allStudents;
         }
 
+        /// <summary>
+        /// Finds the tests that contain questions that havn't been graded yet and populates a list with them.
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Test>> GetUngradedTests()
         {
             await DownloadStudents();
@@ -85,11 +95,11 @@ namespace TestApp.ViewModel
             return ungradedTests;
         }
 
-        public void GetUngradedQuestion()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// After clicking a test this method populates the list with students who've take
+        /// </summary>
+        /// <param name="testId"></param>
+        /// <param name="studentsWithTestList"></param>
         public void PopulateStudentsWithTestList(int testId, ObservableCollection<Student> studentsWithTestList)
         {
             var tempStudentList = allStudents.Where(student => student.Tests.Any(test => test.TestId == testId && test.IsGraded == false)).Select(x => x).ToList();
@@ -99,6 +109,12 @@ namespace TestApp.ViewModel
             }
         }
 
+        /// <summary>
+        /// Finds the questions based on a student and test and populates a list that is bound to the Listview for grading
+        /// </summary>
+        /// <param name="chosenTestId"></param>
+        /// <param name="chosenStudent"></param>
+        /// <param name="questionsForStudentAndTestList"></param>
         public void PopulateUngradedQuestionsForStudent(int chosenTestId, Model.Student chosenStudent, ObservableCollection<Question> questionsForStudentAndTestList)
         {
             var tempQuestionList = chosenStudent.Tests.Where(test => test.TestId == chosenTestId).Select(test => test.Questions).FirstOrDefault();
@@ -106,6 +122,10 @@ namespace TestApp.ViewModel
                 questionsForStudentAndTestList.Add(question);
         }
 
+        /// <summary>
+        /// Calls a method in the APIHelper class and sends off the list of Student Question Answer objects
+        /// </summary>
+        /// <param name="updatedSqaObjects"></param>
         public void FinishGradingTest(List<StudentQuestionAnswer> updatedSqaObjects)
         {
             ApiHelper.Instance.UpdateStudentQuestionAnswer(updatedSqaObjects);
