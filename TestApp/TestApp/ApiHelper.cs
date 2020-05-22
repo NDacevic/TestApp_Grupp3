@@ -272,6 +272,27 @@ namespace TestApp
                 throw new HttpRequestException("No courses retrieved from database. Contact an admin for help.");
             }
         }
+
+        /// <summary>
+        /// Takes a list of StudentQuestionAnswer objects and sends them off to the API.
+        /// The list must have at least one object in it
+        /// </summary>
+        /// <param name=""></param>
+        public async void UpdateStudentQuestionAnswer(List<StudentQuestionAnswer> sqaList)
+        {
+            jsonString = JsonConvert.SerializeObject(sqaList);
+
+            HttpContent content = new StringContent(jsonString);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+            using (HttpResponseMessage response = await httpClient.PutAsync("studentquestionanswers", content))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("Sending ok");
+                }
+            }
+        }
         #endregion
     }
 }
