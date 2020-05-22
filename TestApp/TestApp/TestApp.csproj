@@ -121,6 +121,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Course.cs" />
+    <Compile Include="Model\Role.cs" />
     <Compile Include="Model\TestResult.cs" />
     <Compile Include="ViewModel\LogInViewModel.cs" />
     <Compile Include="ViewModel\AdminViewModel.cs" />
@@ -197,6 +198,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\DeleteTestView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\LogInView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
