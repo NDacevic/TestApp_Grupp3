@@ -29,12 +29,14 @@ namespace TestApp.View.Teacher
     public sealed partial class GradeTestView : Page
     {
         TeacherGradeTestViewModel gradeInstance = TeacherGradeTestViewModel.Instance;
-        Model.Employee teacherInstance = new Employee(); //TODO: Denna är ändrad av JS
+
         ObservableCollection<Test> ungradedTests = new ObservableCollection<Test>();
         ObservableCollection<Model.Student> studentsWithTestList = new ObservableCollection<Model.Student>();
         ObservableCollection<Model.Question> questionsForStudentAndTestList = new ObservableCollection<Question>();
 
         int chosenTestId = 0;
+        int chosenStudentId = 0;
+
         public GradeTestView()
         {
             this.InitializeComponent();
@@ -64,6 +66,7 @@ namespace TestApp.View.Teacher
         private void SelectStudentToGrade(object sender, ItemClickEventArgs e)
         {
             Model.Student chosenStudent = ((Model.Student)e.ClickedItem);
+            chosenStudentId = ((Model.Student)e.ClickedItem).StudentId;
 
             scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
             scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Visible;
@@ -73,11 +76,26 @@ namespace TestApp.View.Teacher
 
         private void FinishGrading(object sender, RoutedEventArgs e)
         {
+            //TODO: Incomplete method. Waiting on the StudentQuestionAnswer Class to be implemented fully
+            List<StudentQuestionAnswer> gradedQuestions = new List<StudentQuestionAnswer>();
+            Question question;
             foreach (var item in listView_QuestionsForStudentAndTest.Items)
             {
+                question = (Question)item;
                 var container = listView_QuestionsForStudentAndTest.ContainerFromItem(item);
-                var child = ListView.ItemsControlFromItemContainer(container);
-                Debug.WriteLine(child);
+                var children = AllChildren(container);
+                foreach (var x in children)
+                {
+                    RadioButton button = (RadioButton)x;
+                    if(button.Name == "radioButton_QuestionCorrect" && button.IsChecked == true)
+                    {
+                        gradedQuestions.Add(new StudentQuestionAnswer(question.Answer, 0) {  }); //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
+                    }
+                    else if (button.Name == "radioButton_QuestionIncorrect" && button.IsChecked == true)
+                    {
+                        gradedQuestions.Add(new StudentQuestionAnswer(question.Answer, 0) {  }) //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
+                    }
+                }
             }
 
             ungradedTests.Clear();
