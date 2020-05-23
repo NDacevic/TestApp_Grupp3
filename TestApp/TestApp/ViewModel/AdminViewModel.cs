@@ -42,12 +42,9 @@ namespace TestApp.ViewModel
             AllStudents = new List<Student>(); //Store all students from DB
             AllEmployees = new List<Employee>(); //Store all Employees from DB
             AllUsers = new ObservableCollection<Person>();
-            FillList();
+            
         }
-        public async void FillList()
-        {
-            AllStudents = await ApiHelper.Instance.GetAllStudents();
-        }
+
         public async void DisplayTests()
         {
             testList = await ApiHelper.Instance.GetAllTests(); //Populating List with Test from DB
@@ -110,6 +107,8 @@ namespace TestApp.ViewModel
             }
 
         }
+     
+    
         public void DeleteTest(int id) 
         {
             ApiHelper.Instance.DeleteTest(id); //Send Test.Id of the test to ApiHelper to delete it from db
@@ -124,8 +123,12 @@ namespace TestApp.ViewModel
             }
            
         }
-        public void DisplayStudents() //Displays all students. DONE
+        public async void DisplayStudents() //Displays all students. DONE
         {
+            if(AllStudents.Count==0)
+            {
+                AllStudents = await ApiHelper.Instance.GetAllStudents();
+            }
             foreach(Person p in AllStudents)
             {
                 if(!AllUsers.Contains(p))
@@ -135,7 +138,6 @@ namespace TestApp.ViewModel
         public void DisplayStudentById(int id) //Displays student by searched Id. DONE
         {
             AllUsers.Clear();
-
             foreach(Student p in AllStudents.ToList())
             {
                 if(p.StudentId==id)
@@ -144,19 +146,34 @@ namespace TestApp.ViewModel
                 }
             }
         }
-        public void DisplayEmployeeById(int id) //Displays employee by searched Id ----UNDER CONSTRUCTION
+        public void DisplayEmployeeById(int id) //Displays employee by searched Id
         {
-            foreach(Employee e in AllUsers.ToList())
+            AllUsers.Clear();
+            foreach(Employee e in AllEmployees.ToList())
             {
-                if(e.EmployeeId!=id)
+                if(e.EmployeeId==id)
                 {
-                    AllUsers.Remove(e);
+                    AllUsers.Add(e);
                 }
             }
         }
         public async void DisplayEmployees() //Displays all employees----UNDER CONSTRUCTION
         {
-            //CALL GETALLEMPLOYEES from apihelper
+            if(AllEmployees.Count==0)
+            {
+                AllEmployees = await ApiHelper.Instance.GetAllEmployees();
+
+            }
+
+            foreach (Person p in AllEmployees)
+             {
+                if (!AllUsers.Contains(p))
+                {
+                    AllUsers.Add(p);
+                }
+            }
+            
+          
         }
 
 

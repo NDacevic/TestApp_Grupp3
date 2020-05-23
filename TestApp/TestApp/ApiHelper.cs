@@ -263,6 +263,19 @@ namespace TestApp
             var employee = JsonConvert.DeserializeObject<Employee>(jsonString);
             return employee;
         }
+       public async Task<List<Employee>>GetAllEmployees()
+        {
+            using(HttpResponseMessage response = await httpClient.GetAsync("Employees"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonString = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<List<Employee>>(jsonString);
+                }
+                else
+                  return null;
+            }
+        }
         
         public async Task<List<Course>> GetAllCourses()
         {

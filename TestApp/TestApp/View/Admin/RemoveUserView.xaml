@@ -29,6 +29,7 @@
             <TextBox         PlaceholderText="Skriv in ID.."
                              Margin="40,0,0,0"
                              x:Name="SearchIdTxtBox" KeyDown="SearchIdTxtBox_KeyDown"
+                             
                              />
         </StackPanel>
         <ListView BorderBrush="Black"
@@ -38,16 +39,23 @@
                   x:Name="DisplayUsersLV"
                   >
             <ListView.ItemTemplate>
-                <DataTemplate  x:Name="displayUsersLV" x:DataType="data:Student" x:DefaultBindMode="TwoWay" >
+                <DataTemplate  x:Name="displayUsersLV" x:DataType="data:Person" x:DefaultBindMode="TwoWay" >
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{x:Bind FirstName}"/>
                         <TextBlock Text="{x:Bind LastName}"/>
+                        <TextBlock Text="Epost:"/>
                         <TextBlock Text="{x:Bind Email}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+    
+            <Button Content="Ta bort"
+                    x:Name="DeleteUser_btn"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,50,150"
+                    Click="DeleteUser_btn_Click"/>
 
-      
     </Grid>
 </Page>
