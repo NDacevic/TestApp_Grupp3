@@ -82,7 +82,7 @@ namespace TestApp.ViewModel
                 //Validate MultipleChoice answers. If Quesion is MultipleChoice
                 if (selectedTest.Questions[i].QuestionType == "Flerval")
                     //If the CorrectAnswer is equal to the students answer
-                    if (selectedTest.Questions[i].CorrectAnswer == answers[0])
+                    if (selectedTest.Questions[i].CorrectAnswer == answers[i])
                         isCorrect = true;
                     else
                         isCorrect = false;
