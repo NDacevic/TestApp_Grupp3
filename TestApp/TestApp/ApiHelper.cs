@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,7 @@ using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
+using Windows.ApplicationModel.Appointments.DataProvider;
 using Windows.UI.Popups;
 
 namespace TestApp
@@ -170,6 +172,51 @@ namespace TestApp
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
+            }
+        }
+
+
+        /// <summary>
+        /// Sends a JsonPatchDocument to the API with updated information for a Test object
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="jsonPatchTest"></param>
+        public async void PatchTest(int id, JsonPatchDocument<Test> jsonPatchTest)
+        {
+            try
+            {
+                //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter
+                
+                //Define the method as a PATCH
+                HttpMethod method = new HttpMethod("PATCH");
+                //Serialize the JsonPatchDocument
+                jsonString = JsonConvert.SerializeObject(jsonPatchTest);
+                //Set the json as the content.
+                HttpContent content = new StringContent(jsonString);
+                //Specify that the content is a Json string
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                //constructn the request
+                var request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"tests/{id}"))
+                {
+                    Content = content
+                };
+
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Debug.Write("Test updated");
+                    }
+                    else
+                    {
+                        throw new HttpRequestException($"PutTest Status: {response.StatusCode}, {response.ReasonPhrase}");
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                Debug.WriteLine(exc.Message);
             }
         }
 
