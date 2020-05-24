@@ -125,6 +125,35 @@ namespace TestApp
             if (response.IsSuccessStatusCode)
             {
                 await new MessageDialog("Provet har raderats").ShowAsync();
+                
+            }
+            else
+            {
+                Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+            }
+        }
+        public async void DeleteEmployee(int id)
+        {
+            HttpResponseMessage response = await httpClient.DeleteAsync($"Employees/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                await new MessageDialog("Den anställde har raderats").ShowAsync();
+            }
+            else
+            {
+                Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+            }
+        }
+        public async void DeleteStudent(int id)
+        {
+            HttpResponseMessage response = await httpClient.DeleteAsync($"Students/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                await new MessageDialog("Eleven har raderats").ShowAsync();
             }
             else
             {
@@ -251,6 +280,7 @@ namespace TestApp
             }
             return studentList;
         }
+        
 
         public void PostEmployee()
         {

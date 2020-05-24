@@ -19,7 +19,7 @@ namespace TestApp.ViewModel
         public List<Employee> AllEmployees { get; set; }
         public Employee TempEmployee { get; set; }
 
-        public List<Test> testList { get; set; }
+        public List<Test> TestList { get; set; }
 
         public static AdminViewModel Instance
         {
@@ -35,7 +35,7 @@ namespace TestApp.ViewModel
 
         public AdminViewModel()
         {
-            testList = new List<Test>(); //Storing tests from DB
+            TestList = new List<Test>(); //Storing tests from DB
             MyTests = new ObservableCollection<Test>(); //Display Tests and used for filtering
             TestQuestions = new ObservableCollection<Question>(); //Used to display questions on test
             TempEmployee = new Employee();
@@ -47,8 +47,8 @@ namespace TestApp.ViewModel
 
         public async void DisplayTests()
         {
-            testList = await ApiHelper.Instance.GetAllTests(); //Populating List with Test from DB
-            foreach (Test t in testList)
+            TestList = await ApiHelper.Instance.GetAllTests(); //Populating List with Test from DB
+            foreach (Test t in TestList)
             {
                 if(!MyTests.Contains(t))
                 {
@@ -59,7 +59,7 @@ namespace TestApp.ViewModel
         }
         public void FilterTests(string course, int grade)
         {
-            foreach (Test subject in testList)
+            foreach (Test subject in TestList)
             {
                 if (!MyTests.Contains(subject)) //We check if our filtered list contains Test from original
                 {
@@ -91,7 +91,7 @@ namespace TestApp.ViewModel
         }
         public void FilterListByCourse(string course)
         {
-            foreach (Test subject in testList)
+            foreach (Test subject in TestList)
             {
                 if (!MyTests.Contains(subject)) //We check if our filtered list contains Test from original
                 {
@@ -111,7 +111,16 @@ namespace TestApp.ViewModel
     
         public void DeleteTest(int id) 
         {
+
             ApiHelper.Instance.DeleteTest(id); //Send Test.Id of the test to ApiHelper to delete it from db
+            foreach(Test t in MyTests.ToList())
+            {
+                if(t.TestId==id)
+                {
+                    MyTests.Remove(t);
+                    TestList.Remove(t);
+                }
+            }
         }
         public void DisplayQuestionsOnTest(Test test) //We go through the choosen Test and displays all the questions.
         {
@@ -157,14 +166,13 @@ namespace TestApp.ViewModel
                 }
             }
         }
-        public async void DisplayEmployees() //Displays all employees----UNDER CONSTRUCTION
+        public async void DisplayEmployees() //Displays all employees
         {
             if(AllEmployees.Count==0)
             {
                 AllEmployees = await ApiHelper.Instance.GetAllEmployees();
 
             }
-
             foreach (Person p in AllEmployees)
              {
                 if (!AllUsers.Contains(p))
@@ -172,8 +180,34 @@ namespace TestApp.ViewModel
                     AllUsers.Add(p);
                 }
             }
-            
-          
+        }
+        public  void DeleteUser(int id, string user)
+        {
+            if(user=="Anställd")
+            {
+                 ApiHelper.Instance.DeleteEmployee(id);
+                foreach (Employee e in AllEmployees.ToList())
+                {
+                    if (e.EmployeeId == id)
+                    {
+                       AllEmployees.Remove(e);
+                        AllUsers.Remove(e);
+                    }
+                }
+
+            }
+            else if(user=="Elev")
+            {
+                ApiHelper.Instance.DeleteStudent(id);
+                foreach (Student s in AllStudents.ToList())
+                {
+                    if (s.StudentId == id)
+                    {
+                        AllStudents.Remove(s);
+                        AllUsers.Remove(s);
+                    }
+                }
+            }
         }
 
 

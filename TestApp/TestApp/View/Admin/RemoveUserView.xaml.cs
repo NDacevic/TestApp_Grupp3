@@ -42,11 +42,11 @@ namespace TestApp.View.Admin
             adminViewModel.DisplayStudents();
         }
 
-        private void SearchIdTxtBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        private void SearchIdTxtBox_KeyDown(object sender, KeyRoutedEventArgs e) //Search person based on ID
         {
-            if (e.Key==Windows.System.VirtualKey.Enter)
+            if (e.Key==Windows.System.VirtualKey.Enter) //Instead of using a button for the textbox we can use 'Enter-key'
             {
-                if (StudentRadioBtn.IsChecked == true)
+                if (StudentRadioBtn.IsChecked == true) //Check if it´s an employee or a student and displays on screen
                 {
                     if(SearchIdTxtBox.Text=="")
                     {
@@ -57,7 +57,6 @@ namespace TestApp.View.Admin
                 }
                 else if(EmployeeRadioBtn.IsChecked==true)
                 {
-
                     if (SearchIdTxtBox.Text == "")
                     {
                         adminViewModel.DisplayEmployees();
@@ -71,9 +70,9 @@ namespace TestApp.View.Admin
 
         private async void DeleteUser_btn_Click(object sender, RoutedEventArgs e)
         {
-            var selectedUser = DisplayUsersLV.SelectedItem.ToString();
-
-            ContentDialog confirmButton = new ContentDialog()
+            string user;
+            var selectedUser = DisplayUsersLV.SelectedItems; //The selected user is saved here
+            ContentDialog confirmButton = new ContentDialog() //Make sure that the user is aware of the action
             {
                 Title = "Ta bort",
                 Content = "Detta kommer att radera personen från databasen, är du säker?",
@@ -82,10 +81,26 @@ namespace TestApp.View.Admin
             };
             ContentDialogResult result = await confirmButton.ShowAsync();
 
-            if (result == ContentDialogResult.Primary)
+            if (result == ContentDialogResult.Primary) //If they are ok we send the users id forward for deletion
             {
-                //TODO GO TO ADMINVIEWMODEL AND REMOVE USER
+                if(StudentRadioBtn.IsChecked==true)
+                {
+                    user = "Elev";
+                    foreach(Model.Student student in selectedUser)
+                    {
+                        adminViewModel.DeleteUser(student.StudentId, user);
+                    }
+                }
+                else if(EmployeeRadioBtn.IsChecked==true)
+                {
+                    user = "Anställd";
+                    foreach (Employee employee in selectedUser)
+                    {
+                        adminViewModel.DeleteUser(employee.EmployeeId, user);
+                    }
+                }
             }
         }
+       
     }
 }
