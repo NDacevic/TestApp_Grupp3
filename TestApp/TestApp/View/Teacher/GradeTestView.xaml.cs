@@ -100,7 +100,7 @@ namespace TestApp.View.Teacher
         /// <param name="e"></param>
         private void FinishGrading(object sender, RoutedEventArgs e)
         {
-            gradeInstance.FinishGradingTest(listView_QuestionsForStudentAndTest,);
+            gradeInstance.FinishGradingTest(listView_QuestionsForStudentAndTest, chosenStudentId, chosenTestId);
 
             ungradedTests.Clear();
             studentsWithTestList.Clear();
