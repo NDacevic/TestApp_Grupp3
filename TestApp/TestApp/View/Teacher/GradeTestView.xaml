@@ -111,7 +111,7 @@
                                 <TextBlock
                                     Text="{x:Bind QuestionText}"/>
                                 <TextBlock
-                                    Text="{x:Bind Answer}"/>
+                                    Text="{x:Bind QuestionAnswer.Answer}"/>
                                 <StackPanel
                                     Orientation="Horizontal">
                                     <RadioButton
