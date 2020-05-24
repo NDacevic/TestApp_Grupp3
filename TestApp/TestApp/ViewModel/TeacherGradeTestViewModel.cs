@@ -52,7 +52,7 @@ namespace TestApp.ViewModel
             }
         }
 
-        private List<Student> allStudents { get; set; }
+        public List<Student> allStudents { get; set; }
         #endregion
 
         #region Methods
@@ -64,15 +64,6 @@ namespace TestApp.ViewModel
         public async Task DownloadStudents()
         {
             allStudents = await ApiHelper.Instance.GetAllStudents();
-        }
-
-        /// <summary>
-        /// Returns the list of all the students
-        /// </summary>
-        /// <returns></returns>
-        public List<Student> GetStudents()
-        {
-            return allStudents;
         }
 
         /// <summary>
@@ -122,10 +113,14 @@ namespace TestApp.ViewModel
         public void PopulateUngradedQuestionsForStudent(int chosenTestId, Model.Student chosenStudent, ObservableCollection<Question> questionsForStudentAndTestList)
         {
             var tempQuestionList = chosenStudent.Tests.Where(test => test.TestId == chosenTestId).Select(test => test.Questions).FirstOrDefault();
-            foreach (var question in tempQuestionList)
-                questionsForStudentAndTestList.Add(question);
-        }
 
+            foreach (var question in tempQuestionList)
+            {
+                if (question.QuestionAnswer.IsCorrect == null)
+                    questionsForStudentAndTestList.Add(question);
+
+            }
+        }
         /// <summary>
         /// When the user has finished grading the questions they want to grade,
         /// This method compiles the questions into a list and sends it off to the API for writing to the database.
@@ -148,24 +143,16 @@ namespace TestApp.ViewModel
                     RadioButton button = (RadioButton)x;
                     if (button.Name == "radioButton_QuestionCorrect" && button.IsChecked == true)
                     {
-                        gradedQuestions.Add(new StudentQuestionAnswer(chosenStudentId, chosenTestId, question.QuestionID, question.Answer, true) { }); //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
+                        gradedQuestions.Add(new StudentQuestionAnswer(chosenStudentId, chosenTestId, question.QuestionID, question.QuestionAnswer.Answer, true) { }); //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
                     }
                     else if (button.Name == "radioButton_QuestionIncorrect" && button.IsChecked == true)
                     {
-                        gradedQuestions.Add(new StudentQuestionAnswer(chosenStudentId, chosenTestId, question.QuestionID, question.Answer, false) { }); //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
+                        gradedQuestions.Add(new StudentQuestionAnswer(chosenStudentId, chosenTestId, question.QuestionID, question.QuestionAnswer.Answer, false) { }); //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
                     }
                 }
             }
 
             ApiHelper.Instance.UpdateStudentQuestionAnswer(gradedQuestions);
-
-            if (listView_QuestionsForStudentAndTest.Items.Count == gradedQuestions.Count)
-            {
-                JsonPatchDocument<Test> jsonPatchTest = new JsonPatchDocument<Test>();
-                jsonPatchTest.Replace(x => x.IsGraded, true);
-
-                ApiHelper.Instance.PatchTest(chosenTestId, jsonPatchTest);
-            }
         }
 
         /// <summary>
