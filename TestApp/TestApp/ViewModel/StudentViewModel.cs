@@ -73,40 +73,30 @@ namespace TestApp.ViewModel
         public void FinishTest()
         {
             bool? isCorrect;
+            bool isTestOnlyMultiChoice;
+            int questionScore;
+            int scoredTestPoints = 0;
+
             //Save all student answers
             List<string> answers =  GetAnswersFromListView();
-            
+            //Check if test only contains MultiChoice Questions. If true, then the test can be completelly corrected instantly and the full result can be posted to the database
+            isTestOnlyMultiChoice = CheckIfTestOnlyContainsMultiChoiseQuestions(selectedTest.Questions);
+                        
             //Loop through all questions
             for (int i = 0; i < selectedTest.Questions.Count; i++)
             {
-                //Validate MultipleChoice answers. If Quesion is MultipleChoice
-                if (selectedTest.Questions[i].QuestionType == "Flerval")
-                    //If the CorrectAnswer is equal to the students answer
-                    if (selectedTest.Questions[i].CorrectAnswer == answers[i])
-                        isCorrect = true;
-                    else
-                        isCorrect = false;
-                //If question is not MultipleChoice
-                else
-                    isCorrect = null;
-
+                //Validate if the given answer is correct and potentially distribute points for it
+                (isCorrect, questionScore) = ValidateAnswersAndCalculateTestScore(selectedTest.Questions[i], answers[i]);
+                scoredTestPoints += questionScore;
+                                
                 //Create the result in the test object
                 selectedTest.Result.Add(new StudentQuestionAnswer(activeStudent.StudentId, selectedTest.TestId, selectedTest.Questions[i].QuestionID, answers[i], isCorrect));
             }
 
-            //Call ApiHelper to Post the result
-            ApiHelper.Instance.PostQuestionAnswers(selectedTest.Result);
-
-            //Todo: Implementera Post av prov som enbart har MC-frågor. Då kan ett TestResult objekt också skrivas till databasen   MO
-
+            //Post results per question and potentially also for the test itsel
+            PostQuestionAndTestResultToDb(isTestOnlyMultiChoice, scoredTestPoints);
         }
 
-
-
-        public void CheckResult()
-        {
-            //Todo: Om alla frågor är MultipleChoice kan resultatet ges omgående
-        }
         /// <summary>
         /// Method that takes all tests from the database and saves the wanted tests to an OC, for list display
         /// </summary>
@@ -169,7 +159,6 @@ namespace TestApp.ViewModel
             }
             else
             {
-                //Todo: Testa om man kan kalla på denna som innehåller timer.Stop() trots att timern i detta fallet aldrig startats - MO
                 StopAndSubmitTest();
             }
         }
@@ -192,25 +181,15 @@ namespace TestApp.ViewModel
                 StopAndSubmitTest();
             }
         }
-        /// <summary>
-        /// Displays a message
-        /// </summary>
-        /// <param name="message"></param>
-        private async Task DisplayMessage(string message)
-        {
-            //Display anonymous message
-            _ = await new MessageDialog(message).ShowAsync();
-        }
 
         /// <summary>
         /// Stops the test, disables manipulation controls, starts registration of answers
         /// </summary>
-        public async void StopAndSubmitTest()
+        public void StopAndSubmitTest()
         {
             dispatcherTimer.Stop();
             bttn_SubmitTest.IsEnabled = false;
             lv_allQuestions.IsEnabled = false;
-            await DisplayMessage("Provet är nu avslutat. Dina svar är härmed registrerade.");
             FinishTest();
         }
         /// <summary>
@@ -269,6 +248,77 @@ namespace TestApp.ViewModel
             }
             //Return the list to the calling method. In the end we have looped through all elements in the listView row and saved 1 answer per question/listview row.
             return answerList;
+        }
+
+        /// <summary>
+        /// Checks if the test only contains MultiChoiceQuestion
+        /// </summary>
+        /// <param name="questions"></param>
+        /// <returns></returns>
+        private bool CheckIfTestOnlyContainsMultiChoiseQuestions(ObservableCollection<Question> questions)
+        {
+            int numberOfTextQuestions=0;
+            
+            //Loop through all questions and check if there are any Text questions
+            foreach (Question question in questions)
+            {
+                if (question.QuestionType=="Text")
+                {
+                    numberOfTextQuestions++;
+                }
+            }
+
+            //If there are any Text questions the test does not only contain MultiChoice questions
+            if (numberOfTextQuestions>0)
+            {
+                return false; //The test contains Text questions too
+            }
+            return true; //The test only contains MultiChoice questions
+        }
+
+        /// <summary>
+        /// Validate the answer to the question and potentially distribute some points for the answer
+        /// </summary>
+        /// <param name="currentQuestion"></param>
+        /// <param name="currentAnswer"></param>
+        /// <returns></returns>
+        private (bool?, int) ValidateAnswersAndCalculateTestScore(Question currentQuestion, string currentAnswer)
+        {
+            int scoredPoints=0;
+            bool? isCorrect;
+
+            //Validate MultipleChoice answers. If Quesion is MultipleChoice
+            if (currentQuestion.QuestionType == "Flerval")
+                //If the CorrectAnswer is equal to the students answer
+                if (currentQuestion.CorrectAnswer == currentAnswer)
+                {
+                    isCorrect = true;
+                    scoredPoints = currentQuestion.PointValue;
+                }
+                else
+                    isCorrect = false;
+            //If question is not MultipleChoice
+            else
+                isCorrect = null;
+
+            return (isCorrect, scoredPoints);
+
+        }
+        /// <summary>
+        /// Post question result and potentially also Test result to the Db
+        /// </summary>
+        /// <param name="isTestOnlyMultiChoice"></param>
+        /// <param name="scoredTestPoints"></param>
+        private void PostQuestionAndTestResultToDb(bool isTestOnlyMultiChoice, int scoredTestPoints)
+        {
+            //Call ApiHelper to Post the result
+            ApiHelper.Instance.PostQuestionAnswers(selectedTest.Result);
+
+            //If there are only MultiChoice questions in the test we can post the result instantly, as a TestResult object
+            if (isTestOnlyMultiChoice)
+            {
+                ApiHelper.Instance.PostTestResult(new TestResult(activeStudent.StudentId, selectedTest.TestId, scoredTestPoints));
+            }
         }
 
         #endregion
