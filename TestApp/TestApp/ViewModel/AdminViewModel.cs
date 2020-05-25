@@ -264,34 +264,33 @@ namespace TestApp.ViewModel
                 }
             }
         }
-        public  void DeleteUser(int id, string user)
+       
+        public void DeleteEmployee(Employee employee)
         {
-            if(user=="Anställd")
-            {
-                 ApiHelper.Instance.DeleteEmployee(id);
-                foreach (Employee e in AllEmployees.ToList())
-                {
-                    if (e.EmployeeId == id)
-                    {
-                       AllEmployees.Remove(e);
-                        AllUsers.Remove(e);
-                    }
-                }
+            ApiHelper.Instance.DeleteEmployee(employee.EmployeeId);
 
-            }
-            else if(user=="Elev")
+            foreach (Employee e in AllEmployees.ToList())
             {
-                ApiHelper.Instance.DeleteStudent(id);
-                foreach (Student s in AllStudents.ToList())
+                if (e.EmployeeId == employee.EmployeeId)
                 {
-                    if (s.StudentId == id)
-                    {
-                        AllStudents.Remove(s);
-                        AllUsers.Remove(s);
-                    }
+                    AllEmployees.Remove(e);
+                    AllUsers.Remove(e);
                 }
             }
         }
+        public void DeleteStudent(Student student)
+        {
+            ApiHelper.Instance.DeleteStudent(student.StudentId);
+            foreach (Student s in AllStudents.ToList())
+            {
+                if (s.StudentId == student.StudentId)
+                {
+                    AllStudents.Remove(s);
+                    AllUsers.Remove(s);
+                }
+            }
+        }
+
 
 
     }

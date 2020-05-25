@@ -55,22 +55,16 @@ namespace TestApp.View.Teacher
         {
             if(ChooseCourseComboBox.SelectedValue==null)//Checking if the user have choosen an subject for the test
             {
-                DisplayNoSubjectWarning(); //If no subject is choosen we give the user a warning.
+               teacherCreateViewModel.DisplayNoSubjectWarning(); //If no subject is choosen we give the user a warning.
             }
             else
             {
                 var selected = DisplayQuestionsListView.SelectedItems;
                 foreach (Question selectedQuestion in selected)
                 {
-                    if (teacherCreateViewModel.CreatedTest.Questions.Contains(selectedQuestion))//Check if the question is already in the test.
-                    {
-                        DisplayQuestionWarning();//Displays a warning that the question already exists
-                    }
-                    else
-                    {
-                        teacherCreateViewModel.AddQuestionToTest(selectedQuestion);
-                    }
-            }   }
+                    teacherCreateViewModel.AddQuestionToTest(selectedQuestion);
+                }  
+            }
         }
 
      
@@ -87,11 +81,11 @@ namespace TestApp.View.Teacher
             }
             catch(NullReferenceException)
             {
-                DisplayFieldsAreEmpty();
+                teacherCreateViewModel.DisplayFieldsAreEmpty();
             }
             catch(FormatException)
             {
-                DisplayFieldsAreEmpty();
+                teacherCreateViewModel.DisplayFieldsAreEmpty();
             }
            
         }
@@ -112,26 +106,17 @@ namespace TestApp.View.Teacher
             teacherCreateViewModel.GetQuestionsForTest(ChooseCourseComboBox.SelectedValue.ToString()); //Sending CourseName to method that´s gonna get all questions on that subject
 
         }
-        private void ResetQuestionList()
-        {
-            foreach (var subject in teacherCreateViewModel.SubjectQuestions) //Going through our list with questions.
-            {
-                if (!teacherCreateViewModel.QuestionsToFilter.Contains(subject)) //We check if our QuestionsToFilter contain our subject question
-                {
-                    teacherCreateViewModel.QuestionsToFilter.Add(subject);
-                }
-            }
-        }
+      
 
         private void FilterQuestionTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ChooseCourseComboBox.SelectedValue == null) //If we try to filter without choosing a course we get a warning
             {
-                DisplayNoSubjectWarning();
+                teacherCreateViewModel.DisplayNoSubjectWarning();
             }
             else
             {
-                ResetQuestionList();
+                teacherCreateViewModel.ResetQuestionList();
 
                 foreach (var filtered in teacherCreateViewModel.QuestionsToFilter.ToList()) //Going through our alternative list of questions
                 {
@@ -151,11 +136,11 @@ namespace TestApp.View.Teacher
         {
             if (ChooseCourseComboBox.SelectedValue == null)
             {
-                DisplayNoSubjectWarning();
+                teacherCreateViewModel.DisplayNoSubjectWarning();
             }
             else
             {
-                ResetQuestionList();
+                teacherCreateViewModel.ResetQuestionList();
                 foreach (var filtered in teacherCreateViewModel.QuestionsToFilter.ToList()) 
                 {
                     if (FilterQuestionPointComboBox.SelectedValue.ToString() == "Alla")
@@ -182,7 +167,7 @@ namespace TestApp.View.Teacher
 
                 if (TestTimePicker.Time.Hours==0) 
                 {
-                    DisplayInvalidTimeForTest();
+                    teacherCreateViewModel.DisplayInvalidTimeForTest();
                 }
                 else
                 {
@@ -191,50 +176,11 @@ namespace TestApp.View.Teacher
             }
             catch(InvalidOperationException)
             {
-                DisplayFieldsAreEmpty();
+                teacherCreateViewModel.DisplayFieldsAreEmpty();
             }
 
         }
-        private async void DisplayInvalidTimeForTest() //Informs user that date or time is incorrect
-        {
-            ContentDialog warning = new ContentDialog
-            {
-                Title = "Varning",
-                Content = "Var vänlig se över datum och tid för prov",
-                CloseButtonText = "Ok"
-            };
-            await warning.ShowAsync();
-        }
-        private async void DisplayFieldsAreEmpty()//Informs user that it can´t continue untill all fields are filled out
-        {
-            ContentDialog warning = new ContentDialog
-            {
-                Title = "Varning",
-                Content = "Var vänlig se till att alla fälten är fyllda",
-                CloseButtonText = "Ok"
-            };
-            await warning.ShowAsync();
-        }
-        private async void DisplayNoSubjectWarning() //Asks the user to choose a subject before trying to filter or adding a question.
-        {
-            ContentDialog warning = new ContentDialog
-            {
-                Title = "Varning",
-                Content = "Var vänlig välj ett ämne för provet",
-                CloseButtonText = "Ok"
-            };
-            await warning.ShowAsync();
-        }
-        private async void DisplayQuestionWarning() //Informs the user that the question is already added to the test.
-        {
-            ContentDialog warning = new ContentDialog
-            {
-                Title = "Varning",
-                Content = "Denna fråga finns redan på provet",
-                CloseButtonText = "Ok"
-            };
-            await warning.ShowAsync();
-        }
+  
         private void TestDatePicker_CalendarViewDayItemChanging(CalendarView sender, CalendarViewDayItemChangingEventArgs e)
         {
            

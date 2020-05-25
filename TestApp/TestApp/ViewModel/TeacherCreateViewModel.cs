@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 
 namespace TestApp.ViewModel
 {
@@ -124,8 +125,6 @@ namespace TestApp.ViewModel
             {
                 await new MessageDialog(exc.Message).ShowAsync();
             }
-           
-           
         }
         public void ResetTest()//Method to reset the object after posting the Test to DB
         {
@@ -133,10 +132,29 @@ namespace TestApp.ViewModel
             QuestionsToFilter.Clear();
             CreatedTest.Questions.Clear();
         }
+        public void ResetQuestionList()//Used when filtering the list
+        {
+            foreach (var subject in SubjectQuestions) //Going through our list with questions.
+            {
+                if (!QuestionsToFilter.Contains(subject)) //We check if our QuestionsToFilter contain our subject question
+                {
+                    QuestionsToFilter.Add(subject);
+                }
+            }
+        }
+       
         public void AddQuestionToTest(Question question) //Adding question that the user choose
         {
-            CreatedTest.Questions.Add(question);
-            CreatedTest.MaxPoints += question.PointValue;
+
+            if (CreatedTest.Questions.Contains(question))//Check if the question is already in the test.
+            {
+                DisplayQuestionWarning();//Displays a warning that the question already exists
+            }
+            else
+            {
+                CreatedTest.Questions.Add(question);
+                CreatedTest.MaxPoints += question.PointValue;
+            }
 
         }
         public void RemoveQuestionFromTest(Question question) //Removing question that the user choose
@@ -162,9 +180,52 @@ namespace TestApp.ViewModel
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
-        
 
-     
+
+
+        public async void DisplayInvalidTimeForTest() //Informs user that date or time is incorrect
+        {
+            ContentDialog warning = new ContentDialog
+            {
+                Title = "Varning",
+                Content = "Var vänlig se över datum och tid för prov",
+                CloseButtonText = "Ok"
+            };
+            await warning.ShowAsync();
+        }
+        public async void DisplayFieldsAreEmpty()//Informs user that it can´t continue untill all fields are filled out
+        {
+            ContentDialog warning = new ContentDialog
+            {
+                Title = "Varning",
+                Content = "Var vänlig se till att alla fälten är fyllda",
+                CloseButtonText = "Ok"
+            };
+            await warning.ShowAsync();
+        }
+        public async void DisplayNoSubjectWarning() //Asks the user to choose a subject before trying to filter or adding a question.
+        {
+            ContentDialog warning = new ContentDialog
+            {
+                Title = "Varning",
+                Content = "Var vänlig välj ett ämne för provet",
+                CloseButtonText = "Ok"
+            };
+            await warning.ShowAsync();
+        }
+        public async void DisplayQuestionWarning() //Informs the user that the question is already added to the test.
+        {
+            ContentDialog warning = new ContentDialog
+            {
+                Title = "Varning",
+                Content = "Denna fråga finns redan på provet",
+                CloseButtonText = "Ok"
+            };
+            await warning.ShowAsync();
+        }
+
+
+
         #endregion
 
     }

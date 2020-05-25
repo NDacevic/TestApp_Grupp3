@@ -28,7 +28,9 @@ namespace TestApp.View
         public LogInView()
         {
             this.InitializeComponent();
+            
         }
+      
         /// <summary>
         /// Method checking email and password för the user trying to log in 
         /// </summary>
@@ -36,6 +38,23 @@ namespace TestApp.View
         /// <param name="e"></param>
         private void Bttn_Login_Click(object sender, RoutedEventArgs e)
         {
+            //!!Following code is only for testing purpose.
+            if(Tb_InsertEmail.Text=="1")
+            {
+                this.Frame.Navigate(typeof(MainPage),"Elev");
+            }
+            else if(Tb_InsertEmail.Text == "2")
+            {
+                this.Frame.Navigate(typeof(MainPage), "Lärare");
+            }
+            else if (Tb_InsertEmail.Text == "3")
+            {
+                this.Frame.Navigate(typeof(MainPage), "Admin");
+            }
+            //TestCode stopped
+
+
+
             string password = LogInViewModel.Instance.EncryptedPassword(PB_InsertPassword.ToString(), new SHA256CryptoServiceProvider());
 
             if (Rb_Student.IsChecked == true)

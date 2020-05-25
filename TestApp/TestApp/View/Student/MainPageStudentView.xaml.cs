@@ -22,9 +22,33 @@ namespace TestApp.View.Student
     /// </summary>
     public sealed partial class MainPageStudentView : Page
     {
+        private Frame mainFrame;
         public MainPageStudentView()
         {
             this.InitializeComponent();
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            mainFrame = (Frame)e?.Parameter;
+        }
+
+
+        private void StudentNavigate_btn(object sender, RoutedEventArgs e)
+        {
+            if (sender == historicalTest_btn)
+            {
+                mainFrame.Navigate(typeof(HistoricalTestsView));
+            }
+            else if(sender == availableTest_btn)
+            {
+                mainFrame.Navigate(typeof(AvailableTestsView));
+            }
+            else if(sender == logOut_btn)
+            {
+              //Not yet implemented
+                
+            }
+              
         }
     }
 }
