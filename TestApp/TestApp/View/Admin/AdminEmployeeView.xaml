@@ -19,13 +19,13 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Margin="50">
+            <StackPanel Margin="40">
                 <TextBlock 
-                Text="Personalinformation" 
+                Text="Lägg till personal" 
                 FontSize="32"/>
                 <StackPanel Orientation="Horizontal" Margin="0,50,0,0"  Spacing="40">
                     <TextBlock
-                    Text="Ange PersonalId: "
+                    Text="PersonalId: "
                     FontSize="20"
                     Width="200"/>
                     <TextBox
@@ -64,19 +64,32 @@
                     Text="{x:Bind }"
                     FontSize="20"/>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="40">
+                    <TextBlock 
+                    Text="Lösenord: " 
+                    FontSize="20"
+                    Width="100"/>
+                    <TextBox
+                    x:Name="Tb_Password"
+                    Text="{x:Bind }"
+                    FontSize="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="40">
+                    <TextBlock 
+                    Text="Roll: " 
+                    FontSize="20"
+                    Width="100"/>
+                    <TextBox
+                    x:Name="Tb_Role"
+                    Text="{x:Bind }"
+                    FontSize="20"/>
+                </StackPanel>
+                <Button
+                    Content="Lägg till personal" 
+                    Padding="15,10"
+                    Margin="0,30,0,0"/>
+            </StackPanel>
 
-            </StackPanel>
-            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="50" Spacing="80">
-                <Button
-                Content="Lägg till elev" 
-                Padding="15,10"/>
-                <Button
-                Content="Ta bort elev"
-                Padding="15,10"/>
-                <Button
-                Content="Ändra information"
-                Padding="15,10"/>
-            </StackPanel>
         </Grid>
     </Grid>
 </Page>
