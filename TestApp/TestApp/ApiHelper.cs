@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,9 +7,11 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
+using Windows.ApplicationModel.Appointments.DataProvider;
 using Windows.UI.Popups;
 
 namespace TestApp
@@ -172,6 +175,51 @@ namespace TestApp
             }
         }
 
+
+        /// <summary>
+        /// Sends a JsonPatchDocument to the API with updated information for a Test object
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="jsonPatchTest"></param>
+        public async void PatchTest(int id, JsonPatchDocument<Test> jsonPatchTest)
+        {
+            try
+            {
+                //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter
+                
+                //Define the method as a PATCH
+                HttpMethod method = new HttpMethod("PATCH");
+                //Serialize the JsonPatchDocument
+                jsonString = JsonConvert.SerializeObject(jsonPatchTest);
+                //Set the json as the content.
+                HttpContent content = new StringContent(jsonString);
+                //Specify that the content is a Json string
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                //constructn the request
+                var request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"tests/{id}"))
+                {
+                    Content = content
+                };
+
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Debug.Write("Test updated");
+                    }
+                    else
+                    {
+                        throw new HttpRequestException($"PutTest Status: {response.StatusCode}, {response.ReasonPhrase}");
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                Debug.WriteLine(exc.Message);
+            }
+        }
+
         public async Task<ObservableCollection<Question>> GetQuestion(string course)
         {
             //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
@@ -302,6 +350,41 @@ namespace TestApp
             else
             {
                 throw new HttpRequestException("No courses retrieved from database. Contact an admin for help.");
+            }
+        }
+
+        /// <summary>
+        /// Takes a list of StudentQuestionAnswer objects and sends them off to the API.
+        /// The list must have at least one object in it
+        /// </summary>
+        /// <param name=""></param>
+        public async void UpdateStudentQuestionAnswer(List<StudentQuestionAnswer> sqaList)
+        {
+            try
+            {
+                //Serialize object into a json string
+                jsonString = JsonConvert.SerializeObject(sqaList);
+
+                //setup the content
+                HttpContent content = new StringContent(jsonString);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                //send it off and display a message indicating success
+                using (HttpResponseMessage response = await httpClient.PutAsync("studentquestionanswers", content))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await new MessageDialog("Rättningen sparad!").ShowAsync();
+                    }
+                    else
+                    {
+                        throw new HttpRequestException($"Code: {response.StatusCode}, {response.ReasonPhrase}");
+                    }
+                }
+            }
+            catch(Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
             }
         }
         #endregion

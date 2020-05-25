@@ -14,44 +14,49 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid 
-            x:Name="grid_InitialTestList"
+        <ScrollViewer
+            x:Name="scrollViewer_InitialTestList"
             >
-            <ListView
-                ItemClick="InitialTestListClick"
+            <Grid>
+                <ListView
+                    x:Name="listView_InitialTestList"
+                    ItemClick="InitialTestListClick"
             
-                ItemsSource="{x:Bind ungradedTests}"
-                SelectionMode="None"
-                IsItemClickEnabled="True"
-                >
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel
-                            Spacing="30"
-                            />
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate
-                        x:DataType="models:Test">
-                        <TextBlock>
-                            <Run Text="Id: "/>
-                            <Run Text="{x:Bind TestId}"/>
-                            <Run Text=" "/>
-                            <Run Text="{x:Bind CourseName}"/>
-                            <Run Text=" åk"/>
-                            <Run Text="{x:Bind Grade}"/>
-                            <Run Text=", "/>
-                        </TextBlock>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
-        <Grid
-            x:Name="grid_StudentsUngradedTestofType"
+                    ItemsSource="{x:Bind ungradedTests}"
+                    SelectionMode="None"
+                    IsItemClickEnabled="True"
+                    >
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel
+                                Spacing="30"
+                                />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate
+                            x:DataType="models:Test">
+                            <TextBlock>
+                                <Run Text="Id: "/>
+                                <Run Text="{x:Bind TestId}"/>
+                                <Run Text=" "/>
+                                <Run Text="{x:Bind CourseName}"/>
+                                <Run Text=" åk"/>
+                                <Run Text="{x:Bind Grade}"/>
+                                <Run Text=", "/>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </ScrollViewer>
+        <ScrollViewer
+           x:Name="scrollViewer_StudentsUngradedTestofType"
             Visibility="Collapsed"
             >
-            <ListView
+            <Grid>
+                <ListView
+                x:Name="listView_StudentsUngradedTestofType"
                 ItemClick="SelectStudentToGrade"
             
                 ItemsSource="{x:Bind studentsWithTestList}"
@@ -59,76 +64,81 @@
                 SelectionMode="None"
                 IsItemClickEnabled="True"
                 >
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel
                             Spacing="30"
                             />
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate
                         x:DataType="models:Student">
-                        <TextBlock>
+                            <TextBlock>
                             <Run Text="{x:Bind FirstName}"/>
                             <Run Text=" "/>
                             <Run Text="{x:Bind LastName}"/>
-                        </TextBlock>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
-        <StackPanel
-            x:Name="stackPanel_QuestionsForStudentAndTest"
+                            </TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </ScrollViewer>
+        <ScrollViewer
+            x:Name="scrollViewer_QuestionsForStudentAndTest"
             Visibility="Collapsed"
-            Spacing="30"
             >
-            <ListView
-                ItemsSource="{x:Bind questionsForStudentAndTestList}"
-                SelectionMode="None"
-                IsItemClickEnabled="True"
+            <StackPanel
+                Spacing="30"
                 >
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel
-                            Spacing="30"
-                            />
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate
-                        x:DataType="models:Question">
-                        <StackPanel>
-                            <TextBlock
-                                Text="{x:Bind QuestionText}"/>
-                            <TextBlock
-                                Text="{x:Bind Answer}"/>
+                <ListView
+                    x:Name="listView_QuestionsForStudentAndTest"
+                    ItemsSource="{x:Bind questionsForStudentAndTestList}"
+                    SelectionMode="None"
+                    IsItemClickEnabled="True"
+                    >
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
                             <StackPanel
-                                Orientation="Horizontal">
-                                <RadioButton
-                                    x:Name="radioButton_QuestionCorrect"
-                                    Content="Rätt"
-                                    />
-                                <RadioButton
-                                    x:Name="radioButton_QuestionIncorrect"
-                                    Content="Fel"
-                                    />
-                                <RadioButton
-                                    x:Name="radioButton_QuestionUngraded"
-                                    Content="Orättad"
-                                    IsChecked="True"
-                                    />
+                                Spacing="30"
+                                />
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <ListView.ItemTemplate>
+                        <DataTemplate
+                            x:DataType="models:Question">
+                            <StackPanel>
+                                <TextBlock
+                                    Text="{x:Bind QuestionText}"/>
+                                <TextBlock
+                                    Text="{x:Bind QuestionAnswer.Answer}"/>
+                                <StackPanel
+                                    Orientation="Horizontal">
+                                    <RadioButton
+                                        x:Name="radioButton_QuestionCorrect"
+                                        Content="Rätt"
+                                        />
+                                    <RadioButton
+                                        x:Name="radioButton_QuestionIncorrect"
+                                        Content="Fel"
+                                        />
+                                    <RadioButton
+                                        x:Name="radioButton_QuestionUngraded"
+                                        Content="Orättad"
+                                        IsChecked="True"
+                                        />
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Button
-                x:Name="bttn_FinishGrading"
-                Click="FinishGrading"
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button
+                    x:Name="bttn_FinishGrading"
+                    Click="FinishGrading"
                 
-                Content="Färdig"
-                />
-        </StackPanel>
+                    Content="Färdig"
+                    />
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
