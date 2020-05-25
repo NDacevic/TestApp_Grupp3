@@ -117,7 +117,7 @@ namespace TestApp.ViewModel
             try
             {
                 CreatedTest.IsActive = true;
-                ApiHelper.Instance.PostCreatedTestAsync(CreatedTest);
+                await ApiHelper.Instance.PostCreatedTestAsync(CreatedTest);
                 ResetTest();
             }
             catch (Exception exc)

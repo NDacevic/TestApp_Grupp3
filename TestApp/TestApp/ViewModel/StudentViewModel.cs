@@ -186,25 +186,15 @@ namespace TestApp.ViewModel
                 StopAndSubmitTest();
             }
         }
-        /// <summary>
-        /// Displays a message
-        /// </summary>
-        /// <param name="message"></param>
-        private async Task DisplayMessage(string message)
-        {
-            //Display anonymous message
-            _ = await new MessageDialog(message).ShowAsync();
-        }
 
         /// <summary>
         /// Stops the test, disables manipulation controls, starts registration of answers
         /// </summary>
-        public async void StopAndSubmitTest()
+        public void StopAndSubmitTest()
         {
             dispatcherTimer.Stop();
             bttn_SubmitTest.IsEnabled = false;
             lv_allQuestions.IsEnabled = false;
-            await DisplayMessage("Provet är nu avslutat. Dina svar är härmed registrerade.");
             FinishTest();
         }
         /// <summary>

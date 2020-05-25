@@ -26,7 +26,6 @@ namespace TestApp
         private static readonly object padlock = new object();
 
         private HttpClient httpClient = new HttpClient();
-        private string url;
         private string jsonString;
 
         #endregion
