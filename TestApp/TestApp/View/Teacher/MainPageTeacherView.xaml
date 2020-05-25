@@ -6,9 +6,38 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="Silver">
 
     <Grid>
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center">
+            
+            <Button Content="Skapa fråga"
+                    x:Name="createQuestion_btn"
+                    Click="TeacherNavigate_btn"/>
+
+            <Button Content="Skapa prov"
+                    x:Name="createTest_btn"
+                    Click="TeacherNavigate_btn"/>
+            
+            <Button Content="Rätta prov"
+                    x:Name="gradeTest_btn"
+                    Click="TeacherNavigate_btn"/>
+            
+            <Button Content="Se provresultat"
+                    x:Name="studentResult_btn"
+                    Click="TeacherNavigate_btn"/>
+            
+            <Button Content="Ta bort prov"
+                    x:Name="removeTest_btn"
+                    Click="TeacherNavigate_btn"/>
+
+
+            <Button Content="Logga ut"
+                    x:Name="logOut_btn"
+                    Click="TeacherNavigate_btn"/>
+
+        </StackPanel>
 
     </Grid>
 </Page>
