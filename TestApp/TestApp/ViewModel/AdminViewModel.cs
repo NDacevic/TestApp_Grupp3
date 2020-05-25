@@ -11,10 +11,15 @@ namespace TestApp.ViewModel
     public class AdminViewModel
     {
         private static AdminViewModel instance = null;
+
         public ObservableCollection<Test> MyTests { get; set; }
         public ObservableCollection<Question> TestQuestions { get; set; }
+        public List<Student> AllStudents { get; set; }
+        public ObservableCollection<Person> AllUsers { get; set; }
+        public List<Employee> AllEmployees { get; set; }
+        public Employee TempEmployee { get; set; }
 
-        public List<Test> testList { get; set; } //Transfer to AdminViewModel
+        public List<Test> TestList { get; set; }
 
         public static AdminViewModel Instance
         {
@@ -30,14 +35,20 @@ namespace TestApp.ViewModel
 
         public AdminViewModel()
         {
-            testList = new List<Test>();
-            MyTests = new ObservableCollection<Test>();
-            TestQuestions = new ObservableCollection<Question>();
+            TestList = new List<Test>(); //Storing tests from DB
+            MyTests = new ObservableCollection<Test>(); //Display Tests and used for filtering
+            TestQuestions = new ObservableCollection<Question>(); //Used to display questions on test
+            TempEmployee = new Employee();
+            AllStudents = new List<Student>(); //Store all students from DB
+            AllEmployees = new List<Employee>(); //Store all Employees from DB
+            AllUsers = new ObservableCollection<Person>();
+            
         }
-        public async void DisplayTests()//Transfer this to AdminViewModel?
+
+        public async void DisplayTests()
         {
-            testList = await ApiHelper.Instance.GetAllTests(); //Populating List with Test from DB
-            foreach (Test t in testList)
+            TestList = await ApiHelper.Instance.GetAllTests(); //Populating List with Test from DB
+            foreach (Test t in TestList)
             {
                 if(!MyTests.Contains(t))
                 {
@@ -48,7 +59,7 @@ namespace TestApp.ViewModel
         }
         public void FilterTests(string course, int grade)
         {
-            foreach (Test subject in testList)
+            foreach (Test subject in TestList)
             {
                 if (!MyTests.Contains(subject)) //We check if our filtered list contains Test from original
                 {
@@ -80,7 +91,7 @@ namespace TestApp.ViewModel
         }
         public void FilterListByCourse(string course)
         {
-            foreach (Test subject in testList)
+            foreach (Test subject in TestList)
             {
                 if (!MyTests.Contains(subject)) //We check if our filtered list contains Test from original
                 {
@@ -96,11 +107,22 @@ namespace TestApp.ViewModel
             }
 
         }
-        public void DeleteTest(int id)
+     
+    
+        public void DeleteTest(int id) 
         {
-            ApiHelper.Instance.DeleteTest(id);
+
+            ApiHelper.Instance.DeleteTest(id); //Send Test.Id of the test to ApiHelper to delete it from db
+            foreach(Test t in MyTests.ToList())
+            {
+                if(t.TestId==id)
+                {
+                    MyTests.Remove(t);
+                    TestList.Remove(t);
+                }
+            }
         }
-        public void DisplayQuestionsOnTest(Test test)
+        public void DisplayQuestionsOnTest(Test test) //We go through the choosen Test and displays all the questions.
         {
             TestQuestions.Clear();
 
@@ -110,5 +132,84 @@ namespace TestApp.ViewModel
             }
            
         }
+        public async void DisplayStudents() //Displays all students. DONE
+        {
+            if(AllStudents.Count==0)
+            {
+                AllStudents = await ApiHelper.Instance.GetAllStudents();
+            }
+            foreach(Person p in AllStudents)
+            {
+                if(!AllUsers.Contains(p))
+                AllUsers.Add(p);
+            }
+        }
+        public void DisplayStudentById(int id) //Displays student by searched Id. DONE
+        {
+            AllUsers.Clear();
+            foreach(Student p in AllStudents.ToList())
+            {
+                if(p.StudentId==id)
+                {
+                    AllUsers.Add(p);
+                }
+            }
+        }
+        public void DisplayEmployeeById(int id) //Displays employee by searched Id
+        {
+            AllUsers.Clear();
+            foreach(Employee e in AllEmployees.ToList())
+            {
+                if(e.EmployeeId==id)
+                {
+                    AllUsers.Add(e);
+                }
+            }
+        }
+        public async void DisplayEmployees() //Displays all employees
+        {
+            if(AllEmployees.Count==0)
+            {
+                AllEmployees = await ApiHelper.Instance.GetAllEmployees();
+
+            }
+            foreach (Person p in AllEmployees)
+             {
+                if (!AllUsers.Contains(p))
+                {
+                    AllUsers.Add(p);
+                }
+            }
+        }
+        public  void DeleteUser(int id, string user)
+        {
+            if(user=="Anställd")
+            {
+                 ApiHelper.Instance.DeleteEmployee(id);
+                foreach (Employee e in AllEmployees.ToList())
+                {
+                    if (e.EmployeeId == id)
+                    {
+                       AllEmployees.Remove(e);
+                        AllUsers.Remove(e);
+                    }
+                }
+
+            }
+            else if(user=="Elev")
+            {
+                ApiHelper.Instance.DeleteStudent(id);
+                foreach (Student s in AllStudents.ToList())
+                {
+                    if (s.StudentId == id)
+                    {
+                        AllStudents.Remove(s);
+                        AllUsers.Remove(s);
+                    }
+                }
+            }
+        }
+
+
     }
 }

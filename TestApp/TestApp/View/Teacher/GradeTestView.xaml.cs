@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TestApp.Model;
 using TestApp.ViewModel;
+using Windows.Devices.Radios;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -28,12 +30,14 @@ namespace TestApp.View.Teacher
     public sealed partial class GradeTestView : Page
     {
         TeacherGradeTestViewModel gradeInstance = TeacherGradeTestViewModel.Instance;
-        Model.Employee teacherInstance = new Employee(); //TODO: Denna är ändrad av JS
+
         ObservableCollection<Test> ungradedTests = new ObservableCollection<Test>();
         ObservableCollection<Model.Student> studentsWithTestList = new ObservableCollection<Model.Student>();
         ObservableCollection<Model.Question> questionsForStudentAndTestList = new ObservableCollection<Question>();
 
         int chosenTestId = 0;
+        int chosenStudentId = 0;
+
         public GradeTestView()
         {
             this.InitializeComponent();
@@ -41,6 +45,9 @@ namespace TestApp.View.Teacher
             GetTests();
         }
 
+        /// <summary>
+        /// Gets the tests and adds them to a global list
+        /// </summary>
         private async void GetTests()
         {
             List<Test> tempTests = await gradeInstance.GetUngradedTests();
@@ -49,38 +56,59 @@ namespace TestApp.View.Teacher
                 ungradedTests.Add(x);
         }
 
+        /// <summary>
+        /// When the user clicks a test. It saves the ID of the test.
+        /// It also shows the next listview and hides the current one.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InitialTestListClick(object sender, ItemClickEventArgs e)
         {
             chosenTestId = ((Test)e.ClickedItem).TestId;
 
-            grid_InitialTestList.Visibility = Visibility.Collapsed;
-            grid_StudentsUngradedTestofType.Visibility = Visibility.Visible;
+            scrollViewer_InitialTestList.Visibility = Visibility.Collapsed;
+            scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Visible;
 
+            //call the method that populates the list used in the next listview
             gradeInstance.PopulateStudentsWithTestList(chosenTestId, studentsWithTestList);
 
         }
 
+        /// <summary>
+        /// When the user clicks a student in the list it saves the ID of the student.
+        /// It also shows the next listview and hides the current one.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectStudentToGrade(object sender, ItemClickEventArgs e)
         {
             Model.Student chosenStudent = ((Model.Student)e.ClickedItem);
+            chosenStudentId = ((Model.Student)e.ClickedItem).StudentId;
 
-            grid_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
-            stackPanel_QuestionsForStudentAndTest.Visibility = Visibility.Visible;
+            scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
+            scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Visible;
 
+            //call the method that populates the list used in the next listview
             gradeInstance.PopulateUngradedQuestionsForStudent(chosenTestId, chosenStudent, questionsForStudentAndTestList);
         }
 
+        /// <summary>
+        /// When the user has finished grading the questions they want to grade,
+        /// This method compiles the questions into a list and sends it off to the API for writing to the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FinishGrading(object sender, RoutedEventArgs e)
         {
+            gradeInstance.FinishGradingTest(listView_QuestionsForStudentAndTest, chosenStudentId, chosenTestId);
 
             ungradedTests.Clear();
             studentsWithTestList.Clear();
             questionsForStudentAndTestList.Clear();
 
-            grid_InitialTestList.Visibility = Visibility.Visible;
-            grid_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
-            stackPanel_QuestionsForStudentAndTest.Visibility = Visibility.Collapsed;
-
+            scrollViewer_InitialTestList.Visibility = Visibility.Visible;
+            scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
+            scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Collapsed;
         }
     }
 }
