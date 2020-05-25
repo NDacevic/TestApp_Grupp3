@@ -9,6 +9,74 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
+            <StackPanel Margin="50">
+                <TextBlock 
+                Text="Personalinformation" 
+                FontSize="32"/>
+                <StackPanel Orientation="Horizontal" Margin="0,50,0,0"  Spacing="40">
+                    <TextBlock
+                    Text="Ange PersonalId: "
+                    FontSize="20"
+                    Width="200"/>
+                    <TextBox
+                    PlaceholderText="PersonalId"
+                    FontSize="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="40">
+                    <TextBlock 
+                    Text="Förnamn: " 
+                    FontSize="20" 
+                    Margin="0,50,0,0"
+                    Width="100"/>
+                    <TextBox
+                    x:Name="Tb_FirstName" 
+                    Text="{x:Bind }"
+                    FontSize="20"
+                    Margin="0,50,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="40">
+                    <TextBlock 
+                    Text="Efternamn: " 
+                    FontSize="20"
+                    Width="100"/>
+                    <TextBox
+                    x:Name="Tb_LastName"
+                    Text="{x:Bind }"
+                    FontSize="20"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="40">
+                    <TextBlock 
+                    Text="Email: " 
+                    FontSize="20"
+                    Width="100"/>
+                    <TextBox
+                    x:Name="Tb_Email"
+                    Text="{x:Bind }"
+                    FontSize="20"/>
+                </StackPanel>
+
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" Margin="50" Spacing="80">
+                <Button
+                Content="Lägg till elev" 
+                Padding="15,10"/>
+                <Button
+                Content="Ta bort elev"
+                Padding="15,10"/>
+                <Button
+                Content="Ändra information"
+                Padding="15,10"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

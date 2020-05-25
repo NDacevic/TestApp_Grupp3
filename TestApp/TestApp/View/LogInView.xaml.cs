@@ -42,6 +42,7 @@ namespace TestApp.View
             {
                 LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
                 LogInViewModel.Instance.CheckStudentPassword(password);
+                Frame.Navigate(typeof(Student.MainPageStudentView));
                 
             }
             else if (Rb_Employee.IsChecked == true)
@@ -51,7 +52,7 @@ namespace TestApp.View
 
                 //if(LogInViewModel.Instance.ActiveEmployee.Role = "Admin")
                 //{
-                //    Frame.Navigate(typeof(MainPageAdminViewxaml));
+                //    Frame.Navigate(typeof(Admin.MainPageAdminViewxaml));
                 //}
                 //else if(LogInViewModel.Instance.ActiveEmployee.Role = "Teacher")
                 //{
