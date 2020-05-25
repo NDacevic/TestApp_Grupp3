@@ -44,10 +44,42 @@ namespace TestApp.Model
         #endregion
 
         #region Properties
-        public string FirstName { get => firstName; set { firstName = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FirstName")); } }
-        public string LastName { get => lastName; set { lastName = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastName")); } }
-        public string Email { get => email; set { email = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Email")); } }
-        public string Password { get => password; set { password = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Password")); } }
+        public string FirstName 
+        { 
+            get => firstName;
+            set 
+            {
+                firstName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FirstName"));
+            } 
+        }
+        public string LastName 
+        { 
+            get => lastName; 
+            set 
+            {
+                lastName = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LastName"));
+            } 
+        }
+        public string Email 
+        {
+            get => email; 
+            set 
+            {
+                email = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Email"));
+            } 
+        }
+        public string Password 
+        { 
+            get => password;
+            set 
+            { 
+                password = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Password")); 
+            }
+        }
 
 
         #endregion
