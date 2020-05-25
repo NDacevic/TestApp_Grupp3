@@ -26,7 +26,6 @@ namespace TestApp.View.Admin
     public sealed partial class RemoveUserView : Page
     {
         AdminViewModel adminViewModel = AdminViewModel.Instance;
-        private Person chosenPerson;
         public RemoveUserView()
         {
             this.InitializeComponent();
