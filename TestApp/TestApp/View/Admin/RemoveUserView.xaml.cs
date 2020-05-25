@@ -106,7 +106,15 @@ namespace TestApp.View.Admin
 
         private void listView_ChoosePersonClick(object sender, ItemClickEventArgs e)
         {
-            Debug.WriteLine(e.ClickedItem.GetType());
+            if(e.ClickedItem.GetType() == typeof(Model.Student))
+                textBlock_IdTextBlock.Text = $"ID: {((Model.Student)e.ClickedItem).StudentId}";
+            else if (e.ClickedItem.GetType() == typeof(Model.Employee))
+                textBlock_IdTextBlock.Text = $"ID: {((Model.Employee)e.ClickedItem).EmployeeId}";
+
+            textBox_FirstName.Text = ((Person)e.ClickedItem).FirstName;
+            textBox_LastName.Text = ((Person)e.ClickedItem).LastName;
+            textBox_Email.Text = ((Person)e.ClickedItem).Email;
+
         }
     }
 }
