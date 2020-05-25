@@ -36,7 +36,8 @@ namespace TestApp.View
         /// <param name="e"></param>
         private void Bttn_Login_Click(object sender, RoutedEventArgs e)
         {
-            string password = LogInViewModel.Instance.EncryptedPassword(PB_InsertPassword.ToString(), new SHA256CryptoServiceProvider());
+            //string password = LogInViewModel.Instance.EncryptedPassword(PB_InsertPassword.ToString(), new SHA256CryptoServiceProvider());
+            string password = PB_InsertPassword.ToString();
 
             if (Rb_Student.IsChecked == true)
             {
@@ -50,14 +51,14 @@ namespace TestApp.View
                 LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
                 LogInViewModel.Instance.CheckEmployeePassword(password);
 
-                //if(LogInViewModel.Instance.ActiveEmployee.Role = "Admin")
-                //{
-                //    Frame.Navigate(typeof(Admin.MainPageAdminViewxaml));
-                //}
-                //else if(LogInViewModel.Instance.ActiveEmployee.Role = "Teacher")
-                //{
-                //    Frame.Navigate(typeof(Teacher.MainPageTeacherView));
-                //}
+                if (LogInViewModel.Instance.ActiveEmployee.Role.RoleName == "Admin")
+                {
+                    Frame.Navigate(typeof(MainPageAdminViewxaml));
+                }
+                else if (LogInViewModel.Instance.ActiveEmployee.Role.RoleName == "Teacher")
+                {
+                    Frame.Navigate(typeof(Teacher.MainPageTeacherView));
+                }
             }
             else
             {
