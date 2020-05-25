@@ -37,6 +37,8 @@
                   Margin="40,150,40,200"
                   ItemsSource="{x:Bind adminViewModel.AllUsers}"
                   x:Name="DisplayUsersLV"
+                  SelectionMode="Single"
+                  ItemClick="listView_ChoosePersonClick"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate  x:Name="displayUsersLV" x:DataType="data:Person" x:DefaultBindMode="TwoWay" >
@@ -68,10 +70,8 @@
             </Grid.RowDefinitions>
 
             <StackPanel>
-                <TextBlock>
-                    <Run Text="ID: "/>
-                    <Run Text="{x:Bind chosenPerson.Id}"
-                </TextBlock>
+                <TextBlock
+                    x:Name="textBlock_IdTextBlock"/>
                 <TextBlock
                     Text="Förnamn"
                     />
@@ -84,9 +84,9 @@
                     Text="Efternamn"
                     />
                 <TextBox
-                    x:Name="textBox_FirstName"
+                    x:Name="textBox_LastName"
                     x:DefaultBindMode="TwoWay"
-                    Text="{x:Bind chosenStudent.LastName}"
+                    Text="{x:Bind chosenPerson.LastName}"
                     />
                 <TextBlock
                     Text="Email"
@@ -106,7 +106,7 @@
                     Text="Repetera Lösenord"
                     />
                 <TextBox
-                    Text="textbox_repeatPassword"
+                    x:Name="textbox_repeatPassword"
                     />
             </StackPanel>
         </Grid>
