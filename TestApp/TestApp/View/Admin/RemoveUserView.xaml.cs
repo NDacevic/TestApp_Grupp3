@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,6 +26,7 @@ namespace TestApp.View.Admin
     public sealed partial class RemoveUserView : Page
     {
         AdminViewModel adminViewModel = AdminViewModel.Instance;
+        private Person chosenPerson;
         public RemoveUserView()
         {
             this.InitializeComponent();
@@ -102,6 +104,20 @@ namespace TestApp.View.Admin
                     adminViewModel.DeleteEmployee(employee);
                 }
             }
+        }
+
+
+        private void listView_ChoosePersonClick(object sender, ItemClickEventArgs e)
+        {
+            if(e.ClickedItem.GetType() == typeof(Model.Student))
+                textBlock_IdTextBlock.Text = $"ID: {((Model.Student)e.ClickedItem).StudentId}";
+            else if (e.ClickedItem.GetType() == typeof(Model.Employee))
+                textBlock_IdTextBlock.Text = $"ID: {((Model.Employee)e.ClickedItem).EmployeeId}";
+
+            textBox_FirstName.Text = ((Person)e.ClickedItem).FirstName;
+            textBox_LastName.Text = ((Person)e.ClickedItem).LastName;
+            textBox_Email.Text = ((Person)e.ClickedItem).Email;
+
         }
 
     }

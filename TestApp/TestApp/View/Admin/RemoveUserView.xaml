@@ -13,9 +13,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-
         </Grid.ColumnDefinitions>
 
+        <!--#region Left Side-->
         <StackPanel>
             <TextBlock       Text= "Var vänlig välj Anställd eller Elev för att få fram information. Sök även på ID för en direkt träff."
                              Margin="40,40,0,0"/>
@@ -37,6 +37,9 @@
                   Margin="40,150,40,200"
                   ItemsSource="{x:Bind adminViewModel.AllUsers}"
                   x:Name="DisplayUsersLV"
+                  SelectionMode="Single"
+                  IsItemClickEnabled="True"
+                  ItemClick="listView_ChoosePersonClick"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate  x:Name="displayUsersLV" x:DataType="data:Person" x:DefaultBindMode="TwoWay" >
@@ -56,6 +59,53 @@
                     HorizontalAlignment="Right"
                     Margin="0,0,50,150"
                     Click="DeleteUser_btn_Click"/>
+        <!--#endregion-->
+        
+        <!--#region Right Side-->
+        <Grid
+            Grid.Column="1"
+            >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
+            <StackPanel>
+                <TextBlock
+                    x:Name="textBlock_IdTextBlock"/>
+                <TextBlock
+                    Text="Förnamn"
+                    />
+                <TextBox
+                    x:Name="textBox_FirstName"
+                    />
+                <TextBlock
+                    Text="Efternamn"
+                    />
+                <TextBox
+                    x:Name="textBox_LastName"
+                    />
+                <TextBlock
+                    Text="Email"
+                    />
+                <TextBox
+                    x:Name="textBox_Email"
+                    Text=""
+                    />
+                <TextBlock
+                    Text="Lösenord"
+                    />
+                <TextBox
+                    x:Name="textBox_Password"
+                    />
+                <TextBlock
+                    Text="Repetera Lösenord"
+                    />
+                <TextBox
+                    x:Name="textbox_repeatPassword"
+                    />
+            </StackPanel>
+        </Grid>
+        <!--#endregion-->
     </Grid>
 </Page>
