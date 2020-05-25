@@ -223,7 +223,7 @@ namespace TestApp
                 //Otherwise throw an error and tell the user that the question was not posted.
                 if (response.IsSuccessStatusCode)
                 {
-                    await new MessageDialog("Provet har sparats").ShowAsync();
+                    await new MessageDialog("Resultatet har sparats").ShowAsync();
                 }
                 else
                 {
