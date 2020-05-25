@@ -14,7 +14,8 @@
         DisplayMode="CompactOverlay"
         CompactPaneLength="300">
         <SplitView.Pane>
-            <StackPanel
+            <Frame x:Name="mainMenuFrame"/>
+            <!--<StackPanel
                 Spacing="20">
                 <TextBlock
                     Text="Navigate to Page"/>
@@ -81,7 +82,7 @@
                     x:Name="bttn_DeleteUser"
                     Content="DeleteUserView"
                     Click="Button_NavigateToPage"/>
-            </StackPanel>
+            </StackPanel>-->
         </SplitView.Pane>
         <SplitView.Content>
             <Frame x:Name="mainFrame"/>

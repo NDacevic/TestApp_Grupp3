@@ -22,9 +22,35 @@ namespace TestApp.View
     /// </summary>
     public sealed partial class MainPageAdminViewxaml : Page
     {
+        private Frame mainFrame;
         public MainPageAdminViewxaml()
         {
             this.InitializeComponent();
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            mainFrame = (Frame)e?.Parameter;
+        }
+
+
+        private void AdminNavigate_btn(object sender, RoutedEventArgs e)
+        {
+            if (sender == addUser_btn)
+            {
+                //Not yet implemented
+            }
+            else if (sender == editUser_btn)
+            {
+                mainFrame.Navigate(typeof(Admin.RemoveUserView));
+            }
+            else if (sender == removeTest_btn)
+            {
+                mainFrame.Navigate(typeof(DeleteTestView));
+            }
+            else if (sender == logOut_btn)
+            {
+                //Not yet implemented
+            }
         }
     }
 }
