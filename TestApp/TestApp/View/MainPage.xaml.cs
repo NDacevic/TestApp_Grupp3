@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TestApp.View;
+using TestApp.View.Admin;
 using TestApp.View.Student;
 using TestApp.View.Teacher;
 using Windows.ApplicationModel.Activation;
@@ -54,10 +55,12 @@ namespace TestApp
                 mainFrame.Navigate(typeof(LogInView));
             else if (sender == bttn_AvailableTestsViewNavigate)
                 mainFrame.Navigate(typeof(AvailableTestsView));
-            //else if (sender == bttn_deleteTestView)
-            //    mainFrame.Navigate(typeof(DeleteTestView));
+            else if (sender == bttn_deleteTestView)
+                mainFrame.Navigate(typeof(DeleteTestView));
             else if (sender == bttn_LogInView)
                 mainFrame.Navigate(typeof(LogInView));
+            else if (sender == bttn_DeleteUser)
+                mainFrame.Navigate(typeof(RemoveUserView));
         }
 
     }
