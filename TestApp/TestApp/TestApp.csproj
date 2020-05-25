@@ -128,7 +128,7 @@
     <Compile Include="View\Admin\RemoveUserView.xaml.cs">
       <DependentUpon>RemoveUserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DeleteTestView.xaml.cs">
+    <Compile Include="View\Admin\DeleteTestView.xaml.cs">
       <DependentUpon>DeleteTestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyDataTemplateSelector.cs" />
@@ -205,7 +205,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DeleteTestView.xaml">
+    <Page Include="View\Admin\DeleteTestView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
