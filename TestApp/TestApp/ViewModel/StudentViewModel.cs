@@ -97,10 +97,6 @@ namespace TestApp.ViewModel
             PostQuestionAndTestResultToDb(isTestOnlyMultiChoice, scoredTestPoints);
         }
 
-        public void CheckResult()
-        {
-            //Todo: Om alla frågor är MultipleChoice kan resultatet ges omgående
-        }
         /// <summary>
         /// Method that takes all tests from the database and saves the wanted tests to an OC, for list display
         /// </summary>
@@ -163,7 +159,6 @@ namespace TestApp.ViewModel
             }
             else
             {
-                //Todo: Testa om man kan kalla på denna som innehåller timer.Stop() trots att timern i detta fallet aldrig startats - MO
                 StopAndSubmitTest();
             }
         }
