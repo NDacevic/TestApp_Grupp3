@@ -14,23 +14,28 @@
             
             <Button Content="Skapa fråga"
                     x:Name="createQuestion_btn"
-                    Click="TeacherNavigate_btn"/>
+                    Click="TeacherNavigate_btn"
+                    Margin="0,0,0,10"/>
 
             <Button Content="Skapa prov"
                     x:Name="createTest_btn"
-                    Click="TeacherNavigate_btn"/>
+                    Click="TeacherNavigate_btn"
+                    Margin="0,0,0,10"/>
             
             <Button Content="Rätta prov"
                     x:Name="gradeTest_btn"
-                    Click="TeacherNavigate_btn"/>
+                    Click="TeacherNavigate_btn"
+                    Margin="0,0,0,10"/>
             
             <Button Content="Se provresultat"
                     x:Name="studentResult_btn"
-                    Click="TeacherNavigate_btn"/>
+                    Click="TeacherNavigate_btn"
+                    Margin="0,0,0,10"/>
             
             <Button Content="Ta bort prov"
                     x:Name="removeTest_btn"
-                    Click="TeacherNavigate_btn"/>
+                    Click="TeacherNavigate_btn"
+                    Margin="0,0,0,10"/>
 
 
             <Button Content="Logga ut"

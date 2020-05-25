@@ -45,7 +45,8 @@ namespace TestApp.View.Student
             }
             else if(sender == logOut_btn)
             {
-                //Not implemented
+              //Not yet implemented
+                
             }
               
         }
