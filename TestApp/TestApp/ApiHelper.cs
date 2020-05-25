@@ -353,9 +353,23 @@ namespace TestApp
         }
         
 
-        public void PostEmployee()
+        public async void PostEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            jsonString = JsonConvert.SerializeObject(employee);
+            HttpContent httpContent = new StringContent(jsonString);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application / json");
+
+            HttpResponseMessage respons = await httpClient.PostAsync("employees", httpContent);
+
+            if (respons.IsSuccessStatusCode)
+            {
+                await new MessageDialog("Personal tillagd med id:" + employee.EmployeeId).ShowAsync();
+            }
+            else
+            {
+                Debug.WriteLine($"Http Error: {respons.StatusCode}. {respons.ReasonPhrase}");
+                throw new HttpRequestException("Kunde inte sparas, vänlig felsök alternativt försök igen.");
+            }
         }
 
         public async Task<Employee> GetEmployee(string email)
