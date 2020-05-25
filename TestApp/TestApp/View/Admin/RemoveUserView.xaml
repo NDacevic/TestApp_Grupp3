@@ -70,9 +70,11 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <StackPanel>
+            <StackPanel
+                Grid.Row="0"
+                >
                 <TextBlock
-                    x:Name="textBlock_IdTextBlock"/>
+                    x:Name="textBlock_Id"/>
                 <TextBlock
                     Text="Förnamn"
                     />
@@ -105,6 +107,13 @@
                     x:Name="textbox_repeatPassword"
                     />
             </StackPanel>
+            <Button
+                x:Name="bttn_EditInformation"
+                Grid.Row="1"
+                Margin="0,0,50,150"
+                Content="Redigera Inforamtion"
+                Click="EditInformationClick"
+                />
         </Grid>
         <!--#endregion-->
     </Grid>
