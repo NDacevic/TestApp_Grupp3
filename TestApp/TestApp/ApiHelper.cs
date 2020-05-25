@@ -325,9 +325,31 @@ namespace TestApp
             return testResults;
         }
 
-        public void PostStudent()
+        public async void PostStudent(Student student)
         {
-            throw new NotImplementedException();
+            try
+            {
+                jsonString = JsonConvert.SerializeObject(student);
+                HttpContent httpContent = new StringContent(jsonString);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application / json");
+
+                HttpResponseMessage respons = await httpClient.PostAsync("students", httpContent);
+
+                //Check if succesfull
+                if (respons.IsSuccessStatusCode)
+                {
+                    await new MessageDialog("Student tillagd").ShowAsync();
+                }
+                else
+                {
+                    Debug.WriteLine($"Http Error: {respons.StatusCode}. {respons.ReasonPhrase}");
+                    throw new HttpRequestException("Kunde inte sparas, vänlig felsök alternativt försök igen.");
+                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
         }
 
         public async Task<Student> GetStudent(string email)
@@ -352,23 +374,34 @@ namespace TestApp
             return studentList;
         }
         
-
+        /// <summary>
+        /// Post new employee created by Admin 
+        /// </summary>
+        /// <param name="employee"></param>
         public async void PostEmployee(Employee employee)
         {
-            jsonString = JsonConvert.SerializeObject(employee);
-            HttpContent httpContent = new StringContent(jsonString);
-            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application / json");
-
-            HttpResponseMessage respons = await httpClient.PostAsync("employees", httpContent);
-
-            if (respons.IsSuccessStatusCode)
+            try
             {
-                await new MessageDialog("Personal tillagd med id:" + employee.EmployeeId).ShowAsync();
+                jsonString = JsonConvert.SerializeObject(employee);
+                HttpContent httpContent = new StringContent(jsonString);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application / json");
+
+                HttpResponseMessage respons = await httpClient.PostAsync("employees", httpContent);
+
+                //Check if succesfull
+                if (respons.IsSuccessStatusCode)
+                {
+                    await new MessageDialog("Personal tillagd").ShowAsync();
+                }
+                else
+                {
+                    Debug.WriteLine($"Http Error: {respons.StatusCode}. {respons.ReasonPhrase}");
+                    throw new HttpRequestException("Kunde inte sparas, vänlig felsök alternativt försök igen.");
+                }
             }
-            else
+            catch (Exception exc)
             {
-                Debug.WriteLine($"Http Error: {respons.StatusCode}. {respons.ReasonPhrase}");
-                throw new HttpRequestException("Kunde inte sparas, vänlig felsök alternativt försök igen.");
+                await new MessageDialog(exc.Message).ShowAsync();
             }
         }
 
