@@ -67,13 +67,11 @@ namespace TestApp.View.Admin
                         adminViewModel.DisplayEmployeeById(int.Parse(SearchIdTxtBox.Text));
                 }
             }
-           
         }
 
         private async void DeleteUser_btn_Click(object sender, RoutedEventArgs e)
         {
-            string user;
-            var selectedUser = DisplayUsersLV.SelectedItems; //The selected user is saved here
+           
             ContentDialog confirmButton = new ContentDialog() //Make sure that the user is aware of the action
             {
                 Title = "Ta bort",
@@ -85,24 +83,29 @@ namespace TestApp.View.Admin
 
             if (result == ContentDialogResult.Primary) //If they are ok we send the users id forward for deletion
             {
-                if(StudentRadioBtn.IsChecked==true)
+                DeleteUser();
+            }
+        }
+
+        public void DeleteUser()
+        {
+            var selectedUser = DisplayUsersLV.SelectedItems; //The selected user is saved here
+            if (StudentRadioBtn.IsChecked == true)
+            {
+                foreach (Model.Student student in selectedUser)
                 {
-                    user = "Elev";
-                    foreach(Model.Student student in selectedUser)
-                    {
-                        adminViewModel.DeleteUser(student.StudentId, user);
-                    }
+                    adminViewModel.DeleteStudent(student);
                 }
-                else if(EmployeeRadioBtn.IsChecked==true)
+            }
+            else if (EmployeeRadioBtn.IsChecked == true)
+            {
+                foreach (Employee employee in selectedUser)
                 {
-                    user = "Anställd";
-                    foreach (Employee employee in selectedUser)
-                    {
-                        adminViewModel.DeleteUser(employee.EmployeeId, user);
-                    }
+                    adminViewModel.DeleteEmployee(employee);
                 }
             }
         }
+
 
         private void listView_ChoosePersonClick(object sender, ItemClickEventArgs e)
         {
@@ -116,5 +119,6 @@ namespace TestApp.View.Admin
             textBox_Email.Text = ((Person)e.ClickedItem).Email;
 
         }
+
     }
 }
