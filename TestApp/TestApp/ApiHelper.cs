@@ -352,7 +352,7 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public async void PatchStudent(int id, JsonPatchDocument<Student> patchDocStudent)
+        public async void PatchStudent(int id, JsonPatchDocument<Person> patchDocStudent)
         {
             //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter
             try
@@ -415,7 +415,7 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public async void PatchEmployee(int id, JsonPatchDocument<Employee> patchDocEmployee)
+        public async void PatchEmployee(int id, JsonPatchDocument<Person> patchDocEmployee)
         {
             //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter
             try
