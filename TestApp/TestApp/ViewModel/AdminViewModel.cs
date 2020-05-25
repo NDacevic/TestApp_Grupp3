@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
+using Windows.UI.Popups;
 
 namespace TestApp.ViewModel
 {
@@ -209,7 +210,29 @@ namespace TestApp.ViewModel
                 }
             }
         }
+        //public async void PostStudent () //TODO Uncomment efter merge
+        //{
+        //    try
+        //    {
+        //        ApiHelper.Instance.PostStudent(TempStudent);
+        //    }
+        //    catch (Exception exc)
+        //    {
+        //        await new MessageDialog(exc.Message).ShowAsync();
+        //    }
+        //}
+        public async void Postemployee ()
+        {
+            try
+            {
+                ApiHelper.Instance.PostEmployee(TempEmployee);
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
 
+        }
 
     }
 }
