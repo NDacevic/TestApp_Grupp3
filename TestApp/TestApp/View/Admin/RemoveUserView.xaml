@@ -38,6 +38,7 @@
                   ItemsSource="{x:Bind adminViewModel.AllUsers}"
                   x:Name="DisplayUsersLV"
                   SelectionMode="Single"
+                  IsItemClickEnabled="True"
                   ItemClick="listView_ChoosePersonClick"
                   >
             <ListView.ItemTemplate>
@@ -77,24 +78,19 @@
                     />
                 <TextBox
                     x:Name="textBox_FirstName"
-                    x:DefaultBindMode="TwoWay"
-                    Text="{x:Bind chosenPerson.FirstName}"
                     />
                 <TextBlock
                     Text="Efternamn"
                     />
                 <TextBox
                     x:Name="textBox_LastName"
-                    x:DefaultBindMode="TwoWay"
-                    Text="{x:Bind chosenPerson.LastName}"
                     />
                 <TextBlock
                     Text="Email"
                     />
                 <TextBox
-                    x:Name="textbox_Email"
-                    x:DefaultBindMode="TwoWay"
-                    Text="{x:Bind chosenPerson.Email}"
+                    x:Name="textBox_Email"
+                    Text=""
                     />
                 <TextBlock
                     Text="Lösenord"
