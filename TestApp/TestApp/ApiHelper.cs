@@ -224,7 +224,7 @@ namespace TestApp
                 //Specify that the content is a Json string
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                //constructn the request
+                //construct the request
                 var request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"tests/{id}"))
                 {
                     Content = content
@@ -352,6 +352,41 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
+        public async void PatchStudent(int id, JsonPatchDocument patchDocStudent)
+        {
+            //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter
+            try
+            {
+                //define method as PATCH
+                HttpMethod method = new HttpMethod("PATCH");
+             
+                //Make the json
+                jsonString = JsonConvert.SerializeObject(patchDocStudent);
+
+                //Configure the request by inputting the request method and the url.
+                HttpRequestMessage request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"students/{id}"));
+                
+                //Set the jsonString as the content. 
+                request.Content = new StringContent(jsonString);
+
+                //Send it off to the API and wait for the response
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await new MessageDialog("Uppdaterad information sparad").ShowAsync();
+                    }
+                    else
+                        throw new HttpRequestException($"Status: {response.StatusCode}, {response.ReasonPhrase}");
+                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+
+            }
+        }
+
         public async Task<Student> GetStudent(string email)
         {
             jsonString = await httpClient.GetStringAsync("LogInStudents/" + email);
@@ -378,6 +413,41 @@ namespace TestApp
         public void PostEmployee()
         {
             throw new NotImplementedException();
+        }
+
+        public async void PatchEmployee(int id, JsonPatchDocument patchDocEmployee)
+        {
+            //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter
+            try
+            {
+                //define method as PATCH
+                HttpMethod method = new HttpMethod("PATCH");
+
+                //Make the json
+                jsonString = JsonConvert.SerializeObject(patchDocEmployee);
+
+                //Configure the request by inputting the request method and the url.
+                HttpRequestMessage request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"employees/{id}"));
+
+                //Set the jsonString as the content. 
+                request.Content = new StringContent(jsonString);
+
+                //Send it off to the API and wait for the response
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await new MessageDialog("Uppdaterad information sparad").ShowAsync();
+                    }
+                    else
+                        throw new HttpRequestException($"Status: {response.StatusCode}, {response.ReasonPhrase}");
+                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+
+            }
         }
 
         public async Task<Employee> GetEmployee(string email)
