@@ -19,6 +19,7 @@ namespace TestApp.Model
         {
             EmployeeId = employeeId;
             Students = new List<Student>();
+            EmployeeRole = new EmployeeRole();
         }
 
         public Employee() : base()
@@ -35,7 +36,7 @@ namespace TestApp.Model
         #endregion
 
         #region Properties
-        public Role Role { get; set; } 
+        public EmployeeRole EmployeeRole { get; set; } 
         public int EmployeeId { get; set; }
         public List<Student> Students { get; set; }
         #endregion
