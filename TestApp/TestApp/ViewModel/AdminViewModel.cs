@@ -309,7 +309,7 @@ namespace TestApp.ViewModel
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
-        public async void Postemployee (Employee employee)
+        public async void PostEmployee (Employee employee)
         {
             try
             {
@@ -322,31 +322,25 @@ namespace TestApp.ViewModel
         }
         public void SetValuesForEmployee(string firstName, string lastName, string email, string password, string roleName)
         {
-            TempEmployee.FirstName = firstName;
-            TempEmployee.LastName = lastName;
-            TempEmployee.Email = email;
-            TempEmployee.Password = password;
-            
-            if (roleName == "Teacher")
-            {
-                TempEmployee.EmployeeRole.RoleId = 1;
-            }
-            else if (roleName == "Admin")
-            {
-                TempEmployee.EmployeeRole.RoleId = 2;
-            }
 
-            Postemployee(TempEmployee);
+                TempEmployee.FirstName = firstName;
+                TempEmployee.LastName = lastName;
+                TempEmployee.Email = email;
+                TempEmployee.Password = password;
+
+                PostEmployee(TempEmployee);
+
         }
         public void SetValuesForStudent (string firstName, string lastName, string email, string password, int classId)
         {
-            TempStudent.FirstName = firstName;
-            TempStudent.LastName = lastName;
-            TempStudent.Email = email;
-            TempStudent.Password = password;
-            TempStudent.ClassId = classId;
 
-            PostStudent();
+                TempStudent.FirstName = firstName;
+                TempStudent.LastName = lastName;
+                TempStudent.Email = email;
+                TempStudent.Password = password;
+                TempStudent.ClassId = classId;
+
+                PostStudent();            
         }
         public async void GetRoles ()
         {
@@ -368,6 +362,5 @@ namespace TestApp.ViewModel
             }
 
         }
-
     }
 }

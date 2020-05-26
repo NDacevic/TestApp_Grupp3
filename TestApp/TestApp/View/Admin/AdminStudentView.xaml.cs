@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,13 +31,21 @@ namespace TestApp.View.Admin
 
         private void Bttn_AddStudent_Click(object sender, RoutedEventArgs e)
         {
-            string firstName = Tb_FirstName.Text;
-            string lastName = Tb_LastName.Text;
-            int classId = int.Parse(Tb_Grade.Text);
-            string email = Tb_Email.Text;
-            string password = Tb_Password.Text;
-
-            AdminViewModel.Instance.SetValuesForStudent(firstName, lastName, email, password, classId);
+            //string firstName = Tb_FirstName.Text;
+            //string lastName = Tb_LastName.Text;            
+            //string email = Tb_Email.Text;
+            //string password = Tb_Password.Text;
+            //int classId = int.Parse(Tb_Grade.Text);
+         
+            try
+            {
+                AdminViewModel.Instance.SetValuesForStudent(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, Tb_Password.Text, int.Parse(Tb_Grade.Text));
+                //AdminViewModel.Instance.SetValuesForStudent(firstName, lastName, email, password, classId);
+            }
+            catch 
+            {
+                return;               
+            }
         }
     }
 }
