@@ -385,7 +385,9 @@ namespace TestApp
                 HttpRequestMessage request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"students/{id}"));
                 
                 //Set the jsonString as the content. 
-                request.Content = new StringContent(jsonString);
+                HttpContent content = new StringContent(jsonString);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                request.Content = content;
 
                 //Send it off to the API and wait for the response
                 using (HttpResponseMessage response = await httpClient.SendAsync(request))
@@ -448,7 +450,9 @@ namespace TestApp
                 HttpRequestMessage request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"employees/{id}"));
 
                 //Set the jsonString as the content. 
-                request.Content = new StringContent(jsonString);
+                HttpContent content = new StringContent(jsonString);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                request.Content = content;
 
                 //Send it off to the API and wait for the response
                 using (HttpResponseMessage response = await httpClient.SendAsync(request))

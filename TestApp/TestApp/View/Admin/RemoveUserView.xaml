@@ -73,8 +73,16 @@
             <StackPanel
                 Grid.Row="0"
                 >
-                <TextBlock
-                    x:Name="textBlock_Id"/>
+                <StackPanel
+                    Orientation="Horizontal"
+                    >
+                    <TextBlock
+                        Text="ID: "
+                        />
+                    <TextBlock
+                        x:Name="textBlock_Id"
+                        />
+                </StackPanel>
                 <TextBlock
                     Text="Förnamn"
                     />

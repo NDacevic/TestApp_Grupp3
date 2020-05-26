@@ -195,7 +195,7 @@ namespace TestApp.ViewModel
                 JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
                 CreatePersonPatchDoc(chosenEmployee, firstName, lastName, email, patchDoc);
 
-                ApiHelper.Instance.PatchEmployee(id, patchDoc );
+                ApiHelper.Instance.PatchEmployee(id, patchDoc);
             }
             catch (FormatException exc)
             {
