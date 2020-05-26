@@ -123,14 +123,16 @@ namespace TestApp.View.Admin
 
         private void EditInformationClick(object sender, RoutedEventArgs args)
         {
-            adminViewModel.EditUserInfo
-                (
-                chosenPerson,
-                int.Parse(textBlock_Id.Text),
-                textBox_FirstName.Text,
-                textBox_LastName.Text,
-                textBox_Email.Text
-                );
+            //Out-commented by MO since chosenPerson is not a student and the
+
+            //adminViewModel.EditUserInfo
+            //    (
+            //    chosenPerson,
+            //    int.Parse(textBlock_Id.Text),
+            //    textBox_FirstName.Text,
+            //    textBox_LastName.Text,
+            //    textBox_Email.Text
+            //    );
         }
 
     }
