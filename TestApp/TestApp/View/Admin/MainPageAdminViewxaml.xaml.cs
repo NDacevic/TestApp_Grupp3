@@ -49,7 +49,7 @@ namespace TestApp.View
             }
             else if (sender == logOut_btn)
             {
-                //Not yet implemented
+                NavigationHelper.Instance.GlobalFrame.Navigate(typeof(LogInView));
             }
         }
     }

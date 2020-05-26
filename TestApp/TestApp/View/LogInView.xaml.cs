@@ -89,5 +89,10 @@ namespace TestApp.View
             }
              */ 
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            NavigationHelper.Instance.GlobalFrame = Frame;
+        }
     }
 }

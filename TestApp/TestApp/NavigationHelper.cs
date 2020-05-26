@@ -13,7 +13,7 @@ namespace TestApp
         #endregion
 
         #region Fields
-        private NavigationHelper instance;
+        private static NavigationHelper instance;
         #endregion
 
         #region Constructors
@@ -30,7 +30,7 @@ namespace TestApp
         #endregion
 
         #region Properties
-        public NavigationHelper Instance { get
+        public static NavigationHelper Instance { get
             {
                 if (instance == null)
                 {
