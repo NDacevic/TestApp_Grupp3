@@ -111,10 +111,10 @@ namespace TestApp.View.Admin
         {
             chosenPerson = (Person)e.ClickedItem;
 
-            if(e.ClickedItem.GetType() == typeof(Model.Student))
-                textBlock_Id.Text = $"ID: {((Model.Student)e.ClickedItem).StudentId}";
+            if (e.ClickedItem.GetType() == typeof(Model.Student))
+                textBlock_Id.Text = ((Model.Student)e.ClickedItem).StudentId.ToString();
             else if (e.ClickedItem.GetType() == typeof(Model.Employee))
-                textBlock_Id.Text = $"ID: {((Model.Employee)e.ClickedItem).EmployeeId}";
+                textBlock_Id.Text = ((Model.Employee)e.ClickedItem).EmployeeId.ToString();
 
             textBox_FirstName.Text = ((Person)e.ClickedItem).FirstName;
             textBox_LastName.Text = ((Person)e.ClickedItem).LastName;
@@ -125,26 +125,23 @@ namespace TestApp.View.Admin
         {
 
             if(chosenPerson.GetType() ==  typeof(Model.Student))
-            adminViewModel.EditUserInfo
-                (
-                (Model.Student)chosenPerson,
-                int.Parse(textBlock_Id.Text),
-                textBox_FirstName.Text,
-                textBox_LastName.Text,
-                textBox_Email.Text
-                );
+                adminViewModel.EditUserInfo
+                    (
+                    (Model.Student)chosenPerson,
+                    int.Parse(textBlock_Id.Text),
+                    textBox_FirstName.Text,
+                    textBox_LastName.Text,
+                    textBox_Email.Text
+                    );
             else if(chosenPerson.GetType() == typeof(Model.Employee))
                 adminViewModel.EditUserInfo
-                (
-                (Model.Employee)chosenPerson,
-                int.Parse(textBlock_Id.Text),
-                textBox_FirstName.Text,
-                textBox_LastName.Text,
-                textBox_Email.Text
-                );
-
-
+                    (
+                    (Model.Employee)chosenPerson,
+                    int.Parse(textBlock_Id.Text),
+                    textBox_FirstName.Text,
+                    textBox_LastName.Text,
+                    textBox_Email.Text
+                    );
         }
-
     }
 }
