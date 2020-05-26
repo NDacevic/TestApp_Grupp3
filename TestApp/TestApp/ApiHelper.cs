@@ -304,6 +304,24 @@ namespace TestApp
             }
         }
 
+        public async Task<List<StudentQuestionAnswer>> GetAllStudentQuestionAnswers()
+        {
+            //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
+            HttpResponseMessage response = await httpClient.GetAsync("StudentQuestionAnswers");
+
+            if (response.IsSuccessStatusCode)
+            {
+                jsonString = response.Content.ReadAsStringAsync().Result;
+                //Convert jsonString to list of SQA objects
+                var studentQuestionAnswers = JsonConvert.DeserializeObject<List<StudentQuestionAnswer>>(jsonString);
+                return studentQuestionAnswers;
+            }
+            else
+            {
+                throw new HttpRequestException("No test results retrieved from database. Contact an admin for help.");
+            }
+        }
+
         public async void PostQuestionAnswers(List<StudentQuestionAnswer> questionAnswers)
         {
             //Convert the object to a json string.

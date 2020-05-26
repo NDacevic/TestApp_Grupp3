@@ -108,14 +108,20 @@ namespace TestApp.ViewModel
             {
                 //Temporary list to hold all tests
                 List<Test> allTests = await ApiHelper.Instance.GetAllTests();
+                List<StudentQuestionAnswer> allAnswers = await ApiHelper.Instance.GetAllStudentQuestionAnswers();
 
-                //Loop through and keep all tests that are active and for the correct grade/year
+                //Loop through all tests and keep those that:
+                // - Does not have any rows in allAnswers where studentID and testID matches activeStudent and the current test. If so the test has already been written.
+                // - And where the test is constructed for the same grade/year as the student is in right now
                 foreach (Test test in allTests)
                 {
-                    //Todo: kraschar eventuellt om ListView är tom. Testa! - MO
-                    if (test.IsActive == true && test.Grade == activeStudent.ClassId)
+                    foreach (StudentQuestionAnswer sqa in allAnswers)
                     {
-                        ActiveTests.Add(test);
+                        //Todo: kraschar eventuellt om ListView är tom. Testa! - MO
+                        if ((activeStudent.StudentId != sqa.StudentId && test.TestId != sqa.TestId) && test.Grade == activeStudent.ClassId)
+                        {
+                            ActiveTests.Add(test);
+                        }
                     }
                 }
             }

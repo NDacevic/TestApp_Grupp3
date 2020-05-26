@@ -23,6 +23,7 @@ namespace TestApp.ViewModel
         public ObservableCollection<Person> AllUsers { get; set; }
         public List<Employee> AllEmployees { get; set; }
         public Employee TempEmployee { get; set; }
+        public Student TempStudent { get; set; }
 
         public List<Test> TestList { get; set; }
 
@@ -43,10 +44,11 @@ namespace TestApp.ViewModel
             TestList = new List<Test>(); //Storing tests from DB
             MyTests = new ObservableCollection<Test>(); //Display Tests and used for filtering
             TestQuestions = new ObservableCollection<Question>(); //Used to display questions on test
-            TempEmployee = new Employee();
+            TempEmployee = new Employee(); //Used when adding a new employee
             AllStudents = new List<Student>(); //Store all students from DB
             AllEmployees = new List<Employee>(); //Store all Employees from DB
             AllUsers = new ObservableCollection<Person>();
+            TempStudent = new Student();
             
         }
 
@@ -162,6 +164,7 @@ namespace TestApp.ViewModel
         /// <param name="email"></param>
         public async void EditUserInfo(Student chosenStudent, int id, string firstName, string lastName, string email)
         {
+            //TODO: Add support for updating passwords
             try
             {
                 JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
@@ -186,6 +189,7 @@ namespace TestApp.ViewModel
         /// <param name="email"></param>
         public async void EditUserInfo(Employee chosenEmployee, int id, string firstName, string lastName, string email)
         {
+            //TODO: Add support for updating passwords
             try
             {
                 JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
