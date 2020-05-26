@@ -108,7 +108,7 @@ namespace TestApp.ViewModel
             {
                 //Temporary list to hold all tests
                 List<Test> allTests = await ApiHelper.Instance.GetAllTests();
-
+                
                 //Loop through and keep all tests that are active and for the correct grade/year
                 foreach (Test test in allTests)
                 {
