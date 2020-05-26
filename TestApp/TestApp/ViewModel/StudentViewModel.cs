@@ -36,7 +36,7 @@ namespace TestApp.ViewModel
         {
             ActiveTests = new ObservableCollection<Test>();
             //Todo: Remove later when a student can log in - MO
-            activeStudent = new Student(1, "Mikael", "Ollhage", "ja@ja.com", "nej", 8, null);
+            activeStudent = LogInViewModel.Instance.ActiveStudent;
 
         }
         #endregion
@@ -102,27 +102,44 @@ namespace TestApp.ViewModel
         /// </summary>
         public async void SeeActiveTests()
         {
+            bool isTestAlreadyWritten;
+
             ActiveTests.Clear();
+
             //Tries to contact API to get all Tests
             try
             {
-                //Temporary list to hold all tests
+                //Get all tests from database
                 List<Test> allTests = await ApiHelper.Instance.GetAllTests();
+                //Get all answers for all tests from databse
                 List<StudentQuestionAnswer> allAnswers = await ApiHelper.Instance.GetAllStudentQuestionAnswers();
 
                 //Loop through all tests and keep those that:
                 // - Does not have any rows in allAnswers where studentID and testID matches activeStudent and the current test. If so the test has already been written.
                 // - And where the test is constructed for the same grade/year as the student is in right now
+
+                //Loop through all tests and check which ones already has answers from the logged in student
                 foreach (Test test in allTests)
                 {
+                    //State that the test has not been written until the opposite has been proven...
+                    isTestAlreadyWritten = false;
+
+                    //Loop through all answer objects.
                     foreach (StudentQuestionAnswer sqa in allAnswers)
                     {
-                        //Todo: kraschar eventuellt om ListView är tom. Testa! - MO
-                        if ((activeStudent.StudentId != sqa.StudentId && test.TestId != sqa.TestId) && test.Grade == activeStudent.ClassId)
+                        //If an object is found which has this student's ID and the test's ID in it, then the test has been written before
+                        if ((activeStudent.StudentId == sqa.StudentId && test.TestId == sqa.TestId))
                         {
-                            ActiveTests.Add(test);
+                            isTestAlreadyWritten = true;
+                            //If an answer object is found then the test has already been written, no need to look further
+                            break;
                         }
                     }
+                    //if the test osn't already written, and it is for the student's grade, then add it to the list
+                    if (!isTestAlreadyWritten && test.Grade == activeStudent.ClassId)
+                    {
+                        ActiveTests.Add(test);
+                    }                    
                 }
             }
             catch (Exception)
