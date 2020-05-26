@@ -22,9 +22,44 @@ namespace TestApp.View.Teacher
     /// </summary>
     public sealed partial class MainPageTeacherView : Page
     {
+        private Frame mainFrame;
         public MainPageTeacherView()
         {
             this.InitializeComponent();
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            mainFrame = (Frame)e?.Parameter;
+        }
+
+
+        private void TeacherNavigate_btn(object sender, RoutedEventArgs e) //Must be a better way to check wich one is pressed than all these if/if else
+        {
+            if (sender == createQuestion_btn)
+            {
+                mainFrame.Navigate(typeof(CreateQuestionView));
+            }
+            else if (sender == createTest_btn)
+            {
+                mainFrame.Navigate(typeof(CreateTestView));
+            }
+            else if(sender == gradeTest_btn)
+            {
+                mainFrame.Navigate(typeof(GradeTestView));
+            }
+            else if (sender == studentResult_btn)
+            {
+                mainFrame.Navigate(typeof(StudentResultView));
+            }
+            else if (sender == removeTest_btn)
+            {
+                mainFrame.Navigate(typeof(DeleteTestView));
+            }
+            else if (sender == logOut_btn)
+            {
+                //Not yet implemented
+            }
+
         }
     }
 }

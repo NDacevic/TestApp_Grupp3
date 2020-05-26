@@ -1,10 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
+using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 
 namespace TestApp.ViewModel
 {
@@ -146,6 +151,84 @@ namespace TestApp.ViewModel
                 AllUsers.Add(p);
             }
         }
+
+
+        /// <summary>
+        /// Overloaded method.
+        /// It handles the creating of the patchdoc and sends it to the APIHelper class.
+        /// </summary>
+        /// <param name="chosenStudent"></param>
+        /// <param name="id"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        public async void EditUserInfo(Student chosenStudent, int id, string firstName, string lastName, string email)
+        {
+            try
+            {
+                JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
+                CreatePersonPatchDoc(chosenStudent, firstName, lastName, email, patchDoc);
+
+                ApiHelper.Instance.PatchStudent(id, patchDoc);
+            }
+            catch (FormatException exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
+        }
+
+        /// <summary>
+        /// /// Overloaded method.
+        /// It handles the creating of the patchdoc and sends it to the APIHelper class.
+        /// </summary>
+        /// <param name="chosenEmployee"></param>
+        /// <param name="id"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        public async void EditUserInfo(Employee chosenEmployee, int id, string firstName, string lastName, string email)
+        {
+            try
+            {
+                JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
+                CreatePersonPatchDoc(chosenEmployee, firstName, lastName, email, patchDoc);
+
+                ApiHelper.Instance.PatchEmployee(id, patchDoc );
+            }
+            catch (FormatException exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
+            
+        }
+
+        /// <summary>
+        /// Used to streamline creation of the patchdoc for updating information on a student or employee
+        /// </summary>
+        /// <param name="person"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        private void CreatePersonPatchDoc(Person person, string firstName, string lastName, string email, JsonPatchDocument<Person> patchDoc)
+        {
+
+            //We check for what is different and add that to the patch doc.
+            if (person.FirstName != firstName)
+                patchDoc.Replace(x => x.FirstName, firstName);
+
+            if (person.LastName != lastName)
+                patchDoc.Replace(x => x.LastName, lastName);
+
+            if (person.Email != email)
+                patchDoc.Replace(x => x.Email, email);
+
+            string test = JsonConvert.SerializeObject(patchDoc);
+
+            if (test == "[]")
+                throw new FormatException("Inga personuppgifter har ändrats!");
+
+        }
+
         public void DisplayStudentById(int id) //Displays student by searched Id. DONE
         {
             AllUsers.Clear();
@@ -183,34 +266,33 @@ namespace TestApp.ViewModel
                 }
             }
         }
-        public  void DeleteUser(int id, string user)
+       
+        public void DeleteEmployee(Employee employee)
         {
-            if(user=="Anställd")
-            {
-                 ApiHelper.Instance.DeleteEmployee(id);
-                foreach (Employee e in AllEmployees.ToList())
-                {
-                    if (e.EmployeeId == id)
-                    {
-                       AllEmployees.Remove(e);
-                        AllUsers.Remove(e);
-                    }
-                }
+            ApiHelper.Instance.DeleteEmployee(employee.EmployeeId);
 
-            }
-            else if(user=="Elev")
+            foreach (Employee e in AllEmployees.ToList())
             {
-                ApiHelper.Instance.DeleteStudent(id);
-                foreach (Student s in AllStudents.ToList())
+                if (e.EmployeeId == employee.EmployeeId)
                 {
-                    if (s.StudentId == id)
-                    {
-                        AllStudents.Remove(s);
-                        AllUsers.Remove(s);
-                    }
+                    AllEmployees.Remove(e);
+                    AllUsers.Remove(e);
                 }
             }
         }
+        public void DeleteStudent(Student student)
+        {
+            ApiHelper.Instance.DeleteStudent(student.StudentId);
+            foreach (Student s in AllStudents.ToList())
+            {
+                if (s.StudentId == student.StudentId)
+                {
+                    AllStudents.Remove(s);
+                    AllUsers.Remove(s);
+                }
+            }
+        }
+
 
 
     }

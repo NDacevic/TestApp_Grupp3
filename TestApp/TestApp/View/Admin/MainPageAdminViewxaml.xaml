@@ -6,9 +6,31 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="Silver">
 
     <Grid>
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center">
+            <Button Content="Lägg till användare"
+                    x:Name="addUser_btn"
+                    Click="AdminNavigate_btn"
+                    Margin="0,0,0,10"/>
+
+            <Button Content="Ändra/Ta bort användare"
+                    x:Name="editUser_btn" 
+                    Click="AdminNavigate_btn"
+                     Margin="0,0,0,10"/>
+            
+            <Button Content="Ta bort prov"
+                    x:Name="removeTest_btn" 
+                    Click="AdminNavigate_btn"
+                    Margin="0,0,0,10"/>
+            
+            <Button Content="Logga ut"
+                    x:Name="logOut_btn"
+                    Click="AdminNavigate_btn"/>
+
+        </StackPanel>
 
     </Grid>
 </Page>
