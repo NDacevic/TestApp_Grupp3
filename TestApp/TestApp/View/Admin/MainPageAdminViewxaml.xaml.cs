@@ -35,9 +35,13 @@ namespace TestApp.View
 
         private void AdminNavigate_btn(object sender, RoutedEventArgs e)
         {
-            if (sender == addUser_btn)
+            if (sender == addEmployee_btn)
             {
-                //Not yet implemented
+                mainFrame.Navigate(typeof(Admin.AdminEmployeeView));
+            }
+            else if(sender == addStudent_btn)
+            {
+                mainFrame.Navigate(typeof(Admin.AdminStudentView));
             }
             else if (sender == editUser_btn)
             {

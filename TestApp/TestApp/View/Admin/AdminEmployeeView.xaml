@@ -82,7 +82,7 @@
                     <ComboBox
                         x:Name="Cb_EmployeeRole"
                         PlaceholderText="Välj roll"
-                        ItemsSource="{x:Bind data:AdminViewModel.Instance.Roles}"
+                        ItemsSource="{x:Bind data:AdminViewModel.Instance.RoleNames}"
                         x:DefaultBindMode="OneWay"
                         Width="200"/>
                 </StackPanel>

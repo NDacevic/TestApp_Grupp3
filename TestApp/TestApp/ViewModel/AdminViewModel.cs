@@ -320,13 +320,21 @@ namespace TestApp.ViewModel
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
-        public void SetValuesForEmployee(string firstName, string lastName, string email, string password, EmployeeRole employeeRole)
+        public void SetValuesForEmployee(string firstName, string lastName, string email, string password, string roleName)
         {
             TempEmployee.FirstName = firstName;
             TempEmployee.LastName = lastName;
             TempEmployee.Email = email;
             TempEmployee.Password = password;
-            TempEmployee.EmployeeRole = employeeRole;
+            
+            if (roleName == "Teacher")
+            {
+                TempEmployee.EmployeeRole.RoleId = 1;
+            }
+            else if (roleName == "Admin")
+            {
+                TempEmployee.EmployeeRole.RoleId = 2;
+            }
 
             Postemployee(TempEmployee);
         }
@@ -348,10 +356,10 @@ namespace TestApp.ViewModel
                if (Roles.Count == 0)
                 {
                     Roles = await ApiHelper.Instance.GetRoles();
-                    //foreach (Role role in Roles)
-                    //{
-                    //    RoleNames.Add(role.RoleName);
-                    //}
+                    foreach (Role role in Roles)
+                    {
+                        RoleNames.Add(role.RoleName);
+                    }
                 }
             }
             catch (Exception exc)

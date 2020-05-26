@@ -36,9 +36,9 @@ namespace TestApp.View.Admin
             string lastName = Tb_LastName.Text;
             string email = Tb_Email.Text;
             string password = Tb_Password.Text;
-            EmployeeRole employeeRole = (EmployeeRole)Cb_EmployeeRole.SelectedItem;
+            string roleName = Cb_EmployeeRole.SelectedItem.ToString();
 
-            AdminViewModel.Instance.SetValuesForEmployee(firstName, lastName, email, password, employeeRole);
+            AdminViewModel.Instance.SetValuesForEmployee(firstName, lastName, email, password, roleName);
         }
     }
 }

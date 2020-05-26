@@ -371,7 +371,7 @@ namespace TestApp
             {
                 jsonString = JsonConvert.SerializeObject(student);
                 HttpContent httpContent = new StringContent(jsonString);
-                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application / json");
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                 HttpResponseMessage respons = await httpClient.PostAsync("students", httpContent);
 
@@ -461,7 +461,7 @@ namespace TestApp
             {
                 jsonString = JsonConvert.SerializeObject(employee);
                 HttpContent httpContent = new StringContent(jsonString);
-                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application / json");
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
                 HttpResponseMessage respons = await httpClient.PostAsync("employees", httpContent);
 
