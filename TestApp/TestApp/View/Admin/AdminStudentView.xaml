@@ -17,22 +17,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Margin="40">
             <TextBlock 
                 Text="Lägg till elev" 
                 FontSize="32"/>
-            <StackPanel Orientation="Horizontal" Margin="0,50,0,0"  Spacing="40">
-                <TextBlock
-                    Text="StudentId: "
-                    FontSize="20"
-                    Width="200"/>
-                <TextBox
-                    PlaceholderText="StudentId"
-                    FontSize="20"/>
-            </StackPanel>
             <StackPanel Orientation="Horizontal" Spacing="40">
                 <TextBlock 
                     Text="Förnamn: " 

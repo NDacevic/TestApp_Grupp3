@@ -25,6 +25,7 @@ namespace TestApp.ViewModel
         public List<Employee> AllEmployees { get; set; }
         public Employee TempEmployee { get; set; }
         public Student TempStudent { get; set; }
+        public ObservableCollection<Role> Roles { get; set; }
 
         public List<Test> TestList { get; set; }
 
@@ -49,7 +50,8 @@ namespace TestApp.ViewModel
             AllStudents = new List<Student>(); //Store all students from DB
             AllEmployees = new List<Employee>(); //Store all Employees from DB
             AllUsers = new ObservableCollection<Person>();
-            TempStudent = new Student();
+            TempStudent = new Student(); //Used when adding a new student
+            Roles = new ObservableCollection<Role>(); //Storing roles from DB
             
         }
 
@@ -293,17 +295,17 @@ namespace TestApp.ViewModel
                 }
             }
         }
-        //public async void PostStudent () //TODO Uncomment efter merge
-        //{
-        //    try
-        //    {
-        //        ApiHelper.Instance.PostStudent(TempStudent);
-        //    }
-        //    catch (Exception exc)
-        //    {
-        //        await new MessageDialog(exc.Message).ShowAsync();
-        //    }
-        //}
+        public async void PostStudent() 
+        {
+            try
+            {
+                ApiHelper.Instance.PostStudent(TempStudent);
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
+        }
         public async void Postemployee ()
         {
             try
@@ -316,7 +318,20 @@ namespace TestApp.ViewModel
             }
 
         }
-
+        public async void GetRoles ()
+        {
+            try
+            {
+               if (Roles.Count == 0)
+                {
+                    Roles = await ApiHelper.Instance.GetRoles();
+                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
+        }
 
     }
 }

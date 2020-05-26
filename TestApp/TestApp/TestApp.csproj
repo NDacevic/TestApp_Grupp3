@@ -121,6 +121,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Course.cs" />
+    <Compile Include="Model\EmployeeRole.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\TestResult.cs" />
     <Compile Include="ViewModel\LogInViewModel.cs" />

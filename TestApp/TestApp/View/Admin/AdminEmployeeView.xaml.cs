@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +26,16 @@ namespace TestApp.View.Admin
         public AdminEmployeeView()
         {
             this.InitializeComponent();
+            AdminViewModel.Instance.GetRoles(); 
+        }
+
+        private void Bttn_AddEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            string firstName = Tb_FirstName.Text;
+            string lastName = Tb_LastName.Text;
+            string email = Tb_Email.Text;
+            string password = Tb_Password.Text;
+
         }
     }
 }
