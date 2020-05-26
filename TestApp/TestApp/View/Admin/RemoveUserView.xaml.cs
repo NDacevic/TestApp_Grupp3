@@ -26,7 +26,7 @@ namespace TestApp.View.Admin
     public sealed partial class RemoveUserView : Page
     {
         AdminViewModel adminViewModel = AdminViewModel.Instance;
-        private Person chosenPerson;
+        Person chosenPerson;
         public RemoveUserView()
         {
             this.InitializeComponent();
@@ -109,15 +109,28 @@ namespace TestApp.View.Admin
 
         private void listView_ChoosePersonClick(object sender, ItemClickEventArgs e)
         {
+            chosenPerson = (Person)e.ClickedItem;
+
             if(e.ClickedItem.GetType() == typeof(Model.Student))
-                textBlock_IdTextBlock.Text = $"ID: {((Model.Student)e.ClickedItem).StudentId}";
+                textBlock_Id.Text = $"ID: {((Model.Student)e.ClickedItem).StudentId}";
             else if (e.ClickedItem.GetType() == typeof(Model.Employee))
-                textBlock_IdTextBlock.Text = $"ID: {((Model.Employee)e.ClickedItem).EmployeeId}";
+                textBlock_Id.Text = $"ID: {((Model.Employee)e.ClickedItem).EmployeeId}";
 
             textBox_FirstName.Text = ((Person)e.ClickedItem).FirstName;
             textBox_LastName.Text = ((Person)e.ClickedItem).LastName;
             textBox_Email.Text = ((Person)e.ClickedItem).Email;
+        }
 
+        private void EditInformationClick(object sender, RoutedEventArgs args)
+        {
+            adminViewModel.EditUserInfo
+                (
+                chosenPerson,
+                int.Parse(textBlock_Id.Text),
+                textBox_FirstName.Text,
+                textBox_LastName.Text,
+                textBox_Email.Text
+                );
         }
 
     }
