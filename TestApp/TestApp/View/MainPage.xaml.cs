@@ -39,7 +39,7 @@ namespace TestApp
                 mainMenuFrame.Navigate(typeof(MainPageStudentView),mainFrame);
                 mainFrame.Navigate(typeof(AvailableTestsView));
             }
-            else if (e.Parameter == "Lärare")
+            else if (e.Parameter == "Teacher")
             {
                 mainMenuFrame.Navigate(typeof(MainPageTeacherView), mainFrame);
                 mainFrame.Navigate(typeof(GradeTestView));

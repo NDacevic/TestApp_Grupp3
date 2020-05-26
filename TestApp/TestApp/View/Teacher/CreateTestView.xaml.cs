@@ -35,7 +35,7 @@ namespace TestApp.View.Teacher
             }
         }
 
-        TeacherCreateViewModel teacherCreateViewModel  = TeacherCreateViewModel.Instance; //Creating reference
+        TeacherCreateViewModel teacherCreateViewModel  = TeacherCreateViewModel.Instance;
 
         //TO DO: Figure out how to filter list
 
@@ -45,7 +45,7 @@ namespace TestApp.View.Teacher
             this.DataContext = teacherCreateViewModel;
             this.DataContext = teacherCreateViewModel.SubjectQuestions;
 
-            foreach (var x in teacherCreateViewModel.Grades)
+            foreach (var x in teacherCreateViewModel.Grades) //Make sure that our dropdown with Grades only contains digits
                 if (x.All(c => char.IsDigit(c)))
                     ChooseGrade.Items.Add(x);
 
@@ -83,10 +83,7 @@ namespace TestApp.View.Teacher
             {
                 teacherCreateViewModel.DisplayFieldsAreEmpty();
             }
-            catch(FormatException)
-            {
-                teacherCreateViewModel.DisplayFieldsAreEmpty();
-            }
+           
            
         }
 
@@ -116,19 +113,11 @@ namespace TestApp.View.Teacher
             }
             else
             {
-                teacherCreateViewModel.ResetQuestionList();
+                if(FilterQuestionPointComboBox.SelectedValue==null)
+                    teacherCreateViewModel.FilterQuestionByType(FilterQuestionTypeComboBox.SelectedValue.ToString(),""); //If filter by point is not used we send this.
+                else
+                    teacherCreateViewModel.FilterQuestionByType(FilterQuestionTypeComboBox.SelectedValue.ToString(), FilterQuestionPointComboBox.SelectedValue.ToString()); //If filter by point is used we send this
 
-                foreach (var filtered in teacherCreateViewModel.QuestionsToFilter.ToList()) //Going through our alternative list of questions
-                {
-                    if (FilterQuestionTypeComboBox.SelectedValue.ToString() == "Alla") //If the user choose to se all questions then we dont remove anything.
-                    {
-
-                    }
-                    else if (filtered.QuestionType != FilterQuestionTypeComboBox.SelectedValue.ToString()) //If the questions QuestionType doesnt match, we remove it.
-                    {
-                        teacherCreateViewModel.QuestionsToFilter.Remove(filtered);
-                    }
-                }
             }
         }
 
@@ -140,19 +129,10 @@ namespace TestApp.View.Teacher
             }
             else
             {
-                teacherCreateViewModel.ResetQuestionList();
-                foreach (var filtered in teacherCreateViewModel.QuestionsToFilter.ToList()) 
-                {
-                    if (FilterQuestionPointComboBox.SelectedValue.ToString() == "Alla")
-                    {
-
-                    }
-                    else if (filtered.PointValue.ToString() != FilterQuestionPointComboBox.SelectedValue.ToString()) //If the questions Point doesnt match, we remove it.
-                    {
-                            teacherCreateViewModel.QuestionsToFilter.Remove(filtered);
-                    }
-                   
-                }
+                if (FilterQuestionTypeComboBox.SelectedValue == null)
+                    teacherCreateViewModel.FilterQuestionByPoint(FilterQuestionPointComboBox.SelectedValue.ToString(), "");
+                else
+                    teacherCreateViewModel.FilterQuestionByPoint(FilterQuestionPointComboBox.SelectedValue.ToString(), FilterQuestionTypeComboBox.SelectedValue.ToString());
             }
         }
         private void AddDateAndTimeToTest()

@@ -304,6 +304,24 @@ namespace TestApp
             }
         }
 
+        public async Task<List<StudentQuestionAnswer>> GetAllStudentQuestionAnswers()
+        {
+            //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
+            HttpResponseMessage response = await httpClient.GetAsync("StudentQuestionAnswers");
+
+            if (response.IsSuccessStatusCode)
+            {
+                jsonString = response.Content.ReadAsStringAsync().Result;
+                //Convert jsonString to list of SQA objects
+                var studentQuestionAnswers = JsonConvert.DeserializeObject<List<StudentQuestionAnswer>>(jsonString);
+                return studentQuestionAnswers;
+            }
+            else
+            {
+                throw new HttpRequestException("No test results retrieved from database. Contact an admin for help.");
+            }
+        }
+
         public async void PostQuestionAnswers(List<StudentQuestionAnswer> questionAnswers)
         {
             //Convert the object to a json string.
@@ -389,7 +407,9 @@ namespace TestApp
                 HttpRequestMessage request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"students/{id}"));
                 
                 //Set the jsonString as the content. 
-                request.Content = new StringContent(jsonString);
+                HttpContent content = new StringContent(jsonString);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                request.Content = content;
 
                 //Send it off to the API and wait for the response
                 using (HttpResponseMessage response = await httpClient.SendAsync(request))
@@ -477,7 +497,9 @@ namespace TestApp
                 HttpRequestMessage request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"employees/{id}"));
 
                 //Set the jsonString as the content. 
-                request.Content = new StringContent(jsonString);
+                HttpContent content = new StringContent(jsonString);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                request.Content = content;
 
                 //Send it off to the API and wait for the response
                 using (HttpResponseMessage response = await httpClient.SendAsync(request))
