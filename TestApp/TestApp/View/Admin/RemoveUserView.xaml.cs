@@ -123,6 +123,7 @@ namespace TestApp.View.Admin
 
         private void EditInformationClick(object sender, RoutedEventArgs args)
         {
+
             if(chosenPerson.GetType() ==  typeof(Model.Student))
             adminViewModel.EditUserInfo
                 (
@@ -141,6 +142,7 @@ namespace TestApp.View.Admin
                 textBox_LastName.Text,
                 textBox_Email.Text
                 );
+
         }
 
     }
