@@ -81,6 +81,7 @@
                     Width="100"/>
                     <ComboBox
                         x:Name="Cb_EmployeeRole"
+                        PlaceholderText="Välj roll"
                         ItemsSource="{x:Bind data:AdminViewModel.Instance.Roles}"
                         x:DefaultBindMode="OneWay"
                         Width="200"/>

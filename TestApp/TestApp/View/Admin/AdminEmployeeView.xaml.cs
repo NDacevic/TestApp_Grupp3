@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.Model;
 using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -35,7 +36,9 @@ namespace TestApp.View.Admin
             string lastName = Tb_LastName.Text;
             string email = Tb_Email.Text;
             string password = Tb_Password.Text;
+            EmployeeRole employeeRole = (EmployeeRole)Cb_EmployeeRole.SelectedItem;
 
+            AdminViewModel.Instance.SetValuesForEmployee(firstName, lastName, email, password, employeeRole);
         }
     }
 }

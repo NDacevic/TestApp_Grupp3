@@ -573,10 +573,10 @@ namespace TestApp
         /// Gets all roles from DB
         /// </summary>
         /// <returns></returns>
-        public async Task<ObservableCollection<Role>> GetRoles ()
+        public async Task<List<Role>> GetRoles ()
         {
             jsonString = await httpClient.GetStringAsync("Roles");
-            var roles = JsonConvert.DeserializeObject<ObservableCollection<Role>>(jsonString);
+            var roles = JsonConvert.DeserializeObject<List<Role>>(jsonString);
             return roles;
         }
         #endregion

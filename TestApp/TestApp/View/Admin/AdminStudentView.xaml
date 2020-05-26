@@ -80,7 +80,8 @@
                     x:Name="Bttn_AddStudent"
                     Content="Lägg till elev" 
                     Padding="15,10"
-                    Margin="0,30,0,0"/>
+                    Margin="0,30,0,0"
+                    Click="Bttn_AddStudent_Click"/>
 
             </StackPanel>         
     </Grid>

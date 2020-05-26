@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +26,17 @@ namespace TestApp.View.Admin
         public AdminStudentView()
         {
             this.InitializeComponent();
+        }
+
+        private void Bttn_AddStudent_Click(object sender, RoutedEventArgs e)
+        {
+            string firstName = Tb_FirstName.Text;
+            string lastName = Tb_LastName.Text;
+            int classId = int.Parse(Tb_Grade.Text);
+            string email = Tb_Email.Text;
+            string password = Tb_Password.Text;
+
+            AdminViewModel.Instance.SetValuesForStudent(firstName, lastName, email, password, classId);
         }
     }
 }

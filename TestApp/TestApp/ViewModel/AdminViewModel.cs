@@ -25,7 +25,8 @@ namespace TestApp.ViewModel
         public List<Employee> AllEmployees { get; set; }
         public Employee TempEmployee { get; set; }
         public Student TempStudent { get; set; }
-        public ObservableCollection<Role> Roles { get; set; }
+        public List<Role> Roles { get; set; }
+        public List<string> RoleNames { get; set; }
 
         public List<Test> TestList { get; set; }
 
@@ -51,7 +52,7 @@ namespace TestApp.ViewModel
             AllEmployees = new List<Employee>(); //Store all Employees from DB
             AllUsers = new ObservableCollection<Person>();
             TempStudent = new Student(); //Used when adding a new student
-            Roles = new ObservableCollection<Role>(); //Storing roles from DB
+            Roles = new List<Role>(); //Storing roles from DB
             
         }
 
@@ -306,31 +307,56 @@ namespace TestApp.ViewModel
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
-        public async void Postemployee ()
+        public async void Postemployee (Employee employee)
         {
             try
             {
-                ApiHelper.Instance.PostEmployee(TempEmployee);
+                ApiHelper.Instance.PostEmployee(employee);
             }
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
             }
+        }
+        public void SetValuesForEmployee(string firstName, string lastName, string email, string password, EmployeeRole employeeRole)
+        {
+            TempEmployee.FirstName = firstName;
+            TempEmployee.LastName = lastName;
+            TempEmployee.Email = email;
+            TempEmployee.Password = password;
+            TempEmployee.EmployeeRole = employeeRole;
 
+            Postemployee(TempEmployee);
+        }
+        public void SetValuesForStudent (string firstName, string lastName, string email, string password, int classId)
+        {
+            TempStudent.FirstName = firstName;
+            TempStudent.LastName = lastName;
+            TempStudent.Email = email;
+            TempStudent.Password = password;
+            TempStudent.ClassId = classId;
+
+            PostStudent();
         }
         public async void GetRoles ()
         {
+            RoleNames = new List<string>();
             try
             {
                if (Roles.Count == 0)
                 {
                     Roles = await ApiHelper.Instance.GetRoles();
+                    //foreach (Role role in Roles)
+                    //{
+                    //    RoleNames.Add(role.RoleName);
+                    //}
                 }
             }
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
             }
+
         }
 
     }
