@@ -121,17 +121,17 @@ namespace TestApp.View.Admin
             textBox_Email.Text = ((Person)e.ClickedItem).Email;
         }
 
-        //private void EditInformationClick(object sender, RoutedEventArgs args)
-        //{
-        //    adminViewModel.EditUserInfo
-        //        (
-        //        chosenPerson,
-        //        int.Parse(textBlock_Id.Text),
-        //        textBox_FirstName.Text,
-        //        textBox_LastName.Text,
-        //        textBox_Email.Text
-        //        );
-        //}
+        private void EditInformationClick(object sender, RoutedEventArgs args)
+        {
+            adminViewModel.EditUserInfo
+                (
+                chosenPerson,
+                int.Parse(textBlock_Id.Text),
+                textBox_FirstName.Text,
+                textBox_LastName.Text,
+                textBox_Email.Text
+                );
+        }
 
     }
 }
