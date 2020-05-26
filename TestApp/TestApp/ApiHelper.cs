@@ -312,7 +312,7 @@ namespace TestApp
             if (response.IsSuccessStatusCode)
             {
                 jsonString = response.Content.ReadAsStringAsync().Result;
-                //Convert jsonString to list of Test objects
+                //Convert jsonString to list of SQA objects
                 var studentQuestionAnswers = JsonConvert.DeserializeObject<List<StudentQuestionAnswer>>(jsonString);
                 return studentQuestionAnswers;
             }
