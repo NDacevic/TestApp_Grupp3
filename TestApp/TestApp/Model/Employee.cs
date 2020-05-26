@@ -35,7 +35,7 @@ namespace TestApp.Model
         #endregion
 
         #region Properties
- 
+        public Role Role { get; set; } 
         public int EmployeeId { get; set; }
         public List<Student> Students { get; set; }
         #endregion
