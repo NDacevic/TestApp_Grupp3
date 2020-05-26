@@ -132,16 +132,7 @@ namespace TestApp.ViewModel
             QuestionsToFilter.Clear();
             CreatedTest.Questions.Clear();
         }
-        public void ResetQuestionList()//Used when filtering the list
-        {
-            foreach (var subject in SubjectQuestions) //Going through our list with questions.
-            {
-                if (!QuestionsToFilter.Contains(subject)) //We check if our QuestionsToFilter contain our subject question
-                {
-                    QuestionsToFilter.Add(subject);
-                }
-            }
-        }
+    
        
         public void AddQuestionToTest(Question question) //Adding question that the user choose
         {
@@ -161,6 +152,66 @@ namespace TestApp.ViewModel
         {
             CreatedTest.Questions.Remove(question);
             CreatedTest.MaxPoints -= question.PointValue;
+        }
+        public void ResetQuestionList()//Used when filtering the list
+        {
+            foreach (var subject in SubjectQuestions) //Going through our list with questions.
+            {
+                if (!QuestionsToFilter.Contains(subject)) //We check if our QuestionsToFilter contain our subject question
+                {
+                    QuestionsToFilter.Add(subject);
+                }
+            }
+        }
+        public void FilteringList(string type,string point)
+        {
+
+        }
+        public void FilterQuestionByPoint(string point, string type)
+        {
+            ResetQuestionList();
+
+            foreach (var filtered in QuestionsToFilter.ToList())  //Flytta till TCVM, skicka med sträng
+            {
+                if (point == "Alla")
+                {
+
+                }
+                else if (filtered.PointValue.ToString() != point) //If the questions Point doesnt match, we remove it.
+                {
+                    QuestionsToFilter.Remove(filtered);
+                }
+                if (type != "" && type != "Alla")
+                {
+                    if (filtered.QuestionType != type)
+                    {
+                        QuestionsToFilter.Remove(filtered);
+                    }
+                }
+            }
+        }
+        public void FilterQuestionByType(string type,string point)
+        {
+            ResetQuestionList();
+
+            foreach (var filtered in QuestionsToFilter.ToList()) //Going through our alternative list of questions
+            {
+                if (type == "Alla") //If the user choose to se all questions then we dont remove anything.
+                {
+
+                }
+                else if (filtered.QuestionType != type) //If the questions QuestionType doesnt match, we remove it.
+                {
+                  QuestionsToFilter.Remove(filtered);
+                }
+                if (point != "" && point != "Alla")
+                {
+                    if (filtered.PointValue != int.Parse(point))
+                    {
+                        QuestionsToFilter.Remove(filtered);
+                    }
+                }
+            }
         }
    
 

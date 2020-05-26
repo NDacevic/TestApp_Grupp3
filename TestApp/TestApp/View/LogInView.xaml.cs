@@ -45,7 +45,7 @@ namespace TestApp.View
             }
             else if(Tb_InsertEmail.Text == "2")
             {
-                this.Frame.Navigate(typeof(MainPage), "Lärare");
+                this.Frame.Navigate(typeof(MainPage), "Teacher");
             }
             else if (Tb_InsertEmail.Text == "3")
             {
