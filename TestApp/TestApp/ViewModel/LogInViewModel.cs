@@ -78,14 +78,14 @@ namespace TestApp.ViewModel
         /// <param name="input"></param>
         /// <param name="algorithm"></param>
         /// <returns></returns>
-        public string EncryptedPassword(string inputPassword, HashAlgorithm algorithm)
-        {
-            Byte[] passwordToBytes = Encoding.UTF8.GetBytes(inputPassword);
+        //public string EncryptedPassword(string inputPassword, HashAlgorithm algorithm)
+        //{
+        //    Byte[] passwordToBytes = Encoding.UTF8.GetBytes(inputPassword);
 
-            Byte[] hashedPasswordBytes = algorithm.ComputeHash(passwordToBytes);
+        //    Byte[] hashedPasswordBytes = algorithm.ComputeHash(passwordToBytes);
 
-            return BitConverter.ToString(hashedPasswordBytes);
-        }
+        //    return BitConverter.ToString(hashedPasswordBytes);
+        //}
         public bool CheckEmployeePassword(string insertedPassword) //Get ()
         {
             if (ActiveEmployee.Password == insertedPassword)
