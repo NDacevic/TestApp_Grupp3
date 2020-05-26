@@ -123,9 +123,19 @@ namespace TestApp.View.Admin
 
         private void EditInformationClick(object sender, RoutedEventArgs args)
         {
+            if(chosenPerson.GetType() ==  typeof(Model.Student))
             adminViewModel.EditUserInfo
                 (
-                chosenPerson,
+                (Model.Student)chosenPerson,
+                int.Parse(textBlock_Id.Text),
+                textBox_FirstName.Text,
+                textBox_LastName.Text,
+                textBox_Email.Text
+                );
+            else if(chosenPerson.GetType() == typeof(Model.Employee))
+                adminViewModel.EditUserInfo
+                (
+                (Model.Employee)chosenPerson,
                 int.Parse(textBlock_Id.Text),
                 textBox_FirstName.Text,
                 textBox_LastName.Text,

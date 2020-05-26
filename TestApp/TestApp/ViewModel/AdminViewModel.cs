@@ -162,6 +162,7 @@ namespace TestApp.ViewModel
         /// <param name="email"></param>
         public async void EditUserInfo(Student chosenStudent, int id, string firstName, string lastName, string email)
         {
+            //TODO: Add support for updating passwords
             try
             {
                 JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
@@ -186,6 +187,7 @@ namespace TestApp.ViewModel
         /// <param name="email"></param>
         public async void EditUserInfo(Employee chosenEmployee, int id, string firstName, string lastName, string email)
         {
+            //TODO: Add support for updating passwords
             try
             {
                 JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
