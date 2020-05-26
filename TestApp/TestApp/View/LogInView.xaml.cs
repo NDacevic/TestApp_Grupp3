@@ -28,7 +28,9 @@ namespace TestApp.View
         public LogInView()
         {
             this.InitializeComponent();
+            
         }
+      
         /// <summary>
         /// Method checking email and password för the user trying to log in 
         /// </summary>
@@ -36,12 +38,35 @@ namespace TestApp.View
         /// <param name="e"></param>
         private void Bttn_Login_Click(object sender, RoutedEventArgs e)
         {
-            string password = LogInViewModel.Instance.EncryptedPassword(PB_InsertPassword.ToString(), new SHA256CryptoServiceProvider());
 
+            //string password = LogInViewModel.Instance.EncryptedPassword(PB_InsertPassword.ToString(), new SHA256CryptoServiceProvider());
+            string password = PB_InsertPassword.Password;
+
+            //!!Following code is only for testing purpose.
+            if(Tb_InsertEmail.Text=="1")
+            {
+                this.Frame.Navigate(typeof(MainPage),"Elev");
+            }
+            else if(Tb_InsertEmail.Text == "2")
+            {
+                this.Frame.Navigate(typeof(MainPage), "Lärare");
+            }
+            else if (Tb_InsertEmail.Text == "3")
+            {
+                this.Frame.Navigate(typeof(MainPage), "Admin");
+            }
+            //TestCode stopped
+
+
+
+           
+
+/*
             if (Rb_Student.IsChecked == true)
             {
                 LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
                 LogInViewModel.Instance.CheckStudentPassword(password);
+                Frame.Navigate(typeof(MainPage), "Student");
                 
             }
             else if (Rb_Employee.IsChecked == true)
@@ -49,20 +74,20 @@ namespace TestApp.View
                 LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
                 LogInViewModel.Instance.CheckEmployeePassword(password);
 
-                //if(LogInViewModel.Instance.ActiveEmployee.Role = "Admin")
-                //{
-                //    Frame.Navigate(typeof(MainPageAdminViewxaml));
-                //}
-                //else if(LogInViewModel.Instance.ActiveEmployee.Role = "Teacher")
-                //{
-                //    Frame.Navigate(typeof(Teacher.MainPageTeacherView));
-                //}
+                if (LogInViewModel.Instance.ActiveEmployee.Role.RoleName == "Admin")
+                {
+                    Frame.Navigate(typeof(MainPage), "Admin");
+                }
+                else if (LogInViewModel.Instance.ActiveEmployee.Role.RoleName == "Teacher")
+                {
+                    Frame.Navigate(typeof(MainPage), "Teacher");
+                }
             }
             else
             {
                 new MessageDialog("Vänligen klicka i om du är student eller personal, tack!");
             }
-              
+             */ 
         }
     }
 }

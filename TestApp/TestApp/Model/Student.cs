@@ -22,6 +22,10 @@ namespace TestApp.Model
             ClassId = classId;
             Tests = tests;
         }
+        public Student ()
+        {
+
+        }
 
         #endregion
 

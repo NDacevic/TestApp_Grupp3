@@ -6,9 +6,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="Silver" >
+    <!--Background color shall change, it's for testing-->
 
     <Grid>
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center">
+            
+            <Button Content="Se prov"
+                    x:Name="availableTest_btn"
+                    Click="StudentNavigate_btn"
+                    Margin="0,0,0,10"/>
+            
+            <Button Content="Se historik"
+                    x:Name="historicalTest_btn"
+                    Click="StudentNavigate_btn"
+                    Margin="0,0,0,10"/>
+            
+            <Button Content="Logga ut"
+                    x:Name="logOut_btn"
+                    Click="StudentNavigate_btn"/>
+
+        </StackPanel>
 
     </Grid>
 </Page>

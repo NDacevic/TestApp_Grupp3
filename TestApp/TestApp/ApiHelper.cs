@@ -26,7 +26,6 @@ namespace TestApp
         private static readonly object padlock = new object();
 
         private HttpClient httpClient = new HttpClient();
-        private string url;
         private string jsonString;
 
         #endregion
@@ -225,7 +224,7 @@ namespace TestApp
                 //Specify that the content is a Json string
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                //constructn the request
+                //construct the request
                 var request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"tests/{id}"))
                 {
                     Content = content
@@ -277,9 +276,32 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void PostTestResult()
+        public async void PostTestResult(TestResult testResult)
         {
-            throw new NotImplementedException();
+            //Convert the object to a json string.
+            jsonString = JsonConvert.SerializeObject(testResult);
+
+            //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
+            using (HttpContent content = new StringContent(jsonString))
+            {
+                //Set the type of content
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                //Call the api and send the Json string.
+                HttpResponseMessage response = await httpClient.PostAsync("TestResults", content);
+
+                //Check if it is successfull. In that case display a message telling the user.
+                //Otherwise throw an error and tell the user that the question was not posted.
+                if (response.IsSuccessStatusCode)
+                {
+                    await new MessageDialog("Resultatet för testet har sparats").ShowAsync();
+                }
+                else
+                {
+                    Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                    throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                }
+            }
         }
 
         public async void PostQuestionAnswers(List<StudentQuestionAnswer> questionAnswers)
@@ -300,7 +322,7 @@ namespace TestApp
                 //Otherwise throw an error and tell the user that the question was not posted.
                 if (response.IsSuccessStatusCode)
                 {
-                    await new MessageDialog("Resultatet har sparats").ShowAsync();
+                    await new MessageDialog("Resultatet för varje individuell fråga har sparats").ShowAsync();
                 }
                 else
                 {
@@ -349,6 +371,41 @@ namespace TestApp
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
+            }
+        }
+
+        public async void PatchStudent(int id, JsonPatchDocument<Person> patchDocStudent)
+        {
+            //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter
+            try
+            {
+                //define method as PATCH
+                HttpMethod method = new HttpMethod("PATCH");
+             
+                //Make the json
+                jsonString = JsonConvert.SerializeObject(patchDocStudent);
+
+                //Configure the request by inputting the request method and the url.
+                HttpRequestMessage request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"students/{id}"));
+                
+                //Set the jsonString as the content. 
+                request.Content = new StringContent(jsonString);
+
+                //Send it off to the API and wait for the response
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await new MessageDialog("Uppdaterad information sparad").ShowAsync();
+                    }
+                    else
+                        throw new HttpRequestException($"Status: {response.StatusCode}, {response.ReasonPhrase}");
+                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+
             }
         }
 
@@ -402,6 +459,41 @@ namespace TestApp
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
+            }
+        }
+
+        public async void PatchEmployee(int id, JsonPatchDocument<Person> patchDocEmployee)
+        {
+            //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter
+            try
+            {
+                //define method as PATCH
+                HttpMethod method = new HttpMethod("PATCH");
+
+                //Make the json
+                jsonString = JsonConvert.SerializeObject(patchDocEmployee);
+
+                //Configure the request by inputting the request method and the url.
+                HttpRequestMessage request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"employees/{id}"));
+
+                //Set the jsonString as the content. 
+                request.Content = new StringContent(jsonString);
+
+                //Send it off to the API and wait for the response
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await new MessageDialog("Uppdaterad information sparad").ShowAsync();
+                    }
+                    else
+                        throw new HttpRequestException($"Status: {response.StatusCode}, {response.ReasonPhrase}");
+                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+
             }
         }
 

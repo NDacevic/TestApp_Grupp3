@@ -125,10 +125,16 @@
     <Compile Include="Model\TestResult.cs" />
     <Compile Include="ViewModel\LogInViewModel.cs" />
     <Compile Include="ViewModel\AdminViewModel.cs" />
+    <Compile Include="View\Admin\AdminEmployeeView.xaml.cs">
+      <DependentUpon>AdminEmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Admin\AdminStudentView.xaml.cs">
+      <DependentUpon>AdminStudentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Admin\RemoveUserView.xaml.cs">
       <DependentUpon>RemoveUserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DeleteTestView.xaml.cs">
+    <Compile Include="View\Admin\DeleteTestView.xaml.cs">
       <DependentUpon>DeleteTestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyDataTemplateSelector.cs" />
@@ -201,11 +207,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\Admin\AdminEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Admin\AdminStudentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Admin\RemoveUserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DeleteTestView.xaml">
+    <Page Include="View\Admin\DeleteTestView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

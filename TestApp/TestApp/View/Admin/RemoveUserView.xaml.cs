@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,6 +26,7 @@ namespace TestApp.View.Admin
     public sealed partial class RemoveUserView : Page
     {
         AdminViewModel adminViewModel = AdminViewModel.Instance;
+        Person chosenPerson;
         public RemoveUserView()
         {
             this.InitializeComponent();
@@ -65,13 +67,11 @@ namespace TestApp.View.Admin
                         adminViewModel.DisplayEmployeeById(int.Parse(SearchIdTxtBox.Text));
                 }
             }
-           
         }
 
         private async void DeleteUser_btn_Click(object sender, RoutedEventArgs e)
         {
-            string user;
-            var selectedUser = DisplayUsersLV.SelectedItems; //The selected user is saved here
+           
             ContentDialog confirmButton = new ContentDialog() //Make sure that the user is aware of the action
             {
                 Title = "Ta bort",
@@ -83,24 +83,55 @@ namespace TestApp.View.Admin
 
             if (result == ContentDialogResult.Primary) //If they are ok we send the users id forward for deletion
             {
-                if(StudentRadioBtn.IsChecked==true)
+                DeleteUser();
+            }
+        }
+
+        public void DeleteUser()
+        {
+            var selectedUser = DisplayUsersLV.SelectedItems; //The selected user is saved here
+            if (StudentRadioBtn.IsChecked == true)
+            {
+                foreach (Model.Student student in selectedUser)
                 {
-                    user = "Elev";
-                    foreach(Model.Student student in selectedUser)
-                    {
-                        adminViewModel.DeleteUser(student.StudentId, user);
-                    }
+                    adminViewModel.DeleteStudent(student);
                 }
-                else if(EmployeeRadioBtn.IsChecked==true)
+            }
+            else if (EmployeeRadioBtn.IsChecked == true)
+            {
+                foreach (Employee employee in selectedUser)
                 {
-                    user = "Anställd";
-                    foreach (Employee employee in selectedUser)
-                    {
-                        adminViewModel.DeleteUser(employee.EmployeeId, user);
-                    }
+                    adminViewModel.DeleteEmployee(employee);
                 }
             }
         }
-       
+
+
+        private void listView_ChoosePersonClick(object sender, ItemClickEventArgs e)
+        {
+            chosenPerson = (Person)e.ClickedItem;
+
+            if(e.ClickedItem.GetType() == typeof(Model.Student))
+                textBlock_Id.Text = $"ID: {((Model.Student)e.ClickedItem).StudentId}";
+            else if (e.ClickedItem.GetType() == typeof(Model.Employee))
+                textBlock_Id.Text = $"ID: {((Model.Employee)e.ClickedItem).EmployeeId}";
+
+            textBox_FirstName.Text = ((Person)e.ClickedItem).FirstName;
+            textBox_LastName.Text = ((Person)e.ClickedItem).LastName;
+            textBox_Email.Text = ((Person)e.ClickedItem).Email;
+        }
+
+        //private void EditInformationClick(object sender, RoutedEventArgs args)
+        //{
+        //    adminViewModel.EditUserInfo
+        //        (
+        //        chosenPerson,
+        //        int.Parse(textBlock_Id.Text),
+        //        textBox_FirstName.Text,
+        //        textBox_LastName.Text,
+        //        textBox_Email.Text
+        //        );
+        //}
+
     }
 }
