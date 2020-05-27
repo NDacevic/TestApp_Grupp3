@@ -36,17 +36,17 @@ namespace TestApp
         {
             if (e.Parameter == "Elev")
             {
-                mainMenuFrame.Navigate(typeof(MainPageStudentView),mainFrame);
+                mainMenuFrame.Navigate(typeof(StudentMenuPage),mainFrame);
                 mainFrame.Navigate(typeof(AvailableTestsView));
             }
             else if (e.Parameter == "Teacher")
             {
-                mainMenuFrame.Navigate(typeof(MainPageTeacherView), mainFrame);
+                mainMenuFrame.Navigate(typeof(TeacherMenuPage), mainFrame);
                 mainFrame.Navigate(typeof(GradeTestView));
             }
             else if (e.Parameter == "Admin")
             {
-                mainMenuFrame.Navigate(typeof(MainPageAdminViewxaml), mainFrame);
+                mainMenuFrame.Navigate(typeof(AdminMenuPage), mainFrame);
                 mainFrame.Navigate(typeof(RemoveUserView)); //This is going to change to "AddUserPage" instead
             }
 

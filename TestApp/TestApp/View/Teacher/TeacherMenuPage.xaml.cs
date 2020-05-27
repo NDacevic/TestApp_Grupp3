@@ -15,15 +15,15 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace TestApp.View
+namespace TestApp.View.Teacher
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPageAdminViewxaml : Page
+    public sealed partial class TeacherMenuPage : Page
     {
         private Frame mainFrame;
-        public MainPageAdminViewxaml()
+        public TeacherMenuPage()
         {
             this.InitializeComponent();
         }
@@ -33,24 +33,37 @@ namespace TestApp.View
         }
 
 
-        private void AdminNavigate_btn(object sender, RoutedEventArgs e)
+        private void TeacherNavigate_btn(object sender, RoutedEventArgs e) //Must be a better way to check wich one is pressed than all these if/if else
         {
-            if (sender == addUser_btn)
+            if (sender == createQuestion_btn)
             {
-                //Not yet implemented
+                mainFrame.Navigate(typeof(CreateQuestionView));
             }
-            else if (sender == editUser_btn)
+            else if (sender == createTest_btn)
             {
-                mainFrame.Navigate(typeof(Admin.RemoveUserView));
+                mainFrame.Navigate(typeof(CreateTestView));
+            }
+            else if(sender == gradeTest_btn)
+            {
+                mainFrame.Navigate(typeof(GradeTestView));
+            }
+            else if (sender == studentResult_btn)
+            {
+                mainFrame.Navigate(typeof(StudentResultView));
             }
             else if (sender == removeTest_btn)
             {
                 mainFrame.Navigate(typeof(DeleteTestView));
             }
+            else if (sender == removeQuestion_btn)
+            {
+                mainFrame.Navigate(typeof(RemoveQuestionView));
+            }
             else if (sender == logOut_btn)
             {
                 NavigationHelper.Instance.GlobalFrame.Navigate(typeof(LogInView));
             }
+
         }
     }
 }

@@ -143,7 +143,7 @@ namespace TestApp.ViewModel
         {
             if(AllStudents.Count==0)
             {
-                AllStudents = await ApiHelper.Instance.GetAllStudents();
+                AllStudents = await ApiHelper.Instance.GetAllStudentsTestsQuestions();
             }
             foreach(Person p in AllStudents)
             {
