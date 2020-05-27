@@ -20,6 +20,10 @@ namespace TestApp.Model
             RoleId = roleId;
             RoleName = roleName;
         }
+        public Role ()
+        {
+
+        }
         #endregion
 
         #region Delegates
