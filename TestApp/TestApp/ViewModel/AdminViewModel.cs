@@ -143,7 +143,7 @@ namespace TestApp.ViewModel
         {
             if(AllStudents.Count==0)
             {
-                AllStudents = await ApiHelper.Instance.GetAllStudents();
+                AllStudents = await ApiHelper.Instance.GetAllStudentsTestsQuestions();
             }
             foreach(Person p in AllStudents)
             {
@@ -310,6 +310,14 @@ namespace TestApp.ViewModel
             }
         }
 
+
+        /////////OBS OBS OBS - Metoderna nedan ska flyttas till en annan viewmodel/////
+      
+        public void DeleteQuestion(Question question)
+        {
+            ApiHelper.Instance.DeleteQuestion(question.QuestionID);
+            TeacherCreateViewModel.Instance.QuestionsToFilter.Remove(question);
+        }
 
 
     }

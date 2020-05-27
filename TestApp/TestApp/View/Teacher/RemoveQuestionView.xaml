@@ -1,0 +1,97 @@
+﻿<Page
+    x:Class="TestApp.View.Teacher.RemoveQuestionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TestApp.View.Teacher"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:TestApp.Model"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <StackPanel Orientation="Horizontal"
+                        Margin="40,0,0,0"
+                        >
+                <TextBlock Text="Välj ämne för att få fram frågorna"
+                           Margin="0,0,0,0"/>
+            
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Margin="40,0,0,0"
+>
+
+                <ComboBox Width="104" 
+                          ItemsSource="{x:Bind teacherCVM.CourseName }"
+                          x:DefaultBindMode="OneWay"
+                          PlaceholderText="Välj ämne"
+                          x:Name="ChooseCourseComboBox"
+                          SelectionChanged="ChooseCourseComboBox_SelectionChanged"/>
+
+               
+               
+                <Button   x:Name="DeleteQuestion_btn"
+                          Margin="30,0,0,0"
+                          Content="Radera fråga"
+                          Click="DeleteQuestion_btn_Click"/>
+
+            </StackPanel>
+
+
+
+        </StackPanel>
+
+        <ListView BorderBrush="Black"
+                  BorderThickness="2"
+                  Margin="20,100,0,150"
+                  ItemsSource="{x:Bind teacherCVM.QuestionsToFilter}"
+                  x:Name="DisplayQuestionsLV"
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="displayQuestionsLV" x:DataType="data:Question" >
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" Width="400" Margin="0,20,0,0" >
+                            <TextBlock>
+                            <Run Text="Fråge ID: "/>
+                            <Run Text="{x:Bind QuestionID}"/>
+                            </TextBlock>
+                            <TextBlock>
+                            <Run Text="Typ av fråga: "/>
+                            <Run Text="{x:Bind QuestionType}"/>
+                            </TextBlock>
+                            <TextBlock>
+                            <Run Text="Fråga: "/>
+                            <Run Text="{x:Bind QuestionText }"/>
+                            </TextBlock>
+                            <TextBlock>
+                            <Run Text="Alternativ 1: "/>
+                            <Run Text="{x:Bind CorrectAnswer }"/>
+                            </TextBlock>
+                            <TextBlock>
+                            <Run Text="Alternativ 2: "/>
+                            <Run Text="{x:Bind IncorrectAnswer1 }"/>
+                            </TextBlock>
+                            <TextBlock>
+                            <Run Text="Alternativ 3: "/>
+                            <Run Text="{x:Bind IncorrectAnswer1 }"/>
+                            </TextBlock>
+                            <TextBlock>
+                            <Run Text="Frågans poängvärde: "/>
+                            <Run Text="{x:Bind PointValue }"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+    </Grid>
+</Page>

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestApp.Model;
+using TestApp.View;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -21,6 +22,7 @@ namespace TestApp.ViewModel
         #region Fields
         private static TeacherGradeTestViewModel instance = null;
         private static readonly object padlock = new object();
+        private ContentDialog loadScreen = new LoadDataView();
         #endregion
 
         #region Constructors
@@ -63,7 +65,11 @@ namespace TestApp.ViewModel
         /// <returns></returns>
         public async Task DownloadStudents()
         {
+
+            loadScreen.ShowAsync();
             allStudents = await ApiHelper.Instance.GetAllStudents();
+            loadScreen.Hide();
+
         }
 
         /// <summary>

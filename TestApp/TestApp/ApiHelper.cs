@@ -271,9 +271,20 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void DeleteQuestion()
+        public async void DeleteQuestion(int id)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = await httpClient.DeleteAsync($"Questions/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                await new MessageDialog("Frågan har raderats").ShowAsync();
+
+            }
+            else
+            {
+                Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+            }
         }
 
         public async void PostTestResult(TestResult testResult)
@@ -415,18 +426,28 @@ namespace TestApp
             return student;
         }
 
-        public async Task<List<Student>> GetAllStudents()
+        public async Task<List<Student>> GetAllStudentsTestsQuestions()
         {
             List<Student> studentList = new List<Student>();
-            using (HttpResponseMessage response = await httpClient.GetAsync("FullStudentsTestsQuestions"))
+            try
             {
-                if (response.IsSuccessStatusCode)
+                using (HttpResponseMessage response = await httpClient.GetAsync("FullStudentsTestsQuestions"))
                 {
-                    jsonString = await response.Content.ReadAsStringAsync();
+                    if (response.IsSuccessStatusCode)
+                    {
+                        jsonString = await response.Content.ReadAsStringAsync();
 
-                    studentList = JsonConvert.DeserializeObject<List<Student>>(jsonString);
+                        studentList = JsonConvert.DeserializeObject<List<Student>>(jsonString);
+                    }
+                    else
+                        throw new HttpRequestException("Ingen uppkoppling till servern. Kontakta administratör");
                 }
             }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
+
             return studentList;
         }
         
