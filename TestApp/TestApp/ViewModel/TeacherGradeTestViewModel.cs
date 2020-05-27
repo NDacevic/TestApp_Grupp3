@@ -65,9 +65,11 @@ namespace TestApp.ViewModel
         /// <returns></returns>
         public async Task DownloadStudents()
         {
+
             loadScreen.ShowAsync();
             allStudents = await ApiHelper.Instance.GetAllStudents();
             loadScreen.Hide();
+
         }
 
         /// <summary>
