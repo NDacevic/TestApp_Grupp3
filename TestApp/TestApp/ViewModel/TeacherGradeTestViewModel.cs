@@ -85,7 +85,7 @@ namespace TestApp.ViewModel
             {
                 foreach(var studentTest in student.Tests)
                 {
-                    if(!studentTest.IsGraded)
+                    if(studentTest.RecievedPoints == null)
                     {
                         if (!ungradedTests.Any(test => test.TestId == studentTest.TestId))
                             ungradedTests.Add(studentTest);
@@ -137,6 +137,7 @@ namespace TestApp.ViewModel
         {
             List<StudentQuestionAnswer> gradedQuestions = new List<StudentQuestionAnswer>();
             Question question;
+            int numberOfQuestionItems = listView_QuestionsForStudentAndTest.Items.Count;
 
             foreach (var item in listView_QuestionsForStudentAndTest.Items)
             {
@@ -160,7 +161,7 @@ namespace TestApp.ViewModel
             var success = await ApiHelper.Instance.UpdateStudentQuestionAnswer(gradedQuestions);
 
             if (success && 
-                gradedQuestions.Count == listView_QuestionsForStudentAndTest.Items.Count)
+                gradedQuestions.Count == numberOfQuestionItems)
             {
                 var points = await GetTotalPoints(chosenStudent, chosenTestId);
 
