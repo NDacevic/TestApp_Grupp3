@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TestApp.View.Admin"
+    xmlns:data="using:TestApp.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -16,22 +17,13 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <StackPanel Margin="40">
                 <TextBlock 
                 Text="Lägg till personal" 
                 FontSize="32"/>
-                <StackPanel Orientation="Horizontal" Margin="0,50,0,0"  Spacing="40">
-                    <TextBlock
-                    Text="PersonalId: "
-                    FontSize="20"
-                    Width="200"/>
-                    <TextBox
-                    PlaceholderText="PersonalId"
-                    FontSize="20"/>
-                </StackPanel>
+                
                 <StackPanel Orientation="Horizontal" Spacing="40">
                     <TextBlock 
                     Text="Förnamn: " 
@@ -40,9 +32,11 @@
                     Width="100"/>
                     <TextBox
                     x:Name="Tb_FirstName" 
-                    Text="{x:Bind }"
+                    Text=""
+                    x:DefaultBindMode="TwoWay"
                     FontSize="20"
-                    Margin="0,50,0,0"/>
+                    Margin="0,50,0,0"
+                    Width="200"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="40">
                     <TextBlock 
@@ -51,8 +45,10 @@
                     Width="100"/>
                     <TextBox
                     x:Name="Tb_LastName"
-                    Text="{x:Bind }"
-                    FontSize="20"/>
+                    Text=""
+                    x:DefaultBindMode="TwoWay"
+                    FontSize="20"
+                    Width="200"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="40">
                     <TextBlock 
@@ -61,8 +57,10 @@
                     Width="100"/>
                     <TextBox
                     x:Name="Tb_Email"
-                    Text="{x:Bind }"
-                    FontSize="20"/>
+                    Text=""
+                    x:DefaultBindMode="TwoWay"
+                    FontSize="20"
+                    Width="200"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="40">
                     <TextBlock 
@@ -71,23 +69,29 @@
                     Width="100"/>
                     <TextBox
                     x:Name="Tb_Password"
-                    Text="{x:Bind }"
-                    FontSize="20"/>
+                    Text=""
+                    x:DefaultBindMode="TwoWay"
+                    FontSize="20"
+                    Width="200"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="40">
                     <TextBlock 
                     Text="Roll: " 
                     FontSize="20"
                     Width="100"/>
-                    <TextBox
-                    x:Name="Tb_Role"
-                    Text="{x:Bind }"
-                    FontSize="20"/>
+                    <ComboBox
+                        x:Name="Cb_EmployeeRole"
+                        PlaceholderText="Välj roll"
+                        ItemsSource="{x:Bind data:AdminViewModel.Instance.RoleNames}"
+                        x:DefaultBindMode="OneWay"
+                        Width="200"/>
                 </StackPanel>
                 <Button
+                    x:Name="Bttn_AddEmployee"
                     Content="Lägg till personal" 
                     Padding="15,10"
-                    Margin="0,30,0,0"/>
+                    Margin="0,30,0,0"
+                    Click="Bttn_AddEmployee_Click"/>
             </StackPanel>
 
         </Grid>

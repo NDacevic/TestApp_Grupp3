@@ -19,6 +19,7 @@ namespace TestApp.Model
         {
             EmployeeId = employeeId;
             Students = new List<Student>();
+            Role = new Role();
         }
 
         public Employee() : base()

@@ -376,9 +376,31 @@ namespace TestApp
             return testResults;
         }
 
-        public void PostStudent()
+        public async void PostStudent(Student student)
         {
-            throw new NotImplementedException();
+            try
+            {
+                jsonString = JsonConvert.SerializeObject(student);
+                HttpContent httpContent = new StringContent(jsonString);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                HttpResponseMessage respons = await httpClient.PostAsync("students", httpContent);
+
+                //Check if succesfull
+                if (respons.IsSuccessStatusCode)
+                {
+                    await new MessageDialog("Student tillagd").ShowAsync();
+                }
+                else
+                {
+                    Debug.WriteLine($"Http Error: {respons.StatusCode}. {respons.ReasonPhrase}");
+                    throw new HttpRequestException("Kunde inte sparas, vänlig felsök alternativt försök igen.");
+                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
         }
 
         public async Task<bool> PatchStudentAsync(int id, JsonPatchDocument<Person> patchDocStudent)
@@ -451,10 +473,35 @@ namespace TestApp
             return studentList;
         }
         
-
-        public void PostEmployee()
+        /// <summary>
+        /// Post new employee created by Admin 
+        /// </summary>
+        /// <param name="employee"></param>
+        public async void PostEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            try
+            {
+                jsonString = JsonConvert.SerializeObject(employee);
+                HttpContent httpContent = new StringContent(jsonString);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
+                HttpResponseMessage respons = await httpClient.PostAsync("employees", httpContent);
+
+                //Check if succesfull
+                if (respons.IsSuccessStatusCode)
+                {
+                    await new MessageDialog("Personal tillagd").ShowAsync();
+                }
+                else
+                {
+                    Debug.WriteLine($"Http Error: {respons.StatusCode}. {respons.ReasonPhrase}");
+                    throw new HttpRequestException("Kunde inte sparas, vänlig felsök alternativt försök igen.");
+                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
         }
 
         public async Task<bool> PatchEmployeeAsync(int id, JsonPatchDocument<Person> patchDocEmployee)
@@ -582,6 +629,16 @@ namespace TestApp
                 await new MessageDialog(exc.Message).ShowAsync();
                 return false;
             }
+        }
+        /// <summary>
+        /// Gets all roles from DB
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<Role>> GetRoles ()
+        {
+            jsonString = await httpClient.GetStringAsync("Roles");
+            var roles = JsonConvert.DeserializeObject<List<Role>>(jsonString);
+            return roles;
         }
         #endregion
     }
