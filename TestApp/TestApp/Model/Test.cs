@@ -63,6 +63,7 @@ namespace TestApp.Model
         public bool IsGraded { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public List<StudentQuestionAnswer> Result { get; set; } = new List<StudentQuestionAnswer>();
+        public int? RecievedPoints { get; set; } //The TestResult object is impossible to get from the API because of "a possible object cycle" so we use this to store the result instead
         public int MaxPoints
         {
             get { return maxPoints; }
