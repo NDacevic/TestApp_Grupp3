@@ -5,6 +5,7 @@
     xmlns:local="using:TestApp.View"
     xmlns:l="using:TestApp"
     xmlns:data="using:TestApp.Model"
+    xmlns:data2="using:TestApp.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -19,13 +20,20 @@
             x:Key="MultipleChoiceAnswerItemTemplate"
             x:DataType="data:Question">
             <StackPanel>
-                <TextBlock 
-                    Name="TxtBl_QuestionID"
-                    Margin="0,20,0,0">
-                    <Run Text="Fråga "/>
-                    <Run Text="{x:Bind QuestionID}"/>
-                    <Run Text=":"/>
-                </TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Fråga"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind RowInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="av"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind data2:StudentViewModel.Instance.NumberOfQuestionsInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                </StackPanel>
                 
                 <TextBlock 
                     Name="TxtBl_Question" 
@@ -64,13 +72,20 @@
             x:Key="TextAnswerItemTemplate"
             x:DataType="data:Question">
             <StackPanel>
-                <TextBlock 
-                    Name="TxtBl_QuestionID"
-                    Margin="0,20,0,0">
-                    <Run Text="Fråga "/>
-                    <Run Text="{x:Bind QuestionID}"/>
-                    <Run Text=":"/>
-                </TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Fråga"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind RowInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="av"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind data2:StudentViewModel.Instance.NumberOfQuestionsInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                </StackPanel>
 
                 <TextBlock 
                     Name="TxtBl_Question" 

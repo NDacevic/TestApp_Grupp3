@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ using Windows.UI.Xaml.Media;
 
 namespace TestApp.ViewModel
 {
-    public class StudentViewModel
+    public class StudentViewModel : INotifyPropertyChanged
     {
         #region Constant Fields
         #endregion
@@ -27,6 +28,9 @@ namespace TestApp.ViewModel
         private TextBlock txtBl_TestTimer;          //used to continuously update the timer
         private Button bttn_SubmitTest;             //used to disable the button when the timer reaches 0
         private Test selectedTest;
+        private int numberOFQuestionsInTest;
+        
+        public event PropertyChangedEventHandler PropertyChanged;
 
 
         #endregion
@@ -63,10 +67,36 @@ namespace TestApp.ViewModel
         //Property used to store all currently active tests, later used to populate the Listview ActiveTests on AvailableTestsView
         public ObservableCollection<Test> ActiveTests { get; internal set; }
 
+        //Binded to the textboxes in a test, for each question, that states how many questions are in the test
+        public int NumberOfQuestionsInTest {
+            get => numberOFQuestionsInTest;
+            set
+            {
+                numberOFQuestionsInTest = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NumberOfQuestionsInTest"));
+            }
+        } 
         public Student ActiveStudent { get; set; }
         #endregion
 
         #region Methods
+
+        public void PopulateQuestionRelatedTextBoxes(Test selectedTest)
+        {
+            //Initialize with "question 0" to be able to increment, and to reset between tests
+            NumberOfQuestionsInTest = 0;
+
+            //Catch the selectedTest and store localy to be used in other methods
+            this.selectedTest = selectedTest;
+
+            //Loop through all questions in the test and set the correct rownumbers for each question
+            for (int i = 0; i < selectedTest.Questions.Count; i++)
+            {
+                selectedTest.Questions[i].RowInTest = i + 1;
+                NumberOfQuestionsInTest++;
+            }
+        }
+
         /// <summary>
         /// Saves all student answers
         /// </summary>
@@ -153,12 +183,11 @@ namespace TestApp.ViewModel
         /// </summary>
         /// <param name="selectedTest"></param>
         /// <param name="TxtBl_TestTimer"></param>
-        public void DispatcherTimerSetup(Test selectedTest, TextBlock txtBl_TestTimer, ListView lv_allQuestions, Button bttn_SubmitTest)
+        public void DispatcherTimerSetup(TextBlock txtBl_TestTimer, ListView lv_allQuestions, Button bttn_SubmitTest)
         {
             this.txtBl_TestTimer = txtBl_TestTimer;
             this.lv_allQuestions = lv_allQuestions;
             this.bttn_SubmitTest = bttn_SubmitTest;
-            this.selectedTest = selectedTest;
 
             //Registers the test's start time
             TimeSpan startTime = selectedTest.StartDate.TimeOfDay;
