@@ -34,18 +34,14 @@ namespace TestApp.View.Admin
             try
             {
                 AdminViewModel.Instance.SetValuesForStudent(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, Tb_Password.Text, int.Parse(Tb_Grade.Text));
-                //AdminViewModel.Instance.SetValuesForStudent(firstName, lastName, email, password, classId);
+              
             }
             catch (Exception)
             {
                 await new MessageDialog("Data var felaktigt inmatad, vänligen försök igen.").ShowAsync();
                 return;               
             }
-            //string firstName = Tb_FirstName.Text;
-            //string lastName = Tb_LastName.Text;            
-            //string email = Tb_Email.Text;
-            //string password = Tb_Password.Text;
-            //int classId = int.Parse(Tb_Grade.Text);
+
         }
     }
 }
