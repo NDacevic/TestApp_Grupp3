@@ -11,8 +11,13 @@
     <Grid>
         <StackPanel Orientation="Vertical"
                     VerticalAlignment="Center">
-            <Button Content="Lägg till användare"
-                    x:Name="addUser_btn"
+            <Button Content="Lägg till personal"
+                    x:Name="addEmployee_btn"
+                    Click="AdminNavigate_btn"
+                    Margin="0,0,0,10"/>
+            
+            <Button Content="Lägg till elev"
+                    x:Name="addStudent_btn"
                     Click="AdminNavigate_btn"
                     Margin="0,0,0,10"/>
 
