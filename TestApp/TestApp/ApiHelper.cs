@@ -531,7 +531,7 @@ namespace TestApp
         /// The list must have at least one object in it
         /// </summary>
         /// <param name=""></param>
-        public async void UpdateStudentQuestionAnswer(List<StudentQuestionAnswer> sqaList)
+        public async Task<bool> UpdateStudentQuestionAnswer(List<StudentQuestionAnswer> sqaList)
         {
             try
             {
@@ -548,6 +548,7 @@ namespace TestApp
                     if (response.IsSuccessStatusCode)
                     {
                         await new MessageDialog("Rättningen sparad!").ShowAsync();
+                        return true;
                     }
                     else
                     {
@@ -558,6 +559,7 @@ namespace TestApp
             catch(Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
+                return false;
             }
         }
         #endregion
