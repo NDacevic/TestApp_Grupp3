@@ -20,10 +20,10 @@ namespace TestApp.View.Student
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPageStudentView : Page
+    public sealed partial class StudentMenuPage : Page
     {
         private Frame mainFrame;
-        public MainPageStudentView()
+        public StudentMenuPage()
         {
             this.InitializeComponent();
         }
