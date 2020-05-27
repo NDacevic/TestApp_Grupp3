@@ -271,9 +271,20 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public void DeleteQuestion()
+        public async void DeleteQuestion(int id)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = await httpClient.DeleteAsync($"Questions/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                await new MessageDialog("Frågan har raderats").ShowAsync();
+
+            }
+            else
+            {
+                Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+            }
         }
 
         public async void PostTestResult(TestResult testResult)
