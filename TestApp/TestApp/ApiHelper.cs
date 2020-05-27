@@ -453,7 +453,7 @@ namespace TestApp
             List<Student> studentList = new List<Student>();
             try
             {
-                using (HttpResponseMessage response = await httpClient.GetAsync("Students")) //Changed this to correct call.Johnny
+                using (HttpResponseMessage response = await httpClient.GetAsync("FullStudentsTestsQuestions"))
                  {
                     if (response.IsSuccessStatusCode)
                     {
