@@ -36,7 +36,7 @@ namespace TestApp.View.Teacher
         ObservableCollection<Model.Question> questionsForStudentAndTestList = new ObservableCollection<Question>();
 
         int chosenTestId = 0;
-        int chosenStudentId = 0;
+        Model.Student chosenStudent = new Model.Student();
 
         public GradeTestView()
         {
@@ -82,8 +82,7 @@ namespace TestApp.View.Teacher
         /// <param name="e"></param>
         private void SelectStudentToGrade(object sender, ItemClickEventArgs e)
         {
-            Model.Student chosenStudent = ((Model.Student)e.ClickedItem);
-            chosenStudentId = ((Model.Student)e.ClickedItem).StudentId;
+            chosenStudent = ((Model.Student)e.ClickedItem);
 
             scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
             scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Visible;
@@ -100,7 +99,7 @@ namespace TestApp.View.Teacher
         /// <param name="e"></param>
         private void FinishGrading(object sender, RoutedEventArgs e)
         {
-            gradeInstance.FinishGradingTest(listView_QuestionsForStudentAndTest, chosenStudentId, chosenTestId);
+            gradeInstance.FinishGradingTest(listView_QuestionsForStudentAndTest, chosenStudent, chosenTestId);
 
             ungradedTests.Clear();
             studentsWithTestList.Clear();

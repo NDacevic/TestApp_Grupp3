@@ -118,7 +118,6 @@ namespace TestApp.ViewModel
             {
                 if (question.QuestionAnswer.IsCorrect == null)
                     questionsForStudentAndTestList.Add(question);
-
             }
         }
         /// <summary>
@@ -128,7 +127,7 @@ namespace TestApp.ViewModel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void FinishGradingTest(ListView listView_QuestionsForStudentAndTest, int chosenStudentId, int chosenTestId)
+        public async void FinishGradingTest(ListView listView_QuestionsForStudentAndTest, Student chosenStudent, int chosenTestId)
         {
             List<StudentQuestionAnswer> gradedQuestions = new List<StudentQuestionAnswer>();
             Question question;
@@ -138,23 +137,51 @@ namespace TestApp.ViewModel
                 question = (Question)item;
                 var container = listView_QuestionsForStudentAndTest.ContainerFromItem(item);
                 var children = AllChildren(container);
-                foreach (var x in children)
+                foreach (var control in children)
                 {
-                    RadioButton button = (RadioButton)x;
+                    RadioButton button = (RadioButton)control;
                     if (button.Name == "radioButton_QuestionCorrect" && button.IsChecked == true)
                     {
-                        gradedQuestions.Add(new StudentQuestionAnswer(chosenStudentId, chosenTestId, question.QuestionID, question.QuestionAnswer.Answer, true) { }); //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
+                        gradedQuestions.Add(new StudentQuestionAnswer(chosenStudent.StudentId, chosenTestId, question.QuestionID, question.QuestionAnswer.Answer, true) { }); //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
                     }
                     else if (button.Name == "radioButton_QuestionIncorrect" && button.IsChecked == true)
                     {
-                        gradedQuestions.Add(new StudentQuestionAnswer(chosenStudentId, chosenTestId, question.QuestionID, question.QuestionAnswer.Answer, false) { }); //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
+                        gradedQuestions.Add(new StudentQuestionAnswer(chosenStudent.StudentId, chosenTestId, question.QuestionID, question.QuestionAnswer.Answer, false) { }); //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
                     }
                 }
             }
 
-            ApiHelper.Instance.UpdateStudentQuestionAnswer(gradedQuestions);
+            var success = await ApiHelper.Instance.UpdateStudentQuestionAnswer(gradedQuestions);
+
+            if (success && 
+                gradedQuestions.Count == listView_QuestionsForStudentAndTest.Items.Count)
+            {
+                var points = await GetTotalPoints(chosenStudent, chosenTestId);
+
+                TestResult result = new TestResult(chosenStudent.StudentId, chosenTestId, points);
+                ApiHelper.Instance.PostTestResult(result);
+            }
         }
 
+        private async Task<int> GetTotalPoints(Model.Student chosenStudent, int chosenTestId)
+        {
+            List<StudentQuestionAnswer> studentQuestionAnswerList = await ApiHelper.Instance.GetAllStudentQuestionAnswers();
+            var filteredSQAList = studentQuestionAnswerList.Where(sqa => sqa.StudentId == chosenStudent.StudentId && sqa.TestId == chosenTestId).Select(sqa => sqa).ToList();
+
+            var questionList = chosenStudent.Tests.Where(t => t.TestId == chosenTestId).Select(t => t.Questions).FirstOrDefault();
+
+            var totalPoints = 0;
+            foreach(var sqa in filteredSQAList)
+            {
+                Question q = questionList.FirstOrDefault(x => x.QuestionID == sqa.QuestionId);
+                if(q != null)
+                {
+                    if (sqa.IsCorrect == true)
+                        totalPoints += q.PointValue;
+                }
+            }
+            return totalPoints;
+        }
         /// <summary>
         /// Goes through a UI element and gets all the children of it that are labeled as 'Controlls'
         /// </summary>
