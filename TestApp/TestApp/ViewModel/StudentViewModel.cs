@@ -67,7 +67,7 @@ namespace TestApp.ViewModel
         //Property used to store all currently active tests, later used to populate the Listview ActiveTests on AvailableTestsView
         public ObservableCollection<Test> ActiveTests { get; internal set; }
 
-        //Binded to the textboxes in a test, for each question, that states how many questions are in the test
+        //Bound to the textboxes in a test, for each question, that states how many questions are in the test
         public int NumberOfQuestionsInTest {
             get => numberOFQuestionsInTest;
             set
@@ -80,7 +80,10 @@ namespace TestApp.ViewModel
         #endregion
 
         #region Methods
-
+        /// <summary>
+        /// Method to set sequence numbers for text elements in each question in a test to be written
+        /// </summary>
+        /// <param name="selectedTest"></param>
         public void PopulateQuestionRelatedTextBoxes(Test selectedTest)
         {
             //Initialize with "question 0" to be able to increment, and to reset between tests
