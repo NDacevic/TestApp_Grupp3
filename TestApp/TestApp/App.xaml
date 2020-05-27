@@ -4,4 +4,35 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TestApp">
 
+    <Application.Resources>
+        <ResourceDictionary>
+            
+            <!--Här sätter jag värdet och ett namn för en brush. #FFFFFF är vit färg -->
+            <SolidColorBrush
+                x:Key="primaryColor"
+                Color="#FFFFFF" 
+                />
+
+            <!-- Sen använder vi den färgen för att färga bakgrunden på alla knappar via {StaticResource -namn på x:Key för färgen- } -->
+            <Style
+                TargetType="Button">
+                <Setter 
+                    Property="Background"
+                    Value="{StaticResource primaryColor}"
+                    />
+            </Style>
+
+            <!-- Font-storlekar kräver en double in som värde. Så vi kan skapa en double vi kan använda såhär-->
+            <x:Double x:Key="MediumFontSize">14</x:Double>
+
+            <!-- Vi använder samma sätt att hämta värdet. fast denna gången är värdet 'FontSize'-->
+            <Style
+                TargetType="TextBlock">
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource MediumFontSize}"
+                    />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>
