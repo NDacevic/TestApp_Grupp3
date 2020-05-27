@@ -120,6 +120,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NavigationHelper.cs" />
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\TestResult.cs" />

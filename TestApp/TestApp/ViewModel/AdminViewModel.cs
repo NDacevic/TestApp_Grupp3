@@ -170,7 +170,14 @@ namespace TestApp.ViewModel
                 JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
                 CreatePersonPatchDoc(chosenStudent, firstName, lastName, email, patchDoc);
 
-                ApiHelper.Instance.PatchStudent(id, patchDoc);
+                bool success = await ApiHelper.Instance.PatchStudentAsync(id, patchDoc);
+
+                if (success)
+                {
+                    chosenStudent.FirstName = firstName;
+                    chosenStudent.LastName = lastName;
+                    chosenStudent.Email = email;
+                }
             }
             catch (FormatException exc)
             {
@@ -195,7 +202,15 @@ namespace TestApp.ViewModel
                 JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
                 CreatePersonPatchDoc(chosenEmployee, firstName, lastName, email, patchDoc);
 
-                ApiHelper.Instance.PatchEmployee(id, patchDoc );
+                bool success = await ApiHelper.Instance.PatchEmployeeAsync(id, patchDoc);
+
+                if (success)
+                {
+                    chosenEmployee.FirstName = firstName;
+                    chosenEmployee.LastName = lastName;
+                    chosenEmployee.Email = email;
+                }
+
             }
             catch (FormatException exc)
             {

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
+using TestApp.Model;
 using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -45,7 +46,9 @@ namespace TestApp.View
             //!!Following code is only for testing purpose.
             if(Tb_InsertEmail.Text=="1")
             {
+                LogInViewModel.Instance.ActiveStudent = new Model.Student(2,"Mikael","Ollhage","nej@ja.com","pass",8,new List<Test>()); 
                 this.Frame.Navigate(typeof(MainPage),"Elev");
+                
             }
             else if(Tb_InsertEmail.Text == "2")
             {
@@ -88,6 +91,11 @@ namespace TestApp.View
                 new MessageDialog("Vänligen klicka i om du är student eller personal, tack!");
             }
              */ 
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            NavigationHelper.Instance.GlobalFrame = Frame;
         }
     }
 }
