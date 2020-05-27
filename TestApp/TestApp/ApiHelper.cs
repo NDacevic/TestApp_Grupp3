@@ -370,7 +370,7 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public async void PatchStudent(int id, JsonPatchDocument<Person> patchDocStudent)
+        public async Task<bool> PatchStudentAsync(int id, JsonPatchDocument<Person> patchDocStudent)
         {
             //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter
             try
@@ -395,6 +395,7 @@ namespace TestApp
                     if (response.IsSuccessStatusCode)
                     {
                         await new MessageDialog("Uppdaterad information sparad").ShowAsync();
+                        return true;
                     }
                     else
                         throw new HttpRequestException($"Status: {response.StatusCode}, {response.ReasonPhrase}");
@@ -403,7 +404,7 @@ namespace TestApp
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
-
+                return false;
             }
         }
 
@@ -435,7 +436,7 @@ namespace TestApp
             throw new NotImplementedException();
         }
 
-        public async void PatchEmployee(int id, JsonPatchDocument<Person> patchDocEmployee)
+        public async Task<bool> PatchEmployeeAsync(int id, JsonPatchDocument<Person> patchDocEmployee)
         {
             //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter
             try
@@ -460,6 +461,7 @@ namespace TestApp
                     if (response.IsSuccessStatusCode)
                     {
                         await new MessageDialog("Uppdaterad information sparad").ShowAsync();
+                        return true;
                     }
                     else
                         throw new HttpRequestException($"Status: {response.StatusCode}, {response.ReasonPhrase}");
@@ -468,7 +470,7 @@ namespace TestApp
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
-
+                return false;
             }
         }
 
