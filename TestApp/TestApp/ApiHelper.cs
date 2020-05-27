@@ -418,7 +418,7 @@ namespace TestApp
         public async Task<List<Student>> GetAllStudents()
         {
             List<Student> studentList = new List<Student>();
-            using (HttpResponseMessage response = await httpClient.GetAsync("students"))
+            using (HttpResponseMessage response = await httpClient.GetAsync("FullStudentsTestsQuestions"))
             {
                 if (response.IsSuccessStatusCode)
                 {
