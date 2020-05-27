@@ -327,6 +327,7 @@ namespace TestApp.ViewModel
                 TempEmployee.LastName = lastName;
                 TempEmployee.Email = email;
                 TempEmployee.Password = password;
+            
 
                 PostEmployee(TempEmployee);
 
