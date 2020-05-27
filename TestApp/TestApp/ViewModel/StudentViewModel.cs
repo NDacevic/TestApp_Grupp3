@@ -5,8 +5,10 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TestApp.Model;
+using TestApp.View;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -29,6 +31,7 @@ namespace TestApp.ViewModel
         private Button bttn_SubmitTest;             //used to disable the button when the timer reaches 0
         private Test selectedTest;
         private int numberOFQuestionsInTest;
+        private ContentDialog loadScreen;
         
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -45,6 +48,7 @@ namespace TestApp.ViewModel
             StudentTestResult = new ObservableCollection<string>();
             AllTests = new List<Test>();
             activeStudent = LogInViewModel.Instance.ActiveStudent;
+            loadScreen = new LoadDataView();
 
 
         }
@@ -73,7 +77,7 @@ namespace TestApp.ViewModel
         public ObservableCollection<Test> ActiveTests { get; internal set; }
 
 
-        //Binded to the textboxes in a test, for each question, that states how many questions are in the test
+        //Bound to the textboxes in a test, for each question, that states how many questions are in the test
         public int NumberOfQuestionsInTest {
             get => numberOFQuestionsInTest;
             set
@@ -90,8 +94,10 @@ namespace TestApp.ViewModel
         #endregion
 
         #region Methods
-
-
+        /// <summary>
+        /// Method to set sequence numbers for text elements in each question in a test to be written
+        /// </summary>
+        /// <param name="selectedTest"></param>
         public void PopulateQuestionRelatedTextBoxes(Test selectedTest)
         {
             //Initialize with "question 0" to be able to increment, and to reset between tests
@@ -156,9 +162,16 @@ namespace TestApp.ViewModel
            
             try
             {
-                GetAllTests();//Making the ApiCall here cause this is the front page when the student log in
+                loadScreen.ShowAsync();
+                Thread.Sleep(1000);
+                
+                GetAllTests();
+                
+                //Making the ApiCall here cause this is the front page when the student log in
                 //Get all answers for all tests from databse
                 List<StudentQuestionAnswer> allAnswers = await ApiHelper.Instance.GetAllStudentQuestionAnswers();
+                Thread.Sleep(1000);
+                loadScreen.Hide();
 
                 //Loop through all tests and keep those that:
                 // - Does not have any rows in allAnswers where studentID and testID matches activeStudent and the current test. If so the test has already been written.
