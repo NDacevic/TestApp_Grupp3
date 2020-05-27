@@ -46,7 +46,7 @@ namespace TestApp.View
             //!!Following code is only for testing purpose.
             if(Tb_InsertEmail.Text=="1")
             {
-                LogInViewModel.Instance.ActiveStudent = new Model.Student(2,"Mikael","Ollhage","nej@ja.com","pass",8,new List<Test>()); 
+                LogInViewModel.Instance.ActiveStudent = new Model.Student(19,"Mikael","Ollhage","nej@ja.com","pass",9,new List<Test>()); 
                 this.Frame.Navigate(typeof(MainPage),"Elev");
                 
             }
