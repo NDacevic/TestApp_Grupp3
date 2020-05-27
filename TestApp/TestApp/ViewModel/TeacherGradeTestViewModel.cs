@@ -63,7 +63,7 @@ namespace TestApp.ViewModel
         /// <returns></returns>
         public async Task DownloadStudents()
         {
-            allStudents = await ApiHelper.Instance.GetAllStudents();
+            allStudents = await ApiHelper.Instance.GetAllStudentsTestsQuestions();
         }
 
         /// <summary>
