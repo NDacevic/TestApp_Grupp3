@@ -5,8 +5,10 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TestApp.Model;
+using TestApp.View;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -29,6 +31,7 @@ namespace TestApp.ViewModel
         private Button bttn_SubmitTest;             //used to disable the button when the timer reaches 0
         private Test selectedTest;
         private int numberOFQuestionsInTest;
+        private ContentDialog loadScreen;
         
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -38,9 +41,15 @@ namespace TestApp.ViewModel
         #region Constructors
         public StudentViewModel()
         {
+
             ActiveTests = new ObservableCollection<Test>();
             //Todo: Remove later when a student can log in - MO
+
+            StudentTestResult = new ObservableCollection<string>();
+            AllTests = new List<Test>();
             activeStudent = LogInViewModel.Instance.ActiveStudent;
+            loadScreen = new LoadDataView();
+
 
         }
         #endregion
@@ -67,6 +76,7 @@ namespace TestApp.ViewModel
         //Property used to store all currently active tests, later used to populate the Listview ActiveTests on AvailableTestsView
         public ObservableCollection<Test> ActiveTests { get; internal set; }
 
+
         //Bound to the textboxes in a test, for each question, that states how many questions are in the test
         public int NumberOfQuestionsInTest {
             get => numberOFQuestionsInTest;
@@ -76,7 +86,11 @@ namespace TestApp.ViewModel
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NumberOfQuestionsInTest"));
             }
         } 
+
         public Student ActiveStudent { get; set; }
+        public ObservableCollection<string> StudentTestResult { get; set; }
+        public List<Test> AllTests { get; set; }
+
         #endregion
 
         #region Methods
@@ -98,6 +112,13 @@ namespace TestApp.ViewModel
                 selectedTest.Questions[i].RowInTest = i + 1;
                 NumberOfQuestionsInTest++;
             }
+        }
+
+
+        public async void GetAllTests()
+        {
+            if(AllTests.Count==0)
+            AllTests = await ApiHelper.Instance.GetAllTests();
         }
 
         /// <summary>
@@ -135,24 +156,29 @@ namespace TestApp.ViewModel
         /// </summary>
         public async void SeeActiveTests()
         {
+           
             bool isTestAlreadyWritten;
-
             ActiveTests.Clear();
-
-            //Tries to contact API to get all Tests
+           
             try
             {
-                //Get all tests from database
-                List<Test> allTests = await ApiHelper.Instance.GetAllTests();
+                loadScreen.ShowAsync();
+                Thread.Sleep(1000);
+                
+                GetAllTests();
+                
+                //Making the ApiCall here cause this is the front page when the student log in
                 //Get all answers for all tests from databse
                 List<StudentQuestionAnswer> allAnswers = await ApiHelper.Instance.GetAllStudentQuestionAnswers();
+                Thread.Sleep(1000);
+                loadScreen.Hide();
 
                 //Loop through all tests and keep those that:
                 // - Does not have any rows in allAnswers where studentID and testID matches activeStudent and the current test. If so the test has already been written.
                 // - And where the test is constructed for the same grade/year as the student is in right now
 
+                foreach (Test test in AllTests)
                 //Loop through all tests and check which ones already has answers from the logged in student
-                foreach (Test test in allTests)
                 {
                     //State that the test has not been written until the opposite has been proven...
                     isTestAlreadyWritten = false;
@@ -374,6 +400,30 @@ namespace TestApp.ViewModel
             {
                 ApiHelper.Instance.PostTestResult(new TestResult(activeStudent.StudentId, selectedTest.TestId, scoredTestPoints));
             }
+        }
+        public async void GetTestResult()
+        {
+            StudentTestResult.Clear();
+            ObservableCollection<TestResult> tempList = await ApiHelper.Instance.GetTestResults();
+
+                foreach (Test t in AllTests)
+                {
+                       foreach (TestResult tr in tempList)
+                       {
+                             if (t.TestId.Equals(tr.TestId))
+                             {
+                                 if (tr.StudentId.Equals(activeStudent.StudentId))
+                                 {
+                                        decimal percentage = (Convert.ToDecimal(tr.TotalPoints)/Convert.ToDecimal(t.MaxPoints))*100;
+                            StudentTestResult.Add($"Ämne: {t.CourseName} åk.{t.Grade}\nDatum för provet: {t.StartDate}\nMaxpoäng: " +
+                                $"{t.MaxPoints}\nDitt resultat: {tr.TotalPoints} poäng ({Math.Round(percentage, 0)}%)");
+                                 }
+                             }
+                       }
+                }
+            
+           
+         
         }
 
         #endregion
