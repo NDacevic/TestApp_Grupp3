@@ -5,10 +5,36 @@
     xmlns:local="using:TestApp.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:TestApp.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
 
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Testhistorik" 
+                   FontSize="48"
+                   HorizontalAlignment="Center"/>
+        
+        <ListView BorderBrush="Black"
+                  BorderThickness="2"
+                  Margin="50,100,50,100"
+                  ItemsSource="{x:Bind studentVM.StudentTestResult}"
+                  x:Name="DisplayTestResultListView"
+                  
+                  >
+            <ListView.ItemTemplate>
+                <DataTemplate x:Name="displayTestResultListView" x:DataType="x:String">
+                    
+                        <StackPanel    Margin="0,15,0,0">
+                            <TextBlock Text="{x:Bind }"/>
+                    </StackPanel>
+                  
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

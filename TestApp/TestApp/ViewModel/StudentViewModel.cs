@@ -34,9 +34,13 @@ namespace TestApp.ViewModel
         #region Constructors
         public StudentViewModel()
         {
+
             ActiveTests = new ObservableCollection<Test>();
             //Todo: Remove later when a student can log in - MO
-            activeStudent = new Student(1, "Mikael", "Ollhage", "ja@ja.com", "nej", 8, null);
+            activeStudent = new Student(7, "Mikael", "Ollhage", "ja@ja.com", "nej", 8, null);
+            StudentTestResult = new ObservableCollection<string>();
+            AllTests = new List<Test>();
+            
 
         }
         #endregion
@@ -64,9 +68,19 @@ namespace TestApp.ViewModel
         public ObservableCollection<Test> ActiveTests { get; internal set; }
 
         public Student ActiveStudent { get; set; }
+        public ObservableCollection<string> StudentTestResult { get; set; }
+        public List<Test> AllTests { get; set; }
+
         #endregion
 
         #region Methods
+        public async void GetAllTests()
+        {
+            if(AllTests.Count==0)
+            AllTests = await ApiHelper.Instance.GetAllTests();
+
+            
+        }
         /// <summary>
         /// Saves all student answers
         /// </summary>
@@ -102,18 +116,17 @@ namespace TestApp.ViewModel
         /// </summary>
         public async void SeeActiveTests()
         {
+            GetAllTests();
             ActiveTests.Clear();
             //Tries to contact API to get all Tests
             try
             {
-                //Temporary list to hold all tests
-                List<Test> allTests = await ApiHelper.Instance.GetAllTests();
                 List<StudentQuestionAnswer> allAnswers = await ApiHelper.Instance.GetAllStudentQuestionAnswers();
 
                 //Loop through all tests and keep those that:
                 // - Does not have any rows in allAnswers where studentID and testID matches activeStudent and the current test. If so the test has already been written.
                 // - And where the test is constructed for the same grade/year as the student is in right now
-                foreach (Test test in allTests)
+                foreach (Test test in AllTests)
                 {
                     foreach (StudentQuestionAnswer sqa in allAnswers)
                     {
@@ -325,6 +338,30 @@ namespace TestApp.ViewModel
             {
                 ApiHelper.Instance.PostTestResult(new TestResult(activeStudent.StudentId, selectedTest.TestId, scoredTestPoints));
             }
+        }
+        public async void GetTestResult()
+        {
+            StudentTestResult.Clear();
+            ObservableCollection<TestResult> tempList = await ApiHelper.Instance.GetTestResults();
+
+                foreach (Test t in AllTests)
+                {
+                       foreach (TestResult tr in tempList)
+                       {
+                             if (t.TestId.Equals(tr.TestId))
+                             {
+                                 if (tr.StudentId.Equals(activeStudent.StudentId))
+                                 {
+                                        decimal percentage = (Convert.ToDecimal(tr.TotalPoints)/Convert.ToDecimal(t.MaxPoints))*100;
+                            StudentTestResult.Add($"Ämne: {t.CourseName} åk.{t.Grade}\nDatum för provet: {t.StartDate}\nMaxpoäng: " +
+                                $"{t.MaxPoints}\nDitt resultat: {tr.TotalPoints} poäng ({Math.Round(percentage, 0)}%)");
+                                 }
+                             }
+                       }
+                }
+            
+           
+         
         }
 
         #endregion
