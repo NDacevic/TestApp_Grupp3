@@ -350,7 +350,7 @@ namespace TestApp
             }
         }
 
-        public void GetTestResult()
+        public void GetTestResult()//Get a single test result
         {
             throw new NotImplementedException();
         }
@@ -493,7 +493,21 @@ namespace TestApp
                   return null;
             }
         }
-        
+        public async Task<ObservableCollection<TestResult>> GetTestResults() //Get list of testresults
+        {
+            HttpResponseMessage response = await httpClient.GetAsync("TestResults");
+            if (response.IsSuccessStatusCode)
+            {
+                jsonString = response.Content.ReadAsStringAsync().Result;
+                //Convert jsonString to list of courses objects
+                var testResult = JsonConvert.DeserializeObject<ObservableCollection<TestResult>>(jsonString);
+                return testResult;
+            }
+            else
+            {
+                throw new HttpRequestException("No results retrieved from database. Contact an admin for help.");
+            }
+        }
         public async Task<List<Course>> GetAllCourses()
         {
             //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress

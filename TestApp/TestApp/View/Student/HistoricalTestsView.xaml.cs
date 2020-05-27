@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +23,16 @@ namespace TestApp.View.Student
     /// </summary>
     public sealed partial class HistoricalTestsView : Page
     {
+        StudentViewModel studentVM = StudentViewModel.Instance;
         public HistoricalTestsView()
         {
             this.InitializeComponent();
+        }
+
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            studentVM.GetTestResult();
         }
     }
 }
