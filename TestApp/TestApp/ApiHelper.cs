@@ -544,6 +544,12 @@ namespace TestApp
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
+        public async Task<EmployeeRole> GetEmployeeRole(int id) //Uncomment efter merge
+        {
+            jsonString = await httpClient.GetStringAsync("EmployeeRoles/" + id);
+            var employee = JsonConvert.DeserializeObject<EmployeeRole>(jsonString);
+            return employee;
+        }
         #endregion
     }
 }

@@ -43,45 +43,46 @@ namespace TestApp.View
             //string password = LogInViewModel.Instance.EncryptedPassword(PB_InsertPassword.ToString(), new SHA256CryptoServiceProvider());
             string password = PB_InsertPassword.Password;
 
-            //!!Following code is only for testing purpose.
-            if(Tb_InsertEmail.Text=="1")
-            {
-                LogInViewModel.Instance.ActiveStudent = new Model.Student(2,"Mikael","Ollhage","nej@ja.com","pass",8,new List<Test>()); 
-                this.Frame.Navigate(typeof(MainPage),"Elev");
+            ////!!Following code is only for testing purpose.
+            //if(Tb_InsertEmail.Text=="1")
+            //{
+            //    LogInViewModel.Instance.ActiveStudent = new Model.Student(2,"Mikael","Ollhage","nej@ja.com","pass",8,new List<Test>()); 
+            //    this.Frame.Navigate(typeof(MainPage),"Elev");
                 
-            }
-            else if(Tb_InsertEmail.Text == "2")
-            {
-                this.Frame.Navigate(typeof(MainPage), "Teacher");
-            }
-            else if (Tb_InsertEmail.Text == "3")
-            {
-                this.Frame.Navigate(typeof(MainPage), "Admin");
-            }
-            //TestCode stopped
+            //}
+            //else if(Tb_InsertEmail.Text == "2")
+            //{
+            //    this.Frame.Navigate(typeof(MainPage), "Teacher");
+            //}
+            //else if (Tb_InsertEmail.Text == "3")
+            //{
+            //    this.Frame.Navigate(typeof(MainPage), "Admin");
+            //}
+            ////TestCode stopped
 
 
 
-           
 
-/*
+
+
             if (Rb_Student.IsChecked == true)
             {
                 LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
                 LogInViewModel.Instance.CheckStudentPassword(password);
-                Frame.Navigate(typeof(MainPage), "Student");
-                
+                Frame.Navigate(typeof(MainPage), "Elev");
+
             }
             else if (Rb_Employee.IsChecked == true)
             {
                 LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
                 LogInViewModel.Instance.CheckEmployeePassword(password);
+                string role = LogInViewModel.Instance.GetEmployeeRole();
 
-                if (LogInViewModel.Instance.ActiveEmployee.Role.RoleName == "Admin")
+                if (role == "Admin")
                 {
                     Frame.Navigate(typeof(MainPage), "Admin");
                 }
-                else if (LogInViewModel.Instance.ActiveEmployee.Role.RoleName == "Teacher")
+                else if (role == "Teacher")
                 {
                     Frame.Navigate(typeof(MainPage), "Teacher");
                 }
@@ -90,7 +91,7 @@ namespace TestApp.View
             {
                 new MessageDialog("Vänligen klicka i om du är student eller personal, tack!");
             }
-             */ 
+
         }
     }
 }

@@ -44,13 +44,15 @@ namespace TestApp.ViewModel
                 return instance;
             }
         }
-        public Employee ActiveEmployee { get; set; }
+        public Employee ActiveEmployee { get; set
+                ; }
         public Student ActiveStudent { get; set; }
         #endregion
 
         #region Methods
         public async void GetStudent (string email)
         {
+            ActiveStudent = new Student();
             try
             {
                 ActiveStudent = await ApiHelper.Instance.GetStudent(email);
@@ -63,6 +65,7 @@ namespace TestApp.ViewModel
         }
         public async void GetEmployee (string email)
         {
+            ActiveEmployee = new Employee();
             try
             {
                 ActiveEmployee = await ApiHelper.Instance.GetEmployee(email);
@@ -70,6 +73,18 @@ namespace TestApp.ViewModel
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
+            }
+        }
+        public async string GetEmployeeRole ()
+        {
+            try
+            {
+                string role = await ApiHelper.Instance.GetEmployeeRole(ActiveEmployee.EmployeeId);
+                return role;
+            }
+            catch
+            {
+                await new MessageDialog("Felaktig inmatning, försök igen alternativt kontakta admin").ShowAsync();
             }
         }
         /// <summary>
@@ -88,6 +103,7 @@ namespace TestApp.ViewModel
         //}
         public bool CheckEmployeePassword(string insertedPassword) //Get ()
         {
+   
             if (ActiveEmployee.Password == insertedPassword)
             {
                 return true;
