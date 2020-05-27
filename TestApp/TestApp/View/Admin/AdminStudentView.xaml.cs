@@ -29,23 +29,23 @@ namespace TestApp.View.Admin
             this.InitializeComponent();
         }
 
-        private void Bttn_AddStudent_Click(object sender, RoutedEventArgs e)
+        private async void Bttn_AddStudent_Click(object sender, RoutedEventArgs e)
         {
-            //string firstName = Tb_FirstName.Text;
-            //string lastName = Tb_LastName.Text;            
-            //string email = Tb_Email.Text;
-            //string password = Tb_Password.Text;
-            //int classId = int.Parse(Tb_Grade.Text);
-         
             try
             {
                 AdminViewModel.Instance.SetValuesForStudent(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, Tb_Password.Text, int.Parse(Tb_Grade.Text));
                 //AdminViewModel.Instance.SetValuesForStudent(firstName, lastName, email, password, classId);
             }
-            catch 
+            catch (Exception)
             {
+                await new MessageDialog("Data var felaktigt inmatad, vänligen försök igen.").ShowAsync();
                 return;               
             }
+            //string firstName = Tb_FirstName.Text;
+            //string lastName = Tb_LastName.Text;            
+            //string email = Tb_Email.Text;
+            //string password = Tb_Password.Text;
+            //int classId = int.Parse(Tb_Grade.Text);
         }
     }
 }

@@ -7,6 +7,7 @@ using TestApp.Model;
 using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,15 +31,25 @@ namespace TestApp.View.Admin
             AdminViewModel.Instance.GetRoles(); 
         }
 
-        private void Bttn_AddEmployee_Click(object sender, RoutedEventArgs e)
+        private async void Bttn_AddEmployee_Click(object sender, RoutedEventArgs e)
         {
-            string firstName = Tb_FirstName.Text;
-            string lastName = Tb_LastName.Text;
-            string email = Tb_Email.Text;
-            string password = Tb_Password.Text;
-            string roleName = Cb_EmployeeRole.SelectedItem.ToString();
+            try
+            {
+                AdminViewModel.Instance.SetValuesForEmployee(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, Tb_Password.Text, Cb_EmployeeRole.SelectedItem.ToString());
+            }
+            catch (Exception)
+            {
+                await new MessageDialog("Data var felaktigt inmatad, vänligen försök igen.").ShowAsync();
 
-            AdminViewModel.Instance.SetValuesForEmployee(firstName, lastName, email, password, roleName);
+            }
+            //string firstName = Tb_FirstName.Text;
+            //string lastName = Tb_LastName.Text;
+            //string email = Tb_Email.Text;
+            //string password = Tb_Password.Text;
+            //string roleName = Cb_EmployeeRole.SelectedItem.ToString();
+
+            //AdminViewModel.Instance.SetValuesForEmployee(firstName, lastName, email, password, roleName);
         }
     }
 }
+

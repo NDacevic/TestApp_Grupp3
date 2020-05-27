@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TestApp.Model;
 using Windows.UI.Popups;
@@ -51,7 +52,6 @@ namespace TestApp.ViewModel
             AllStudents = new List<Student>(); //Store all students from DB
             AllEmployees = new List<Employee>(); //Store all Employees from DB
             AllUsers = new ObservableCollection<Person>();
-            TempStudent = new Student(); //Used when adding a new student
             Roles = new List<Role>(); //Storing roles from DB
             
         }
@@ -298,71 +298,99 @@ namespace TestApp.ViewModel
                 }
             }
         }
-        public async void PostStudent() 
+        /// <summary>
+        /// Posting new student with values to DB
+        /// </summary>
+        public async void PostStudent(Student student) 
         {
             try
             {
-                ApiHelper.Instance.PostStudent(TempStudent);
+                ApiHelper.Instance.PostStudent(student);
             }
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
+        /// <summary>
+        /// Posting new employee with values to DB
+        /// </summary>
+        /// <param name="employee"></param>
         public async void PostEmployee (Employee employee)
         {
             try
             {
                 ApiHelper.Instance.PostEmployee(employee);
+                Thread.Sleep(1000);
+                
             }
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
+        /// <summary>
+        /// Setting the values for temp employee (new employee) before posting
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="roleName"></param>
         public void SetValuesForEmployee(string firstName, string lastName, string email, string password, string roleName)
         {
-
+            try
+            {
                 TempEmployee.FirstName = firstName;
                 TempEmployee.LastName = lastName;
                 TempEmployee.Email = email;
                 TempEmployee.Password = password;
-            TempEmployee.Role = new Role() { RoleName = roleName};
-
+                TempEmployee.Role = new Role() { RoleName = roleName };
 
                 PostEmployee(TempEmployee);
-
+            }
+            catch
+            {
+                
+            }
         }
-        public void SetValuesForStudent (string firstName, string lastName, string email, string password, int classId)
+        /// <summary>
+        /// Setting the values for temp student (new student) before posting 
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="classId"></param>
+            public void SetValuesForStudent (string firstName, string lastName, string email, string password, int classId)
         {
-
+            TempStudent = new Student();
+            try
+            {
                 TempStudent.FirstName = firstName;
                 TempStudent.LastName = lastName;
                 TempStudent.Email = email;
                 TempStudent.Password = password;
                 TempStudent.ClassId = classId;
 
-                PostStudent();            
+                PostStudent(TempStudent); 
+            }
+             catch
+            {
+                return;
+            }              
         }
+        /// <summary>
+        /// GetRoles from DB for choosing role for new employee
+        /// </summary>
         public async void GetRoles ()
         {
             RoleNames = new List<string>();
-            try
-            {
-               if (Roles.Count == 0)
+            Roles = await ApiHelper.Instance.GetRoles();
+            foreach (Role role in Roles)
                 {
-                    Roles = await ApiHelper.Instance.GetRoles();
-                    foreach (Role role in Roles)
-                    {
-                        RoleNames.Add(role.RoleName);
-                    }
+                    RoleNames.Add(role.RoleName);
                 }
-            }
-            catch (Exception exc)
-            {
-                await new MessageDialog(exc.Message).ShowAsync();
-            }
-
         }
     }
 }
