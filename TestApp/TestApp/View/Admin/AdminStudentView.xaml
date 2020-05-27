@@ -17,22 +17,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Margin="40">
             <TextBlock 
                 Text="Lägg till elev" 
                 FontSize="32"/>
-            <StackPanel Orientation="Horizontal" Margin="0,50,0,0"  Spacing="40">
-                <TextBlock
-                    Text="StudentId: "
-                    FontSize="20"
-                    Width="200"/>
-                <TextBox
-                    PlaceholderText="StudentId"
-                    FontSize="20"/>
-            </StackPanel>
             <StackPanel Orientation="Horizontal" Spacing="40">
                 <TextBlock 
                     Text="Förnamn: " 
@@ -41,9 +31,10 @@
                     Width="100"/>
                 <TextBox
                     x:Name="Tb_FirstName" 
-                    Text="{x:Bind }"
+                    Text=""
                     FontSize="20"
-                    Margin="0,50,0,0"/>
+                    Margin="0,50,0,0"
+                    Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Spacing="40">
                 <TextBlock 
@@ -52,8 +43,9 @@
                     Width="100"/>
                 <TextBox
                     x:Name="Tb_LastName"
-                    Text="{x:Bind }"
-                    FontSize="20"/>
+                    Text=""
+                    FontSize="20"
+                    Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Spacing="40">
                 <TextBlock 
@@ -62,8 +54,9 @@
                     Width="100"/>
                 <TextBox
                     x:Name="Tb_Grade"
-                    Text="{x:Bind }"
-                    FontSize="20"/>
+                    Text=""
+                    FontSize="20"
+                    Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Spacing="40">
                 <TextBlock 
@@ -72,8 +65,9 @@
                     Width="100"/>
                 <TextBox
                     x:Name="Tb_Email"
-                    Text="{x:Bind }"
-                    FontSize="20"/>
+                    Text=""
+                    FontSize="20"
+                    Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Spacing="40">
                 <TextBlock 
@@ -82,15 +76,17 @@
                     Width="100"/>
                 <TextBox
                     x:Name="Tb_Password"
-                    Text="{x:Bind }"
-                    FontSize="20"/>
+                    Text=""
+                    FontSize="20"
+                    Width="200"/>
             </StackPanel>
 
                 <Button
                     x:Name="Bttn_AddStudent"
                     Content="Lägg till elev" 
                     Padding="15,10"
-                    Margin="0,30,0,0"/>
+                    Margin="0,30,0,0"
+                    Click="Bttn_AddStudent_Click"/>
 
             </StackPanel>         
     </Grid>

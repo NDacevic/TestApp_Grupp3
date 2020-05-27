@@ -6,10 +6,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TestApp.Model;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
+
 
 namespace TestApp.ViewModel
 {
@@ -24,6 +26,8 @@ namespace TestApp.ViewModel
         public List<Employee> AllEmployees { get; set; }
         public Employee TempEmployee { get; set; }
         public Student TempStudent { get; set; }
+        public List<Role> Roles { get; set; }
+        public List<string> RoleNames { get; set; }
 
         public List<Test> TestList { get; set; }
 
@@ -44,11 +48,11 @@ namespace TestApp.ViewModel
             TestList = new List<Test>(); //Storing tests from DB
             MyTests = new ObservableCollection<Test>(); //Display Tests and used for filtering
             TestQuestions = new ObservableCollection<Question>(); //Used to display questions on test
-            TempEmployee = new Employee(); //Used when adding a new employee
+            //TempEmployee = new Employee(); //Used when adding a new employee
             AllStudents = new List<Student>(); //Store all students from DB
             AllEmployees = new List<Employee>(); //Store all Employees from DB
             AllUsers = new ObservableCollection<Person>();
-            TempStudent = new Student();
+            Roles = new List<Role>(); //Storing roles from DB
             
         }
 
@@ -309,16 +313,107 @@ namespace TestApp.ViewModel
                 }
             }
         }
+        /// <summary>
+        /// Posting new student with values to DB
+        /// </summary>
+        public async void PostStudent(Student student) 
+        {
+            try
+            {
+                ApiHelper.Instance.PostStudent(student);
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
+        }
+        /// <summary>
+        /// Posting new employee with values to DB
+        /// </summary>
+        /// <param name="employee"></param>
+        public async void PostEmployee (Employee employee)
+        {
+            try
+            {
+                ApiHelper.Instance.PostEmployee(employee);
+                Thread.Sleep(1000);
+                
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
+        }
+        /// <summary>
+        /// Setting the values for temp employee (new employee) before posting
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="roleName"></param>
+        public void SetValuesForEmployee(string firstName, string lastName, string email, string password, string roleName)
+        {
+            TempEmployee = new Employee();
+            try
+            {
+                TempEmployee.FirstName = firstName;
+                TempEmployee.LastName = lastName;
+                TempEmployee.Email = email;
+                TempEmployee.Password = password;
+                TempEmployee.Role = new Role() { RoleName = roleName };
 
+                PostEmployee(TempEmployee);
+            }
+            catch
+            {
+                return;
+            }
+        }
+        /// <summary>
+        /// Setting the values for temp student (new student) before posting 
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="classId"></param>
+            public void SetValuesForStudent (string firstName, string lastName, string email, string password, int classId)
+        {
+            TempStudent = new Student();
+            try
+            {
+                TempStudent.FirstName = firstName;
+                TempStudent.LastName = lastName;
+                TempStudent.Email = email;
+                TempStudent.Password = password;
+                TempStudent.ClassId = classId;
+
+                PostStudent(TempStudent); 
+            }
+             catch
+            {
+                return;
+            }              
+        }
+        /// <summary>
+        /// GetRoles from DB for choosing role for new employee
+        /// </summary>
+        public async void GetRoles ()
+        {
+            RoleNames = new List<string>();
+            Roles = await ApiHelper.Instance.GetRoles();
+            foreach (Role role in Roles)
+                {
+                    RoleNames.Add(role.RoleName);
+                }
+        }
 
         /////////OBS OBS OBS - Metoderna nedan ska flyttas till en annan viewmodel/////
-      
         public void DeleteQuestion(Question question)
         {
             ApiHelper.Instance.DeleteQuestion(question.QuestionID);
             TeacherCreateViewModel.Instance.QuestionsToFilter.Remove(question);
         }
-
-
     }
 }

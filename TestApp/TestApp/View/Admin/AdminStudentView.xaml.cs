@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,6 +27,21 @@ namespace TestApp.View.Admin
         public AdminStudentView()
         {
             this.InitializeComponent();
+        }
+
+        private async void Bttn_AddStudent_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AdminViewModel.Instance.SetValuesForStudent(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, Tb_Password.Text, int.Parse(Tb_Grade.Text));
+              
+            }
+            catch (Exception)
+            {
+                await new MessageDialog("Data var felaktigt inmatad, vänligen försök igen.").ShowAsync();
+                return;               
+            }
+
         }
     }
 }

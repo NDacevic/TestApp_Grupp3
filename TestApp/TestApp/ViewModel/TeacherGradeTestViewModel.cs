@@ -67,7 +67,7 @@ namespace TestApp.ViewModel
         {
 
             loadScreen.ShowAsync();
-            allStudents = await ApiHelper.Instance.GetAllStudents();
+            allStudents = await ApiHelper.Instance.GetAllStudentsTestsQuestions();
             loadScreen.Hide();
 
         }
