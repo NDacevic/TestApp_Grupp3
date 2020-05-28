@@ -120,6 +120,7 @@ namespace TestApp.ViewModel
         }
         public void DisplayStudentResult(int testId)
         {
+            
             DisplayResult.Clear();
             foreach (TestResult tr in StudentTestResults.ToList())
             {
@@ -127,10 +128,13 @@ namespace TestApp.ViewModel
                 {
                     if (tr.TestId == testId&&student.StudentId==tr.StudentId)
                     {
-                        DisplayResult.Add($"{tr.TestId} \t\t {student.FirstName} {student.LastName} {tr.TotalPoints}");
+                        
+                        DisplayResult.Add($"TestId: {tr.TestId}\nNamn: {student.FirstName} {student.LastName}\nPoäng: {tr.TotalPoints}");
+                        
                     }
                 }
             }
+
         }
        
         #endregion
