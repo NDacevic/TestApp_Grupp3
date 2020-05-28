@@ -63,6 +63,7 @@ namespace TestApp.Model
         public bool IsGraded { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public List<StudentQuestionAnswer> Result { get; set; } = new List<StudentQuestionAnswer>();
+        
         public int MaxPoints
         {
             get { return maxPoints; }
