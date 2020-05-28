@@ -65,41 +65,38 @@ namespace TestApp.View
             if (Rb_Student.IsChecked == true)
             {
 
-                    await LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
-                    bool correct = LogInViewModel.Instance.CheckStudentPassword(password);
-                    if(correct)
-                    {
-                        Frame.Navigate(typeof(MainPage), "Elev");
-                    }
-
+                await LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
+                bool correctStudent = LogInViewModel.Instance.CheckStudentPassword(password);
+                if (correctStudent)
+                {
+                    Frame.Navigate(typeof(MainPage), "Elev");
+                }
+                else
+                {
+                    await new MessageDialog("Inkorrekt data, försök igen.").ShowAsync();
+                }
 
             }
             else if (Rb_Employee.IsChecked == true)
             {
-                try
+                 await LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
+                 bool correctEmployee = LogInViewModel.Instance.CheckEmployeePassword(password);
+                if(correctEmployee)
                 {
-                    await LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
-                    LogInViewModel.Instance.CheckEmployeePassword(password);
-
-                    if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 1)
-                    {
+                     if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 1)
+                     {                     
                         Frame.Navigate(typeof(MainPage), "Teacher");
-                    }
-                    else if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 2)
-                    {
-                        Frame.Navigate(typeof(MainPage), "Admin");
-                    }
+                     }
+                     else if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 2)
+                     {
+                         Frame.Navigate(typeof(MainPage), "Admin");
+                     }                    
                 }
-                catch (Exception)
+                else
                 {
-                    await new MessageDialog("Vänligen fyll i alla fält.").ShowAsync();
+                    await new MessageDialog("Inkorrekt data, försök igen.").ShowAsync();
                 }
             }
-            else
-            {
-                new MessageDialog("Vänligen klicka i om du är student eller personal, tack!");
-            }
-
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
