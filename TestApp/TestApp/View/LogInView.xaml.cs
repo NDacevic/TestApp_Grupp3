@@ -61,10 +61,6 @@ namespace TestApp.View
             ////TestCode stopped
 
 
-
-
-
-
             if (Rb_Student.IsChecked == true)
             {
                 LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
@@ -76,8 +72,6 @@ namespace TestApp.View
             {
                 await LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
                 LogInViewModel.Instance.CheckEmployeePassword(password);
-                //LogInViewModel.Instance.GetEmployeeRole();
-
 
                 if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 1)
                 {

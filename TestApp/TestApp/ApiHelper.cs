@@ -630,12 +630,6 @@ namespace TestApp
             }
         }
 
-        public async Task<EmployeeRole> GetEmployeeRole(int id) 
-        {
-            jsonString = await httpClient.GetStringAsync("EmployeeRoles/" + id);
-            var employee = JsonConvert.DeserializeObject<EmployeeRole>(jsonString);
-            return employee;
-        }
         /// <summary>
         /// Gets all roles from DB
         /// </summary>
