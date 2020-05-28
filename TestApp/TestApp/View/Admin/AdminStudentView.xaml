@@ -74,11 +74,10 @@
                     Text="Lösenord: " 
                     FontSize="20"
                     Width="100"/>
-                <TextBox
-                    x:Name="Tb_Password"
-                    Text=""
-                    FontSize="20"
+                <PasswordBox
+                    x:Name="Pb_Password"
                     Width="200"/>
+
             </StackPanel>
 
                 <Button
