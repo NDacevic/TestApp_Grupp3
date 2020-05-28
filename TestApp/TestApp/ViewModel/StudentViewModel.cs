@@ -343,7 +343,7 @@ namespace TestApp.ViewModel
             //Loop through all questions and check if there are any Text questions
             foreach (Question question in questions)
             {
-                if (question.QuestionType=="Text")
+                if (question.QuestionType=="Fritext")
                 {
                     numberOfTextQuestions++;
                 }
