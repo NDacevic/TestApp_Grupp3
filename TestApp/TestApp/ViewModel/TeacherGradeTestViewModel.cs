@@ -78,7 +78,6 @@ namespace TestApp.ViewModel
         /// <returns></returns>
         public async Task<List<Test>> GetUngradedTests()
         {
-            await DownloadStudents();
             List<Test> ungradedTests = new List<Test>();
 
             foreach (var student in allStudents)
@@ -103,6 +102,8 @@ namespace TestApp.ViewModel
         /// <param name="studentsWithTestList"></param>
         public void PopulateStudentsWithTestList(int testId, ObservableCollection<Student> studentsWithTestList)
         {
+            studentsWithTestList.Clear();
+
             var tempStudentList = allStudents
                 .Where(student => 
                     student.Tests
@@ -126,6 +127,7 @@ namespace TestApp.ViewModel
         /// <param name="questionsForStudentAndTestList"></param>
         public void PopulateUngradedQuestionsForStudent(int chosenTestId, Model.Student chosenStudent, ObservableCollection<Question> questionsForStudentAndTestList)
         {
+            questionsForStudentAndTestList.Clear();
             var tempQuestionList = chosenStudent.Tests.Where(test => test.TestId == chosenTestId).Select(test => test.Questions).FirstOrDefault();
 
             foreach (var question in tempQuestionList)
@@ -157,18 +159,20 @@ namespace TestApp.ViewModel
                     RadioButton button = (RadioButton)control;
                     if (button.Name == "radioButton_QuestionCorrect" && button.IsChecked == true)
                     {
-                        gradedQuestions.Add(new StudentQuestionAnswer(chosenStudent.StudentId, chosenTestId, question.QuestionID, question.QuestionAnswer.Answer, true) { }); //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
+                        question.QuestionAnswer.IsCorrect = true;
+                        gradedQuestions.Add(new StudentQuestionAnswer(chosenStudent.StudentId, chosenTestId, question.QuestionID, question.QuestionAnswer.Answer, true)); 
                     }
                     else if (button.Name == "radioButton_QuestionIncorrect" && button.IsChecked == true)
                     {
-                        gradedQuestions.Add(new StudentQuestionAnswer(chosenStudent.StudentId, chosenTestId, question.QuestionID, question.QuestionAnswer.Answer, false) { }); //TODO: Change this to the normal constructor once Micke has implemented StudentQuestionAnswer fully
+                        question.QuestionAnswer.IsCorrect = false;
+                        gradedQuestions.Add(new StudentQuestionAnswer(chosenStudent.StudentId, chosenTestId, question.QuestionID, question.QuestionAnswer.Answer, false) { });
                     }
                 }
             }
 
             var success = await ApiHelper.Instance.UpdateStudentQuestionAnswer(gradedQuestions);
 
-            if (success && 
+            if (success &&
                 gradedQuestions.Count == numberOfQuestionItems)
             {
                 var points = await GetTotalPoints(chosenStudent, chosenTestId);
