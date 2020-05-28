@@ -24,7 +24,6 @@ namespace TestApp.View.Teacher
     /// </summary>
     public sealed partial class StudentResultView : Page
     {
-        TeacherStudentViewModel teacherStudentViewModel { get; set; }
         public StudentResultView()
         {
             this.InitializeComponent();
@@ -32,24 +31,14 @@ namespace TestApp.View.Teacher
         }
         private void GetAllTests()
         {
-            TeacherStudentViewModel.Instance.DisplayAllTests();
+            TeacherStudentViewModel.Instance.GetTests();
         }
-        private void GetTestResult()
-        {
-            Test test = (Test)Lv_AllTests.SelectedItem;
-            TeacherStudentViewModel.Instance.DisplayStudentResult(test.TestId);
-        }
+     
 
         private void Bttn_SeeStudentResult_Click(object sender, RoutedEventArgs e) 
         {
-            try
-            {
-                GetTestResult();
-            }
-            catch
-            {
-
-            }
+            Test test = (Test)Lv_AllTests.SelectedItem;
+            TeacherStudentViewModel.Instance.GetStudentResult(test.TestId);
         }
     }
 }

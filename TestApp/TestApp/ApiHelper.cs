@@ -454,6 +454,30 @@ namespace TestApp
             var student = JsonConvert.DeserializeObject<Student>(jsonString);
             return student;
         }
+        public async Task <List<Student>> GetAllStudents()
+        {
+            List<Student> studentList = new List<Student>();
+            try
+            {
+                using (HttpResponseMessage response = await httpClient.GetAsync("Students"))
+                {
+                    if (response.IsSuccessStatusCode)
+                    {
+                        jsonString = await response.Content.ReadAsStringAsync();
+
+                        studentList = JsonConvert.DeserializeObject<List<Student>>(jsonString);
+                    }
+                    else
+                        throw new HttpRequestException("Ingen uppkoppling till servern. Kontakta administratör");
+                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
+
+            return studentList;
+        }
 
         public async Task<List<Student>> GetAllStudentsTestsQuestions()
         {

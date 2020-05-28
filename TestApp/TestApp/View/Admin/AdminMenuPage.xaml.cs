@@ -51,6 +51,10 @@ namespace TestApp.View
             {
                 mainFrame.Navigate(typeof(DeleteTestView));
             }
+            else if (sender == removeQuestion_btn)
+            {
+                mainFrame.Navigate(typeof(Teacher.RemoveQuestionView));
+            }
             else if (sender == logOut_btn)
             {
                 NavigationHelper.Instance.GlobalFrame.Navigate(typeof(LogInView));

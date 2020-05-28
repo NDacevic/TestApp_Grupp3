@@ -31,16 +31,6 @@
                     x:Name="studentResult_btn"
                     Click="TeacherNavigate_btn"
                     Margin="0,0,0,10"/>
-            
-            <Button Content="Ta bort prov"
-                    x:Name="removeTest_btn"
-                    Click="TeacherNavigate_btn"
-                    Margin="0,0,0,10"/>
-
-            <Button Content="Ta bort fråga"
-                    x:Name="removeQuestion_btn"
-                    Click="TeacherNavigate_btn"
-                    Margin="0,0,0,10"/>
 
 
             <Button Content="Logga ut"

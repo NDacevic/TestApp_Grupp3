@@ -22,8 +22,11 @@ namespace TestApp.ViewModel
         #region Constructors
         public TeacherStudentViewModel()
         {
+            AllStudents = new List<Student>();
+            DisplayResult = new ObservableCollection<string>();
             GradedTests = new ObservableCollection<Test>();
             StudentTestResults = new ObservableCollection<TestResult>();
+            AllTests = new List<Test>();
         }
         #endregion
 
@@ -48,61 +51,92 @@ namespace TestApp.ViewModel
                 }
             }
         }
-        public ObservableCollection<Test> GradedTests { get; set; }
-        public ObservableCollection<TestResult> StudentTestResults { get; set; }
+        
+        public List <Test> AllTests { get; set; } //Keep all tests
+        public ObservableCollection<Test> GradedTests { get; set; } //Keep all graded test in here
+        public ObservableCollection<TestResult> StudentTestResults { get; set; } //Keep all students with graded tests
+        public string StudentName { get; set; }
+        public ObservableCollection<string> DisplayResult { get; set; } //Displays all students that has completed the choosen test
+        public List<Student> AllStudents { get; set; }
+       
         #endregion
 
         #region Methods
-        public void GetStudents()
-        {
-            throw new NotImplementedException();
-        }
+    
         /// <summary>
         /// Displays all tests that is already graded
         /// </summary>
-        public async void DisplayAllTests()
+        
+        public async void GetTests()
         {
+            StudentTestResults.Clear();
+            AllTests.Clear();
             try
             {
-                var tests = await ApiHelper.Instance.GetAllTests();
-
-                if(GradedTests.Count == 0)
-                {
-                    foreach (Test t in tests)
-                    {
-                        if (t.IsGraded == true)
-                        {
-                            GradedTests.Add(t);
-                        }
-
-                    }
-                }
+                StudentTestResults = await ApiHelper.Instance.GetTestResults();
+                AllTests = await ApiHelper.Instance.GetAllTests();
             }
+           
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
             }
+            DisplayAllTests();
+        }
+        public void DisplayAllTests()
+        {
+            GradedTests.Clear();
+            foreach(TestResult tr in StudentTestResults.ToList())
+            {
+                foreach (Test t in AllTests.ToList())
+                {
+                     if (t.TestId == tr.TestId&&!GradedTests.Contains(t))
+                     {
+                         GradedTests.Add(t);
+                     }
+                }
+            }
+            
         }
         /// <summary>
         /// Displays the test results for one chosen test in the StudentResultView
         /// </summary>
         /// <param name="testId"></param>
 
-        public async void DisplayStudentResult(int testId)
+        public async void GetStudentResult(int testId)
         {
+            AllStudents.Clear();
             try
             {
-                var testResults = await ApiHelper.Instance.GetAllTestResults(testId);
-                foreach (TestResult ts in testResults)
-                {
-                    StudentTestResults.Add(ts);
-                }
+                AllStudents = await ApiHelper.Instance.GetAllStudents();
             }
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
             }
+
+            DisplayStudentResult(testId);
+
         }
+        public void DisplayStudentResult(int testId)
+        {
+            
+            DisplayResult.Clear();
+            foreach (TestResult tr in StudentTestResults.ToList())
+            {
+                foreach (Student student in AllStudents)
+                {
+                    if (tr.TestId == testId&&student.StudentId==tr.StudentId)
+                    {
+                        
+                        DisplayResult.Add($"TestId: {tr.TestId}\nNamn: {student.FirstName} {student.LastName}\nPoäng: {tr.TotalPoints}");
+                        
+                    }
+                }
+            }
+
+        }
+       
         #endregion
 
     }

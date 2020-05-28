@@ -18,66 +18,81 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" 
+                        Spacing="30"
+                        VerticalAlignment="Bottom"
+                        >
+                
+            <TextBlock  Text="TestId"
+                        Margin="10,0,0,0"/>
+            <TextBlock  Text="Ämne"
+                        Margin="40,0,0,0"/>
+            <TextBlock  Text="Årskurs"
+                        Margin="40,0,0,0"/>
+            <TextBlock  Text="Maxpoäng"
+                        Margin="40,0,0,0"/>
+            <TextBlock  Text="Datum"
+                        Margin="40,0,0,0"/>
+        </StackPanel>
         <ListView 
             x:Name="Lv_AllTests"
             ItemsSource="{x:Bind model:TeacherStudentViewModel.Instance.GradedTests}"
-            x:DefaultBindMode="TwoWay"
-            Grid.Column="0" 
             Grid.Row="1"
             BorderBrush="Black"
             BorderThickness="2">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Spacing="20"/>
+                    <StackPanel/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:Test">
-                    <StackPanel Orientation="Horizontal" Spacing="30">
-                        <TextBlock Text="{x:Bind TestId}"/>
-                        <TextBlock Text="{x:Bind CourseName}" />
-                        <TextBlock Text="{x:Bind Grade}" />
-                        <TextBlock Text="{x:Bind MaxPoints}" />
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                             <TextBlock Text="{x:Bind TestId}"/>
+                        </StackPanel>
+                        <TextBlock Text="{x:Bind CourseName}"
+                                   Margin="60,0,0,0"/>
+                        <TextBlock Text="{x:Bind Grade}"
+                                   Margin="80,0,0,0"/>
+                        <TextBlock Text="{x:Bind MaxPoints}"
+                                   Margin="130,0,0,0"
+                                   />
+                        <TextBlock Text="{x:Bind StartDate.LocalDateTime}"
+                                   Margin="60,0,0,0"
+                                   />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <ListView.Header>
-                <StackPanel Orientation="Horizontal" Spacing="30">
-                    <TextBlock Text="TestId"/>
-                    <TextBlock Text="Ämne"/>
-                    <TextBlock Text="Årskurs" />
-                    <TextBlock Text="Maxpoäng"/>
-                </StackPanel>
-            </ListView.Header>
+           
+                
+           
         </ListView>
         <ListView 
             x:Name="Lv_IndividualTestResult"
-            ItemsSource="{x:Bind model:TeacherStudentViewModel.Instance.StudentTestResults}"
-            x:DefaultBindMode="TwoWay"
+            ItemsSource="{x:Bind model:TeacherStudentViewModel.Instance.DisplayResult}"
             Grid.Column="2" 
             Grid.Row="1"
             BorderBrush="Black"
             BorderThickness="2">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="data:TestResult">
-                    <StackPanel Orientation="Horizontal" Spacing="30">
-                        <TextBlock Text="{x:Bind TestId}"/>
-                        <TextBlock Text="{x:Bind StudentId}"/>
-                        <TextBlock Text="{x:Bind TotalPoints}"/>
+                <DataTemplate x:DataType="x:String">
+                    <StackPanel Orientation="Vertical"
+                                Margin=" 0,15,0,0">
+                        <TextBlock Text="{x:Bind }"/>
+                        
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <ListView.Header>
-                <StackPanel Orientation="Horizontal" Spacing="30">
-                    <TextBlock Text="TestId"/>
-                    <TextBlock Text="StudentId"/>
-                    <TextBlock Text="Poäng"/>
-                </StackPanel>
-            </ListView.Header>
         </ListView>
+        
+        <StackPanel    Orientation="Horizontal" 
+                       Grid.Column="2"
+                       VerticalAlignment="Bottom"
+                              />
         <Button 
             x:Name="Bttn_SeeStudentResult" 
             Content="Se elever"

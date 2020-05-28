@@ -44,6 +44,7 @@ namespace TestApp.View
             string password = PB_InsertPassword.Password;
 
             //!!Following code is only for testing purpose.
+
             //if(Tb_InsertEmail.Text=="1")
             //{
             //  LogInViewModel.Instance.ActiveStudent = new Model.Student(19,"Mikael","Ollhage","nej@ja.com","pass",8,new List<Test>());
@@ -60,6 +61,7 @@ namespace TestApp.View
             //    this.Frame.Navigate(typeof(MainPage), "Admin");
             //}
             ////TestCode stopped
+
 
 
             if (Rb_Student.IsChecked == true)
