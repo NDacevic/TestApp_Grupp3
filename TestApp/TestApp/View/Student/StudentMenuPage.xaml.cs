@@ -33,7 +33,7 @@ namespace TestApp.View.Student
         }
 
 
-        private void StudentNavigate_btn(object sender, RoutedEventArgs e)
+        private async void StudentNavigate_btn(object sender, RoutedEventArgs e)
         {
             if (sender == historicalTest_btn)
             {
@@ -41,6 +41,8 @@ namespace TestApp.View.Student
             }
             else if(sender == availableTest_btn)
             {
+                //Calls the factory pattern's createAsync methdo to load all new data again
+                await AvailableTestsView.CreateAsync();
                 mainFrame.Navigate(typeof(AvailableTestsView));
             }
             else if(sender == logOut_btn)

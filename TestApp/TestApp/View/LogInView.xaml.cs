@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using TestApp.Model;
+using TestApp.View.Student;
 using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -28,8 +29,7 @@ namespace TestApp.View
     {
         public LogInView()
         {
-            this.InitializeComponent();
-            
+            this.InitializeComponent();            
         }
       
         /// <summary>
@@ -37,60 +37,59 @@ namespace TestApp.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Bttn_Login_Click(object sender, RoutedEventArgs e)
+        private async void Bttn_Login_Click(object sender, RoutedEventArgs e)
         {
 
             //string password = LogInViewModel.Instance.EncryptedPassword(PB_InsertPassword.ToString(), new SHA256CryptoServiceProvider());
             string password = PB_InsertPassword.Password;
 
             //!!Following code is only for testing purpose.
-            if(Tb_InsertEmail.Text=="1")
-            {
-                LogInViewModel.Instance.ActiveStudent = new Model.Student(19,"Mikael","Ollhage","nej@ja.com","pass",8,new List<Test>()); 
-                this.Frame.Navigate(typeof(MainPage),"Elev");
-                
-            }
-            else if(Tb_InsertEmail.Text == "2")
-            {
-                this.Frame.Navigate(typeof(MainPage), "Teacher");
-            }
-            else if (Tb_InsertEmail.Text == "3")
-            {
-                this.Frame.Navigate(typeof(MainPage), "Admin");
-            }
-            //TestCode stopped
+
+            //if(Tb_InsertEmail.Text=="1")
+            //{
+            //  LogInViewModel.Instance.ActiveStudent = new Model.Student(19,"Mikael","Ollhage","nej@ja.com","pass",8,new List<Test>());
+            // //Calls the Factory Pattern's CreateAsync method to load all data before navigating to the page, making sure all controls has time to populate
+            //  await AvailableTestsView.CreateAsync();
+            //  this.Frame.Navigate(typeof(MainPage),"Elev");
+            //}
+            //else if(Tb_InsertEmail.Text == "2")
+            //{
+            //    this.Frame.Navigate(typeof(MainPage), "Teacher");
+            //}
+            //else if (Tb_InsertEmail.Text == "3")
+            //{
+            //    this.Frame.Navigate(typeof(MainPage), "Admin");
+            //}
+            ////TestCode stopped
 
 
 
-           
-
-/*
             if (Rb_Student.IsChecked == true)
             {
                 LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
                 LogInViewModel.Instance.CheckStudentPassword(password);
-                Frame.Navigate(typeof(MainPage), "Student");
-                
+                Frame.Navigate(typeof(MainPage), "Elev");
+
             }
             else if (Rb_Employee.IsChecked == true)
             {
-                LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
+                await LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
                 LogInViewModel.Instance.CheckEmployeePassword(password);
 
-                if (LogInViewModel.Instance.ActiveEmployee.Role.RoleName == "Admin")
-                {
-                    Frame.Navigate(typeof(MainPage), "Admin");
-                }
-                else if (LogInViewModel.Instance.ActiveEmployee.Role.RoleName == "Teacher")
+                if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 1)
                 {
                     Frame.Navigate(typeof(MainPage), "Teacher");
+                }
+                else if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 2)
+                {
+                    Frame.Navigate(typeof(MainPage), "Admin");
                 }
             }
             else
             {
                 new MessageDialog("Vänligen klicka i om du är student eller personal, tack!");
             }
-             */ 
+
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

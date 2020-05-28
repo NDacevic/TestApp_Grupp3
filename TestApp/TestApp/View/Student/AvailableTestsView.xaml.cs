@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using TestApp.Model;
 using TestApp.ViewModel;
 using Windows.Foundation;
@@ -35,9 +36,7 @@ namespace TestApp.View.Student
         #region Constructors
         public AvailableTestsView()
         {
-            this.InitializeComponent();
-            //Call method to set the Property that binds to this page's ListView
-            StudentViewModel.Instance.SeeActiveTests();
+            this.InitializeComponent();           
         }
         #endregion
 
@@ -51,6 +50,27 @@ namespace TestApp.View.Student
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Factory Pattern creation method
+        /// </summary>
+        /// <returns></returns>
+        public static async Task CreateAsync()
+        {
+            //Create instance of this class to be able to call next method
+            AvailableTestsView availableTestsView = new AvailableTestsView();
+            await availableTestsView.InitializeAsync();
+        }
+
+        /// <summary>
+        /// Factory Pattern Initialize async method
+        /// </summary>
+        /// <returns></returns>
+        private async Task InitializeAsync()
+        {
+            //Get external data
+            await StudentViewModel.Instance.SeeActiveTests();
+        }
+
         #endregion
 
         /// <summary>
