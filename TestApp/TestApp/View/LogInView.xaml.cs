@@ -76,15 +76,16 @@ namespace TestApp.View
             {
                 LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
                 LogInViewModel.Instance.CheckEmployeePassword(password);
-                string role = LogInViewModel.Instance.GetEmployeeRole();
+                LogInViewModel.Instance.GetEmployeeRole();
 
-                if (role == "Admin")
-                {
-                    Frame.Navigate(typeof(MainPage), "Admin");
-                }
-                else if (role == "Teacher")
+
+                if (LogInViewModel.Instance.ActiveEmployeeRole.RoleId == 1)
                 {
                     Frame.Navigate(typeof(MainPage), "Teacher");
+                }
+                else if (LogInViewModel.Instance.ActiveEmployeeRole.RoleId == 2)
+                {
+                    Frame.Navigate(typeof(MainPage), "Admin");
                 }
             }
             else
@@ -92,6 +93,11 @@ namespace TestApp.View
                 new MessageDialog("Vänligen klicka i om du är student eller personal, tack!");
             }
 
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            NavigationHelper.Instance.GlobalFrame = Frame;
         }
     }
 }

@@ -20,10 +20,10 @@ namespace TestApp.View.Teacher
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPageTeacherView : Page
+    public sealed partial class TeacherMenuPage : Page
     {
         private Frame mainFrame;
-        public MainPageTeacherView()
+        public TeacherMenuPage()
         {
             this.InitializeComponent();
         }
@@ -55,9 +55,13 @@ namespace TestApp.View.Teacher
             {
                 mainFrame.Navigate(typeof(DeleteTestView));
             }
+            else if (sender == removeQuestion_btn)
+            {
+                mainFrame.Navigate(typeof(RemoveQuestionView));
+            }
             else if (sender == logOut_btn)
             {
-                //Not yet implemented
+                NavigationHelper.Instance.GlobalFrame.Navigate(typeof(LogInView));
             }
 
         }

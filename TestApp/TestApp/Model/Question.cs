@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TestApp.Model
 {
-    public class Question
+    public class Question : INotifyPropertyChanged
     {
         #region Constant Fields
         #endregion
 
         #region Fields
+        private int rowInTest;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         #endregion
 
         #region Constructors
@@ -49,6 +54,17 @@ namespace TestApp.Model
 
         }
         public StudentQuestionAnswer QuestionAnswer { get; set; }
+        
+        //used to populate the textboxes in a test, for each question, that states which number the question has (1 to max)
+        public int RowInTest 
+        {
+            get => rowInTest;
+            set
+            {
+                rowInTest = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RowInTest"));
+            }
+        } 
         #endregion
 
         #region Methods

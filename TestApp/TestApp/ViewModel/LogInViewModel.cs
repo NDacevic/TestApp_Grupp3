@@ -44,9 +44,9 @@ namespace TestApp.ViewModel
                 return instance;
             }
         }
-        public Employee ActiveEmployee { get; set
-                ; }
+        public Employee ActiveEmployee { get; set; }
         public Student ActiveStudent { get; set; }
+        public EmployeeRole ActiveEmployeeRole { get; set; }
         #endregion
 
         #region Methods
@@ -75,17 +75,21 @@ namespace TestApp.ViewModel
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
-        public async string GetEmployeeRole ()
+        public async void GetEmployeeRole()
         {
-            try
-            {
-                string role = await ApiHelper.Instance.GetEmployeeRole(ActiveEmployee.EmployeeId);
-                return role;
-            }
-            catch
-            {
-                await new MessageDialog("Felaktig inmatning, försök igen alternativt kontakta admin").ShowAsync();
-            }
+            ActiveEmployeeRole = new EmployeeRole();
+            //try
+            //{
+            int id = ActiveEmployee.EmployeeId;
+            string mail = ActiveEmployee.Email;
+                ActiveEmployeeRole = await ApiHelper.Instance.GetEmployeeRole(id);
+               
+                
+            //}
+            //catch
+            //{
+            //    await new MessageDialog("Felaktig inmatning, försök igen alternativt kontakta admin").ShowAsync();
+            //}
         }
         /// <summary>
         /// Encrypting the password using SHA256

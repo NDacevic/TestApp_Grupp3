@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="TestApp.View.MainPageAdminViewxaml"
+    x:Class="TestApp.View.AdminMenuPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:TestApp.View"
@@ -11,8 +11,13 @@
     <Grid>
         <StackPanel Orientation="Vertical"
                     VerticalAlignment="Center">
-            <Button Content="Lägg till användare"
-                    x:Name="addUser_btn"
+            <Button Content="Lägg till personal"
+                    x:Name="addEmployee_btn"
+                    Click="AdminNavigate_btn"
+                    Margin="0,0,0,10"/>
+            
+            <Button Content="Lägg till elev"
+                    x:Name="addStudent_btn"
                     Click="AdminNavigate_btn"
                     Margin="0,0,0,10"/>
 

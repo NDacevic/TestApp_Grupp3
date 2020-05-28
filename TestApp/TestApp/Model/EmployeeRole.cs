@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestApp.Model
 {
-    public class Role
+    public class EmployeeRole
     {
         #region Constant Fields
         #endregion
@@ -15,12 +15,7 @@ namespace TestApp.Model
         #endregion
 
         #region Constructors
-        public Role (int roleId, string roleName)
-        {
-            RoleId = roleId;
-            RoleName = roleName;
-        }
-        public Role ()
+        public EmployeeRole()
         {
 
         }
@@ -33,8 +28,10 @@ namespace TestApp.Model
         #endregion
 
         #region Properties
+        public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
         public int RoleId { get; set; }
-        public string RoleName { get; set; }
+        public Role Role { get; set; }
         #endregion
 
         #region Methods

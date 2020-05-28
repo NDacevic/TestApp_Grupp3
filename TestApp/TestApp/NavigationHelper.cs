@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
-namespace TestApp.Model
+namespace TestApp
 {
-    public class Role
+    class NavigationHelper
     {
         #region Constant Fields
         #endregion
 
         #region Fields
+        private static NavigationHelper instance;
         #endregion
 
         #region Constructors
-        public Role (int roleId, string roleName)
-        {
-            RoleId = roleId;
-            RoleName = roleName;
-        }
-        public Role ()
+        private NavigationHelper()
         {
 
         }
@@ -33,8 +30,17 @@ namespace TestApp.Model
         #endregion
 
         #region Properties
-        public int RoleId { get; set; }
-        public string RoleName { get; set; }
+        public static NavigationHelper Instance { get
+            {
+                if (instance == null)
+                {
+                    instance = new NavigationHelper();
+                }
+                return instance;
+            } 
+        }
+
+        public Frame GlobalFrame { get; set; }
         #endregion
 
         #region Methods

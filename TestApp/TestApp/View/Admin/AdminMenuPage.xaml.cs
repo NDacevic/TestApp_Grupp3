@@ -20,10 +20,10 @@ namespace TestApp.View
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPageAdminViewxaml : Page
+    public sealed partial class AdminMenuPage : Page
     {
         private Frame mainFrame;
-        public MainPageAdminViewxaml()
+        public AdminMenuPage()
         {
             this.InitializeComponent();
         }
@@ -35,9 +35,13 @@ namespace TestApp.View
 
         private void AdminNavigate_btn(object sender, RoutedEventArgs e)
         {
-            if (sender == addUser_btn)
+            if (sender == addEmployee_btn)
             {
-                //Not yet implemented
+                mainFrame.Navigate(typeof(Admin.AdminEmployeeView));
+            }
+            else if(sender == addStudent_btn)
+            {
+                mainFrame.Navigate(typeof(Admin.AdminStudentView));
             }
             else if (sender == editUser_btn)
             {
@@ -49,7 +53,7 @@ namespace TestApp.View
             }
             else if (sender == logOut_btn)
             {
-                //Not yet implemented
+                NavigationHelper.Instance.GlobalFrame.Navigate(typeof(LogInView));
             }
         }
     }

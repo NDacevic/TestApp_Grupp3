@@ -120,7 +120,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NavigationHelper.cs" />
     <Compile Include="Model\Course.cs" />
+    <Compile Include="Model\EmployeeRole.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\TestResult.cs" />
     <Compile Include="ViewModel\LogInViewModel.cs" />
@@ -138,6 +140,9 @@
       <DependentUpon>DeleteTestView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyDataTemplateSelector.cs" />
+    <Compile Include="View\LoadDataView.xaml.cs">
+      <DependentUpon>LoadDataView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
     </Compile>
@@ -155,14 +160,14 @@
     <Compile Include="ViewModel\TeacherGradeTestViewModel.cs" />
     <Compile Include="ViewModel\TeacherStudentViewModel.cs" />
     <Compile Include="ViewModel\StudentViewModel.cs" />
-    <Compile Include="View\Admin\MainPageAdminViewxaml.xaml.cs">
-      <DependentUpon>MainPageAdminViewxaml.xaml</DependentUpon>
+    <Compile Include="View\Admin\AdminMenuPage.xaml.cs">
+      <DependentUpon>AdminMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Student\AvailableTestsView.xaml.cs">
       <DependentUpon>AvailableTestsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Student\MainPageStudentView.xaml.cs">
-      <DependentUpon>MainPageStudentView.xaml</DependentUpon>
+    <Compile Include="View\Student\StudentMenuPage.xaml.cs">
+      <DependentUpon>StudentMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Teacher\CreateQuestionView.xaml.cs">
       <DependentUpon>CreateQuestionView.xaml</DependentUpon>
@@ -173,14 +178,17 @@
     <Compile Include="View\Teacher\GradeTestView.xaml.cs">
       <DependentUpon>GradeTestView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Teacher\MainPageTeacherView.xaml.cs">
-      <DependentUpon>MainPageTeacherView.xaml</DependentUpon>
+    <Compile Include="View\Teacher\TeacherMenuPage.xaml.cs">
+      <DependentUpon>TeacherMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Student\HistoricalTestsView.xaml.cs">
       <DependentUpon>HistoricalTestsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Student\WriteTestView.xaml.cs">
       <DependentUpon>WriteTestView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Teacher\RemoveQuestionView.xaml.cs">
+      <DependentUpon>RemoveQuestionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Teacher\StudentResultView.xaml.cs">
       <DependentUpon>StudentResultView.xaml</DependentUpon>
@@ -223,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\LoadDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LogInView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -231,7 +243,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Admin\MainPageAdminViewxaml.xaml">
+    <Page Include="View\Admin\AdminMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -239,7 +251,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Student\MainPageStudentView.xaml">
+    <Page Include="View\Student\StudentMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -255,7 +267,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Teacher\MainPageTeacherView.xaml">
+    <Page Include="View\Teacher\TeacherMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -264,6 +276,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Student\WriteTestView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Teacher\RemoveQuestionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
