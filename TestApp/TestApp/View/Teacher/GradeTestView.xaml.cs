@@ -41,8 +41,6 @@ namespace TestApp.View.Teacher
         public GradeTestView()
         {
             this.InitializeComponent();
-
-            GetTests();
         }
 
         /// <summary>
@@ -108,6 +106,36 @@ namespace TestApp.View.Teacher
             scrollViewer_InitialTestList.Visibility = Visibility.Visible;
             scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
             scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Collapsed;
+        }
+
+        private async void ReloadAllStudentsTestsQuestionsClick(object sender, RoutedEventArgs args)
+        {
+            await gradeInstance.DownloadStudents();
+            GetTests();
+        }
+
+        private void PreviousListClick(object sender, RoutedEventArgs args)
+        {
+            if (scrollViewer_StudentsUngradedTestofType.Visibility == Visibility.Visible)
+            {
+                scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
+                scrollViewer_InitialTestList.Visibility = Visibility.Visible;
+            }
+            else if (scrollViewer_QuestionsForStudentAndTest.Visibility == Visibility.Visible)
+            {
+                scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Collapsed;
+                scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Visible;
+            }
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (gradeInstance.allStudents == null)
+            {
+                await gradeInstance.DownloadStudents();
+            }
+            GetTests();
+            Debug.WriteLine("Loaded");
         }
     }
 }
