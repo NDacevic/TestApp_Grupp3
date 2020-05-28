@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:models="using:TestApp.Model"
     mc:Ignorable="d"
+    Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
@@ -14,6 +15,10 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <ScrollViewer
             x:Name="scrollViewer_InitialTestList"
             >
@@ -140,5 +145,23 @@
                     />
             </StackPanel>
         </ScrollViewer>
+        <StackPanel
+            Orientation="Horizontal"
+            Grid.Row="1"
+            Spacing="50"
+            Margin="0,0,0,50"
+            >
+            <Button
+                x:Name="bttn_PreviousList"
+                Click="PreviousListClick"
+                Content="Backa"
+                />
+            <Button
+                x:Name="bttn_ReloadAllStudentsTestsQuestions"
+                Click="ReloadAllStudentsTestsQuestionsClick"
+            
+                Content="Ladda om listan"
+                />
+        </StackPanel>
     </Grid>
 </Page>
