@@ -236,6 +236,7 @@ namespace TestApp.ViewModel
             //Start test if there is time remaining, else register blank answers
             if (remainingTestDuration > 0)
             {
+                this.txtBl_TestTimer.Text = $"Tid kvar: {remainingTestDuration} min";
                 dispatcherTimer.Start();
             }
             else
@@ -343,7 +344,7 @@ namespace TestApp.ViewModel
             //Loop through all questions and check if there are any Text questions
             foreach (Question question in questions)
             {
-                if (question.QuestionType=="Text")
+                if (question.QuestionType=="Fritext")
                 {
                     numberOfTextQuestions++;
                 }
