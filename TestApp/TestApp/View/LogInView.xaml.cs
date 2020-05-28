@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using TestApp.Model;
+using TestApp.View.Student;
 using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -28,8 +29,7 @@ namespace TestApp.View
     {
         public LogInView()
         {
-            this.InitializeComponent();
-            
+            this.InitializeComponent();            
         }
       
         /// <summary>
@@ -37,7 +37,7 @@ namespace TestApp.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Bttn_Login_Click(object sender, RoutedEventArgs e)
+        private async void Bttn_Login_Click(object sender, RoutedEventArgs e)
         {
 
             //string password = LogInViewModel.Instance.EncryptedPassword(PB_InsertPassword.ToString(), new SHA256CryptoServiceProvider());
@@ -46,7 +46,9 @@ namespace TestApp.View
             //!!Following code is only for testing purpose.
             if(Tb_InsertEmail.Text=="1")
             {
-                LogInViewModel.Instance.ActiveStudent = new Model.Student(19,"Mikael","Ollhage","nej@ja.com","pass",9,new List<Test>()); 
+                LogInViewModel.Instance.ActiveStudent = new Model.Student(19,"Mikael","Ollhage","nej@ja.com","pass",8,new List<Test>());
+                //Calls the Factory Pattern's CreateAsync method to load all data before navigating to the page, making sure all controls has time to populate
+                await AvailableTestsView.CreateAsync();
                 this.Frame.Navigate(typeof(MainPage),"Elev");
                 
             }
