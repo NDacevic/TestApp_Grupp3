@@ -67,12 +67,10 @@
                     Text="Lösenord: " 
                     FontSize="20"
                     Width="100"/>
-                    <TextBox
-                    x:Name="Tb_Password"
-                    Text=""
-                    x:DefaultBindMode="TwoWay"
-                    FontSize="20"
-                    Width="200"/>
+                    <PasswordBox
+                        x:Name="Pb_Password"
+                        Width="200"/>
+
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="40">
                     <TextBlock 

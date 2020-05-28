@@ -78,14 +78,7 @@ namespace TestApp.ViewModel
         /// <param name="input"></param>
         /// <param name="algorithm"></param>
         /// <returns></returns>
-        //public string EncryptPassword(string inputPassword, HashAlgorithm algorithm)
-        //{
-        //    Byte[] passwordToBytes = Encoding.UTF8.GetBytes(inputPassword);
 
-        //    Byte[] hashedPasswordBytes = algorithm.ComputeHash(passwordToBytes);
-
-        //    return BitConverter.ToString(hashedPasswordBytes);
-        //}
         public static string EncryptPassword(string password)
         {
             // Create a SHA256   
