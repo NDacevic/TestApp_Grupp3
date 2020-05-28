@@ -76,14 +76,14 @@ namespace TestApp.View
             {
                 LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
                 LogInViewModel.Instance.CheckEmployeePassword(password);
-                LogInViewModel.Instance.GetEmployeeRole();
+                //LogInViewModel.Instance.GetEmployeeRole();
 
 
-                if (LogInViewModel.Instance.ActiveEmployeeRole.RoleId == 1)
+                if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 1)
                 {
                     Frame.Navigate(typeof(MainPage), "Teacher");
                 }
-                else if (LogInViewModel.Instance.ActiveEmployeeRole.RoleId == 2)
+                else if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 2)
                 {
                     Frame.Navigate(typeof(MainPage), "Admin");
                 }
