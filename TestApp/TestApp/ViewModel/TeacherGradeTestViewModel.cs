@@ -85,7 +85,7 @@ namespace TestApp.ViewModel
             {
                 foreach(var studentTest in student.Tests)
                 {
-                    if(studentTest.RecievedPoints == null)
+                    if((studentTest.Questions.Select(x => x.QuestionAnswer)).Any(x => x.IsCorrect == null))
                     {
                         if (!ungradedTests.Any(test => test.TestId == studentTest.TestId))
                             ungradedTests.Add(studentTest);
@@ -103,7 +103,15 @@ namespace TestApp.ViewModel
         /// <param name="studentsWithTestList"></param>
         public void PopulateStudentsWithTestList(int testId, ObservableCollection<Student> studentsWithTestList)
         {
-            var tempStudentList = allStudents.Where(student => student.Tests.Any(test => test.TestId == testId && test.IsGraded == false)).Select(x => x).ToList();
+            var tempStudentList = allStudents
+                .Where(student => 
+                    student.Tests
+                           .Any(test => 
+                               test.TestId == testId && (test.Questions
+                                                              .Select(x => x.QuestionAnswer))
+                                                              .Any(x => x.IsCorrect == null)))
+                .Select(x => x)
+                .ToList();
             foreach(var student in tempStudentList)
             {
                 studentsWithTestList.Add(student);
