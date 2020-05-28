@@ -236,6 +236,7 @@ namespace TestApp.ViewModel
             //Start test if there is time remaining, else register blank answers
             if (remainingTestDuration > 0)
             {
+                this.txtBl_TestTimer.Text = $"Tid kvar: {remainingTestDuration} min";
                 dispatcherTimer.Start();
             }
             else
