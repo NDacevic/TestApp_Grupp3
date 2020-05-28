@@ -31,14 +31,14 @@ namespace TestApp.View.Teacher
         }
         private void GetAllTests()
         {
-            TeacherStudentViewModel.Instance.DisplayAllTests();
+            TeacherStudentViewModel.Instance.GetTests();
         }
      
 
         private void Bttn_SeeStudentResult_Click(object sender, RoutedEventArgs e) 
         {
             Test test = (Test)Lv_AllTests.SelectedItem;
-            TeacherStudentViewModel.Instance.DisplayStudentResult(test.TestId);
+            TeacherStudentViewModel.Instance.GetStudentResult(test.TestId);
         }
     }
 }
