@@ -64,23 +64,35 @@ namespace TestApp.View
 
             if (Rb_Student.IsChecked == true)
             {
-                LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
-                LogInViewModel.Instance.CheckStudentPassword(password);
-                Frame.Navigate(typeof(MainPage), "Elev");
+
+                    await LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
+                    bool correct = LogInViewModel.Instance.CheckStudentPassword(password);
+                    if(correct)
+                    {
+                        Frame.Navigate(typeof(MainPage), "Elev");
+                    }
+
 
             }
             else if (Rb_Employee.IsChecked == true)
             {
-                await LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
-                LogInViewModel.Instance.CheckEmployeePassword(password);
+                try
+                {
+                    await LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
+                    LogInViewModel.Instance.CheckEmployeePassword(password);
 
-                if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 1)
-                {
-                    Frame.Navigate(typeof(MainPage), "Teacher");
+                    if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 1)
+                    {
+                        Frame.Navigate(typeof(MainPage), "Teacher");
+                    }
+                    else if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 2)
+                    {
+                        Frame.Navigate(typeof(MainPage), "Admin");
+                    }
                 }
-                else if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 2)
+                catch (Exception)
                 {
-                    Frame.Navigate(typeof(MainPage), "Admin");
+                    await new MessageDialog("Vänligen fyll i alla fält.").ShowAsync();
                 }
             }
             else
