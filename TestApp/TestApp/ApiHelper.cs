@@ -544,7 +544,8 @@ namespace TestApp
 
         public async Task<Employee> GetEmployee(string email)
         {
-            jsonString = await httpClient.GetStringAsync("LogInEmployees/" + email);
+            HttpResponseMessage httpResponse = await httpClient.GetAsync("LogInEmployees/" + email);
+            jsonString = await httpResponse.Content.ReadAsStringAsync();
             var employee = JsonConvert.DeserializeObject<Employee>(jsonString);
             return employee;
         }
@@ -628,6 +629,7 @@ namespace TestApp
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
+
         /// <summary>
         /// Gets all roles from DB
         /// </summary>

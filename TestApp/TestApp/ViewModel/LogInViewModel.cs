@@ -51,6 +51,7 @@ namespace TestApp.ViewModel
         #region Methods
         public async void GetStudent (string email)
         {
+            ActiveStudent = new Student();
             try
             {
                 ActiveStudent = await ApiHelper.Instance.GetStudent(email);
@@ -61,8 +62,9 @@ namespace TestApp.ViewModel
             }
             
         }
-        public async void GetEmployee (string email)
+        public async Task GetEmployee (string email)
         {
+            ActiveEmployee = new Employee();
             try
             {
                 ActiveEmployee = await ApiHelper.Instance.GetEmployee(email);
@@ -72,6 +74,7 @@ namespace TestApp.ViewModel
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
+
         /// <summary>
         /// Encrypting the password using SHA256
         /// </summary>
@@ -87,6 +90,7 @@ namespace TestApp.ViewModel
                 // Return byte array  
                 byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
 
+<<<<<<< HEAD
                 // Convert byte array to a string   
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < bytes.Length; i++)
@@ -97,7 +101,13 @@ namespace TestApp.ViewModel
             }
         }
         public bool CheckEmployeePassword(string insertedPassword) //Get ()
+=======
+        //    return BitConverter.ToString(hashedPasswordBytes);
+        //}
+        public bool CheckEmployeePassword(string insertedPassword)
+>>>>>>> master
         {
+   
             if (ActiveEmployee.Password == insertedPassword)
             {
                 return true;
