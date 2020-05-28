@@ -24,7 +24,6 @@
         <ListView 
             x:Name="Lv_AllTests"
             ItemsSource="{x:Bind model:TeacherStudentViewModel.Instance.GradedTests}"
-            x:DefaultBindMode="TwoWay"
             Grid.Column="0" 
             Grid.Row="1"
             BorderBrush="Black"
@@ -55,8 +54,7 @@
         </ListView>
         <ListView 
             x:Name="Lv_IndividualTestResult"
-            ItemsSource="{x:Bind model:TeacherStudentViewModel.Instance.StudentTestResults}"
-            x:DefaultBindMode="TwoWay"
+            ItemsSource="{x:Bind model:TeacherStudentViewModel.Instance.DisplayResult}"
             Grid.Column="2" 
             Grid.Row="1"
             BorderBrush="Black"

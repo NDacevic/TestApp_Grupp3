@@ -22,8 +22,11 @@ namespace TestApp.ViewModel
         #region Constructors
         public TeacherStudentViewModel()
         {
+            AllStudents = new List<Student>();
+            DisplayResult = new ObservableCollection<TestResult>();
             GradedTests = new ObservableCollection<Test>();
             StudentTestResults = new ObservableCollection<TestResult>();
+            AllTests = new List<Test>();
         }
         #endregion
 
@@ -48,8 +51,14 @@ namespace TestApp.ViewModel
                 }
             }
         }
-        public ObservableCollection<Test> GradedTests { get; set; }
-        public ObservableCollection<TestResult> StudentTestResults { get; set; }
+        
+        public List <Test> AllTests { get; set; } //Keep all tests
+        public ObservableCollection<Test> GradedTests { get; set; } //Keep all graded test in here
+        public ObservableCollection<TestResult> StudentTestResults { get; set; } //Keep all students with graded tests
+        public string StudentName { get; set; }
+        public ObservableCollection<TestResult> DisplayResult { get; set; }
+        public List<Student>  AllStudents { get; set; }
+       
         #endregion
 
         #region Methods
@@ -64,19 +73,26 @@ namespace TestApp.ViewModel
         {
             try
             {
-                var tests = await ApiHelper.Instance.GetAllTests();
+                StudentTestResults.Clear();
+                AllTests.Clear();
+                GradedTests.Clear();
 
-                if(GradedTests.Count == 0)
-                {
-                    foreach (Test t in tests)
+                StudentTestResults = await ApiHelper.Instance.GetTestResults();
+                AllTests = await ApiHelper.Instance.GetAllTests();
+
+                    foreach(TestResult tr in StudentTestResults.ToList())
                     {
-                        if (t.IsGraded == true)
+          
+                      foreach (Test t in AllTests.ToList())
+                     {
+                        if (t.TestId == tr.TestId&&!GradedTests.Contains(t))
                         {
                             GradedTests.Add(t);
-                        }
 
+                        }
+                     }
+                       
                     }
-                }
             }
             catch (Exception exc)
             {
@@ -88,21 +104,26 @@ namespace TestApp.ViewModel
         /// </summary>
         /// <param name="testId"></param>
 
-        public async void DisplayStudentResult(int testId)
+        public async void GetStudentResult(int testId)
         {
-            try
+            AllStudents.Clear();
+            AllStudents = await ApiHelper.Instance.GetAllStudents();
+
+            DisplayStudentResult(testId);
+
+        }
+        public void DisplayStudentResult(int testId)
+        {
+            DisplayResult.Clear();
+            foreach (TestResult tr in StudentTestResults.ToList())
             {
-                var testResults = await ApiHelper.Instance.GetAllTestResults(testId);
-                foreach (TestResult ts in testResults)
-                {
-                    StudentTestResults.Add(ts);
-                }
-            }
-            catch (Exception exc)
-            {
-                await new MessageDialog(exc.Message).ShowAsync();
+                if (tr.TestId == testId)
+               
+                   DisplayResult.Add(tr);
+             
             }
         }
+       
         #endregion
 
     }
