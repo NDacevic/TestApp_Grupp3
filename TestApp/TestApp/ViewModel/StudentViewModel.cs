@@ -115,7 +115,7 @@ namespace TestApp.ViewModel
         }
 
 
-        public async void GetAllTests()
+        public async Task GetAllTests()
         {
             if(AllTests.Count==0)
             AllTests = await ApiHelper.Instance.GetAllTests();
@@ -154,7 +154,7 @@ namespace TestApp.ViewModel
         /// <summary>
         /// Method that takes all tests from the database and saves the wanted tests to an OC, for list display
         /// </summary>
-        public async void SeeActiveTests()
+        public async Task SeeActiveTests()
         {
            
             bool isTestAlreadyWritten;
@@ -165,7 +165,7 @@ namespace TestApp.ViewModel
                 loadScreen.ShowAsync();
                 Thread.Sleep(1000);
                 
-                GetAllTests();
+                await GetAllTests();
                 
                 //Making the ApiCall here cause this is the front page when the student log in
                 //Get all answers for all tests from databse
