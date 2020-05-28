@@ -77,7 +77,7 @@ namespace TestApp.View.Teacher
                 teacherCreateViewModel.CreatedTest.Grade = int.Parse(ChooseGrade.SelectedValue.ToString());
                 teacherCreateViewModel.CreatedTest.TestDuration = int.Parse(TestTime_txtBox.Text);
                 AddDateAndTimeToTest();
-                teacherCreateViewModel.CreateTestToDB();
+                
             }
             catch(NullReferenceException)
             {
@@ -144,19 +144,18 @@ namespace TestApp.View.Teacher
                 dateAndTime = new DateTimeOffset(TestDatePicker.Date.Value.Year, TestDatePicker.Date.Value.Month, TestDatePicker.Date.Value.Day
               , TestTimePicker.Time.Hours-2, TestTimePicker.Time.Minutes, TestTimePicker.Time.Seconds,
                                          new TimeSpan(0, 0, 0));
-
-                if (TestTimePicker.Time.Hours==0) 
-                {
-                    teacherCreateViewModel.DisplayInvalidTimeForTest();
-                }
-                else
-                {
+               
                     teacherCreateViewModel.CreatedTest.StartDate = dateAndTime; //We give our Test the given date and time.
-                }
+                    teacherCreateViewModel.CreateTestToDB();
+            
             }
             catch(InvalidOperationException)
             {
                 teacherCreateViewModel.DisplayFieldsAreEmpty();
+            }
+            catch(ArgumentOutOfRangeException)
+            {
+                teacherCreateViewModel.DisplayInvalidTimeForTest();
             }
 
         }
