@@ -289,29 +289,36 @@ namespace TestApp
 
         public async void PostTestResult(TestResult testResult)
         {
-            //Convert the object to a json string.
-            jsonString = JsonConvert.SerializeObject(testResult);
-
-            //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
-            using (HttpContent content = new StringContent(jsonString))
+            try
             {
-                //Set the type of content
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                //Convert the object to a json string.
+                jsonString = JsonConvert.SerializeObject(testResult);
 
-                //Call the api and send the Json string.
-                HttpResponseMessage response = await httpClient.PostAsync("TestResults", content);
+                //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
+                using (HttpContent content = new StringContent(jsonString))
+                {
+                    //Set the type of content
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                //Check if it is successfull. In that case display a message telling the user.
-                //Otherwise throw an error and tell the user that the question was not posted.
-                if (response.IsSuccessStatusCode)
-                {
-                    await new MessageDialog("Resultatet för testet har sparats").ShowAsync();
+                    //Call the api and send the Json string.
+                    HttpResponseMessage response = await httpClient.PostAsync("TestResults", content);
+
+                    //Check if it is successfull. In that case display a message telling the user.
+                    //Otherwise throw an error and tell the user that the question was not posted.
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await new MessageDialog("Resultatet för testet har sparats").ShowAsync();
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                        throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                    }
                 }
-                else
-                {
-                    Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                    throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
-                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
             }
         }
 
@@ -599,7 +606,7 @@ namespace TestApp
         /// The list must have at least one object in it
         /// </summary>
         /// <param name=""></param>
-        public async void UpdateStudentQuestionAnswer(List<StudentQuestionAnswer> sqaList)
+        public async Task<bool> UpdateStudentQuestionAnswer(List<StudentQuestionAnswer> sqaList)
         {
             try
             {
@@ -616,6 +623,7 @@ namespace TestApp
                     if (response.IsSuccessStatusCode)
                     {
                         await new MessageDialog("Rättningen sparad!").ShowAsync();
+                        return true;
                     }
                     else
                     {
@@ -626,6 +634,7 @@ namespace TestApp
             catch(Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
+                return false;
             }
         }
         /// <summary>
