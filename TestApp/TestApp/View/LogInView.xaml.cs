@@ -40,8 +40,8 @@ namespace TestApp.View
         private void Bttn_Login_Click(object sender, RoutedEventArgs e)
         {
 
-            //string password = LogInViewModel.Instance.EncryptedPassword(PB_InsertPassword.ToString(), new SHA256CryptoServiceProvider());
-            string password = PB_InsertPassword.Password;
+
+            string password = LogInViewModel.EncryptPassword(PB_InsertPassword.Password);
 
             //!!Following code is only for testing purpose.
             if(Tb_InsertEmail.Text=="1")
