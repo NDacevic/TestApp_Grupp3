@@ -63,7 +63,7 @@ namespace TestApp.ViewModel
             }
             
         }
-        public async void GetEmployee (string email)
+        public async Task GetEmployee (string email)
         {
             ActiveEmployee = new Employee();
             try
@@ -75,22 +75,22 @@ namespace TestApp.ViewModel
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
-        public async void GetEmployeeRole()
-        {
-            ActiveEmployeeRole = new EmployeeRole();
-            //try
-            //{
-            int id = ActiveEmployee.EmployeeId;
-            string mail = ActiveEmployee.Email;
-                ActiveEmployeeRole = await ApiHelper.Instance.GetEmployeeRole(id);
+        //public async void GetEmployeeRole()
+        //{
+        //    ActiveEmployeeRole = new EmployeeRole();
+        //    //try
+        //    //{
+        //    int id = ActiveEmployee.EmployeeId;
+        //    string mail = ActiveEmployee.Email;
+        //        ActiveEmployeeRole = await ApiHelper.Instance.GetEmployeeRole(id);
                
                 
-            //}
-            //catch
-            //{
-            //    await new MessageDialog("Felaktig inmatning, försök igen alternativt kontakta admin").ShowAsync();
-            //}
-        }
+        //    //}
+        //    //catch
+        //    //{
+        //    //    await new MessageDialog("Felaktig inmatning, försök igen alternativt kontakta admin").ShowAsync();
+        //    //}
+        //}
         /// <summary>
         /// Encrypting the password using SHA256
         /// </summary>
@@ -105,7 +105,7 @@ namespace TestApp.ViewModel
 
         //    return BitConverter.ToString(hashedPasswordBytes);
         //}
-        public bool CheckEmployeePassword(string insertedPassword) //Get ()
+        public bool CheckEmployeePassword(string insertedPassword)
         {
    
             if (ActiveEmployee.Password == insertedPassword)

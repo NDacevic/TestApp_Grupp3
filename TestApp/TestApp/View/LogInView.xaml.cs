@@ -37,7 +37,7 @@ namespace TestApp.View
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Bttn_Login_Click(object sender, RoutedEventArgs e)
+        private async void Bttn_Login_Click(object sender, RoutedEventArgs e)
         {
 
             //string password = LogInViewModel.Instance.EncryptedPassword(PB_InsertPassword.ToString(), new SHA256CryptoServiceProvider());
@@ -74,7 +74,7 @@ namespace TestApp.View
             }
             else if (Rb_Employee.IsChecked == true)
             {
-                LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
+                await LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
                 LogInViewModel.Instance.CheckEmployeePassword(password);
                 //LogInViewModel.Instance.GetEmployeeRole();
 
