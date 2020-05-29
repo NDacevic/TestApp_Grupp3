@@ -416,7 +416,7 @@ namespace TestApp.ViewModel
                                  if (tr.StudentId.Equals(activeStudent.StudentId))
                                  {
                                         decimal percentage = (Convert.ToDecimal(tr.TotalPoints)/Convert.ToDecimal(t.MaxPoints))*100;
-                            StudentTestResult.Add($"Ämne: {t.CourseName} åk.{t.Grade}\nDatum för provet: {t.StartDate}\nMaxpoäng: " +
+                            StudentTestResult.Add($"Ämne: {t.CourseName} Åk{t.Grade}\nDatum för provet: {t.StartDate.ToString("yyyy-MM-dd")}\nMaxpoäng: " +
                                 $"{t.MaxPoints}\nDitt resultat: {tr.TotalPoints} poäng ({Math.Round(percentage, 0)}%)");
                                  }
                              }

@@ -83,6 +83,10 @@ namespace TestApp.View.Teacher
             {
                 teacherCreateViewModel.DisplayFieldsAreEmpty();
             }
+            catch(FormatException)
+            {
+                teacherCreateViewModel.DisplayFieldsAreEmpty();
+            }
            
            
         }
@@ -147,7 +151,7 @@ namespace TestApp.View.Teacher
                
                     teacherCreateViewModel.CreatedTest.StartDate = dateAndTime; //We give our Test the given date and time.
                     teacherCreateViewModel.CreateTestToDB();
-            
+
             }
             catch(InvalidOperationException)
             {
@@ -157,12 +161,12 @@ namespace TestApp.View.Teacher
             {
                 teacherCreateViewModel.DisplayInvalidTimeForTest();
             }
-
+            ResetControllers();
         }
+        
   
         private void TestDatePicker_CalendarViewDayItemChanging(CalendarView sender, CalendarViewDayItemChangingEventArgs e)
         {
-           
             //Greying out Sundays,Saturdays and days prior to today, so the user can´t set wrong date.
             if (e.Item.Date < DateTime.Today)
             {
@@ -177,7 +181,16 @@ namespace TestApp.View.Teacher
                 e.Item.IsBlackout = true;
             }
         }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            teacherCreateViewModel.QuestionsToFilter.Clear();
+        }
+        private void ResetControllers()
+        {
+            teacherCreateViewModel.CreatedTest.MaxPoints = 0;
+            this.Frame.Navigate(typeof(CreateTestView));
+        }
 
-     
+
     }
 }

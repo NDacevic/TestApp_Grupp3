@@ -16,16 +16,20 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel>
+            <TextBlock Text="Ta borta fråga" 
+                   FontSize="48"
+                   HorizontalAlignment="Left"
+                       Margin="20,0,0,0"/>
             <StackPanel Orientation="Horizontal"
-                        Margin="40,0,0,0"
+                        Margin="20,0,0,0"
                         >
                 <TextBlock Text="Välj ämne för att få fram frågorna"
-                           Margin="0,0,0,0"/>
+                           Margin="0,10,0,0"/>
             
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
-                        Margin="40,0,0,0"
+                        Margin="20,10,0,0"
 >
 
                 <ComboBox Width="104" 
@@ -50,7 +54,7 @@
 
         <ListView BorderBrush="Black"
                   BorderThickness="2"
-                  Margin="20,100,0,150"
+                  Margin="20,140,0,150"
                   ItemsSource="{x:Bind teacherCVM.QuestionsToFilter}"
                   x:Name="DisplayQuestionsLV"
                   >

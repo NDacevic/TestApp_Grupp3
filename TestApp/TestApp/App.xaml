@@ -24,8 +24,13 @@
 
             <!-- Font-storlekar kräver en double in som värde. Så vi kan skapa en double vi kan använda såhär-->
             <x:Double x:Key="MediumFontSize">14</x:Double>
+
+            <x:Double x:Key="LargeFontSize">20</x:Double>
+            
+
             <x:Double x:Key="HeaderFontSize">40</x:Double>
             <x:Double x:Key="ColumnTitleFontSize">20</x:Double>
+
 
             <!-- Vi använder samma sätt att hämta värdet. fast denna gången är värdet 'FontSize'-->
             <Style
@@ -34,6 +39,19 @@
                     Property="FontSize"
                     Value="{StaticResource MediumFontSize}"
                     />
+<
+            </Style>
+
+            <Style
+                TargetType="TextBlock"
+                x:Name="MediumTitle"
+                >
+                <Setter 
+                    Property="FontSize"
+                    Value="{StaticResource LargeFontSize}"
+                    />
+           
+=
                 <!--<Setter
                     Property="FontSize"
                     Value="{StaticResource HeaderFontSize}"
@@ -44,6 +62,7 @@
                     />-->
             </Style>          
             
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>
