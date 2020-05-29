@@ -33,7 +33,8 @@ namespace TestApp.View.Admin
         {
             try
             {
-                AdminViewModel.Instance.SetValuesForStudent(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, Tb_Password.Text, int.Parse(Tb_Grade.Text));
+                string password = LogInViewModel.EncryptPassword(Pb_Password.Password);
+                AdminViewModel.Instance.SetValuesForStudent(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, password, int.Parse(Tb_Grade.Text));
               
             }
             catch (Exception)

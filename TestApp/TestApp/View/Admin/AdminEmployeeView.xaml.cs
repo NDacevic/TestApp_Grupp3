@@ -35,7 +35,8 @@ namespace TestApp.View.Admin
         {
             try
             {
-                AdminViewModel.Instance.SetValuesForEmployee(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, Tb_Password.Text, Cb_EmployeeRole.SelectedItem.ToString());
+                string password = LogInViewModel.EncryptPassword(Pb_Password.Password);
+                AdminViewModel.Instance.SetValuesForEmployee(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, password, Cb_EmployeeRole.SelectedItem.ToString());
             }
             catch (Exception)
             {

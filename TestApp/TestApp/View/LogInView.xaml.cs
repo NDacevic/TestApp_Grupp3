@@ -29,19 +29,19 @@ namespace TestApp.View
     {
         public LogInView()
         {
-            this.InitializeComponent();            
+            this.InitializeComponent();
         }
-      
+
         /// <summary>
         /// Method checking email and password för the user trying to log in 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void Bttn_Login_Click(object sender, RoutedEventArgs e)
+        private void Bttn_Login_Click(object sender, RoutedEventArgs e)
         {
 
-            //string password = LogInViewModel.Instance.EncryptedPassword(PB_InsertPassword.ToString(), new SHA256CryptoServiceProvider());
-            string password = PB_InsertPassword.Password;
+
+            string password = LogInViewModel.EncryptPassword(PB_InsertPassword.Password);
 
             //!!Following code is only for testing purpose.
 
@@ -66,16 +66,39 @@ namespace TestApp.View
 
             if (Rb_Student.IsChecked == true)
             {
-                LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
-                LogInViewModel.Instance.CheckStudentPassword(password);
-                Frame.Navigate(typeof(MainPage), "Elev");
+                StudentLogIn(password);
 
             }
             else if (Rb_Employee.IsChecked == true)
             {
-                await LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
-                LogInViewModel.Instance.CheckEmployeePassword(password);
+                EmployeeLogIn(password);
 
+            }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            NavigationHelper.Instance.GlobalFrame = Frame;
+        }
+        public async void StudentLogIn(string password)
+        {
+            await LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
+            bool correctStudent = LogInViewModel.Instance.CheckStudentPassword(password);
+            if (correctStudent)
+            {
+                Frame.Navigate(typeof(MainPage), "Elev");
+            }
+            else
+            {
+                await new MessageDialog("Inkorrekt data, försök igen.").ShowAsync();
+            }
+        }
+        public async void EmployeeLogIn(string password)
+        {
+            await LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
+            bool correctEmployee = LogInViewModel.Instance.CheckEmployeePassword(password);
+            if (correctEmployee)
+            {
                 if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 1)
                 {
                     Frame.Navigate(typeof(MainPage), "Teacher");
@@ -87,14 +110,8 @@ namespace TestApp.View
             }
             else
             {
-                new MessageDialog("Vänligen klicka i om du är student eller personal, tack!");
+                await new MessageDialog("Inkorrekt data, försök igen.").ShowAsync();
             }
-
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            NavigationHelper.Instance.GlobalFrame = Frame;
         }
     }
 }

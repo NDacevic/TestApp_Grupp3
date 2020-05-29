@@ -49,7 +49,7 @@ namespace TestApp.ViewModel
         #endregion
 
         #region Methods
-        public async void GetStudent (string email)
+        public async Task GetStudent (string email)
         {
             ActiveStudent = new Student();
             try
@@ -81,14 +81,25 @@ namespace TestApp.ViewModel
         /// <param name="input"></param>
         /// <param name="algorithm"></param>
         /// <returns></returns>
-        //public string EncryptedPassword(string inputPassword, HashAlgorithm algorithm)
-        //{
-        //    Byte[] passwordToBytes = Encoding.UTF8.GetBytes(inputPassword);
 
-        //    Byte[] hashedPasswordBytes = algorithm.ComputeHash(passwordToBytes);
+        public static string EncryptPassword(string password)
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // Return byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(password));
 
-        //    return BitConverter.ToString(hashedPasswordBytes);
-        //}
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                //return encrypted string
+                return builder.ToString();
+            }
+        }
         public bool CheckEmployeePassword(string insertedPassword)
         {
    
