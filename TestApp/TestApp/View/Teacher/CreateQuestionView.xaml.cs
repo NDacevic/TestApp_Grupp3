@@ -31,14 +31,6 @@ namespace TestApp.View.Teacher
         public CreateQuestionView()
         {
             this.InitializeComponent();
-
-            foreach (var x in createInstance.QuestionPoint)
-                if(x.All(c => char.IsDigit(c)))
-                    comboBox_QuestionPoints.Items.Add(x);
-
-            comboBox_QuestionPoints.SelectedIndex = 0;
-            comboBox_CourseNames.SelectedIndex = 0;
-            comboBox_QuestionType.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -51,23 +43,44 @@ namespace TestApp.View.Teacher
         {
             try
             {
-
                 int selectedPoint = int.Parse(comboBox_QuestionPoints.SelectedValue.ToString());
                 string selectedQuestionType = ((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString();
+
+                if (comboBox_CourseNames.SelectedIndex == -1)
+                    throw new Exception("Välj ett ämne först.");
+
                 string selectedCourse = comboBox_CourseNames.SelectedValue.ToString();
 
+
                 if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Flerval")
-                    createInstance.CreatedQuestion = new Question(0, selectedQuestionType, textBox_questionText.Text, textBox_CorrectAnswer.Text,textBox_IncorrectAnswer1.Text, textBox_IncorrectAnswer2.Text, selectedCourse, selectedPoint);
+                    createInstance.CreatedQuestion = new Question(0, selectedQuestionType, textBox_questionText.Text, textBox_CorrectAnswer.Text, textBox_IncorrectAnswer1.Text, textBox_IncorrectAnswer2.Text, selectedCourse, selectedPoint);
                 else if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Fritext")
                     createInstance.CreatedQuestion = new Question(0, selectedQuestionType, textBox_questionText.Text, null, null, null, selectedCourse, selectedPoint);
-                createInstance.CreateQuestion();
 
+                if (await createInstance.CreateQuestion())
+                    ResetPage();
             }
-            catch (FormatException exc)
+            catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
+
+        /// <summary>
+        /// Clears all the elements on the page
+        /// </summary>
+        private void ResetPage()
+        {
+            comboBox_CourseNames.SelectedIndex = 0;
+            comboBox_QuestionType.SelectedIndex = 0;
+            comboBox_QuestionPoints.SelectedIndex = 0;
+
+            textBox_questionText.Text = "";
+            textBox_CorrectAnswer.Text = "";
+            textBox_IncorrectAnswer1.Text = "";
+            textBox_IncorrectAnswer2.Text = "";
+        }
+
 
         /// <summary>
         /// Controls the showing and hiding of the textboxes pertaining to a multiple choice question.
@@ -86,6 +99,17 @@ namespace TestApp.View.Teacher
             {
                 grid_MultipleChoiceAnswers.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            foreach (var x in createInstance.QuestionPoint)
+                if (x.All(c => char.IsDigit(c)))
+                    comboBox_QuestionPoints.Items.Add(x);
+
+            comboBox_QuestionPoints.SelectedIndex = 0;
+            comboBox_CourseNames.SelectedIndex = 0;
+            comboBox_QuestionType.SelectedIndex = 0;
         }
     }
 }

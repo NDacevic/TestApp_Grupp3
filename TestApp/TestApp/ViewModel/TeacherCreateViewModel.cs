@@ -219,16 +219,18 @@ namespace TestApp.ViewModel
         /// Calls the PostCreatedQuestion APIHelper method and submits the created question.
         /// After that it resets the created question to null
         /// </summary>
-        public async void CreateQuestion()
+        public async Task<bool> CreateQuestion()
         {
             try
             {
-                ApiHelper.Instance.PostCreatedQuestion(CreatedQuestion);
+                bool success = await ApiHelper.Instance.PostCreatedQuestion(CreatedQuestion);
                 CreatedQuestion = null;
+                return success;
             }
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
+                return false;
             }
         }
 
