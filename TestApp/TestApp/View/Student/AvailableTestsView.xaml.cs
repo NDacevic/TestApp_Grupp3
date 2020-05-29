@@ -51,29 +51,6 @@ namespace TestApp.View.Student
 
         #region Methods
         /// <summary>
-        /// Factory Pattern creation method
-        /// </summary>
-        /// <returns></returns>
-        public static async Task CreateAsync()
-        {
-            //Create instance of this class to be able to call next method
-            AvailableTestsView availableTestsView = new AvailableTestsView();
-            await availableTestsView.InitializeAsync();
-        }
-
-        /// <summary>
-        /// Factory Pattern Initialize async method
-        /// </summary>
-        /// <returns></returns>
-        private async Task InitializeAsync()
-        {
-            //Get external data
-            await StudentViewModel.Instance.SeeActiveTests();
-        }
-
-        #endregion
-
-        /// <summary>
         /// Navigation to WriteTestView using double click on ListView item
         /// </summary>
         /// <param name="sender"></param>
@@ -117,5 +94,8 @@ namespace TestApp.View.Student
                 _ = new MessageDialog($"Det aktuella provet kan tidigast påbörjas {selectedTest.StartDate.DateTime:yyyy-mm-dd HH:mm}.").ShowAsync();
             }
         }
+        #endregion
+
+
     }
 }
