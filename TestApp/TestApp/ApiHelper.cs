@@ -65,37 +65,39 @@ namespace TestApp
         #region Methods
         public async Task PostCreatedTestAsync(Test test)
         {
-            //Convert the object to a json string.
-            jsonString = JsonConvert.SerializeObject(test);
-            Debug.WriteLine(test);
-
-            //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
-            using (HttpContent content = new StringContent(jsonString))
+            try
             {
-                //Set the type of content
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                //Convert the object to a json string.
+                jsonString = JsonConvert.SerializeObject(test);
+                Debug.WriteLine(test);
 
-                //Call the api and send the Json string.
-                HttpResponseMessage response = await httpClient.PostAsync("Tests", content);
+                //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
+                using (HttpContent content = new StringContent(jsonString))
+                {
+                    //Set the type of content
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                //Check if it is successfull. In that case display a message telling the user.
-                //Otherwise throw an error and tell the user that the question was not posted.
-                if (response.IsSuccessStatusCode)
-                {
-                    await new MessageDialog("Provet har sparats").ShowAsync();
-                }
-                else
-                {
-                    Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                    throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                    //Call the api and send the Json string.
+                    HttpResponseMessage response = await httpClient.PostAsync("Tests", content);
+
+                    //Check if it is successfull. In that case display a message telling the user.
+                    //Otherwise throw an error and tell the user that the question was not posted.
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await new MessageDialog("Provet har sparats").ShowAsync();
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                        throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                    }
                 }
             }
+            catch(Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
         
-        }
-
-        public void GetTest()
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -104,63 +106,93 @@ namespace TestApp
         /// <returns></returns>
         public async Task<List<Test>> GetAllTests()
         {
-            //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
-            HttpResponseMessage response = await httpClient.GetAsync("Tests");
+            try
+            {
+                //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
+                HttpResponseMessage response = await httpClient.GetAsync("Tests");
 
-            if (response.IsSuccessStatusCode)
-            {
-                jsonString = response.Content.ReadAsStringAsync().Result;
-                //Convert jsonString to list of Test objects
-                var tests = JsonConvert.DeserializeObject<List<Test>>(jsonString);
-                return tests;
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonString = response.Content.ReadAsStringAsync().Result;
+                    //Convert jsonString to list of Test objects
+                    var tests = JsonConvert.DeserializeObject<List<Test>>(jsonString);
+                    return tests;
+                }
+                else
+                {
+                    throw new HttpRequestException("No tests retrieved from database. Contact an admin for help.");
+                }
             }
-            else
+            catch (Exception exc)
             {
-                throw new HttpRequestException("No tests retrieved from database. Contact an admin for help.");
-            }            
+                await new MessageDialog(exc.Message).ShowAsync();
+                return new List<Test>();
+            }
         }
 
         public async void DeleteTest(int id)
         {
-            HttpResponseMessage response = await httpClient.DeleteAsync($"Tests/{id}");
+            try
+            {
+                HttpResponseMessage response = await httpClient.DeleteAsync($"Tests/{id}");
 
-            if (response.IsSuccessStatusCode)
-            {
-                await new MessageDialog("Provet har raderats").ShowAsync();
-                
+                if (response.IsSuccessStatusCode)
+                {
+                    await new MessageDialog("Provet har raderats").ShowAsync();
+
+                }
+                else
+                {
+                    Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                    throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                }
             }
-            else
+            catch (Exception exc)
             {
-                Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                await new MessageDialog(exc.Message).ShowAsync();
             }
         }
+
         public async void DeleteEmployee(int id)
         {
-            HttpResponseMessage response = await httpClient.DeleteAsync($"Employees/{id}");
+            try
+            {
+                HttpResponseMessage response = await httpClient.DeleteAsync($"Employees/{id}");
 
-            if (response.IsSuccessStatusCode)
-            {
-                await new MessageDialog("Den anställde har raderats").ShowAsync();
+                if (response.IsSuccessStatusCode)
+                {
+                    await new MessageDialog("Den anställde har raderats").ShowAsync();
+                }
+                else
+                {
+                    Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                    throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                }
             }
-            else
+            catch (Exception exc)
             {
-                Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                await new MessageDialog(exc.Message).ShowAsync();
             }
         }
         public async void DeleteStudent(int id)
         {
-            HttpResponseMessage response = await httpClient.DeleteAsync($"Students/{id}");
+            try
+            {
+                HttpResponseMessage response = await httpClient.DeleteAsync($"Students/{id}");
 
-            if (response.IsSuccessStatusCode)
-            {
-                await new MessageDialog("Eleven har raderats").ShowAsync();
+                if (response.IsSuccessStatusCode)
+                {
+                    await new MessageDialog("Eleven har raderats").ShowAsync();
+                }
+                else
+                {
+                    Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                    throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                }
             }
-            else
+            catch (Exception exc)
             {
-                Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                await new MessageDialog(exc.Message).ShowAsync();
             }
         }
 
@@ -253,40 +285,51 @@ namespace TestApp
 
         public async Task<ObservableCollection<Question>> GetQuestion(string course)
         {
-            //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
-            HttpResponseMessage response = await httpClient.GetAsync($"Questions/{course}");
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                jsonString = response.Content.ReadAsStringAsync().Result;
-                //Convert jsonString to list of question objects
-                var question = JsonConvert.DeserializeObject<ObservableCollection<Question>>(jsonString);
-                return question;
-            }
-            else
-            {
-                throw new HttpRequestException("No questions retrieved from database. Contact an admin for help.");
-            }
-        }
 
-        public void GetAllQuestions()
-        {
-            throw new NotImplementedException();
+                //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
+                HttpResponseMessage response = await httpClient.GetAsync($"Questions/{course}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonString = response.Content.ReadAsStringAsync().Result;
+                    //Convert jsonString to list of question objects
+                    var question = JsonConvert.DeserializeObject<ObservableCollection<Question>>(jsonString);
+                    return question;
+                }
+                else
+                {
+                    throw new HttpRequestException("No questions retrieved from database. Contact an admin for help.");
+                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+                return new ObservableCollection<Question>();
+            }
         }
 
         public async void DeleteQuestion(int id)
         {
-            HttpResponseMessage response = await httpClient.DeleteAsync($"Questions/{id}");
-
-            if (response.IsSuccessStatusCode)
+            try
             {
-                await new MessageDialog("Frågan har raderats").ShowAsync();
+                HttpResponseMessage response = await httpClient.DeleteAsync($"Questions/{id}");
 
+                if (response.IsSuccessStatusCode)
+                {
+                    await new MessageDialog("Frågan har raderats").ShowAsync();
+
+                }
+                else
+                {
+                    Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                    throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                }
             }
-            else
+            catch (Exception exc)
             {
-                Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                await new MessageDialog(exc.Message).ShowAsync();
             }
         }
 
@@ -327,63 +370,83 @@ namespace TestApp
 
         public async Task<List<StudentQuestionAnswer>> GetAllStudentQuestionAnswers()
         {
-            //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
-            HttpResponseMessage response = await httpClient.GetAsync("StudentQuestionAnswers");
+            try
+            {
+                //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress + "string"
+                HttpResponseMessage response = await httpClient.GetAsync("StudentQuestionAnswers");
 
-            if (response.IsSuccessStatusCode)
-            {
-                jsonString = response.Content.ReadAsStringAsync().Result;
-                //Convert jsonString to list of SQA objects
-                var studentQuestionAnswers = JsonConvert.DeserializeObject<List<StudentQuestionAnswer>>(jsonString);
-                return studentQuestionAnswers;
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonString = response.Content.ReadAsStringAsync().Result;
+                    //Convert jsonString to list of SQA objects
+                    var studentQuestionAnswers = JsonConvert.DeserializeObject<List<StudentQuestionAnswer>>(jsonString);
+                    return studentQuestionAnswers;
+                }
+                else
+                {
+                    throw new HttpRequestException("No test results retrieved from database. Contact an admin for help.");
+                }
             }
-            else
+            catch (Exception exc)
             {
-                throw new HttpRequestException("No test results retrieved from database. Contact an admin for help.");
+                await new MessageDialog(exc.Message).ShowAsync();
+                return new List<StudentQuestionAnswer>();
             }
         }
 
         public async void PostQuestionAnswers(List<StudentQuestionAnswer> questionAnswers)
         {
-            //Convert the object to a json string.
-            jsonString = JsonConvert.SerializeObject(questionAnswers);
-
-            //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
-            using (HttpContent content = new StringContent(jsonString))
+            try
             {
-                //Set the type of content
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                //Convert the object to a json string.
+                jsonString = JsonConvert.SerializeObject(questionAnswers);
 
-                //Call the api and send the Json string.
-                HttpResponseMessage response = await httpClient.PostAsync("StudentQuestionAnswers", content);
+                //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
+                using (HttpContent content = new StringContent(jsonString))
+                {
+                    //Set the type of content
+                    content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                //Check if it is successfull. In that case display a message telling the user.
-                //Otherwise throw an error and tell the user that the question was not posted.
-                if (response.IsSuccessStatusCode)
-                {
-                    await new MessageDialog("Resultatet för varje individuell fråga har sparats").ShowAsync();
+                    //Call the api and send the Json string.
+                    HttpResponseMessage response = await httpClient.PostAsync("StudentQuestionAnswers", content);
+
+                    //Check if it is successfull. In that case display a message telling the user.
+                    //Otherwise throw an error and tell the user that the question was not posted.
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await new MessageDialog("Resultatet för varje individuell fråga har sparats").ShowAsync();
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
+                        throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                    }
                 }
-                else
-                {
-                    Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                    throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
-                }
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
             }
         }
 
-        public void GetTestResult()//Get a single test result
-        {
-            throw new NotImplementedException();
-        }
         /// <summary>
         /// Gets the test results for all students taking one test (filtered by TestId)
         /// </summary>
         /// <returns>List<TestResult></TestResult></returns>
         public async Task<List<TestResult>> GetAllTestResults(int testId)
         {
-            jsonString = await httpClient.GetStringAsync("TestResults/"+ testId);
-            var testResults = JsonConvert.DeserializeObject<List<TestResult>>(jsonString);
-            return testResults;
+            try
+            {
+                jsonString = await httpClient.GetStringAsync("TestResults/" + testId);
+                var testResults = JsonConvert.DeserializeObject<List<TestResult>>(jsonString);
+                return testResults;
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+                return new List<TestResult>();
+            }
+
         }
 
         public async void PostStudent(Student student)
@@ -453,10 +516,19 @@ namespace TestApp
 
         public async Task<Student> GetStudent(string email)
         {
-            jsonString = await httpClient.GetStringAsync("LogInStudents/" + email);
-            var student = JsonConvert.DeserializeObject<Student>(jsonString);
-            return student;
+            try
+            {
+                jsonString = await httpClient.GetStringAsync("LogInStudents/" + email);
+                var student = JsonConvert.DeserializeObject<Student>(jsonString);
+                return student;
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+                return new Student();
+            }
         }
+
         public async Task <List<Student>> GetAllStudents()
         {
             List<Student> studentList = new List<Student>();
@@ -484,9 +556,10 @@ namespace TestApp
 
         public async Task<List<Student>> GetAllStudentsTestsQuestions()
         {
-            List<Student> studentList = new List<Student>();
+            
             try
             {
+                List<Student> studentList = new List<Student>();
                 using (HttpResponseMessage response = await httpClient.GetAsync("FullStudentsTestsQuestions"))
                  {
                     if (response.IsSuccessStatusCode)
@@ -502,9 +575,8 @@ namespace TestApp
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
+                return new List<Student>();
             }
-
-            return studentList;
         }
         
         /// <summary>
@@ -578,54 +650,88 @@ namespace TestApp
 
         public async Task<Employee> GetEmployee(string email)
         {
-            HttpResponseMessage httpResponse = await httpClient.GetAsync("LogInEmployees/" + email);
-            jsonString = await httpResponse.Content.ReadAsStringAsync();
-            var employee = JsonConvert.DeserializeObject<Employee>(jsonString);
-            return employee;
-        }
-       public async Task<List<Employee>>GetAllEmployees()
-        {
-            using(HttpResponseMessage response = await httpClient.GetAsync("Employees"))
+            try
             {
-                if (response.IsSuccessStatusCode)
+                HttpResponseMessage httpResponse = await httpClient.GetAsync("LogInEmployees/" + email);
+                jsonString = await httpResponse.Content.ReadAsStringAsync();
+                var employee = JsonConvert.DeserializeObject<Employee>(jsonString);
+                return employee;
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+                return new Employee();
+            }
+        }
+        public async Task<List<Employee>> GetAllEmployees()
+        {
+            try
+            {
+                using (HttpResponseMessage response = await httpClient.GetAsync("Employees"))
                 {
-                    jsonString = await response.Content.ReadAsStringAsync();
-                    return JsonConvert.DeserializeObject<List<Employee>>(jsonString);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        jsonString = await response.Content.ReadAsStringAsync();
+                        return JsonConvert.DeserializeObject<List<Employee>>(jsonString);
+                    }
+                    else
+                        throw new HttpRequestException("");
                 }
-                else
-                  return null;
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+                return new List<Employee>();
             }
         }
         public async Task<ObservableCollection<TestResult>> GetTestResults() //Get list of testresults
         {
-            HttpResponseMessage response = await httpClient.GetAsync("TestResults");
-            if (response.IsSuccessStatusCode)
+            try
             {
-                jsonString = response.Content.ReadAsStringAsync().Result;
-                //Convert jsonString to list of courses objects
-                var testResult = JsonConvert.DeserializeObject<ObservableCollection<TestResult>>(jsonString);
-                return testResult;
+
+                HttpResponseMessage response = await httpClient.GetAsync("TestResults");
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonString = response.Content.ReadAsStringAsync().Result;
+                    //Convert jsonString to list of courses objects
+                    var testResult = JsonConvert.DeserializeObject<ObservableCollection<TestResult>>(jsonString);
+                    return testResult;
+                }
+                else
+                {
+                    throw new HttpRequestException("No results retrieved from database. Contact an admin for help.");
+                }
             }
-            else
+            catch (Exception exc)
             {
-                throw new HttpRequestException("No results retrieved from database. Contact an admin for help.");
+                await new MessageDialog(exc.Message).ShowAsync();
+                return new ObservableCollection<TestResult>();
             }
         }
+
         public async Task<List<Course>> GetAllCourses()
         {
-            //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress
-            HttpResponseMessage response = await httpClient.GetAsync("Courses");
+            try
+            {
+                //Get jsonString from API. Contacts correct API address using the httpClient's BaseAddress
+                HttpResponseMessage response = await httpClient.GetAsync("Courses");
 
-            if (response.IsSuccessStatusCode)
-            {
-                jsonString = response.Content.ReadAsStringAsync().Result;
-                //Convert jsonString to list of courses objects
-                var courses = JsonConvert.DeserializeObject<List<Course>>(jsonString);
-                return courses;
+                if (response.IsSuccessStatusCode)
+                {
+                    jsonString = response.Content.ReadAsStringAsync().Result;
+                    //Convert jsonString to list of courses objects
+                    var courses = JsonConvert.DeserializeObject<List<Course>>(jsonString);
+                    return courses;
+                }
+                else
+                {
+                    throw new HttpRequestException("No courses retrieved from database. Contact an admin for help.");
+                }
             }
-            else
+            catch (Exception exc)
             {
-                throw new HttpRequestException("No courses retrieved from database. Contact an admin for help.");
+                await new MessageDialog(exc.Message).ShowAsync();
+                return new List<Course>();
             }
         }
 
