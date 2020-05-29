@@ -168,7 +168,7 @@ namespace TestApp
         /// Converts the question object to a Json string and posts it to the API for writing into the database
         /// </summary>
         /// <param name="question"></param>
-        public async void PostCreatedQuestion(Question question)
+        public async Task<bool> PostCreatedQuestion(Question question)
         {
             try
             {
@@ -189,17 +189,20 @@ namespace TestApp
                     if (response.IsSuccessStatusCode)
                     {
                         await new MessageDialog("Question saved successfully").ShowAsync();
+                        return true;
                     }
                     else
                     {
                         Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                        throw new HttpRequestException("Question was not saved. Contact an admin for help");
+                        throw new HttpRequestException("Frågan blev ej sparad. Kontakta administratör");
                     }
                 }
+                
             }
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
+                return false;
             }
         }
 
