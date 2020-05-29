@@ -319,6 +319,15 @@ namespace TestApp.ViewModel
         /// </summary>
         public async void PostStudent(Student student) 
         {
+            AllStudents = await ApiHelper.Instance.GetAllStudents();
+            foreach (Student stu in AllStudents)
+            {
+                if (stu.Email == student.Email)
+                {
+                    await new MessageDialog("Det finns redan en användare med denna email, vänligen kontrollera uppgifterna.").ShowAsync();
+                    return;
+                }
+            }
             try
             {
                 ApiHelper.Instance.PostStudent(student);
@@ -334,6 +343,15 @@ namespace TestApp.ViewModel
         /// <param name="employee"></param>
         public async void PostEmployee (Employee employee)
         {
+            AllEmployees = await ApiHelper.Instance.GetAllEmployees();
+            foreach (Employee emp in AllEmployees)
+            {
+                if (emp.Email == employee.Email)
+                {
+                    await new MessageDialog("Det finns redan en användare med denna email, vänligen kontrollera uppgifterna.").ShowAsync();
+                    return;
+                }
+            }
             try
             {
                 ApiHelper.Instance.PostEmployee(employee);

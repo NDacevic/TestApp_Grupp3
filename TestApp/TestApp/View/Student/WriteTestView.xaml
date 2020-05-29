@@ -145,14 +145,17 @@
             Grid.Row="1"
             Grid.Column="1"
             HorizontalAlignment="Right"/>
-        <ListView
-            Name="Lv_AllQuestions"
+        <ScrollViewer
+            Name="ScrView_allQuestions"
             Grid.Row="2"
-            Grid.Column="1"
-            SelectionMode="None"
-            ItemsSource="{x:Bind selectedTest.Questions}"
-            ItemTemplateSelector="{StaticResource MyDataTemplateSelector}">
-        </ListView>
+            Grid.Column="1">
+            <ListView
+                Name="Lv_AllQuestions"                
+                SelectionMode="None"
+                ItemsSource="{x:Bind selectedTest.Questions}"
+                ItemTemplateSelector="{StaticResource MyDataTemplateSelector}">
+            </ListView>
+        </ScrollViewer>
         <Button
             Name="Bttn_SubmitTest"
             Content="Lämna in provet"

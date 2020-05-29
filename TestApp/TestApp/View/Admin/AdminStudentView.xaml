@@ -52,11 +52,10 @@
                     Text="Årskurs: " 
                     FontSize="20"
                     Width="100"/>
-                <TextBox
-                    x:Name="Tb_Grade"
-                    Text=""
-                    FontSize="20"
-                    Width="200"/>
+                <ComboBox
+                        x:Name="Cb_Grade"
+                        PlaceholderText="Välj årskurs"
+                        Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Spacing="40">
                 <TextBlock 

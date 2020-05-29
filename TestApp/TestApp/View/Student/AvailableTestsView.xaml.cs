@@ -51,37 +51,15 @@ namespace TestApp.View.Student
 
         #region Methods
         /// <summary>
-        /// Factory Pattern creation method
-        /// </summary>
-        /// <returns></returns>
-        public static async Task CreateAsync()
-        {
-            //Create instance of this class to be able to call next method
-            AvailableTestsView availableTestsView = new AvailableTestsView();
-            await availableTestsView.InitializeAsync();
-        }
-
-        /// <summary>
-        /// Factory Pattern Initialize async method
-        /// </summary>
-        /// <returns></returns>
-        private async Task InitializeAsync()
-        {
-            //Get external data
-            await StudentViewModel.Instance.SeeActiveTests();
-        }
-
-        #endregion
-
-        /// <summary>
         /// Navigation to WriteTestView using double click on ListView item
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Lv_AvailableTests_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            //Todo: Tillåt bara detta om StartDatum=Dagens datum & currentTime=>StartTime - MO
-            Frame.Navigate(typeof(WriteTestView), (sender as ListView).SelectedItem);
+            //Save the test attempted to be written
+            Test selectedTest = ((sender as ListView).SelectedItem) as Test;
+            TakeTestOrDont(selectedTest);            
         }
 
         /// <summary>
@@ -91,18 +69,33 @@ namespace TestApp.View.Student
         /// <param name="e"></param>
         private void Bttn_TakeTest_Click(object sender, RoutedEventArgs e)
         {
+            Test selectedTest = Lv_AvailableTests.SelectedItem as Test;
+            TakeTestOrDont(selectedTest);
+        }
 
-            //Todo: Tillåt bara detta om StartDatum=Dagens datum & currentTime=>StartTime - MO
-            //Navigation using button is only possible if a test is selected
-            if (Lv_AvailableTests.SelectedItem!=null)
+        /// <summary>
+        /// Checks if date and time conditions are met, if so navigates further and starts the test
+        /// </summary>
+        /// <param name="selectedTest"></param>
+        private void TakeTestOrDont(Test selectedTest)
+        {
+            //Get the current Time
+            TimeSpan currentTime = DateTime.Now.TimeOfDay;
+            //Get the current Date
+            DateTime currentDate = DateTime.Now.Date;
+
+            //If the date for the test is equal to the current date && if the current time is after the tests start time...
+            if (currentDate == selectedTest.StartDate.Date && currentTime >= selectedTest.StartDate.TimeOfDay)
             {
-                Frame.Navigate(typeof(WriteTestView), Lv_AvailableTests.SelectedItem);
+                Frame.Navigate(typeof(WriteTestView), selectedTest);
             }
             else
             {
-                _ = new MessageDialog("Vänligen välj ett prov att skriva.").ShowAsync();
+                _ = new MessageDialog($"Det aktuella provet kan tidigast påbörjas {selectedTest.StartDate.DateTime:yyyy-mm-dd HH:mm}.").ShowAsync();
             }
-            
         }
+        #endregion
+
+
     }
 }

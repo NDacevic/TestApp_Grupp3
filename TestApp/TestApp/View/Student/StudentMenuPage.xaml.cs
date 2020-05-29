@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -41,8 +42,7 @@ namespace TestApp.View.Student
             }
             else if(sender == availableTest_btn)
             {
-                //Calls the factory pattern's createAsync methdo to load all new data again
-                await AvailableTestsView.CreateAsync();
+                await StudentViewModel.Instance.SeeActiveTests();
                 mainFrame.Navigate(typeof(AvailableTestsView));
             }
             else if(sender == logOut_btn)
