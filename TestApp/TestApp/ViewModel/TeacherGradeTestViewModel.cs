@@ -170,7 +170,9 @@ namespace TestApp.ViewModel
                 }
             }
 
-            var success = await ApiHelper.Instance.UpdateStudentQuestionAnswer(gradedQuestions);
+            var success = false;
+            if (gradedQuestions.Count > 0)
+                success = await ApiHelper.Instance.UpdateStudentQuestionAnswer(gradedQuestions);
 
             if (success &&
                 gradedQuestions.Count == numberOfQuestionItems)
