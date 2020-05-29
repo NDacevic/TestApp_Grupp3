@@ -48,8 +48,7 @@ namespace TestApp.View
             //if(Tb_InsertEmail.Text=="1")
             //{
             //  LogInViewModel.Instance.ActiveStudent = new Model.Student(19,"Mikael","Ollhage","nej@ja.com","pass",8,new List<Test>());
-            // //Calls the Factory Pattern's CreateAsync method to load all data before navigating to the page, making sure all controls has time to populate
-            //  await AvailableTestsView.CreateAsync();
+            // 
             //  this.Frame.Navigate(typeof(MainPage),"Elev");
             //}
             //else if(Tb_InsertEmail.Text == "2")
@@ -86,6 +85,8 @@ namespace TestApp.View
             bool correctStudent = LogInViewModel.Instance.CheckStudentPassword(password);
             if (correctStudent)
             {
+                //Populates the property used on the next page before navigating to it, so it is fully loaded when we navigate there.
+                await StudentViewModel.Instance.SeeActiveTests();
                 Frame.Navigate(typeof(MainPage), "Elev");
             }
             else
