@@ -27,6 +27,12 @@ namespace TestApp.View.Admin
         public AdminStudentView()
         {
             this.InitializeComponent();
+
+            TeacherCreateViewModel.Instance.GetCoursesForList();
+
+            foreach (var x in TeacherCreateViewModel.Instance.Grades) //Make sure that our dropdown with Grades only contains digits
+                if (x.All(c => char.IsDigit(c)))
+                    Cb_Grade.Items.Add(x);
         }
 
         private async void Bttn_AddStudent_Click(object sender, RoutedEventArgs e)
@@ -34,7 +40,7 @@ namespace TestApp.View.Admin
             try
             {
                 string password = LogInViewModel.EncryptPassword(Pb_Password.Password);
-                AdminViewModel.Instance.SetValuesForStudent(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, password, int.Parse(Tb_Grade.Text));
+                AdminViewModel.Instance.SetValuesForStudent(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, password, int.Parse(Cb_Grade.SelectedValue.ToString()));
               
             }
             catch (Exception)
@@ -43,6 +49,14 @@ namespace TestApp.View.Admin
                 return;               
             }
 
+        }
+        public void ClearValues()
+        {
+            Tb_FirstName.Text = "";
+            Tb_LastName.Text = "";
+            Tb_Email.Text = "";
+            Pb_Password.Password = "";
+            Cb_Grade.SelectedIndex = 0;
         }
     }
 }
