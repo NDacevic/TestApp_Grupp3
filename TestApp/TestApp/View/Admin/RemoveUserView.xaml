@@ -17,8 +17,12 @@
 
         <!--#region Left Side-->
         <StackPanel>
+            <TextBlock Text="Ta bort/redigera användare" 
+                   FontSize="48"
+                   HorizontalAlignment="Left"
+                       Margin="20,0,0,0"/>
             <TextBlock       Text= "Var vänlig välj Anställd eller Elev för att få fram information. Sök även på ID för en direkt träff."
-                             Margin="40,40,0,0"/>
+                             Margin="40,10,0,10"/>
             <StackPanel      Orientation="Horizontal"
                              Margin="40,0,0,0">
                 <RadioButton x:Name="EmployeeRadioBtn"
@@ -30,14 +34,14 @@
                              Click="StudentRadioBtn_Click"/>
             </StackPanel>
             <TextBox         PlaceholderText="Skriv in ID.."
-                             Margin="40,0,0,0"
+                             Margin="40,10,40,0"
                              x:Name="SearchIdTxtBox" KeyDown="SearchIdTxtBox_KeyDown"
                              
                              />
         </StackPanel>
         <ListView BorderBrush="Black"
                   BorderThickness="2"
-                  Margin="40,150,40,200"
+                  Margin="40,190,40,200"
                   ItemsSource="{x:Bind adminViewModel.AllUsers}"
                   x:Name="DisplayUsersLV"
                   SelectionMode="Single"
@@ -73,18 +77,12 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <StackPanel
-                Grid.Row="0"
-                >
+            <StackPanel Margin="0,153,100,10">
                 <StackPanel
                     Orientation="Horizontal"
                     >
-                    <TextBlock
-                        Text="ID: "
-                        />
-                    <TextBlock
-                        x:Name="textBlock_Id"
-                        />
+                    <TextBlock />
+                   
                 </StackPanel>
                 <TextBlock
                     Text="Förnamn"
@@ -121,9 +119,10 @@
             <Button
                 x:Name="bttn_EditInformation"
                 Grid.Row="1"
-                Margin="0,0,50,150"
-                Content="Redigera Inforamtion"
+                Margin="0,0,98,156"
+                Content="Spara ändring"
                 Click="EditInformationClick"
+                HorizontalAlignment="Right"
                 />
         </Grid>
         <!--#endregion-->
