@@ -65,38 +65,12 @@ namespace TestApp.View
             if (Rb_Student.IsChecked == true)
             {
                 StudentLogIn(password);
-                //await LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
-                //bool correctStudent = LogInViewModel.Instance.CheckStudentPassword(password);
-                //if (correctStudent)
-                //{
-                //    Frame.Navigate(typeof(MainPage), "Elev");
-                //}
-                //else
-                //{
-                //    await new MessageDialog("Inkorrekt data, försök igen.").ShowAsync();
-                //}
 
             }
             else if (Rb_Employee.IsChecked == true)
             {
                 EmployeeLogIn(password);
-                //await LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
-                //bool correctEmployee = LogInViewModel.Instance.CheckEmployeePassword(password);
-                //if (correctEmployee)
-                //{
-                //    if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 1)
-                //    {
-                //        Frame.Navigate(typeof(MainPage), "Teacher");
-                //    }
-                //    else if (LogInViewModel.Instance.ActiveEmployee.Role.RoleId == 2)
-                //    {
-                //        Frame.Navigate(typeof(MainPage), "Admin");
-                //    }
-                //}
-                //else
-                //{
-                //    await new MessageDialog("Inkorrekt data, försök igen.").ShowAsync();
-                //}
+
             }
         }
 
