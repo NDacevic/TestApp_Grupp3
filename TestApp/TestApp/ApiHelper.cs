@@ -188,7 +188,7 @@ namespace TestApp
                     //Otherwise throw an error and tell the user that the question was not posted.
                     if (response.IsSuccessStatusCode)
                     {
-                        await new MessageDialog("Question saved successfully").ShowAsync();
+                        await new MessageDialog("Frågan är sparad").ShowAsync();
                         return true;
                     }
                     else
@@ -237,7 +237,7 @@ namespace TestApp
                 {
                     if (response.IsSuccessStatusCode)
                     {
-                        Debug.Write("Test updated");
+                        Debug.Write("Provet är uppdaterat");
                     }
                     else
                     {
