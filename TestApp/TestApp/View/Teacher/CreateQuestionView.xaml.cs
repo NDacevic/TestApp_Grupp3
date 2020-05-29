@@ -60,7 +60,9 @@ namespace TestApp.View.Teacher
                     createInstance.CreatedQuestion = new Question(0, selectedQuestionType, textBox_questionText.Text, textBox_CorrectAnswer.Text,textBox_IncorrectAnswer1.Text, textBox_IncorrectAnswer2.Text, selectedCourse, selectedPoint);
                 else if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Fritext")
                     createInstance.CreatedQuestion = new Question(0, selectedQuestionType, textBox_questionText.Text, null, null, null, selectedCourse, selectedPoint);
-                createInstance.CreateQuestion();
+                
+                if(await createInstance.CreateQuestion())
+                    ResetPage();
 
             }
             catch (FormatException exc)
@@ -68,6 +70,22 @@ namespace TestApp.View.Teacher
                 await new MessageDialog(exc.Message).ShowAsync();
             }
         }
+
+        /// <summary>
+        /// Clears all the elements on the page
+        /// </summary>
+        private void ResetPage()
+        {
+            comboBox_CourseNames.SelectedIndex = 0;
+            comboBox_QuestionType.SelectedIndex = 0;
+            comboBox_QuestionPoints.SelectedIndex = 0;
+
+            textBox_questionText.Text = "";
+            textBox_CorrectAnswer.Text = "";
+            textBox_IncorrectAnswer1.Text = "";
+            textBox_IncorrectAnswer2.Text = "";
+        }
+
 
         /// <summary>
         /// Controls the showing and hiding of the textboxes pertaining to a multiple choice question.
