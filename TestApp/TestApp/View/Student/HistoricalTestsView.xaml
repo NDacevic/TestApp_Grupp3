@@ -17,7 +17,8 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="Testhistorik" 
                    FontSize="48"
-                   HorizontalAlignment="Center"/>
+                   HorizontalAlignment="Left"
+                   Margin="40,0,0,0"/>
         
         <ListView BorderBrush="Black"
                   BorderThickness="2"

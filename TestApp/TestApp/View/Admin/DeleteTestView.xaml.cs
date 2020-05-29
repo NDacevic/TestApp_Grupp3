@@ -85,11 +85,15 @@ namespace TestApp.View
             var selected = DisplayTestsLV.SelectedItems;
             foreach (Test selectedTest in selected)
             {
-                TestDate.Text = selectedTest.StartDate.ToString();
+                TestDate.Text = selectedTest.StartDate.ToString("yyyy-MM-dd");
                 TestGrade.Text = selectedTest.Grade.ToString();
                 TestCourse.Text = selectedTest.CourseName;
                 adminViewModel.DisplayQuestionsOnTest(selectedTest);
             }
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            TeacherCreateViewModel.Instance.QuestionsToFilter.Clear();
         }
     }
 }

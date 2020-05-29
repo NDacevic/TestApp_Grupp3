@@ -92,13 +92,21 @@ namespace TestApp.ViewModel
         #region Methods
         public async void GetCoursesForList() //Populating combobox with courses from DB
         {
-            CourseName = new List<string>();
-            Courses = await ApiHelper.Instance.GetAllCourses();
-            foreach(Course course in Courses)
+            try
             {
-                CourseName.Add(course.CourseName);
+                CourseName = new List<string>();
+                Courses = await ApiHelper.Instance.GetAllCourses();
+                foreach (Course course in Courses)
+                {
+                    CourseName.Add(course.CourseName);
+                }
             }
-        
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
+
+
         }
 
         public async void GetQuestionsForTest(string course) 

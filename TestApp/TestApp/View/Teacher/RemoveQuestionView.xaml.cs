@@ -44,5 +44,9 @@ namespace TestApp.View.Teacher
 
             }
         }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            teacherCVM.QuestionsToFilter.Clear();
+        }
     }
 }
