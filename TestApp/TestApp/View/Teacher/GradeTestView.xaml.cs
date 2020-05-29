@@ -48,6 +48,9 @@ namespace TestApp.View.Teacher
         /// </summary>
         private async void GetTests()
         {
+            if (ungradedTests != null)
+                ungradedTests.Clear();
+
             List<Test> tempTests = await gradeInstance.GetUngradedTests();
 
             foreach (var x in tempTests)
@@ -64,8 +67,11 @@ namespace TestApp.View.Teacher
         {
             chosenTestId = ((Test)e.ClickedItem).TestId;
 
-            scrollViewer_InitialTestList.Visibility = Visibility.Collapsed;
+            scrollViewer_InitialTestList.Visibility = Visibility.Collapsed; 
+            textBlock_TestTitle.Visibility = Visibility.Collapsed;
+            
             scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Visible;
+            textBlock_StudentTitle.Visibility = Visibility.Visible;
 
             //call the method that populates the list used in the next listview
             gradeInstance.PopulateStudentsWithTestList(chosenTestId, studentsWithTestList);
@@ -83,7 +89,10 @@ namespace TestApp.View.Teacher
             chosenStudent = ((Model.Student)e.ClickedItem);
 
             scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
+            textBlock_StudentTitle.Visibility = Visibility.Collapsed;
+
             scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Visible;
+            textBlock_QuestionTitle.Visibility = Visibility.Visible;
 
             //call the method that populates the list used in the next listview
             gradeInstance.PopulateUngradedQuestionsForStudent(chosenTestId, chosenStudent, questionsForStudentAndTestList);
@@ -97,19 +106,24 @@ namespace TestApp.View.Teacher
         /// <param name="e"></param>
         private void FinishGrading(object sender, RoutedEventArgs e)
         {
-            gradeInstance.FinishGradingTest(listView_QuestionsForStudentAndTest, chosenStudent, chosenTestId);
+            if (scrollViewer_QuestionsForStudentAndTest.Visibility == Visibility.Visible)
+            {
+                gradeInstance.FinishGradingTest(listView_QuestionsForStudentAndTest, chosenStudent, chosenTestId);
 
-            ungradedTests.Clear();
-            studentsWithTestList.Clear();
-            questionsForStudentAndTestList.Clear();
+                GetTests();
+                studentsWithTestList.Clear();
+                questionsForStudentAndTestList.Clear();
 
-            scrollViewer_InitialTestList.Visibility = Visibility.Visible;
-            scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
-            scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Collapsed;
+                ResetView();
+            }
         }
 
         private async void ReloadAllStudentsTestsQuestionsClick(object sender, RoutedEventArgs args)
         {
+            scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Collapsed;
+            scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
+            scrollViewer_InitialTestList.Visibility = Visibility.Visible;
+
             await gradeInstance.DownloadStudents();
             GetTests();
         }
@@ -119,12 +133,18 @@ namespace TestApp.View.Teacher
             if (scrollViewer_StudentsUngradedTestofType.Visibility == Visibility.Visible)
             {
                 scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
+                textBlock_StudentTitle.Visibility = Visibility.Collapsed;
+
                 scrollViewer_InitialTestList.Visibility = Visibility.Visible;
+                textBlock_TestTitle.Visibility = Visibility.Visible;
             }
             else if (scrollViewer_QuestionsForStudentAndTest.Visibility == Visibility.Visible)
             {
                 scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Collapsed;
+                textBlock_QuestionTitle.Visibility = Visibility.Collapsed;
+
                 scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Visible;
+                textBlock_StudentTitle.Visibility = Visibility.Visible;
             }
         }
 
@@ -136,6 +156,17 @@ namespace TestApp.View.Teacher
             }
             GetTests();
             Debug.WriteLine("Loaded");
+        }
+
+        private void ResetView()
+        {
+            scrollViewer_InitialTestList.Visibility = Visibility.Visible;
+            scrollViewer_StudentsUngradedTestofType.Visibility = Visibility.Collapsed;
+            scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Collapsed;
+
+            textBlock_TestTitle.Visibility = Visibility.Visible;
+            textBlock_StudentTitle.Visibility = Visibility.Collapsed;
+            textBlock_QuestionTitle.Visibility = Visibility.Collapsed;
         }
     }
 }
