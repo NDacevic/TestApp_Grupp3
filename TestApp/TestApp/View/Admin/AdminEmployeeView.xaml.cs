@@ -43,6 +43,15 @@ namespace TestApp.View.Admin
                 await new MessageDialog("Data var felaktigt inmatad, vänligen försök igen.").ShowAsync();
 
             }
+            ClearValues();
+        }
+        public void ClearValues ()
+        {
+            Tb_FirstName.Text = "";
+            Tb_LastName.Text = "";
+            Tb_Email.Text = "";
+            Pb_Password.Password = "";
+            Cb_EmployeeRole.SelectedIndex = 0;
         }
     }
 }
