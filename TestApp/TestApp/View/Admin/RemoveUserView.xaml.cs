@@ -4,10 +4,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.ServiceModel.Channels;
 using TestApp.Model;
 using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -127,27 +129,36 @@ namespace TestApp.View.Admin
             textBox_Email.Text = ((Person)e.ClickedItem).Email;
         }
 
-        private void EditInformationClick(object sender, RoutedEventArgs args)
+        private async void EditInformationClick(object sender, RoutedEventArgs args)
         {
+            try
+            {
+                if (chosenPerson == null)
+                    throw new Exception("Du måste välja en användare att redigera först");
 
-            if(chosenPerson.GetType() ==  typeof(Model.Student))
-                adminViewModel.EditUserInfo
-                    (
-                    (Model.Student)chosenPerson,
-                    int.Parse(textBlock_Id.Text),
-                    textBox_FirstName.Text,
-                    textBox_LastName.Text,
-                    textBox_Email.Text
-                    );
-            else if(chosenPerson.GetType() == typeof(Model.Employee))
-                adminViewModel.EditUserInfo
-                    (
-                    (Model.Employee)chosenPerson,
-                    int.Parse(textBlock_Id.Text),
-                    textBox_FirstName.Text,
-                    textBox_LastName.Text,
-                    textBox_Email.Text
-                    );
+                if (chosenPerson.GetType() == typeof(Model.Student))
+                    adminViewModel.EditUserInfo
+                        (
+                        (Model.Student)chosenPerson,
+                        int.Parse(textBlock_Id.Text),
+                        textBox_FirstName.Text,
+                        textBox_LastName.Text,
+                        textBox_Email.Text
+                        );
+                else if (chosenPerson.GetType() == typeof(Model.Employee))
+                    adminViewModel.EditUserInfo
+                        (
+                        (Model.Employee)chosenPerson,
+                        int.Parse(textBlock_Id.Text),
+                        textBox_FirstName.Text,
+                        textBox_LastName.Text,
+                        textBox_Email.Text
+                        );
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+            }
         }
     }
 }

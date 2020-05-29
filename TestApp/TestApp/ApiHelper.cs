@@ -567,6 +567,7 @@ namespace TestApp
                         jsonString = await response.Content.ReadAsStringAsync();
 
                         studentList = JsonConvert.DeserializeObject<List<Student>>(jsonString);
+                        return studentList;
                     }
                     else
                         throw new HttpRequestException("Ingen uppkoppling till servern. Kontakta administratör");
@@ -778,9 +779,17 @@ namespace TestApp
         /// <returns></returns>
         public async Task<List<Role>> GetRoles ()
         {
-            jsonString = await httpClient.GetStringAsync("Roles");
-            var roles = JsonConvert.DeserializeObject<List<Role>>(jsonString);
-            return roles;
+            try
+            {
+                jsonString = await httpClient.GetStringAsync("Roles");
+                var roles = JsonConvert.DeserializeObject<List<Role>>(jsonString);
+                return roles;
+            }
+            catch (Exception exc)
+            {
+                await new MessageDialog(exc.Message).ShowAsync();
+                return new List<Role>();
+            }
         }
         #endregion
     }

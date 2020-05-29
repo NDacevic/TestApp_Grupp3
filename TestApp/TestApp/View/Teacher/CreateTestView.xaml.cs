@@ -73,22 +73,20 @@ namespace TestApp.View.Teacher
             try
             {
                 //Populates the Test with the given values and sends it to the DB
+
+                if (ChooseCourseComboBox.SelectedIndex == -1 || ChooseGrade.SelectedIndex == -1)
+                    throw new Exception();
+
                 teacherCreateViewModel.CreatedTest.CourseName = ChooseCourseComboBox.SelectedValue.ToString();
                 teacherCreateViewModel.CreatedTest.Grade = int.Parse(ChooseGrade.SelectedValue.ToString());
                 teacherCreateViewModel.CreatedTest.TestDuration = int.Parse(TestTime_txtBox.Text);
                 AddDateAndTimeToTest();
                 
             }
-            catch(NullReferenceException)
+            catch(Exception)
             {
                 teacherCreateViewModel.DisplayFieldsAreEmpty();
             }
-            catch(FormatException)
-            {
-                teacherCreateViewModel.DisplayFieldsAreEmpty();
-            }
-           
-           
         }
 
         private void RemoveQuestionFromTest_Btn_Click(object sender, RoutedEventArgs e)
