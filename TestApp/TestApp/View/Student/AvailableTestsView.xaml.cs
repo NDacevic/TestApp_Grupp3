@@ -51,29 +51,6 @@ namespace TestApp.View.Student
 
         #region Methods
         /// <summary>
-        /// Factory Pattern creation method
-        /// </summary>
-        /// <returns></returns>
-        public static async Task CreateAsync()
-        {
-            //Create instance of this class to be able to call next method
-            AvailableTestsView availableTestsView = new AvailableTestsView();
-            await availableTestsView.InitializeAsync();
-        }
-
-        /// <summary>
-        /// Factory Pattern Initialize async method
-        /// </summary>
-        /// <returns></returns>
-        private async Task InitializeAsync()
-        {
-            //Get external data
-            await StudentViewModel.Instance.SeeActiveTests();
-        }
-
-        #endregion
-
-        /// <summary>
         /// Navigation to WriteTestView using double click on ListView item
         /// </summary>
         /// <param name="sender"></param>
@@ -94,7 +71,7 @@ namespace TestApp.View.Student
 
             //Todo: Tillåt bara detta om StartDatum=Dagens datum & currentTime=>StartTime - MO
             //Navigation using button is only possible if a test is selected
-            if (Lv_AvailableTests.SelectedItem!=null)
+            if (Lv_AvailableTests.SelectedItem != null)
             {
                 Frame.Navigate(typeof(WriteTestView), Lv_AvailableTests.SelectedItem);
             }
@@ -102,7 +79,9 @@ namespace TestApp.View.Student
             {
                 _ = new MessageDialog("Vänligen välj ett prov att skriva.").ShowAsync();
             }
-            
         }
+        #endregion
+
+
     }
 }
