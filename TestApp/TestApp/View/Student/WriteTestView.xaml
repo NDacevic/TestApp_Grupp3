@@ -128,7 +128,6 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="*"/>
-
         </Grid.ColumnDefinitions>
         <TextBlock
             Text="{x:Bind selectedTest.CourseName}"
