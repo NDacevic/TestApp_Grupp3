@@ -22,9 +22,12 @@
             <StackPanel      Orientation="Horizontal"
                              Margin="40,0,0,0">
                 <RadioButton x:Name="EmployeeRadioBtn"
-                             Content="Anställd" Click="EmployeeRadioBtn_Click"/>
+                             Content="Anställd" 
+                             Click="EmployeeRadioBtn_Click"
+                             IsChecked="True"/>
                 <RadioButton x:Name="StudentRadioBtn"
-                             Content="Elev" Click="StudentRadioBtn_Click"/>
+                             Content="Elev" 
+                             Click="StudentRadioBtn_Click"/>
             </StackPanel>
             <TextBox         PlaceholderText="Skriv in ID.."
                              Margin="40,0,0,0"
