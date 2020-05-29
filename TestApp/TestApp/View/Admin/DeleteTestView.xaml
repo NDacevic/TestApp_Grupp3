@@ -16,8 +16,12 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel>
+            <TextBlock Text="Ta bort prov" 
+                   FontSize="48"
+                   HorizontalAlignment="Left"
+                       Margin="20,0,0,0"/>
             <StackPanel Orientation="Horizontal"
-                        Margin="40,0,0,0"
+                        Margin="20,0,0,0"
                         >
                 <TextBlock Text="Filtrera ämne"
                            Margin="0,0,0,0"/>
@@ -26,7 +30,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
-                        Margin="40,0,0,0"
+                        Margin="20,0,0,0"
 >   
                 
                 <ComboBox Width="104" 
@@ -60,7 +64,7 @@
 
         <ListView BorderBrush="Black"
                   BorderThickness="2"
-                  Margin="20,100,0,150"
+                  Margin="20,120,0,150"
                   ItemsSource="{x:Bind adminViewModel.MyTests }"
                   x:Name="DisplayTestsLV"
                   >
@@ -79,7 +83,7 @@
                             <Run Text=" Poäng:"/>
                             <Run Text="{x:Bind MaxPoints}"/>
                             <Run Text=" Datum:"/>
-                            <Run Text="{x:Bind StartDate}"/>
+                            <Run Text="{x:Bind StartDate.ToString('yyyy-MM-dd',{x:Null})}"/>
 
                         </TextBlock>
                     </StackPanel>
@@ -89,7 +93,7 @@
 
         <GridView BorderBrush="Black"
                   BorderThickness="2"
-                  Margin="20,100,0,150"
+                  Margin="20,120,0,150"
                   ItemsSource="{x:Bind adminViewModel.TestQuestions }"
                   x:Name="DisplayQuestionsLV"
                   Grid.Column="1"
@@ -97,7 +101,7 @@
             <GridView.ItemTemplate>
                 <DataTemplate x:Name="displayQuestionsLV" x:DataType="data:Question" >
                     <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Vertical" Width="400" Margin="0,15,0,0" >
+                        <StackPanel Orientation="Vertical" Width="400" Margin="10,15,0,0" >
                             <TextBlock>
                             <Run Text="Fråge ID: "/>
                             <Run Text="{x:Bind QuestionID}"/>
@@ -136,7 +140,7 @@
 
         <StackPanel Grid.Column="1">
             <StackPanel Orientation="Horizontal"
-                        Margin="40,0,0,0"
+                        Margin="40,80,0,0"
                         >
                 <TextBlock Text="Provets ämne"
                            Margin="0,0,0,0"/>

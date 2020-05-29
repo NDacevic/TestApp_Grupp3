@@ -21,19 +21,21 @@
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal" 
+        <TextBlock Text="Provresultat" 
+                   FontSize="48"
+                   HorizontalAlignment="Left"/>
+        <StackPanel Orientation="Horizontal" 
                         Spacing="30"
                         VerticalAlignment="Bottom"
                         >
-                
-            <TextBlock  Text="TestId"
+            <TextBlock  Text="Prov Id"
                         Margin="10,0,0,0"/>
             <TextBlock  Text="Ämne"
-                        Margin="40,0,0,0"/>
+                        Margin="22,0,0,0"/>
             <TextBlock  Text="Årskurs"
-                        Margin="40,0,0,0"/>
+                        Margin="65,0,0,0"/>
             <TextBlock  Text="Maxpoäng"
-                        Margin="40,0,0,0"/>
+                        Margin="55,0,0,0"/>
             <TextBlock  Text="Datum"
                         Margin="40,0,0,0"/>
         </StackPanel>
@@ -52,17 +54,20 @@
                 <DataTemplate x:DataType="data:Test">
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Orientation="Vertical">
-                             <TextBlock Text="{x:Bind TestId}"/>
+                             <TextBlock Text="{x:Bind TestId}"
+                                        Width="15"/>
                         </StackPanel>
                         <TextBlock Text="{x:Bind CourseName}"
-                                   Margin="60,0,0,0"/>
+                                   Margin="78,0,0,0"
+                                   Width="80"/>
                         <TextBlock Text="{x:Bind Grade}"
-                                   Margin="80,0,0,0"/>
+                                   Margin="55,0,0,0"/>
                         <TextBlock Text="{x:Bind MaxPoints}"
-                                   Margin="130,0,0,0"
+                                   Margin="115,0,0,0"
+                                   Width="15"
                                    />
-                        <TextBlock Text="{x:Bind StartDate.LocalDateTime}"
-                                   Margin="60,0,0,0"
+                        <TextBlock Text="{x:Bind StartDate.ToString('yyyy-MM-dd',{x:Null})}"
+                                   Margin="120,0,0,0"
                                    />
                     </StackPanel>
                 </DataTemplate>
