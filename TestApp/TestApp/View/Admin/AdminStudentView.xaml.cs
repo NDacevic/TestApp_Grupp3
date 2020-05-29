@@ -29,12 +29,13 @@ namespace TestApp.View.Admin
             this.InitializeComponent();
 
             TeacherCreateViewModel.Instance.GetCoursesForList();
-
-            foreach (var x in TeacherCreateViewModel.Instance.Grades) //Make sure that our dropdown with Grades only contains digits
-                if (x.All(c => char.IsDigit(c)))
-                    Cb_Grade.Items.Add(x);
+            PopulateGradeDropDown();
         }
-
+        /// <summary>
+        /// Encrypting password before sending values to be set to the new student
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Bttn_AddStudent_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -50,6 +51,19 @@ namespace TestApp.View.Admin
             }
 
         }
+        /// <summary>
+        /// Populating the drop down for choosing grade
+        /// </summary>
+        public void PopulateGradeDropDown ()
+        {
+
+            foreach (var grade in TeacherCreateViewModel.Instance.Grades)
+                if (grade.All(c => char.IsDigit(c)))
+                    Cb_Grade.Items.Add(grade);
+        }
+        /// <summary>
+        /// Clear values when new student has been posted to DB
+        /// </summary>
         public void ClearValues()
         {
             Tb_FirstName.Text = "";
