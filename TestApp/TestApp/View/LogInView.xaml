@@ -53,8 +53,10 @@
                     HorizontalAlignment="Center"
                     TextAlignment="Left"
                     Grid.Row="2"
-                    Width="120"
-                    Margin="0,0,0,20"/>
+                    Width="250"
+                    Margin="0,0,0,20"
+                    
+                    KeyDown="TextBox_KeyDown"/>
                 <PasswordBox 
                     x:Name="PB_InsertPassword" 
                     PlaceholderText="Lösenord"
@@ -62,8 +64,9 @@
                     BorderThickness="2"
                     HorizontalAlignment="Center"                    
                     Grid.Row="4" 
-                    Width="120"                   
-                    Margin="0,0,0,30"/>
+                    Width="250"                   
+                    Margin="0,0,0,30"
+                    KeyDown="TextBox_KeyDown"/>
                 <Button 
                     x:Name="Bttn_Login" 
                     Content="Logga In"

@@ -40,39 +40,8 @@ namespace TestApp.View
         private void Bttn_Login_Click(object sender, RoutedEventArgs e)
         {
 
-
-            string password = LogInViewModel.EncryptPassword(PB_InsertPassword.Password);
-
-            //!!Following code is only for testing purpose.
-
-            //if(Tb_InsertEmail.Text=="1")
-            //{
-            //  LogInViewModel.Instance.ActiveStudent = new Model.Student(19,"Mikael","Ollhage","nej@ja.com","pass",8,new List<Test>());
-            // 
-            //  this.Frame.Navigate(typeof(MainPage),"Elev");
-            //}
-            //else if(Tb_InsertEmail.Text == "2")
-            //{
-            //    this.Frame.Navigate(typeof(MainPage), "Teacher");
-            //}
-            //else if (Tb_InsertEmail.Text == "3")
-            //{
-            //    this.Frame.Navigate(typeof(MainPage), "Admin");
-            //}
-            ////TestCode stopped
-
-
-
-            if (Rb_Student.IsChecked == true)
-            {
-                StudentLogIn(password);
-
-            }
-            else if (Rb_Employee.IsChecked == true)
-            {
-                EmployeeLogIn(password);
-
-            }
+            CheckLogin();
+            
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -112,6 +81,50 @@ namespace TestApp.View
             else
             {
                 await new MessageDialog("Inkorrekt data, försök igen.").ShowAsync();
+            }
+        }
+
+        private void TextBox_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if(e.Key == Windows.System.VirtualKey.Enter)
+            {
+                CheckLogin();
+            }
+        }
+
+        private void CheckLogin()
+        {
+            string password = LogInViewModel.EncryptPassword(PB_InsertPassword.Password);
+
+            //!!Following code is only for testing purpose.
+
+            //if(Tb_InsertEmail.Text=="1")
+            //{
+            //  LogInViewModel.Instance.ActiveStudent = new Model.Student(19,"Mikael","Ollhage","nej@ja.com","pass",8,new List<Test>());
+            // 
+            //  this.Frame.Navigate(typeof(MainPage),"Elev");
+            //}
+            //else if(Tb_InsertEmail.Text == "2")
+            //{
+            //    this.Frame.Navigate(typeof(MainPage), "Teacher");
+            //}
+            //else if (Tb_InsertEmail.Text == "3")
+            //{
+            //    this.Frame.Navigate(typeof(MainPage), "Admin");
+            //}
+            ////TestCode stopped
+
+
+
+            if (Rb_Student.IsChecked == true)
+            {
+                StudentLogIn(password);
+
+            }
+            else if (Rb_Employee.IsChecked == true)
+            {
+                EmployeeLogIn(password);
+
             }
         }
     }
