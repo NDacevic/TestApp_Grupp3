@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     mc:Ignorable="d"
+    Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
@@ -17,13 +18,13 @@
             <StackPanel
                 Orientation="Horizontal">
                 <TextBlock
-                    Text="Course"
+                    Text="Ämne:"
                     />
                 <ComboBox
                     x:Name="comboBox_CourseNames"
                     x:DefaultBindMode="OneWay"
-                    
                     ItemsSource="{x:Bind createInstance.CourseName}"
+                    PlaceholderText="Välj ämne"
                     >
                     <ComboBox.ItemTemplate>
                         <DataTemplate
@@ -34,7 +35,8 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <TextBlock
-                    Text="Question type"
+                    Text="Typ:"
+                    HorizontalAlignment="Center"
                     />
                 <ComboBox
                     x:Name="comboBox_QuestionType"
@@ -50,19 +52,21 @@
                             />
                 </ComboBox>
                 <TextBlock
-                    Text="Points"
+                    Text="Poäng:"
                     />
                 <ComboBox
                     x:Name="comboBox_QuestionPoints"/>
                 <ListView Width="100"/>
             </StackPanel>
             <TextBlock
-                Text="Question"
+                Text="Fråga"
                 FontSize="20"
                 />
             <TextBox 
                 x:Name="textBox_questionText"
-                Height="400"     
+                Height="400"
+                TextWrapping="Wrap"
+                
                 />
             <Grid
                 x:Name="grid_MultipleChoiceAnswers"
@@ -76,7 +80,7 @@
                     Grid.Column="0"
                     >
                     <TextBlock
-                        Text="Correct Answer"/>
+                        Text="Rätt Svar"/>
                     <TextBox
                         x:Name="textBox_CorrectAnswer"/>
                 </StackPanel>
@@ -84,7 +88,7 @@
                     Grid.Column="1"
                     >
                     <TextBlock
-                        Text="Incorrect Answer"/>
+                        Text="Fel Svar"/>
                     <TextBox
                         x:Name="textBox_IncorrectAnswer1"/>
                 </StackPanel>
@@ -92,14 +96,14 @@
                     Grid.Column="2"
                     >
                     <TextBlock
-                        Text="Incorrect Answer"/>
+                        Text="Fel Svar"/>
                     <TextBox
                         x:Name="textBox_IncorrectAnswer2"/>
                 </StackPanel>
             </Grid>
             <Button 
                 x:Name="bttn_CreateQuestion"
-                Content="Create"
+                Content="Skapa Fråga"
                 Click="CreateQuestionClick"
                 />
         </StackPanel>
