@@ -86,12 +86,7 @@ namespace TestApp.View.Admin
             if (result == ContentDialogResult.Primary) //If they are ok we send the users id forward for deletion
             {
                 DeleteUser();
-                textBox_FirstName.Text = "";
-                textBox_LastName.Text = "";
-                textBox_Email.Text = "";
-                textBlock_Id.Text = "";
-                textBox_Password.Text = "";
-                textbox_repeatPassword.Text = "";
+                ResetControllers();
             }
         }
 
@@ -158,7 +153,17 @@ namespace TestApp.View.Admin
             catch (Exception exc)
             {
                 await new MessageDialog(exc.Message).ShowAsync();
-            }
+            } 
+        }
+        
+        private void ResetControllers()
+        {
+            textBox_FirstName.Text = "";
+            textBox_LastName.Text = "";
+            textBox_Email.Text = "";
+            textBlock_Id.Text = "";
+            textBox_Password.Text = "";
+            textbox_repeatPassword.Text = "";
         }
     }
 }
