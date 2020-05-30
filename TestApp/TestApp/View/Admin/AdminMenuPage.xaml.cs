@@ -30,8 +30,9 @@ namespace TestApp.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             mainFrame = (Frame)e?.Parameter;
-            displayName.Text = $"Inloggad som:\n{ViewModel.LogInViewModel.Instance.ActiveEmployee.FirstName} {ViewModel.LogInViewModel.Instance.ActiveEmployee.LastName}" +
-    $"\n{ViewModel.LogInViewModel.Instance.ActiveEmployee.Email}";
+            if(ViewModel.LogInViewModel.Instance.ActiveEmployee != null)
+                displayName.Text = $"Inloggad som:\n{ViewModel.LogInViewModel.Instance.ActiveEmployee.FirstName} {ViewModel.LogInViewModel.Instance.ActiveEmployee.LastName}" +
+                    $"\n{ViewModel.LogInViewModel.Instance.ActiveEmployee.Email}";
         }
 
 
