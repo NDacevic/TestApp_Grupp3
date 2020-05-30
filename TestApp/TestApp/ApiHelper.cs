@@ -124,9 +124,10 @@ namespace TestApp
                     throw new HttpRequestException();
                 }
             }
-            catch
+            catch(Exception exc)
             {
                 BasicNoConnectionMessage(exc);
+                return new List<Test>();
             }
         }
 
