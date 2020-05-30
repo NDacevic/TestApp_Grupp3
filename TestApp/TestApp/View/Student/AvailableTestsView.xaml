@@ -27,8 +27,7 @@
             Grid.Row="0"
             Grid.Column="1"
             HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            FontSize="{StaticResource HeaderFontSize}"/>
+            VerticalAlignment="Bottom"/>
         
         <StackPanel 
             Grid.Row="1"
