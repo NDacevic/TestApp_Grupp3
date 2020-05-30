@@ -49,7 +49,7 @@
                     Property="FontSize"
                     Value="{StaticResource LargeFontSize}"
                     />
-                    <!--<Setter
+                <!--<Setter
                     Property="FontSize"
                     Value="{StaticResource HeaderFontSize}"
                     />-->
