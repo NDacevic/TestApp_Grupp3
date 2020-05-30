@@ -77,7 +77,7 @@ namespace TestApp.View
             {
                 adminViewModel.DeleteTest(selectedQuestion.TestId);
             }
-
+            ResetControlls();
         }
 
         private void PickTestButton_Click(object sender, RoutedEventArgs e) //Pick a test and display its content
@@ -94,6 +94,13 @@ namespace TestApp.View
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             TeacherCreateViewModel.Instance.QuestionsToFilter.Clear();
+        }
+        private void ResetControlls()
+        {
+            adminViewModel.TestQuestions.Clear();
+            TestDate.Text = "";
+            TestGrade.Text = "";
+            TestCourse.Text = "";
         }
     }
 }

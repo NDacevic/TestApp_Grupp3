@@ -31,6 +31,9 @@ namespace TestApp.View.Student
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             mainFrame = (Frame)e?.Parameter;
+            mainFrame = (Frame)e?.Parameter;
+            displayName.Text = $"Inloggad som:\n{LogInViewModel.Instance.ActiveStudent.FirstName} {LogInViewModel.Instance.ActiveStudent.LastName}" +
+                $"\n{LogInViewModel.Instance.ActiveStudent.Email}";
         }
 
 
