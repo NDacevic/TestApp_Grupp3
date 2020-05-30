@@ -17,37 +17,47 @@
 
         <!--#region Left Side-->
         <StackPanel>
-            <TextBlock Text="Ta bort/redigera användare" 
-                   FontSize="48"
-                   HorizontalAlignment="Left"
-                       Margin="20,0,0,0"/>
-            <TextBlock       Text= "Var vänlig välj Anställd eller Elev för att få fram information. Sök även på ID för en direkt träff."
-                             Margin="40,10,0,10"/>
-            <StackPanel      Orientation="Horizontal"
-                             Margin="40,0,0,0">
-                <RadioButton x:Name="EmployeeRadioBtn"
-                             Content="Anställd" 
-                             Click="EmployeeRadioBtn_Click"
-                             IsChecked="True"/>
-                <RadioButton x:Name="StudentRadioBtn"
-                             Content="Elev" 
-                             Click="StudentRadioBtn_Click"/>
+            <TextBlock
+                Text="Ta bort/redigera användare" 
+                FontSize="48"
+                HorizontalAlignment="Left"
+                Margin="20,0,0,0"
+                />
+            <TextBlock
+                Text= "Var vänlig välj Anställd eller Elev för att få fram information. Sök även på ID för en direkt träff."
+                Margin="40,10,0,10"
+                />
+            <StackPanel
+                Orientation="Horizontal"
+                Margin="40,0,0,0">
+                <RadioButton 
+                    x:Name="EmployeeRadioBtn"
+                    Content="Anställd" 
+                    Click="EmployeeRadioBtn_Click"
+                    IsChecked="True"
+                    />
+                <RadioButton
+                    x:Name="StudentRadioBtn"
+                    Content="Elev" 
+                    Click="StudentRadioBtn_Click"
+                    />
             </StackPanel>
-            <TextBox         PlaceholderText="Skriv in ID.."
-                             Margin="40,10,40,0"
-                             x:Name="SearchIdTxtBox" KeyDown="SearchIdTxtBox_KeyDown"
-                             
-                             />
+            <TextBox
+                PlaceholderText="Skriv in ID.."
+                Margin="40,10,40,0"
+                x:Name="SearchIdTxtBox" KeyDown="SearchIdTxtBox_KeyDown"
+                />
         </StackPanel>
-        <ListView BorderBrush="Black"
-                  BorderThickness="2"
-                  Margin="40,190,40,200"
-                  ItemsSource="{x:Bind adminViewModel.AllUsers}"
-                  x:Name="DisplayUsersLV"
-                  SelectionMode="Single"
-                  IsItemClickEnabled="True"
-                  ItemClick="listView_ChoosePersonClick"
-                  >
+        <ListView
+            BorderBrush="Black"
+            BorderThickness="2"
+            Margin="40,190,40,200"
+            ItemsSource="{x:Bind adminViewModel.AllUsers}"
+            x:Name="DisplayUsersLV"
+            SelectionMode="Single"
+            IsItemClickEnabled="True"
+            ItemClick="listView_ChoosePersonClick"
+            >
             <ListView.ItemTemplate>
                 <DataTemplate  x:Name="displayUsersLV" x:DataType="data:Person" x:DefaultBindMode="TwoWay" >
                     <StackPanel Orientation="Horizontal">
@@ -106,14 +116,14 @@
                 <TextBlock
                     Text="Lösenord"
                     />
-                <TextBox
-                    x:Name="textBox_Password"
+                <PasswordBox
+                    x:Name="passwordBox_Password"
                     />
                 <TextBlock
                     Text="Repetera Lösenord"
                     />
-                <TextBox
-                    x:Name="textbox_repeatPassword"
+                <PasswordBox
+                    x:Name="passwordBox_repeatPassword"
                     />
             </StackPanel>
             <Button
