@@ -78,7 +78,7 @@ namespace TestApp.Model
         #region Methods
         public bool ShouldSerializeId()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
         #endregion
     }

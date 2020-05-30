@@ -39,9 +39,6 @@ namespace TestApp.View.Admin
         {
             try
             {
-                if (Cb_EmployeeRole.SelectedIndex == -1)
-                    throw new Exception();
-
                 string password = LogInViewModel.EncryptPassword(Pb_Password.Password);
                 AdminViewModel.Instance.SetValuesForEmployee(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, password, Cb_EmployeeRole.SelectedItem.ToString());
                 ClearValues();

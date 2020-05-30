@@ -40,9 +40,6 @@ namespace TestApp.View.Admin
         {
             try
             {
-                if (Cb_Grade.SelectedIndex == -1)
-                    throw new Exception();
-
                 string password = LogInViewModel.EncryptPassword(Pb_Password.Password);
                 AdminViewModel.Instance.SetValuesForStudent(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, password, int.Parse(Cb_Grade.SelectedValue.ToString()));
               

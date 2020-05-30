@@ -45,10 +45,6 @@ namespace TestApp.View.Teacher
             {
                 int selectedPoint = int.Parse(comboBox_QuestionPoints.SelectedValue.ToString());
                 string selectedQuestionType = ((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString();
-
-                if (comboBox_CourseNames.SelectedIndex == -1)
-                    throw new Exception("Välj ett ämne först.");
-
                 string selectedCourse = comboBox_CourseNames.SelectedValue.ToString();
 
 

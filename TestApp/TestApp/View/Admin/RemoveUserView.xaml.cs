@@ -133,9 +133,6 @@ namespace TestApp.View.Admin
         {
             try
             {
-                if (chosenPerson == null)
-                    throw new Exception("Du måste välja en användare att redigera först");
-
                 if (chosenPerson.GetType() == typeof(Model.Student))
                     adminViewModel.EditUserInfo
                         (
@@ -155,9 +152,9 @@ namespace TestApp.View.Admin
                         textBox_Email.Text
                         );
             }
-            catch (Exception exc)
+            catch
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                await new MessageDialog("Välj en person att redigera först").ShowAsync();
             }
         }
     }
