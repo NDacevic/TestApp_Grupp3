@@ -18,10 +18,10 @@
         <!--#region Left Side-->
         <StackPanel>
             <TextBlock
-                Text="Ta bort/redigera användare" 
+                Text="Ta bort användare" 
                 FontSize="48"
                 HorizontalAlignment="Left"
-                Margin="20,0,0,0"
+                Margin="35,0,0,0"
                 />
             <TextBlock
                 Text= "Var vänlig välj Anställd eller Elev för att få fram information. Sök även på ID för en direkt träff."
@@ -87,13 +87,18 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Margin="0,153,100,10">
-                <StackPanel
-                    Orientation="Horizontal"
-                    >
-                    <TextBlock />
-                   
-                </StackPanel>
+            <StackPanel Margin="0,0,100,10">
+                <TextBlock
+                    Text="Redigera information" 
+                    FontSize="48"
+                    HorizontalAlignment="Left"
+                    Margin="0,0,0,80"
+                />
+                <TextBlock
+                    Text="Användainfo"
+                    Style="{StaticResource MediumTitle}"
+                    Margin="0,0,0,15"
+                    />
                 <TextBlock
                     Text="Förnamn"
                     />
@@ -113,6 +118,18 @@
                     x:Name="textBox_Email"
                     Text=""
                     />
+                <Button
+                    x:Name="bttn_EditInformation"
+                    Grid.Row="1"
+                    Content="Spara info"
+                    Click="EditInformationClick"
+                    HorizontalAlignment="Left"
+                />
+                <TextBlock
+                    Text="Lösenord"
+                    Style="{StaticResource MediumTitle}"
+                    Margin="0,50,0,15"
+                    />
                 <TextBlock
                     Text="Lösenord"
                     />
@@ -125,15 +142,15 @@
                 <PasswordBox
                     x:Name="passwordBox_repeatPassword"
                     />
-            </StackPanel>
-            <Button
-                x:Name="bttn_EditInformation"
-                Grid.Row="1"
-                Margin="0,0,98,156"
-                Content="Spara ändring"
-                Click="EditInformationClick"
-                HorizontalAlignment="Right"
+                <Button
+                    x:Name="bttn_EditPassword"
+                    Grid.Row="1"
+                    Content="Spara lösenord"
+                    Click="EditPasswordClick"
+                    HorizontalAlignment="Left"
                 />
+            </StackPanel>
+            
         </Grid>
         <!--#endregion-->
     </Grid>
