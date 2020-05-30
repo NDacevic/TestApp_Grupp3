@@ -81,20 +81,41 @@
 
             </StackPanel>
 
-
+            <StackPanel Orientation="Horizontal" 
+                        
+                        VerticalAlignment="Bottom"
+                        Margin="40,10,0,0"
+                        >
+                <TextBlock  Text="Ämne"
+                        Margin="12,0,0,0"/>
+                <TextBlock  Text="Frågetyp"
+                        Margin="44,0,0,0"/>
+                <TextBlock  Text="Fråga"
+                        Margin="24,0,0,0"/>
+                <TextBlock  Text="Poäng"
+                        Margin="280,0,0,0"/>
+             
+            </StackPanel>
 
         </StackPanel>
 
         <ListView BorderBrush="Black"
                   BorderThickness="2"
-                  Margin="40,120,0,200"
+                  Margin="40,145,0,200"
                   ItemsSource="{x:Bind teacherCreateViewModel.QuestionsToFilter}"
                   x:Name="DisplayQuestionsListView"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="displayQuestionsListView" x:DataType="data:Question" >
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{x:Bind QuestionSummary}"/>
+                        <TextBlock  Text="{x:Bind CourseName}"
+                                    Width="80"/>
+                        <TextBlock Text="{x:Bind QuestionType}"/>
+                        <TextBlock Text="{x:Bind QuestionText}"
+                                   Margin="30,0,0,0"
+                                   Width="300"/>
+                        <TextBlock Text="{x:Bind PointValue}"
+                                   Margin="30,0,0,0"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -103,14 +124,21 @@
         <ListView Grid.Column="2"
                   BorderBrush="Black"
                   BorderThickness="2"
-                  Margin="0,120,20,200"
+                  Margin="0,145,20,200"
                   ItemsSource="{x:Bind teacherCreateViewModel.CreatedTest.Questions}"
                   x:Name="DisplayAddedQuestionsListView"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="displayAddedQuestionsListView" x:DataType="data:Question">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{x:Bind QuestionSummary}"/>
+                        <TextBlock  Text="{x:Bind CourseName}"
+                                    Width="80"/>
+                        <TextBlock Text="{x:Bind QuestionType}"/>
+                        <TextBlock Text="{x:Bind QuestionText}"
+                                   Margin="30,0,0,0"
+                                   Width="300"/>
+                        <TextBlock Text="{x:Bind PointValue}"
+                                   Margin="30,0,0,0"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -155,7 +183,21 @@
                                     Margin="10,0,0,0"
                                     />
             </StackPanel>
-       
+            <StackPanel Orientation="Horizontal" 
+                        
+                        VerticalAlignment="Bottom"
+                        Margin="0,7,0,0"
+                        >
+                <TextBlock  Text="Ämne"
+                        Margin="12,0,0,0"/>
+                <TextBlock  Text="Frågetyp"
+                        Margin="44,0,0,0"/>
+                <TextBlock  Text="Fråga"
+                        Margin="24,0,0,0"/>
+                <TextBlock  Text="Poäng"
+                        Margin="280,0,0,0"/>
+
+            </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="2"
                     Orientation="Vertical"

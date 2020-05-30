@@ -144,21 +144,17 @@ namespace TestApp.ViewModel
        
         public void AddQuestionToTest(Question question) //Adding question that the user choose
         {
-
-            if (CreatedTest.Questions.Contains(question))//Check if the question is already in the test.
-            {
-                DisplayQuestionWarning();//Displays a warning that the question already exists
-            }
-            else
-            {
+          
                 CreatedTest.Questions.Add(question);
+                QuestionsToFilter.Remove(question);
                 CreatedTest.MaxPoints += question.PointValue;
-            }
+            
 
         }
         public void RemoveQuestionFromTest(Question question) //Removing question that the user choose
         {
             CreatedTest.Questions.Remove(question);
+            QuestionsToFilter.Add(question);
             CreatedTest.MaxPoints -= question.PointValue;
         }
         public void ResetQuestionList()//Used when filtering the list
@@ -274,16 +270,7 @@ namespace TestApp.ViewModel
             };
             await warning.ShowAsync();
         }
-        public async void DisplayQuestionWarning() //Informs the user that the question is already added to the test.
-        {
-            ContentDialog warning = new ContentDialog
-            {
-                Title = "Varning",
-                Content = "Denna fråga finns redan på provet",
-                CloseButtonText = "Ok"
-            };
-            await warning.ShowAsync();
-        }
+        
 
 
 

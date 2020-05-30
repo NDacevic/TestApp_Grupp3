@@ -86,12 +86,7 @@ namespace TestApp.View.Admin
             if (result == ContentDialogResult.Primary) //If they are ok we send the users id forward for deletion
             {
                 DeleteUser();
-                textBox_FirstName.Text = "";
-                textBox_LastName.Text = "";
-                textBox_Email.Text = "";
-                textBlock_Id.Text = "";
-                textBox_Password.Text = "";
-                textbox_repeatPassword.Text = "";
+                ResetControllers();
             }
         }
 
@@ -119,11 +114,6 @@ namespace TestApp.View.Admin
         {
             chosenPerson = (Person)e.ClickedItem;
 
-            if (e.ClickedItem.GetType() == typeof(Model.Student))
-                textBlock_Id.Text = ((Model.Student)e.ClickedItem).StudentId.ToString();
-            else if (e.ClickedItem.GetType() == typeof(Model.Employee))
-                textBlock_Id.Text = ((Model.Employee)e.ClickedItem).EmployeeId.ToString();
-
             textBox_FirstName.Text = ((Person)e.ClickedItem).FirstName;
             textBox_LastName.Text = ((Person)e.ClickedItem).LastName;
             textBox_Email.Text = ((Person)e.ClickedItem).Email;
@@ -137,7 +127,6 @@ namespace TestApp.View.Admin
                     adminViewModel.EditUserInfo
                         (
                         (Model.Student)chosenPerson,
-                        int.Parse(textBlock_Id.Text),
                         textBox_FirstName.Text,
                         textBox_LastName.Text,
                         textBox_Email.Text
@@ -146,7 +135,6 @@ namespace TestApp.View.Admin
                     adminViewModel.EditUserInfo
                         (
                         (Model.Employee)chosenPerson,
-                        int.Parse(textBlock_Id.Text),
                         textBox_FirstName.Text,
                         textBox_LastName.Text,
                         textBox_Email.Text
@@ -156,6 +144,15 @@ namespace TestApp.View.Admin
             {
                 await new MessageDialog("Välj en person att redigera först").ShowAsync();
             }
+        }
+
+        private void ResetControllers()
+        {
+            textBox_FirstName.Text = "";
+            textBox_LastName.Text = "";
+            textBox_Email.Text = "";
+            textBox_Password.Text = "";
+            textbox_repeatPassword.Text = "";
         }
     }
 }
