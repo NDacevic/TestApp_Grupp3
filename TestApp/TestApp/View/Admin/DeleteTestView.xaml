@@ -57,35 +57,50 @@
                           Click="DeleteTestButton_Click"/>
 
             </StackPanel>
-
+            <StackPanel Orientation="Horizontal" 
+                        Spacing="30"
+                        VerticalAlignment="Bottom"
+                        Margin="10,10,0,0"
+                        >
+                <TextBlock  Text="Prov Id"
+                        Margin="12,0,0,0"/>
+                <TextBlock  Text="Ämne"
+                        Margin="27,0,0,0"/>
+                <TextBlock  Text="Årskurs"
+                        Margin="65,0,0,0"/>
+                <TextBlock  Text="Maxpoäng"
+                        Margin="55,0,0,0"/>
+                <TextBlock  Text="Datum"
+                        Margin="40,0,0,0"/>
+            </StackPanel>
 
 
         </StackPanel>
 
         <ListView BorderBrush="Black"
                   BorderThickness="2"
-                  Margin="20,120,0,150"
+                  Margin="20,150,0,150"
                   ItemsSource="{x:Bind adminViewModel.MyTests }"
                   x:Name="DisplayTestsLV"
                   >
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="displayTestsLV" x:DataType="data:Test" >
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock>
-                            <Run Text="Prov ID: "/>
-                            <Run Text="{x:Bind TestId}"/>
-                            <Run Text=" Årskurs:"/>
-                            <Run Text="{x:Bind Grade}"/>
-                            <Run Text=" Ämne:"/>
-                            <Run Text="{x:Bind CourseName}"/>
-                            <Run Text=" Provtid:"/>
-                            <Run Text="{x:Bind TestDuration}"/>
-                            <Run Text=" Poäng:"/>
-                            <Run Text="{x:Bind MaxPoints}"/>
-                            <Run Text=" Datum:"/>
-                            <Run Text="{x:Bind StartDate.ToString('yyyy-MM-dd',{x:Null})}"/>
+                        <TextBlock Text="{x:Bind TestId}"
+                                   Width="15"/>
+                        <TextBlock Text="{x:Bind CourseName}"
+                                   Margin="78,0,0,0"
+                                   Width="80"/>
+                        <TextBlock Text="{x:Bind Grade}"
+                                   Margin="55,0,0,0"/>
+                        <TextBlock Text="{x:Bind MaxPoints}"
+                                   Margin="115,0,0,0"
+                                   Width="15"
+                                   />
+                        <TextBlock Text="{x:Bind StartDate.ToString('yyyy-MM-dd',{x:Null})}"
+                                   Margin="120,0,0,0"
+                                   />
 
-                        </TextBlock>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -93,7 +108,7 @@
 
         <GridView BorderBrush="Black"
                   BorderThickness="2"
-                  Margin="20,120,0,150"
+                  Margin="20,150,0,150"
                   ItemsSource="{x:Bind adminViewModel.TestQuestions }"
                   x:Name="DisplayQuestionsLV"
                   Grid.Column="1"

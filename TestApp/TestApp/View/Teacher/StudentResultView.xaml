@@ -53,10 +53,9 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="data:Test">
                     <StackPanel Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical">
-                             <TextBlock Text="{x:Bind TestId}"
-                                        Width="15"/>
-                        </StackPanel>
+                      
+                        <TextBlock Text="{x:Bind TestId}"
+                                   Width="15"/>
                         <TextBlock Text="{x:Bind CourseName}"
                                    Margin="78,0,0,0"
                                    Width="80"/>

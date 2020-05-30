@@ -10,6 +10,9 @@
     <!--Background color shall change, it's for testing-->
 
     <Grid>
+        <TextBlock Text=""
+                   x:Name="displayName"
+                   Margin="20,100,0,0"/>
         <StackPanel Orientation="Vertical"
                     VerticalAlignment="Center">
             

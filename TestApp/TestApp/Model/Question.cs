@@ -48,11 +48,7 @@ namespace TestApp.Model
         public string IncorrectAnswer2 { get; set; }
         public int PointValue { get; set; }
         public string CourseName { get; set; }
-        public string QuestionSummary
-        {
-            get { return $"[{CourseName}] Fråga: {QuestionText} [{QuestionType}] Poäng: {PointValue}"; }
-
-        }
+     
         public StudentQuestionAnswer QuestionAnswer { get; set; }
         
         //used to populate the textboxes in a test, for each question, that states which number the question has (1 to max)
