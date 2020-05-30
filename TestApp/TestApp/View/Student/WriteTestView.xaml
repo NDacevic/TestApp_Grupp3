@@ -15,9 +15,9 @@
 
     <!--................Resources to be used on this page................-->
     <Page.Resources>
-        <!--................DataTemplate for MultipleChoice questions................-->
+        <!--................DataTemplates for MultipleChoice questions................-->
         <DataTemplate 
-            x:Key="MultipleChoiceAnswerItemTemplate"
+            x:Key="MCA1ItemTemplate"
             x:DataType="data:Question">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -63,9 +63,259 @@
                     Width="1000"
                     HorizontalAlignment="Stretch" 
                     Margin="0,20,0,0"/>
-
             </StackPanel>
         </DataTemplate>
+
+        <DataTemplate 
+            x:Key="MCA2ItemTemplate"
+            x:DataType="data:Question">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Fråga"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind RowInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="av"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind data2:StudentViewModel.Instance.NumberOfQuestionsInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                </StackPanel>
+
+                <TextBlock 
+                    Name="TxtBl_Question" 
+                    Margin="0,20,0,0"
+                    Text="{x:Bind QuestionText}"/>
+
+                <TextBlock 
+                    Text="Svarsalternativ:"
+                    Margin="0,20,0,0"/>
+
+                <RadioButton 
+                    Name="RadioBttn_Top"  
+                    Content="{x:Bind CorrectAnswer}"/>
+                <RadioButton 
+                    Name="RadioBttn_Middle" 
+                    Content="{x:Bind IncorrectAnswer2}"/>
+                <RadioButton 
+                    Name="RadioBttn_Bottom" 
+                    Content="{x:Bind IncorrectAnswer1}"/>
+                <RadioButton 
+                    Name="RadioBttn_Unanswered" 
+                    Content="Obesvarad"
+                    IsChecked="True"/>
+                <Rectangle 
+                    Fill="Aquamarine" 
+                    Height="1" 
+                    Width="1000"
+                    HorizontalAlignment="Stretch" 
+                    Margin="0,20,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate 
+            x:Key="MCA3ItemTemplate"
+            x:DataType="data:Question">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Fråga"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind RowInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="av"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind data2:StudentViewModel.Instance.NumberOfQuestionsInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                </StackPanel>
+
+                <TextBlock 
+                    Name="TxtBl_Question" 
+                    Margin="0,20,0,0"
+                    Text="{x:Bind QuestionText}"/>
+
+                <TextBlock 
+                    Text="Svarsalternativ:"
+                    Margin="0,20,0,0"/>
+
+                <RadioButton 
+                    Name="RadioBttn_Top"  
+                    Content="{x:Bind IncorrectAnswer1}"/>
+                <RadioButton 
+                    Name="RadioBttn_Middle" 
+                    Content="{x:Bind CorrectAnswer}"/>
+                <RadioButton 
+                    Name="RadioBttn_Bottom" 
+                    Content="{x:Bind IncorrectAnswer2}"/>
+                <RadioButton 
+                    Name="RadioBttn_Unanswered" 
+                    Content="Obesvarad"
+                    IsChecked="True"/>
+                <Rectangle 
+                    Fill="Aquamarine" 
+                    Height="1" 
+                    Width="1000"
+                    HorizontalAlignment="Stretch" 
+                    Margin="0,20,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate 
+            x:Key="MCA4ItemTemplate"
+            x:DataType="data:Question">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Fråga"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind RowInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="av"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind data2:StudentViewModel.Instance.NumberOfQuestionsInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                </StackPanel>
+
+                <TextBlock 
+                    Name="TxtBl_Question" 
+                    Margin="0,20,0,0"
+                    Text="{x:Bind QuestionText}"/>
+
+                <TextBlock 
+                    Text="Svarsalternativ:"
+                    Margin="0,20,0,0"/>
+
+                <RadioButton 
+                    Name="RadioBttn_Top"  
+                    Content="{x:Bind IncorrectAnswer2}"/>
+                <RadioButton 
+                    Name="RadioBttn_Middle" 
+                    Content="{x:Bind CorrectAnswer}"/>
+                <RadioButton 
+                    Name="RadioBttn_Bottom" 
+                    Content="{x:Bind IncorrectAnswer1}"/>
+                <RadioButton 
+                    Name="RadioBttn_Unanswered" 
+                    Content="Obesvarad"
+                    IsChecked="True"/>
+                <Rectangle 
+                    Fill="Aquamarine" 
+                    Height="1" 
+                    Width="1000"
+                    HorizontalAlignment="Stretch" 
+                    Margin="0,20,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate 
+            x:Key="MCA5ItemTemplate"
+            x:DataType="data:Question">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Fråga"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind RowInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="av"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind data2:StudentViewModel.Instance.NumberOfQuestionsInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                </StackPanel>
+
+                <TextBlock 
+                    Name="TxtBl_Question" 
+                    Margin="0,20,0,0"
+                    Text="{x:Bind QuestionText}"/>
+
+                <TextBlock 
+                    Text="Svarsalternativ:"
+                    Margin="0,20,0,0"/>
+
+                <RadioButton 
+                    Name="RadioBttn_Top"  
+                    Content="{x:Bind IncorrectAnswer1}"/>
+                <RadioButton 
+                    Name="RadioBttn_Middle" 
+                    Content="{x:Bind IncorrectAnswer2}"/>
+                <RadioButton 
+                    Name="RadioBttn_Bottom" 
+                    Content="{x:Bind CorrectAnswer}"/>
+                <RadioButton 
+                    Name="RadioBttn_Unanswered" 
+                    Content="Obesvarad"
+                    IsChecked="True"/>
+                <Rectangle 
+                    Fill="Aquamarine" 
+                    Height="1" 
+                    Width="1000"
+                    HorizontalAlignment="Stretch" 
+                    Margin="0,20,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate 
+            x:Key="MCA6ItemTemplate"
+            x:DataType="data:Question">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Fråga"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind RowInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="av"/>
+                    <TextBlock 
+                        Margin="5,0,0,0"
+                        Text="{x:Bind data2:StudentViewModel.Instance.NumberOfQuestionsInTest}"
+                        x:DefaultBindMode="TwoWay"/>
+                </StackPanel>
+
+                <TextBlock 
+                    Name="TxtBl_Question" 
+                    Margin="0,20,0,0"
+                    Text="{x:Bind QuestionText}"/>
+
+                <TextBlock 
+                    Text="Svarsalternativ:"
+                    Margin="0,20,0,0"/>
+
+                <RadioButton 
+                    Name="RadioBttn_Top"  
+                    Content="{x:Bind IncorrectAnswer2}"/>
+                <RadioButton 
+                    Name="RadioBttn_Middle" 
+                    Content="{x:Bind IncorrectAnswer1}"/>
+                <RadioButton 
+                    Name="RadioBttn_Bottom" 
+                    Content="{x:Bind CorrectAnswer}"/>
+                <RadioButton 
+                    Name="RadioBttn_Unanswered" 
+                    Content="Obesvarad"
+                    IsChecked="True"/>
+                <Rectangle 
+                    Fill="Aquamarine" 
+                    Height="1" 
+                    Width="1000"
+                    HorizontalAlignment="Stretch" 
+                    Margin="0,20,0,0"/>
+            </StackPanel>
+        </DataTemplate>
+
 
         <!--................DataTemplate for Text questions................-->
         <DataTemplate 
@@ -110,7 +360,12 @@
         <!--................Connection between DataTemplates and DataTemplateSelector................-->
         <l:MyDataTemplateSelector
             x:Key="MyDataTemplateSelector"
-            MultipleChoiceAnswer="{StaticResource MultipleChoiceAnswerItemTemplate}"
+            MCA1="{StaticResource MCA1ItemTemplate}"
+            MCA2="{StaticResource MCA2ItemTemplate}"
+            MCA3="{StaticResource MCA3ItemTemplate}"
+            MCA4="{StaticResource MCA4ItemTemplate}"
+            MCA5="{StaticResource MCA5ItemTemplate}"
+            MCA6="{StaticResource MCA6ItemTemplate}"
             TextAnswer="{StaticResource TextAnswerItemTemplate}">
         </l:MyDataTemplateSelector>
     </Page.Resources>
