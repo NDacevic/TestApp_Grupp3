@@ -47,6 +47,15 @@ namespace TestApp.View.Teacher
                 string selectedQuestionType = ((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString();
                 string selectedCourse = comboBox_CourseNames.SelectedValue.ToString();
 
+                if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Flerval")
+                {
+                    if (textBox_CorrectAnswer.Text == "" || textBox_IncorrectAnswer1.Text == "" || textBox_IncorrectAnswer2.Text == "" || textBox_questionText.Text == "")
+                        throw new Exception();
+                }
+
+                if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Fritext" && textBox_questionText.Text == "")
+                    throw new Exception();
+
 
                 if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Flerval")
                     createInstance.CreatedQuestion = new Question(0, selectedQuestionType, textBox_questionText.Text, textBox_CorrectAnswer.Text, textBox_IncorrectAnswer1.Text, textBox_IncorrectAnswer2.Text, selectedCourse, selectedPoint);
@@ -56,9 +65,9 @@ namespace TestApp.View.Teacher
                 if (await createInstance.CreateQuestion())
                     ResetPage();
             }
-            catch (Exception exc)
+            catch
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                await new MessageDialog("Fyll i all information innan du skapar en fråga").ShowAsync();
             }
         }
 

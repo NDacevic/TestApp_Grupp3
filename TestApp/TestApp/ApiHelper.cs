@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.VisualBasic.CompilerServices;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -89,13 +90,13 @@ namespace TestApp
                     else
                     {
                         Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                        throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                        throw new HttpRequestException();
                     }
                 }
             }
             catch(Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
             }
         
         }
@@ -120,13 +121,12 @@ namespace TestApp
                 }
                 else
                 {
-                    throw new HttpRequestException("No tests retrieved from database. Contact an admin for help.");
+                    throw new HttpRequestException();
                 }
             }
-            catch (Exception exc)
+            catch
             {
-                await new MessageDialog(exc.Message).ShowAsync();
-                return new List<Test>();
+                BasicNoConnectionMessage(exc);
             }
         }
 
@@ -144,12 +144,12 @@ namespace TestApp
                 else
                 {
                     Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                    throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                    throw new HttpRequestException();
                 }
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
             }
         }
 
@@ -166,12 +166,12 @@ namespace TestApp
                 else
                 {
                     Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                    throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                    throw new HttpRequestException();
                 }
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
             }
         }
         public async void DeleteStudent(int id)
@@ -187,12 +187,12 @@ namespace TestApp
                 else
                 {
                     Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                    throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                    throw new HttpRequestException("");
                 }
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
             }
         }
 
@@ -233,7 +233,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return false;
             }
         }
@@ -279,7 +279,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                Debug.WriteLine(exc.Message);
+                BasicNoConnectionMessage(exc);
             }
         }
 
@@ -305,7 +305,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return new ObservableCollection<Question>();
             }
         }
@@ -329,7 +329,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
             }
         }
 
@@ -364,7 +364,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
             }
         }
 
@@ -389,7 +389,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return new List<StudentQuestionAnswer>();
             }
         }
@@ -425,7 +425,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
             }
         }
 
@@ -443,7 +443,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return new List<TestResult>();
             }
 
@@ -472,7 +472,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
             }
         }
 
@@ -509,7 +509,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return false;
             }
         }
@@ -524,7 +524,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return new Student();
             }
         }
@@ -541,6 +541,7 @@ namespace TestApp
                         jsonString = await response.Content.ReadAsStringAsync();
 
                         studentList = JsonConvert.DeserializeObject<List<Student>>(jsonString);
+                        return studentList;
                     }
                     else
                         throw new HttpRequestException("Ingen uppkoppling till servern. Kontakta administratör");
@@ -548,10 +549,9 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
+                return new List<Student>();
             }
-
-            return studentList;
         }
 
         public async Task<List<Student>> GetAllStudentsTestsQuestions()
@@ -575,7 +575,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return new List<Student>();
             }
         }
@@ -607,7 +607,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
             }
         }
 
@@ -644,7 +644,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return false;
             }
         }
@@ -660,7 +660,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return new Employee();
             }
         }
@@ -681,7 +681,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return new List<Employee>();
             }
         }
@@ -705,7 +705,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return new ObservableCollection<TestResult>();
             }
         }
@@ -731,7 +731,7 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return new List<Course>();
             }
         }
@@ -768,7 +768,7 @@ namespace TestApp
             }
             catch(Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return false;
             }
         }
@@ -787,9 +787,15 @@ namespace TestApp
             }
             catch (Exception exc)
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                BasicNoConnectionMessage(exc);
                 return new List<Role>();
             }
+        }
+
+        private async void BasicNoConnectionMessage(Exception exc)
+        {
+            Debug.WriteLine(exc.Message);
+            await new MessageDialog("Ingen kontakt med servern. Kontakta admin").ShowAsync();
         }
         #endregion
     }
