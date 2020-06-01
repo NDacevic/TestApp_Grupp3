@@ -109,7 +109,11 @@ namespace TestApp.View.Admin
             }
         }
 
-
+        /// <summary>
+        /// Extracts the information for a selected person and displays it in textboxes on the right side of the page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listView_ChoosePersonClick(object sender, ItemClickEventArgs e)
         {
             chosenPerson = (Person)e.ClickedItem;
@@ -119,6 +123,11 @@ namespace TestApp.View.Admin
             textBox_Email.Text = ((Person)e.ClickedItem).Email;
         }
 
+        /// <summary>
+        /// Sends the information inside the textboxes to the EditUserInfo method for handling.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private async void EditInformationClick(object sender, RoutedEventArgs args)
         {
             try
@@ -155,6 +164,11 @@ namespace TestApp.View.Admin
             }
         }
 
+        /// <summary>
+        /// Sends the information inside the textboxes to the EditPassword method for handling.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private async void EditPasswordClick(object sender, RoutedEventArgs args)
         {
             try
@@ -188,6 +202,10 @@ namespace TestApp.View.Admin
                 await new MessageDialog("Error. Kontakta administratör").ShowAsync();
             }
         }
+
+        /// <summary>
+        /// Resets all the elements on the right side of the page
+        /// </summary>
         private void ResetControllers()
         {
             textBox_FirstName.Text = "";
