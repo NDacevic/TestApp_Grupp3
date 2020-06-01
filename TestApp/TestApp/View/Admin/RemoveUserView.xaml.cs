@@ -146,13 +146,29 @@ namespace TestApp.View.Admin
             }
         }
 
+        private async void EditPasswordClick(object sender, RoutedEventArgs args)
+        {
+            if (passwordBox_Password.Password == passwordBox_repeatPassword.Password)
+            {
+                string hashPass = LogInViewModel.EncryptPassword(passwordBox_Password.Password);
+
+                if(chosenPerson.GetType() == typeof(Model.Student)) 
+                    adminViewModel.EditPassword((Model.Student)chosenPerson, hashPass);
+                else if (chosenPerson.GetType() == typeof(Model.Employee))
+                    adminViewModel.EditPassword((Model.Employee)chosenPerson, hashPass);
+            }
+            else
+                await new MessageDialog("Lösenorden stämmer ej").ShowAsync();
+        }
+
         private void ResetControllers()
         {
             textBox_FirstName.Text = "";
             textBox_LastName.Text = "";
             textBox_Email.Text = "";
-            textBox_Password.Text = "";
-            textbox_repeatPassword.Text = "";
+
+            passwordBox_Password.Password = "";
+            passwordBox_repeatPassword.Password = "";
         }
     }
 }
