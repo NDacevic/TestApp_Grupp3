@@ -80,7 +80,6 @@ namespace TestApp.View.Teacher
         /// </summary>
         private void ResetPage()
         {
-            comboBox_CourseNames.SelectedIndex = 0;
             comboBox_QuestionType.SelectedIndex = 0;
             comboBox_QuestionPoints.SelectedIndex = 0;
 
