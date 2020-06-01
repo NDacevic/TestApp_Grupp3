@@ -120,7 +120,6 @@ namespace TestApp.ViewModel
         /// <returns></returns>
         public async Task GetAllTests()
         {
-            if(AllTests.Count==0)
             AllTests = await ApiHelper.Instance.GetAllTests();
         }
 

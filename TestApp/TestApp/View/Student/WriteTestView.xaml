@@ -10,6 +10,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    RequestedTheme="Light"
     Loaded="Page_Loaded">
     
 
@@ -19,7 +20,8 @@
         <DataTemplate 
             x:Key="MCA1ItemTemplate"
             x:DataType="data:Question">
-            <StackPanel>
+            <StackPanel
+                Margin="0,10,0,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Fråga"/>
                     <TextBlock 
@@ -58,7 +60,7 @@
                     Content="Obesvarad"
                     IsChecked="True"/>
                 <Rectangle 
-                    Fill="Aquamarine" 
+                    Fill="Gray" 
                     Height="1" 
                     Width="1000"
                     HorizontalAlignment="Stretch" 
@@ -69,7 +71,8 @@
         <DataTemplate 
             x:Key="MCA2ItemTemplate"
             x:DataType="data:Question">
-            <StackPanel>
+            <StackPanel
+                Margin="0,10,0,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Fråga"/>
                     <TextBlock 
@@ -108,7 +111,7 @@
                     Content="Obesvarad"
                     IsChecked="True"/>
                 <Rectangle 
-                    Fill="Aquamarine" 
+                    Fill="Gray" 
                     Height="1" 
                     Width="1000"
                     HorizontalAlignment="Stretch" 
@@ -119,7 +122,8 @@
         <DataTemplate 
             x:Key="MCA3ItemTemplate"
             x:DataType="data:Question">
-            <StackPanel>
+            <StackPanel
+                Margin="0,10,0,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Fråga"/>
                     <TextBlock 
@@ -158,7 +162,7 @@
                     Content="Obesvarad"
                     IsChecked="True"/>
                 <Rectangle 
-                    Fill="Aquamarine" 
+                    Fill="Gray"
                     Height="1" 
                     Width="1000"
                     HorizontalAlignment="Stretch" 
@@ -169,7 +173,8 @@
         <DataTemplate 
             x:Key="MCA4ItemTemplate"
             x:DataType="data:Question">
-            <StackPanel>
+            <StackPanel
+                Margin="0,10,0,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Fråga"/>
                     <TextBlock 
@@ -208,7 +213,7 @@
                     Content="Obesvarad"
                     IsChecked="True"/>
                 <Rectangle 
-                    Fill="Aquamarine" 
+                    Fill="Gray" 
                     Height="1" 
                     Width="1000"
                     HorizontalAlignment="Stretch" 
@@ -219,7 +224,8 @@
         <DataTemplate 
             x:Key="MCA5ItemTemplate"
             x:DataType="data:Question">
-            <StackPanel>
+            <StackPanel
+                Margin="0,10,0,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Fråga"/>
                     <TextBlock 
@@ -258,7 +264,7 @@
                     Content="Obesvarad"
                     IsChecked="True"/>
                 <Rectangle 
-                    Fill="Aquamarine" 
+                    Fill="Gray" 
                     Height="1" 
                     Width="1000"
                     HorizontalAlignment="Stretch" 
@@ -269,7 +275,8 @@
         <DataTemplate 
             x:Key="MCA6ItemTemplate"
             x:DataType="data:Question">
-            <StackPanel>
+            <StackPanel
+                Margin="0,10,0,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Fråga"/>
                     <TextBlock 
@@ -308,7 +315,7 @@
                     Content="Obesvarad"
                     IsChecked="True"/>
                 <Rectangle 
-                    Fill="Aquamarine" 
+                    Fill="Gray" 
                     Height="1" 
                     Width="1000"
                     HorizontalAlignment="Stretch" 
@@ -321,7 +328,8 @@
         <DataTemplate 
             x:Key="TextAnswerItemTemplate"
             x:DataType="data:Question">
-            <StackPanel>
+            <StackPanel
+                Margin="0,10,0,0">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Fråga"/>
                     <TextBlock 
@@ -349,7 +357,7 @@
                     TextWrapping="Wrap"/>
                 
                 <Rectangle 
-                    Fill="Aquamarine" 
+                    Fill="Gray" 
                     Height="1" 
                     Width="1000"
                     HorizontalAlignment="Stretch" 
@@ -357,7 +365,7 @@
             </StackPanel>
         </DataTemplate>
 
-        <!--................Connection between DataTemplates and DataTemplateSelector................-->
+        <!--................Connections between DataTemplates and DataTemplateSelector................-->
         <l:MyDataTemplateSelector
             x:Key="MyDataTemplateSelector"
             MCA1="{StaticResource MCA1ItemTemplate}"
@@ -384,21 +392,46 @@
             <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock
-            Text="{x:Bind selectedTest.CourseName}"
-            Grid.Row="0"
+        <StackPanel 
+            Orientation="Horizontal" 
             Grid.Column="1"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"/>
-        <TextBlock
-            Text="{x:Bind selectedTest.Grade}"
+            HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+            <Rectangle
+                Width="400"
+                Height="1"
+                Fill="Black"/>
+            <TextBlock 
+                Text="Prov pågår" 
+                Margin="40,0,40,0"
+                FontSize="40"/>
+            <Rectangle
+                Width="400"
+                Height="1"
+                Fill="Black"/>
+        </StackPanel>
+        <StackPanel 
+            Orientation="Horizontal"
             Grid.Row="1"
             Grid.Column="1"
-            HorizontalAlignment="Left"/>
+            Margin="0,20,0,0">
+            <TextBlock
+                Text="Aktuellt prov:"
+                HorizontalAlignment="Left"/>
+            <TextBlock
+                Margin="10,0,0,0"
+                Text="{x:Bind selectedTest.CourseName}"/>
+            <TextBlock
+                Margin="5,0,0,0"
+                Text="Åk"/>
+            <TextBlock
+                Text="{x:Bind selectedTest.Grade}"/>
+        </StackPanel>
         <TextBlock
             Name="TxtBl_TestTimer"
             Grid.Row="1"
             Grid.Column="1"
+            Margin="0,20,0,0"
             HorizontalAlignment="Right"/>
         <ScrollViewer
             Name="ScrView_allQuestions"
@@ -413,7 +446,7 @@
         </ScrollViewer>
         <Button
             Name="Bttn_SubmitTest"
-            Content="Lämna in provet"
+            Content="Registrera svar och avsluta"
             Grid.Column="1"
             Grid.Row="3"
             HorizontalAlignment="Right" Click="Bttn_SubmitTest_Click"
