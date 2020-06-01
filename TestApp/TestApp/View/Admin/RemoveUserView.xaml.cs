@@ -133,7 +133,7 @@ namespace TestApp.View.Admin
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Extracts the information for a selected person and displays it in textboxes on the right side of the page
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -147,7 +147,7 @@ namespace TestApp.View.Admin
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Sends the information inside the textboxes to the EditUserInfo method for handling.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
@@ -188,7 +188,7 @@ namespace TestApp.View.Admin
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Sends the information inside the textboxes to the EditPassword method for handling.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
@@ -227,9 +227,8 @@ namespace TestApp.View.Admin
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Resets all the elements on the right side of the page
         /// </summary>
-
         private void ResetControllers()
         {
             textBox_FirstName.Text = "";

@@ -222,7 +222,7 @@ namespace TestApp
             {
                 //Convert the object to a json string.
                 jsonString = JsonConvert.SerializeObject(question);
-                Debug.WriteLine(jsonString);
+
                 //Set this part of the code into a scope so we don't have to worry about it not getting disposed.
                 using (HttpContent content = new StringContent(jsonString))
                 {
@@ -281,6 +281,7 @@ namespace TestApp
                     Content = content
                 };
 
+                //Send the request to the api and await response
                 using (HttpResponseMessage response = await httpClient.SendAsync(request))
                 {
                     if (response.IsSuccessStatusCode)
@@ -358,7 +359,7 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Contacts the API and writes a specific test result to the database
+        /// Takes a TestResult object and posts it to the API
         /// </summary>
         /// <param name="testResult"></param>
         public async void PostTestResult(TestResult testResult)
@@ -378,15 +379,14 @@ namespace TestApp
                     HttpResponseMessage response = await httpClient.PostAsync("TestResults", content);
 
                     //Check if it is successfull. In that case display a message telling the user.
-                    //Otherwise throw an error and tell the user that the question was not posted.
+                    //Otherwise throw an error and tell the user that the testresult was not posted.
                     if (response.IsSuccessStatusCode)
                     {
                         await new MessageDialog("Resultatet för testet har sparats").ShowAsync();
                     }
                     else
                     {
-                        Debug.WriteLine($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
-                        throw new HttpRequestException("Ett fel har uppstått, kontakta administratör");
+                        throw new HttpRequestException($"Http Error: {response.StatusCode}. {response.ReasonPhrase}");
                     }
                 }
             }
@@ -416,7 +416,7 @@ namespace TestApp
                 }
                 else
                 {
-                    throw new HttpRequestException("No test results retrieved from database. Contact an admin for help.");
+                    throw new HttpRequestException();
                 }
             }
             catch (Exception exc)
@@ -516,6 +516,7 @@ namespace TestApp
             }
         }
         
+
         /// <summary>
         /// Todo: Comments!
         /// </summary>
@@ -566,7 +567,7 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Gets the full list of Students with their attached tests and questions with answers.
         /// </summary>
         /// <returns></returns>
         public async Task<List<Student>> GetAllStudentsTestsQuestions()
@@ -574,6 +575,7 @@ namespace TestApp
             try
             {
                 List<Student> studentList = new List<Student>();
+
                 using (HttpResponseMessage response = await httpClient.GetAsync("FullStudentsTestsQuestions"))
                  {
                     if (response.IsSuccessStatusCode)
@@ -624,8 +626,9 @@ namespace TestApp
                 BasicNoConnectionMessage(exc);
             }
         }
+
         /// <summary>
-        /// Todo: Comments!
+        /// Sends a PATCH request to the API with updated information for the Students table
         /// </summary>
         /// <param name="id"></param>
         /// <param name="patchDocStudent"></param>
@@ -751,6 +754,7 @@ namespace TestApp
             }
         }
 
+
         /// <summary>
         /// Todo: Comments!
         /// </summary>
@@ -867,7 +871,8 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// The method that's run in every catch to ensure that we have an error message in swedish when the app can't connect to the database.
+        /// Also prints out whatever message was thrown in the debug window
         /// </summary>
         /// <param name="exc"></param>
         private async void BasicNoConnectionMessage(Exception exc)
