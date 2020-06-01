@@ -42,12 +42,12 @@ namespace TestApp.View.Admin
             {
                 string password = LogInViewModel.EncryptPassword(Pb_Password.Password);
                 AdminViewModel.Instance.SetValuesForStudent(Tb_FirstName.Text, Tb_LastName.Text, Tb_Email.Text, password, int.Parse(Cb_Grade.SelectedValue.ToString()));
-              
+                ClearValues();
             }
             catch (Exception)
             {
                 await new MessageDialog("Data var felaktigt inmatad, vänligen försök igen.").ShowAsync();
-                return;               
+               
             }
 
         }
