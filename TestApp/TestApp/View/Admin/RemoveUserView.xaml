@@ -45,7 +45,8 @@
             <TextBox
                 PlaceholderText="Skriv in ID.."
                 Margin="40,10,40,0"
-                x:Name="SearchIdTxtBox" KeyDown="SearchIdTxtBox_KeyDown"
+                x:Name="SearchIdTxtBox" 
+                KeyDown="SearchIdTxtBox_KeyDown"
                 />
         </StackPanel>
         <ListView
@@ -87,17 +88,20 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Margin="0,0,100,10">
+            <StackPanel 
+                Margin="0,0,100,10"
+                Spacing="10"
+                >
                 <TextBlock
                     Text="Redigera information" 
                     FontSize="48"
                     HorizontalAlignment="Left"
-                    Margin="0,0,0,80"
+                    Margin="0,0,0,75"
                 />
                 <TextBlock
-                    Text="Användainfo"
+                    Text="Användarinfo"
                     Style="{StaticResource MediumTitle}"
-                    Margin="0,0,0,15"
+                    Margin="0,0,0,5"
                     />
                 <TextBlock
                     Text="Förnamn"
@@ -128,7 +132,7 @@
                 <TextBlock
                     Text="Lösenord"
                     Style="{StaticResource MediumTitle}"
-                    Margin="0,50,0,15"
+                    Margin="0,84,0,15"
                     />
                 <TextBlock
                     Text="Lösenord"

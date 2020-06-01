@@ -155,7 +155,6 @@ namespace TestApp.View.Teacher
                 await gradeInstance.DownloadStudents();
             }
             GetTests();
-            Debug.WriteLine("Loaded");
         }
 
         private void ResetView()

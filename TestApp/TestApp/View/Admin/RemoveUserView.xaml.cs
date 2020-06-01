@@ -123,6 +123,11 @@ namespace TestApp.View.Admin
         {
             try
             {
+                if (textBox_FirstName.Text == "" ||
+                        textBox_LastName.Text == "" ||
+                        textBox_Email.Text == "")
+                    throw new FormatException();
+
                 if (chosenPerson.GetType() == typeof(Model.Student))
                     adminViewModel.EditUserInfo
                         (
@@ -140,6 +145,10 @@ namespace TestApp.View.Admin
                         textBox_Email.Text
                         );
             }
+            catch (FormatException)
+            {
+                await new MessageDialog("Förnamn, Efternamn och Email får inte vara tomma").ShowAsync();
+            }
             catch
             {
                 await new MessageDialog("Välj en person att redigera först").ShowAsync();
@@ -148,19 +157,37 @@ namespace TestApp.View.Admin
 
         private async void EditPasswordClick(object sender, RoutedEventArgs args)
         {
-            if (passwordBox_Password.Password == passwordBox_repeatPassword.Password)
+            try
             {
-                string hashPass = LogInViewModel.EncryptPassword(passwordBox_Password.Password);
+                if (passwordBox_Password.Password == "" && passwordBox_repeatPassword.Password == "")
+                    throw new FormatException();
 
-                if(chosenPerson.GetType() == typeof(Model.Student)) 
-                    adminViewModel.EditPassword((Model.Student)chosenPerson, hashPass);
-                else if (chosenPerson.GetType() == typeof(Model.Employee))
-                    adminViewModel.EditPassword((Model.Employee)chosenPerson, hashPass);
+                if (passwordBox_Password.Password == passwordBox_repeatPassword.Password)
+                {
+                    string hashPass = LogInViewModel.EncryptPassword(passwordBox_Password.Password);
+
+                    if (chosenPerson.GetType() == typeof(Model.Student))
+                        adminViewModel.EditPassword((Model.Student)chosenPerson, hashPass);
+                    else if (chosenPerson.GetType() == typeof(Model.Employee))
+                        adminViewModel.EditPassword((Model.Employee)chosenPerson, hashPass);
+                }
+                else
+                    await new MessageDialog("Lösenorden stämmer ej").ShowAsync();
+
             }
-            else
-                await new MessageDialog("Lösenorden stämmer ej").ShowAsync();
+            catch (NullReferenceException)
+            {
+                await new MessageDialog("Välj en person först").ShowAsync();
+            }
+            catch(FormatException)
+            {
+                await new MessageDialog("Lösenordet får inte vara tomt").ShowAsync();
+            }
+            catch
+            {
+                await new MessageDialog("Error. Kontakta administratör").ShowAsync();
+            }
         }
-
         private void ResetControllers()
         {
             textBox_FirstName.Text = "";
