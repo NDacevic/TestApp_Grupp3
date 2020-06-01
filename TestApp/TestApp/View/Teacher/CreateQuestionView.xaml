@@ -14,7 +14,16 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock
+            Text="Skapa Fråga"
+            Grid.Row="0"
+            />
+        <StackPanel
+            Grid.Row="1">
             <StackPanel
                 Orientation="Horizontal">
                 <TextBlock
