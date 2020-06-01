@@ -168,7 +168,6 @@ namespace TestApp.View.Teacher
                 await gradeInstance.DownloadStudents();
             }
             GetTests();
-            Debug.WriteLine("Loaded");
         }
 
         /// <summary>
