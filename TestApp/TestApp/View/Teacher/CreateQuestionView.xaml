@@ -23,7 +23,7 @@
             Text="Skapa fråga"
             Grid.Row="0"
             Margin="0,10"
-            FontSize="48"
+            Style="{StaticResource HeaderTitle}"
             />
         <StackPanel
             Grid.Row="1"
@@ -34,6 +34,8 @@
                 >
                 <TextBlock
                     Text="Ämne:"
+                    Style="{StaticResource SmallTitle}" 
+                    VerticalAlignment="Center"
                     />
                 <ComboBox
                     x:Name="comboBox_CourseNames"
@@ -52,6 +54,8 @@
                 <TextBlock
                     Text="Typ:"
                     HorizontalAlignment="Center"
+                    Style="{StaticResource SmallTitle}" 
+                    VerticalAlignment="Center"
                     />
                 <ComboBox
                     x:Name="comboBox_QuestionType"
@@ -68,6 +72,8 @@
                 </ComboBox>
                 <TextBlock
                     Text="Poäng:"
+                    Style="{StaticResource SmallTitle}" 
+                    VerticalAlignment="Center"
                     />
                 <ComboBox
                     x:Name="comboBox_QuestionPoints"/>
@@ -75,7 +81,7 @@
             </StackPanel>
             <TextBlock
                 Text="Fråga"
-                FontSize="20"
+                Style="{StaticResource MediumTitle}"
                 />
             <TextBox 
                 x:Name="textBox_questionText"
@@ -96,10 +102,12 @@
                     >
                     <TextBlock
                         Text="Rätt Svar"
+                        Style="{StaticResource SmallTitle}"
                         />
                     <TextBox
                         x:Name="textBox_CorrectAnswer"
                         Margin="0,0,10,0"
+                        Style="{StaticResource SmallTitleBox}"
                         />
                 </StackPanel>
                 <StackPanel
@@ -107,10 +115,12 @@
                     >
                     <TextBlock
                         Text="Fel Svar"
+                        Style="{StaticResource SmallTitle}"
                         />
                     <TextBox
                         x:Name="textBox_IncorrectAnswer1"
                          Margin="0,0,10,0"
+                        Style="{StaticResource SmallTitleBox}"
                         />
                 </StackPanel>
                 <StackPanel
@@ -118,9 +128,11 @@
                     >
                     <TextBlock
                         Text="Fel Svar"
+                        Style="{StaticResource SmallTitle}"
                         />
                     <TextBox
                         x:Name="textBox_IncorrectAnswer2"
+                        Style="{StaticResource SmallTitleBox}"
                         />
                 </StackPanel>
             </Grid>

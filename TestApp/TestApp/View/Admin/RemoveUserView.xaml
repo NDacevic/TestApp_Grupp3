@@ -19,13 +19,14 @@
         <StackPanel>
             <TextBlock
                 Text="Ta bort användare" 
-                FontSize="48"
                 HorizontalAlignment="Left"
                 Margin="35,0,0,0"
+                Style="{StaticResource HeaderTitle}"
                 />
             <TextBlock
                 Text= "Var vänlig välj Anställd eller Elev för att få fram information. Sök även på ID för en direkt träff."
                 Margin="40,10,0,10"
+                Style="{StaticResource SmallTitle}"
                 />
             <StackPanel
                 Orientation="Horizontal"
@@ -50,8 +51,6 @@
                 />
         </StackPanel>
         <ListView
-            BorderBrush="Black"
-            BorderThickness="2"
             Margin="40,190,40,200"
             ItemsSource="{x:Bind adminViewModel.AllUsers}"
             x:Name="DisplayUsersLV"
@@ -94,9 +93,9 @@
                 >
                 <TextBlock
                     Text="Redigera information" 
-                    FontSize="48"
                     HorizontalAlignment="Left"
                     Margin="0,0,0,75"
+                    Style="{StaticResource HeaderTitle}"
                 />
                 <TextBlock
                     Text="Användarinfo"
@@ -105,21 +104,27 @@
                     />
                 <TextBlock
                     Text="Förnamn"
+                    Style="{StaticResource SmallTitle}"
                     />
                 <TextBox
                     x:Name="textBox_FirstName"
+                    Style="{StaticResource SmallTitleBox}"
                     />
                 <TextBlock
                     Text="Efternamn"
+                    Style="{StaticResource SmallTitle}"
                     />
                 <TextBox
                     x:Name="textBox_LastName"
+                    Style="{StaticResource SmallTitleBox}"
                     />
                 <TextBlock
                     Text="Email"
+                    Style="{StaticResource SmallTitle}"
                     />
                 <TextBox
                     x:Name="textBox_Email"
+                    Style="{StaticResource SmallTitleBox}"
                     Text=""
                     />
                 <Button
@@ -136,15 +141,19 @@
                     />
                 <TextBlock
                     Text="Lösenord"
+                    Style="{StaticResource SmallTitle}"
                     />
                 <PasswordBox
                     x:Name="passwordBox_Password"
+                    Style="{StaticResource SmallPasswordTitle}"
                     />
                 <TextBlock
                     Text="Repetera Lösenord"
+                    Style="{StaticResource SmallTitle}"
                     />
                 <PasswordBox
                     x:Name="passwordBox_repeatPassword"
+                    Style="{StaticResource SmallPasswordTitle}"
                     />
                 <Button
                     x:Name="bttn_EditPassword"

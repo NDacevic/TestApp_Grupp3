@@ -41,7 +41,7 @@
                     Value="{StaticResource borderColor}"/>
                 <Setter
                     Property="BorderThickness"
-                    Value="3"/>
+                    Value="2"/>
             </Style>
 
             <Style
@@ -54,6 +54,7 @@
             <x:Double x:Key="MediumFontSize">18</x:Double>
 
             <x:Double x:Key="HeaderFontSize">40</x:Double>
+            <x:Double x:Key="SmallFontSize">14</x:Double>
 
 
             <!-- Vi använder samma sätt att hämta värdet. fast denna gången är värdet 'FontSize'-->
@@ -75,6 +76,17 @@
                     Property="FontFamily"
                     Value="Arial Nova"/>
             </Style>
+            <Style
+                TargetType="TextBlock"
+                x:Name="SmallTitle">
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource SmallFontSize}"/>
+                <Setter
+                    Property="FontFamily"
+                    Value="Arial Nova"/>
+            </Style>
+
 
             <Style
                 TargetType="TextBlock"
@@ -108,7 +120,28 @@
                     Property="FontFamily"
                     Value="Arial Nova"/>
             </Style>
-
+            
+            <Style
+                TargetType="TextBox"
+                x:Name="SmallTitleBox">
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource SmallFontSize}"/>
+                <Setter
+                    Property="FontFamily"
+                    Value="Arial Nova"/>
+            </Style>
+            <Style
+                TargetType="PasswordBox"
+                x:Name="SmallPasswordTitle">
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource SmallFontSize}"/>
+                <Setter
+                    Property="FontFamily"
+                    Value="Arial Nova"/>
+            </Style>
+            
             <Style
                 TargetType="PasswordBox"
                 x:Name="PasswordTitle">
