@@ -33,6 +33,11 @@ namespace TestApp.View
             adminViewModel.DisplayTests();
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChooseCourseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -47,6 +52,11 @@ namespace TestApp.View
 
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChooseGradeForTest_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(ChooseGradeForTest.SelectedValue.ToString()=="Alla")
@@ -70,6 +80,11 @@ namespace TestApp.View
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteTestButton_Click(object sender, RoutedEventArgs e) //Pick a Test and delete it
         {
             var selected = DisplayTestsLV.SelectedItems;
@@ -80,6 +95,11 @@ namespace TestApp.View
             ResetControlls();
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PickTestButton_Click(object sender, RoutedEventArgs e) //Pick a test and display its content
         {
             var selected = DisplayTestsLV.SelectedItems;
@@ -91,10 +111,19 @@ namespace TestApp.View
                 adminViewModel.DisplayQuestionsOnTest(selectedTest);
             }
         }
+
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             TeacherCreateViewModel.Instance.QuestionsToFilter.Clear();
         }
+
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         private void ResetControlls()
         {
             adminViewModel.TestQuestions.Clear();

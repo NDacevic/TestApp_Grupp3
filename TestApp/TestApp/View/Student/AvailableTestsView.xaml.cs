@@ -73,7 +73,8 @@ namespace TestApp.View.Student
             {
                 Test selectedTest = Lv_AvailableTests.SelectedItem as Test;
                 TakeTestOrDont(selectedTest);
-            }catch (NullReferenceException)
+            }
+            catch (NullReferenceException)
             {
                 await new MessageDialog("Välj ett prov att skriva först").ShowAsync();
             }
@@ -97,7 +98,7 @@ namespace TestApp.View.Student
             }
             else
             {
-                _ = new MessageDialog($"Det aktuella provet kan tidigast påbörjas {selectedTest.StartDate.DateTime:yyyy-mm-dd HH:mm}.").ShowAsync();
+                _ = new MessageDialog($"Det aktuella provet kan tidigast påbörjas {selectedTest.StartDate.DateTime:yyyy-MM-dd HH:mm}.").ShowAsync();
             }
         }
         #endregion

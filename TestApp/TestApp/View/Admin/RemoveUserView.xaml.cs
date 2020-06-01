@@ -34,18 +34,33 @@ namespace TestApp.View.Admin
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EmployeeRadioBtn_Click(object sender, RoutedEventArgs e)
         {
             adminViewModel.AllUsers.Clear();
             adminViewModel.DisplayEmployees();
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StudentRadioBtn_Click(object sender, RoutedEventArgs e)
         {
             adminViewModel.AllUsers.Clear();
             adminViewModel.DisplayStudents();
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchIdTxtBox_KeyDown(object sender, KeyRoutedEventArgs e) //Search person based on ID
         {
             if (e.Key==Windows.System.VirtualKey.Enter) //Instead of using a button for the textbox we can use 'Enter-key'
@@ -71,6 +86,11 @@ namespace TestApp.View.Admin
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void DeleteUser_btn_Click(object sender, RoutedEventArgs e)
         {
            
@@ -90,6 +110,9 @@ namespace TestApp.View.Admin
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public void DeleteUser()
         {
             var selectedUser = DisplayUsersLV.SelectedItems; //The selected user is saved here
@@ -109,7 +132,11 @@ namespace TestApp.View.Admin
             }
         }
 
-
+        /// <summary>
+        /// Extracts the information for a selected person and displays it in textboxes on the right side of the page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void listView_ChoosePersonClick(object sender, ItemClickEventArgs e)
         {
             chosenPerson = (Person)e.ClickedItem;
@@ -119,10 +146,20 @@ namespace TestApp.View.Admin
             textBox_Email.Text = ((Person)e.ClickedItem).Email;
         }
 
+        /// <summary>
+        /// Sends the information inside the textboxes to the EditUserInfo method for handling.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private async void EditInformationClick(object sender, RoutedEventArgs args)
         {
             try
             {
+                if (textBox_FirstName.Text == "" ||
+                        textBox_LastName.Text == "" ||
+                        textBox_Email.Text == "")
+                    throw new FormatException();
+
                 if (chosenPerson.GetType() == typeof(Model.Student))
                     adminViewModel.EditUserInfo
                         (
@@ -140,27 +177,58 @@ namespace TestApp.View.Admin
                         textBox_Email.Text
                         );
             }
+            catch (FormatException)
+            {
+                await new MessageDialog("Förnamn, Efternamn och Email får inte vara tomma").ShowAsync();
+            }
             catch
             {
                 await new MessageDialog("Välj en person att redigera först").ShowAsync();
             }
         }
 
+        /// <summary>
+        /// Sends the information inside the textboxes to the EditPassword method for handling.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private async void EditPasswordClick(object sender, RoutedEventArgs args)
         {
-            if (passwordBox_Password.Password == passwordBox_repeatPassword.Password)
+            try
             {
-                string hashPass = LogInViewModel.EncryptPassword(passwordBox_Password.Password);
+                if (passwordBox_Password.Password == "" && passwordBox_repeatPassword.Password == "")
+                    throw new FormatException();
 
-                if(chosenPerson.GetType() == typeof(Model.Student)) 
-                    adminViewModel.EditPassword((Model.Student)chosenPerson, hashPass);
-                else if (chosenPerson.GetType() == typeof(Model.Employee))
-                    adminViewModel.EditPassword((Model.Employee)chosenPerson, hashPass);
+                if (passwordBox_Password.Password == passwordBox_repeatPassword.Password)
+                {
+                    string hashPass = LogInViewModel.EncryptPassword(passwordBox_Password.Password);
+
+                    if (chosenPerson.GetType() == typeof(Model.Student))
+                        adminViewModel.EditPassword((Model.Student)chosenPerson, hashPass);
+                    else if (chosenPerson.GetType() == typeof(Model.Employee))
+                        adminViewModel.EditPassword((Model.Employee)chosenPerson, hashPass);
+                }
+                else
+                    await new MessageDialog("Lösenorden stämmer ej").ShowAsync();
+
             }
-            else
-                await new MessageDialog("Lösenorden stämmer ej").ShowAsync();
+            catch (NullReferenceException)
+            {
+                await new MessageDialog("Välj en person först").ShowAsync();
+            }
+            catch(FormatException)
+            {
+                await new MessageDialog("Lösenordet får inte vara tomt").ShowAsync();
+            }
+            catch
+            {
+                await new MessageDialog("Error. Kontakta administratör").ShowAsync();
+            }
         }
 
+        /// <summary>
+        /// Resets all the elements on the right side of the page
+        /// </summary>
         private void ResetControllers()
         {
             textBox_FirstName.Text = "";

@@ -10,7 +10,9 @@
     Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid
+        Margin="40,0,0,0"
+        >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -25,7 +27,8 @@
             Text="Prov att rätta"
             Grid.Row="0"
             Style="{StaticResource MediumTitle}"
-            Margin="14"
+            FontSize="48"
+            Margin="0,0,0,80"
             />
         <TextBlock
             x:Name="textBlock_StudentTitle"
@@ -33,7 +36,8 @@
             Grid.Row="0"
             Visibility="Collapsed"
             Style="{StaticResource MediumTitle}"
-            Margin="14"
+            FontSize="48"
+            Margin="0,0,0,80"
             />
         <TextBlock
             x:Name="textBlock_QuestionTitle"
@@ -41,11 +45,14 @@
             Grid.Row="0"
             Visibility="Collapsed"
             Style="{StaticResource MediumTitle}"
-            Margin="14"
+            FontSize="48"
+            Margin="0,0,0,80"
             />
         <ScrollViewer
             x:Name="scrollViewer_InitialTestList"
             Grid.Row="1"
+            BorderBrush="Gray"
+            BorderThickness="2"
             >
             <Grid>
                 <ListView
@@ -81,6 +88,8 @@
             x:Name="scrollViewer_StudentsUngradedTestofType"
             Visibility="Collapsed"
             Grid.Row="1"
+            BorderBrush="Gray"
+            BorderThickness="2"
             >
             <Grid>
                 <ListView
@@ -116,6 +125,8 @@
             x:Name="scrollViewer_QuestionsForStudentAndTest"
             Visibility="Collapsed"
             Grid.Row="1"
+            BorderBrush="Gray"
+            BorderThickness="2"
             >
             <ListView
                 x:Name="listView_QuestionsForStudentAndTest"

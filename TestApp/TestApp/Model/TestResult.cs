@@ -38,6 +38,5 @@ namespace TestApp.Model
 
         #region Methods
         #endregion
-
     }
 }

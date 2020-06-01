@@ -47,21 +47,25 @@ namespace TestApp.View.Teacher
                 string selectedQuestionType = ((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString();
                 string selectedCourse = comboBox_CourseNames.SelectedValue.ToString();
 
-                if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Flerval")
-                {
-                    if (textBox_CorrectAnswer.Text == "" || textBox_IncorrectAnswer1.Text == "" || textBox_IncorrectAnswer2.Text == "" || textBox_questionText.Text == "")
-                        throw new Exception();
-                }
-
-                if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Fritext" && textBox_questionText.Text == "")
+                //you're not allowed to post a question with empty question text
+                if (textBox_questionText.Text == "")
                     throw new Exception();
 
 
+                //You're not allowed to post a multiple choice question without filling out all the choices.
+                if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Flerval")
+                {
+                    if (textBox_CorrectAnswer.Text == "" || textBox_IncorrectAnswer1.Text == "" || textBox_IncorrectAnswer2.Text == "")
+                        throw new Exception();
+                }
+
+                //create an object with the relevant information (this differs if it's multiple choice or text question but the same type is still used)
                 if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Flerval")
                     createInstance.CreatedQuestion = new Question(0, selectedQuestionType, textBox_questionText.Text, textBox_CorrectAnswer.Text, textBox_IncorrectAnswer1.Text, textBox_IncorrectAnswer2.Text, selectedCourse, selectedPoint);
                 else if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Fritext")
                     createInstance.CreatedQuestion = new Question(0, selectedQuestionType, textBox_questionText.Text, null, null, null, selectedCourse, selectedPoint);
 
+                //When the question is created all the textboxes are emptied and the comboboxes are reset
                 if (await createInstance.CreateQuestion())
                     ResetPage();
             }
@@ -72,7 +76,7 @@ namespace TestApp.View.Teacher
         }
 
         /// <summary>
-        /// Clears all the elements on the page
+        /// Clears all the elements on the page and resets all the comboboxes
         /// </summary>
         private void ResetPage()
         {
@@ -94,7 +98,6 @@ namespace TestApp.View.Teacher
         /// <param name="e"></param>
         private void ComboBox_QuestionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Debug.WriteLine(((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString());
 
             if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Flerval")
             {
@@ -106,6 +109,11 @@ namespace TestApp.View.Teacher
             }
         }
 
+        /// <summary>
+        /// Runs after the page is loaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             foreach (var x in createInstance.QuestionPoint)

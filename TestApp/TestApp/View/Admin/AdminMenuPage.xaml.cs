@@ -27,6 +27,10 @@ namespace TestApp.View
         {
             this.InitializeComponent();
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             mainFrame = (Frame)e?.Parameter;
@@ -35,7 +39,11 @@ namespace TestApp.View
                     $"\n{ViewModel.LogInViewModel.Instance.ActiveEmployee.Email}";
         }
 
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AdminNavigate_btn(object sender, RoutedEventArgs e)
         {
             if (sender == addEmployee_btn)

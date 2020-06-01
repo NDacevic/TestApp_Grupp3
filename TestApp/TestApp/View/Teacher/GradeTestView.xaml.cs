@@ -118,6 +118,11 @@ namespace TestApp.View.Teacher
             }
         }
 
+        /// <summary>
+        /// Resets the grade view and redownloads all the information from the database again.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private async void ReloadAllStudentsTestsQuestionsClick(object sender, RoutedEventArgs args)
         {
             scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Collapsed;
@@ -128,6 +133,11 @@ namespace TestApp.View.Teacher
             GetTests();
         }
 
+        /// <summary>
+        /// This goes back to the previous list depending on what list is currently visible
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void PreviousListClick(object sender, RoutedEventArgs args)
         {
             if (scrollViewer_StudentsUngradedTestofType.Visibility == Visibility.Visible)
@@ -147,17 +157,24 @@ namespace TestApp.View.Teacher
                 textBlock_StudentTitle.Visibility = Visibility.Visible;
             }
         }
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            //if the students list is empty this makes sure it's downloaded
             if (gradeInstance.allStudents == null)
             {
                 await gradeInstance.DownloadStudents();
             }
             GetTests();
-            Debug.WriteLine("Loaded");
         }
 
+        /// <summary>
+        /// Resets the view to it's original starting position
+        /// </summary>
         private void ResetView()
         {
             scrollViewer_InitialTestList.Visibility = Visibility.Visible;

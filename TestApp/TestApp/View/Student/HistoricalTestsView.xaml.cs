@@ -29,7 +29,10 @@ namespace TestApp.View.Student
             this.InitializeComponent();
         }
 
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             studentVM.GetTestResult();

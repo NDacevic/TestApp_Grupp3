@@ -38,6 +38,11 @@ namespace TestApp.Model
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Tells the Json converter that it shouldn't use the ID property when serializing.
+        /// </summary>
+        /// <returns></returns>
+        public bool ShouldSerializeRoleId() => false;
         #endregion
     }
 }

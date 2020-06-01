@@ -39,15 +39,23 @@ namespace TestApp.View
         /// <param name="e"></param>
         private void Bttn_Login_Click(object sender, RoutedEventArgs e)
         {
-
-            CheckLogin();
-            
+            CheckLogin();            
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             NavigationHelper.Instance.GlobalFrame = Frame;
         }
+
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="password"></param>
         public async void StudentLogIn(string password)
         {
             await LogInViewModel.Instance.GetStudent(Tb_InsertEmail.Text);
@@ -63,6 +71,10 @@ namespace TestApp.View
                 await new MessageDialog("Inkorrekt data, försök igen.").ShowAsync();
             }
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="password"></param>
         public async void EmployeeLogIn(string password)
         {
             await LogInViewModel.Instance.GetEmployee(Tb_InsertEmail.Text);
@@ -83,7 +95,11 @@ namespace TestApp.View
                 await new MessageDialog("Inkorrekt data, försök igen.").ShowAsync();
             }
         }
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if(e.Key == Windows.System.VirtualKey.Enter)
@@ -92,10 +108,14 @@ namespace TestApp.View
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         private void CheckLogin()
         {
             string password = LogInViewModel.EncryptPassword(PB_InsertPassword.Password);
 
+            #region testCode
             //!!Following code is only for testing purpose.
 
             //if(Tb_InsertEmail.Text=="1")
@@ -113,7 +133,7 @@ namespace TestApp.View
             //    this.Frame.Navigate(typeof(MainPage), "Admin");
             //}
             ////TestCode stopped
-
+            #endregion
 
 
             if (Rb_Student.IsChecked == true)
