@@ -149,14 +149,25 @@ namespace TestApp.ViewModel
             Question question;
             int numberOfQuestionItems = listView_QuestionsForStudentAndTest.Items.Count;
 
+            //Go through all the items inside the listview. This retrieves question objects
             foreach (var item in listView_QuestionsForStudentAndTest.Items)
             {
+                //Cast it to a variable of the type.
                 question = (Question)item;
+
+                //Get the container that holds the question object.
                 var container = listView_QuestionsForStudentAndTest.ContainerFromItem(item);
+
+                //find all it's children of the 'control' type. (in this case it will find all the radiobuttons attached to the container of the question object.)
                 var children = AllChildren(container);
+
+                //go through the radiobuttons and find which one is clicked. 
                 foreach (var control in children)
                 {
                     RadioButton button = (RadioButton)control;
+
+                    //if the question is marked with correct or false. the changes are staged for sending to the database.
+                    //alternatively they can be marked as "ungraded" this will keep the questions in the list so the teacher can come back at a later date and grade it.
                     if (button.Name == "radioButton_QuestionCorrect" && button.IsChecked == true)
                     {
                         question.QuestionAnswer.IsCorrect = true;
@@ -169,22 +180,29 @@ namespace TestApp.ViewModel
                     }
                 }
             }
-
+            
             var success = false;
+
+            //Send the questions staged for changing to the api
             if (gradedQuestions.Count > 0)
                 success = await ApiHelper.Instance.UpdateStudentQuestionAnswer(gradedQuestions);
 
+            //if the changes were saved on the database and we find that all the questions for a student and test have been saved,
+            //we send another POST to the testresult bridge table where we store the points for the students test.
             if (success &&
                 gradedQuestions.Count == numberOfQuestionItems)
             {
+                //Send another request to the API to get all the corrected questions
+                //(since this can be done in multiple sessions of grading)
                 var points = await GetTotalPoints(chosenStudent, chosenTestId);
 
                 TestResult result = new TestResult(chosenStudent.StudentId, chosenTestId, points);
                 ApiHelper.Instance.PostTestResult(result);
             }
         }
+
         /// <summary>
-        /// Todo: Comments!
+        /// Sends a request to the api to get all the results of a students written test and counts up the aquired points value
         /// </summary>
         /// <param name="chosenStudent"></param>
         /// <param name="chosenTestId"></param>
@@ -208,6 +226,7 @@ namespace TestApp.ViewModel
             }
             return totalPoints;
         }
+
         /// <summary>
         /// Goes through a UI element and gets all the children of it that are labeled as 'Controlls'
         /// </summary>
@@ -215,8 +234,6 @@ namespace TestApp.ViewModel
         /// <returns></returns>
         public List<Control> AllChildren(DependencyObject parent)
         {
-
-            //Todo: Move this method to another class
             var list = new List<Control>();
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
             {

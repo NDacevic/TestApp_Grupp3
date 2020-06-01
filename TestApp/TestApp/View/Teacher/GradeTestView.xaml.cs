@@ -119,7 +119,7 @@ namespace TestApp.View.Teacher
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Resets the grade view and redownloads all the information from the database again.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
@@ -132,8 +132,9 @@ namespace TestApp.View.Teacher
             await gradeInstance.DownloadStudents();
             GetTests();
         }
+
         /// <summary>
-        /// Todo: Comments!
+        /// This goes back to the previous list depending on what list is currently visible
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
@@ -163,6 +164,7 @@ namespace TestApp.View.Teacher
         /// <param name="e"></param>
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            //if the students list is empty this makes sure it's downloaded
             if (gradeInstance.allStudents == null)
             {
                 await gradeInstance.DownloadStudents();
@@ -171,7 +173,7 @@ namespace TestApp.View.Teacher
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Resets the view to it's original starting position
         /// </summary>
         private void ResetView()
         {

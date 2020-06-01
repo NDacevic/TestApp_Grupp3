@@ -115,6 +115,7 @@ namespace TestApp.View
         {
             string password = LogInViewModel.EncryptPassword(PB_InsertPassword.Password);
 
+            #region testCode
             //!!Following code is only for testing purpose.
 
             //if(Tb_InsertEmail.Text=="1")
@@ -132,7 +133,7 @@ namespace TestApp.View
             //    this.Frame.Navigate(typeof(MainPage), "Admin");
             //}
             ////TestCode stopped
-
+            #endregion
 
 
             if (Rb_Student.IsChecked == true)

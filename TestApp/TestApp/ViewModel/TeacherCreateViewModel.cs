@@ -91,7 +91,9 @@ namespace TestApp.ViewModel
 
         #region Methods
         /// <summary>
-        /// We fill our combobox with courses from DB
+
+        /// Gets all courses from DB for populating comboboxes 
+
         /// </summary>
         public async void GetCoursesForList() 
         {
