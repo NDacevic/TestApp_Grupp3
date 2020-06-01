@@ -27,16 +27,23 @@ namespace TestApp.View.Teacher
         {
             this.InitializeComponent();
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             mainFrame = (Frame)e?.Parameter;
             if(ViewModel.LogInViewModel.Instance.ActiveEmployee != null)
                 displayName.Text = $"Inloggad som:\n{ViewModel.LogInViewModel.Instance.ActiveEmployee.FirstName} {ViewModel.LogInViewModel.Instance.ActiveEmployee.LastName}" +
-                    $"\n{ViewModel.LogInViewModel.Instance.ActiveEmployee.Email}";
-           
+                    $"\n{ViewModel.LogInViewModel.Instance.ActiveEmployee.Email}";           
         }
 
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TeacherNavigate_btn(object sender, RoutedEventArgs e) //Must be a better way to check wich one is pressed than all these if/if else
         {
             if (sender == createQuestion_btn)

@@ -11,14 +11,8 @@ namespace TestApp.Model
 {
     public class Test:INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged(string caller = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(caller));
-            }
-        }
+        
+        
         #region Constant Fields
         #endregion
 
@@ -51,6 +45,7 @@ namespace TestApp.Model
         #endregion
 
         #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Properties
@@ -76,6 +71,18 @@ namespace TestApp.Model
         #endregion
 
         #region Methods
+        /// <summary>
+        /// INotifyPropertyChanged catcher method
+        /// </summary>
+        /// <param name="caller"></param>
+        private void NotifyPropertyChanged(string caller = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(caller));
+            }
+        }
+
         /// <summary>
         /// Tells the Json converter that it shouldn't use the ID property when serializing.
         /// </summary>

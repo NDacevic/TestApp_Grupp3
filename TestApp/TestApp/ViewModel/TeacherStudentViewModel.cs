@@ -83,6 +83,9 @@ namespace TestApp.ViewModel
             }
             DisplayAllTests();
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public void DisplayAllTests()
         {
             GradedTests.Clear();
@@ -118,6 +121,10 @@ namespace TestApp.ViewModel
             DisplayStudentResult(testId);
 
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="testId"></param>
         public void DisplayStudentResult(int testId)
         {
             
@@ -134,10 +141,7 @@ namespace TestApp.ViewModel
                     }
                 }
             }
-
-        }
-       
+        }       
         #endregion
-
     }
 }

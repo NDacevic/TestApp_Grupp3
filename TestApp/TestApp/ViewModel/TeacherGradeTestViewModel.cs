@@ -183,7 +183,12 @@ namespace TestApp.ViewModel
                 ApiHelper.Instance.PostTestResult(result);
             }
         }
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="chosenStudent"></param>
+        /// <param name="chosenTestId"></param>
+        /// <returns></returns>
         private async Task<int> GetTotalPoints(Model.Student chosenStudent, int chosenTestId)
         {
             List<StudentQuestionAnswer> studentQuestionAnswerList = await ApiHelper.Instance.GetAllStudentQuestionAnswers();

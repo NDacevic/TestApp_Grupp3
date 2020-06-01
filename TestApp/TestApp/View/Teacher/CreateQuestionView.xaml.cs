@@ -106,6 +106,11 @@ namespace TestApp.View.Teacher
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             foreach (var x in createInstance.QuestionPoint)

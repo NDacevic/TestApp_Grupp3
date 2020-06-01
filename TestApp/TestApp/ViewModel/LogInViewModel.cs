@@ -49,6 +49,11 @@ namespace TestApp.ViewModel
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Todo: Comments
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public async Task GetStudent (string email)
         {
             ActiveStudent = new Student();
@@ -62,6 +67,11 @@ namespace TestApp.ViewModel
             }
             
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public async Task GetEmployee (string email)
         {
             ActiveEmployee = new Employee();
@@ -100,6 +110,11 @@ namespace TestApp.ViewModel
                 return builder.ToString();
             }
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="insertedPassword"></param>
+        /// <returns></returns>
         public bool CheckEmployeePassword(string insertedPassword)
         {
    
@@ -112,6 +127,11 @@ namespace TestApp.ViewModel
                 return false;
             }
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="insertedPassword"></param>
+        /// <returns></returns>
         public bool CheckStudentPassword(string insertedPassword)
         {
             if (ActiveStudent.Password == insertedPassword)

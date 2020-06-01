@@ -28,6 +28,11 @@ namespace TestApp.View.Student
         {
             this.InitializeComponent();
         }
+
+        /// <summary>
+        /// Todo: Comments
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             mainFrame = (Frame)e?.Parameter;
@@ -37,7 +42,11 @@ namespace TestApp.View.Student
                     $"\n{LogInViewModel.Instance.ActiveStudent.Email}";
         }
 
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void StudentNavigate_btn(object sender, RoutedEventArgs e)
         {
             if (sender == historicalTest_btn)
@@ -52,8 +61,7 @@ namespace TestApp.View.Student
             else if(sender == logOut_btn)
             {
                 NavigationHelper.Instance.GlobalFrame.Navigate(typeof(LogInView));                
-            }
-              
+            }              
         }
     }
 }
