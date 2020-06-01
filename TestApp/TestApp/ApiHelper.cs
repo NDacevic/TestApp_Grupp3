@@ -320,7 +320,6 @@ namespace TestApp
                 if (response.IsSuccessStatusCode)
                 {
                     await new MessageDialog("Frågan har raderats").ShowAsync();
-
                 }
                 else
                 {
@@ -575,6 +574,7 @@ namespace TestApp
                 BasicNoConnectionMessage(exc);
             }
         }
+          
         public async Task<bool> PatchStudentAsync(int id, JsonPatchDocument<Person> patchDocStudent)
         {
             //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter

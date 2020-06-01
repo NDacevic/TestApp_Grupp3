@@ -161,11 +161,12 @@ namespace TestApp.View.Admin
                 await new MessageDialog("Lösenorden stämmer ej").ShowAsync();
         }
 
-            private void ResetControllers()
+        private void ResetControllers()
         {
             textBox_FirstName.Text = "";
             textBox_LastName.Text = "";
             textBox_Email.Text = "";
+
             passwordBox_Password.Password = "";
             passwordBox_repeatPassword.Password = "";
         }
