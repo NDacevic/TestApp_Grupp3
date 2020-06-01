@@ -89,7 +89,6 @@ namespace TestApp.View.Teacher
         /// <param name="e"></param>
         private void ComboBox_QuestionType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Debug.WriteLine(((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString());
 
             if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Flerval")
             {

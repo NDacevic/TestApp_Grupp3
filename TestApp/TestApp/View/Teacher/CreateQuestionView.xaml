@@ -9,7 +9,8 @@
     Loaded="Page_Loaded"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid
+        Margin="40,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -19,13 +20,18 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock
-            Text="Skapa Fråga"
+            Text="Skapa fråga"
             Grid.Row="0"
+            Margin="0,10"
+            FontSize="48"
             />
         <StackPanel
-            Grid.Row="1">
+            Grid.Row="1"
+            Spacing="10">
             <StackPanel
-                Orientation="Horizontal">
+                Orientation="Horizontal" 
+                Spacing="10"
+                >
                 <TextBlock
                     Text="Ämne:"
                     />
@@ -89,25 +95,33 @@
                     Grid.Column="0"
                     >
                     <TextBlock
-                        Text="Rätt Svar"/>
+                        Text="Rätt Svar"
+                        />
                     <TextBox
-                        x:Name="textBox_CorrectAnswer"/>
+                        x:Name="textBox_CorrectAnswer"
+                        Margin="0,0,10,0"
+                        />
                 </StackPanel>
                 <StackPanel
                     Grid.Column="1"
                     >
                     <TextBlock
-                        Text="Fel Svar"/>
+                        Text="Fel Svar"
+                        />
                     <TextBox
-                        x:Name="textBox_IncorrectAnswer1"/>
+                        x:Name="textBox_IncorrectAnswer1"
+                         Margin="0,0,10,0"
+                        />
                 </StackPanel>
                 <StackPanel
                     Grid.Column="2"
                     >
                     <TextBlock
-                        Text="Fel Svar"/>
+                        Text="Fel Svar"
+                        />
                     <TextBox
-                        x:Name="textBox_IncorrectAnswer2"/>
+                        x:Name="textBox_IncorrectAnswer2"
+                        />
                 </StackPanel>
             </Grid>
             <Button 
