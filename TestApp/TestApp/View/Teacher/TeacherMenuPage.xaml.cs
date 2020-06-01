@@ -28,7 +28,7 @@ namespace TestApp.View.Teacher
             this.InitializeComponent();
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Displays the name and email of user that logged in
         /// </summary>
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -40,11 +40,11 @@ namespace TestApp.View.Teacher
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Navigates to different pages depending on the users choice.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TeacherNavigate_btn(object sender, RoutedEventArgs e) //Must be a better way to check wich one is pressed than all these if/if else
+        private void TeacherNavigate_btn(object sender, RoutedEventArgs e)
         {
             if (sender == createQuestion_btn)
             {

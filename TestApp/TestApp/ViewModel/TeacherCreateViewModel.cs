@@ -91,9 +91,9 @@ namespace TestApp.ViewModel
 
         #region Methods
         /// <summary>
-        /// Todo: Comments!
+        /// We fill our combobox with courses from DB
         /// </summary>
-        public async void GetCoursesForList() //Populating combobox with courses from DB
+        public async void GetCoursesForList() 
         {
             try
             {
@@ -111,23 +111,23 @@ namespace TestApp.ViewModel
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Used to display questions thats only related to the given course
         /// </summary>
         /// <param name="course"></param>
         public async void GetQuestionsForTest(string course) 
         {
-           QuestionsToFilter.Clear(); //Everytime we want to change subject on the Test we clear the list with questions to filter.
+           QuestionsToFilter.Clear(); 
 
-           SubjectQuestions = await ApiHelper.Instance.GetQuestion(course); //Send CourseName to ApiHelper and want a Obs.Coll in return.
+           SubjectQuestions = await ApiHelper.Instance.GetQuestion(course); 
 
             foreach (Question questionTofilter in SubjectQuestions)
             {
-                QuestionsToFilter.Add(questionTofilter); //Populating the list with questions from SubjectQuestions
+                QuestionsToFilter.Add(questionTofilter); 
             }
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// We send our created test to be saved in DB.
         /// </summary>
         public async void CreateTestToDB()
         {
@@ -150,50 +150,50 @@ namespace TestApp.ViewModel
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Method to reset the object after posting the Test to DB
         /// </summary>
-        public void ResetTest()//Method to reset the object after posting the Test to DB
+        public void ResetTest()
         {
             CreatedTest.Questions.Clear();
             QuestionsToFilter.Clear();
             CreatedTest.Questions.Clear();
         }
-    
+
         /// <summary>
-        /// Todo: Comments!
+        /// Adding question that the user picked
         /// </summary>
         /// <param name="question"></param>
-        public void AddQuestionToTest(Question question) //Adding question that the user choose
+        public void AddQuestionToTest(Question question)
         {          
                 CreatedTest.Questions.Add(question);
                 QuestionsToFilter.Remove(question);
                 CreatedTest.MaxPoints += question.PointValue;     
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Removing question that the user picked
         /// </summary>
         /// <param name="question"></param>
-        public void RemoveQuestionFromTest(Question question) //Removing question that the user choose
+        public void RemoveQuestionFromTest(Question question) 
         {
             CreatedTest.Questions.Remove(question);
             QuestionsToFilter.Add(question);
             CreatedTest.MaxPoints -= question.PointValue;
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Resets list of questions after filtering.
         /// </summary>
-        public void ResetQuestionList()//Used when filtering the list
+        public void ResetQuestionList()
         {
-            foreach (var subject in SubjectQuestions) //Going through our list with questions.
+            foreach (var subject in SubjectQuestions)
             {
-                if (!QuestionsToFilter.Contains(subject)) //We check if our QuestionsToFilter contain our subject question
+                if (!QuestionsToFilter.Contains(subject))
                 {
                     QuestionsToFilter.Add(subject);
                 }
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// We filter our list with questions by a questions PointValue depending on the parameters given by the user
         /// </summary>
         /// <param name="point"></param>
         /// <param name="type"></param>
@@ -201,13 +201,13 @@ namespace TestApp.ViewModel
         {
             ResetQuestionList();
 
-            foreach (var filtered in QuestionsToFilter.ToList())  //Flytta till TCVM, skicka med sträng
+            foreach (var filtered in QuestionsToFilter.ToList())
             {
                 if (point == "Alla")
                 {
 
                 }
-                else if (filtered.PointValue.ToString() != point) //If the questions Point doesnt match, we remove it.
+                else if (filtered.PointValue.ToString() != point)
                 {
                     QuestionsToFilter.Remove(filtered);
                 }
@@ -221,7 +221,7 @@ namespace TestApp.ViewModel
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// We filter our list with questions by a questions QuestionType depending on the parameters given by the user
         /// </summary>
         /// <param name="type"></param>
         /// <param name="point"></param>
@@ -229,7 +229,7 @@ namespace TestApp.ViewModel
         {
             ResetQuestionList();
 
-            foreach (var filtered in QuestionsToFilter.ToList()) //Going through our alternative list of questions
+            foreach (var filtered in QuestionsToFilter.ToList()) 
             {
                 if (type == "Alla") //If the user choose to se all questions then we dont remove anything.
                 {
@@ -269,9 +269,9 @@ namespace TestApp.ViewModel
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Informs user that date or time is incorrect
         /// </summary>
-        public async void DisplayInvalidTimeForTest() //Informs user that date or time is incorrect
+        public async void DisplayInvalidTimeForTest() 
         {
             ContentDialog warning = new ContentDialog
             {
@@ -282,9 +282,9 @@ namespace TestApp.ViewModel
             await warning.ShowAsync();
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Informs user that it can´t continue untill all fields are filled out
         /// </summary>
-        public async void DisplayFieldsAreEmpty()//Informs user that it can´t continue untill all fields are filled out
+        public async void DisplayFieldsAreEmpty()
         {
             ContentDialog warning = new ContentDialog
             {
@@ -295,9 +295,9 @@ namespace TestApp.ViewModel
             await warning.ShowAsync();
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Asks the user to choose a subject before trying to filter or adding a question.
         /// </summary>
-        public async void DisplayNoSubjectWarning() //Asks the user to choose a subject before trying to filter or adding a question.
+        public async void DisplayNoSubjectWarning() 
         {
             ContentDialog warning = new ContentDialog
             {
@@ -308,9 +308,9 @@ namespace TestApp.ViewModel
             await warning.ShowAsync();
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Asks the user to choose a subject before trying to filter or adding a question.
         /// </summary>
-        public async void DisplayNoQuestionsOnTest() //Asks the user to choose a subject before trying to filter or adding a question.
+        public async void DisplayNoQuestionsOnTest() 
         {
             ContentDialog warning = new ContentDialog
             {

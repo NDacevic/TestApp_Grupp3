@@ -30,7 +30,7 @@ namespace TestApp.View.Student
         }
 
         /// <summary>
-        /// Todo: Comments
+        /// Displays the name and email of user that logged in
         /// </summary>
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -43,7 +43,7 @@ namespace TestApp.View.Student
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Navigaste to the choosen page.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

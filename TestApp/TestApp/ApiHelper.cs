@@ -65,7 +65,7 @@ namespace TestApp
 
         #region Methods
         /// <summary>
-        /// Todo: Comments!
+        /// Converts the test object and sends it to our API.
         /// </summary>
         /// <param name="test"></param>
         /// <returns></returns>
@@ -136,7 +136,7 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Sends the test ID to the API for deletion
         /// </summary>
         /// <param name="id"></param>
         public async void DeleteTest(int id)
@@ -162,7 +162,7 @@ namespace TestApp
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Sends the employee ID to the API for deletion
         /// </summary>
         /// <param name="id"></param>
         public async void DeleteEmployee(int id)
@@ -187,7 +187,7 @@ namespace TestApp
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Sends the student ID to the API for deletion
         /// </summary>
         /// <param name="id"></param>
         public async void DeleteStudent(int id)
@@ -300,7 +300,7 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Get´s a list of questions back from API depending on our course.
         /// </summary>
         /// <param name="course"></param>
         /// <returns></returns>
@@ -332,7 +332,7 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Sends a question ID to API for deletion.
         /// </summary>
         /// <param name="id"></param>
         public async void DeleteQuestion(int id)
@@ -537,7 +537,7 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Calls API and get a list of students in return
         /// </summary>
         /// <returns></returns>
         public async Task <List<Student>> GetAllStudents()
@@ -726,7 +726,7 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Calls API and get´s a list of employees in return
         /// </summary>
         /// <returns></returns>
         public async Task<List<Employee>> GetAllEmployees()
@@ -752,14 +752,13 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Contacts API and get´s alist of TestResults in return
         /// </summary>
         /// <returns></returns>
-        public async Task<ObservableCollection<TestResult>> GetTestResults() //Get list of testresults
+        public async Task<ObservableCollection<TestResult>> GetTestResults() 
         {
             try
             {
-
                 HttpResponseMessage response = await httpClient.GetAsync("TestResults");
                 if (response.IsSuccessStatusCode)
                 {
@@ -781,7 +780,7 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Calls API and get´s a list of Course in return
         /// </summary>
         /// <returns></returns>
         public async Task<List<Course>> GetAllCourses()

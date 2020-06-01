@@ -30,7 +30,7 @@ namespace TestApp.View.Student
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// When we enter the page, we go to a method that displays result of tests
         /// </summary>
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)

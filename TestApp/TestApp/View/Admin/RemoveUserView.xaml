@@ -48,11 +48,19 @@
                 x:Name="SearchIdTxtBox" 
                 KeyDown="SearchIdTxtBox_KeyDown"
                 />
+            <StackPanel Orientation="Horizontal"
+                        Margin="40,10,0,0">
+                <TextBlock Text="Epost"
+                           Margin="15,0,0,0"/>
+                <TextBlock Text="Namn"
+                           Margin="250,0,0,0"/>
+            </StackPanel>
         </StackPanel>
+     
         <ListView
-            BorderBrush="Black"
+           
             BorderThickness="2"
-            Margin="40,190,40,200"
+            Margin="40,210,40,200"
             ItemsSource="{x:Bind adminViewModel.AllUsers}"
             x:Name="DisplayUsersLV"
             SelectionMode="Single"
@@ -60,12 +68,21 @@
             ItemClick="listView_ChoosePersonClick"
             >
             <ListView.ItemTemplate>
-                <DataTemplate  x:Name="displayUsersLV" x:DataType="data:Person" x:DefaultBindMode="TwoWay" >
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{x:Bind FirstName}"/>
-                        <TextBlock Text="{x:Bind LastName}"/>
-                        <TextBlock Text="Epost:"/>
-                        <TextBlock Text="{x:Bind Email}"/>
+                <DataTemplate  x:Name="displayUsersLV" x:DataType="data:Person" 
+                               x:DefaultBindMode="TwoWay" >
+                    <StackPanel Orientation="Horizontal"
+                               Spacing="5">
+
+                        <TextBlock Text="{x:Bind Email}"
+                                       Width="220"/>
+                        <TextBlock Text="{Binding FirstName}"
+                                   Margin="62,0,0,0"/>
+                        <TextBlock Text="{x:Bind LastName}"
+                                   />
+
+
+
+
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -132,7 +149,7 @@
                 <TextBlock
                     Text="Lösenord"
                     Style="{StaticResource MediumTitle}"
-                    Margin="0,84,0,15"
+                    Margin="0,55,0,15"
                     />
                 <TextBlock
                     Text="Lösenord"

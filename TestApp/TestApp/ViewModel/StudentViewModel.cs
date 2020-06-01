@@ -403,7 +403,7 @@ namespace TestApp.ViewModel
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Displays the students test result.
         /// </summary>
         public async void GetTestResult()
         {

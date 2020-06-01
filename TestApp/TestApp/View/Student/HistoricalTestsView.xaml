@@ -20,7 +20,7 @@
                    HorizontalAlignment="Left"
                    Margin="40,0,0,0"/>
         
-        <ListView BorderBrush="Black"
+        <ListView 
                   BorderThickness="2"
                   Margin="50,100,50,100"
                   ItemsSource="{x:Bind studentVM.StudentTestResult}"

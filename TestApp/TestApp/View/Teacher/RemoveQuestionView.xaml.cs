@@ -31,7 +31,7 @@ namespace TestApp.View.Teacher
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// We send the choosen course from the combobox further to display all questions related to that course.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -41,7 +41,7 @@ namespace TestApp.View.Teacher
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Sends the picked questions further to be deleted from DB
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -55,7 +55,7 @@ namespace TestApp.View.Teacher
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Clearing list of questions when navigated this page.
         /// </summary>
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
