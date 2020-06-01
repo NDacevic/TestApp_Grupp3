@@ -114,6 +114,10 @@ namespace TestApp.ViewModel
             }
         }
 
+        /// <summary>
+        /// Calls the ApiHelper to get all available tests from the database
+        /// </summary>
+        /// <returns></returns>
         public async Task GetAllTests()
         {
             AllTests = await ApiHelper.Instance.GetAllTests();
@@ -160,15 +164,12 @@ namespace TestApp.ViewModel
            
             try
             {
-                loadScreen.ShowAsync();
-                Thread.Sleep(1000);
-                
+                loadScreen.ShowAsync();              
                 await GetAllTests();
                 
                 //Making the ApiCall here cause this is the front page when the student log in
                 //Get all answers for all tests from databse
                 List<StudentQuestionAnswer> allAnswers = await ApiHelper.Instance.GetAllStudentQuestionAnswers();
-                Thread.Sleep(1000);
                 loadScreen.Hide();
 
                 //Loop through all tests and keep those that:
@@ -400,6 +401,10 @@ namespace TestApp.ViewModel
                 ApiHelper.Instance.PostTestResult(new TestResult(activeStudent.StudentId, selectedTest.TestId, scoredTestPoints));
             }
         }
+
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public async void GetTestResult()
         {
             StudentTestResult.Clear();
@@ -419,12 +424,8 @@ namespace TestApp.ViewModel
                                  }
                              }
                        }
-                }
-            
-           
-         
+                }      
         }
-
         #endregion
     }
 }

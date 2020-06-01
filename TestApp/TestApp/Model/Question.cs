@@ -70,7 +70,5 @@ namespace TestApp.Model
         /// <returns></returns>
         public bool ShouldSerializeQuestionId() => false;   
         #endregion
-
-
     }
 }

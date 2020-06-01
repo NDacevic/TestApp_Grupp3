@@ -34,18 +34,33 @@ namespace TestApp.View.Admin
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EmployeeRadioBtn_Click(object sender, RoutedEventArgs e)
         {
             adminViewModel.AllUsers.Clear();
             adminViewModel.DisplayEmployees();
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StudentRadioBtn_Click(object sender, RoutedEventArgs e)
         {
             adminViewModel.AllUsers.Clear();
             adminViewModel.DisplayStudents();
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchIdTxtBox_KeyDown(object sender, KeyRoutedEventArgs e) //Search person based on ID
         {
             if (e.Key==Windows.System.VirtualKey.Enter) //Instead of using a button for the textbox we can use 'Enter-key'
@@ -71,6 +86,11 @@ namespace TestApp.View.Admin
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void DeleteUser_btn_Click(object sender, RoutedEventArgs e)
         {
            
@@ -90,6 +110,9 @@ namespace TestApp.View.Admin
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public void DeleteUser()
         {
             var selectedUser = DisplayUsersLV.SelectedItems; //The selected user is saved here

@@ -157,7 +157,11 @@ namespace TestApp.View.Teacher
                 textBlock_StudentTitle.Visibility = Visibility.Visible;
             }
         }
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             //if the students list is empty this makes sure it's downloaded

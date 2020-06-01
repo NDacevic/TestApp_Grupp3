@@ -32,6 +32,10 @@ namespace TestApp
         {
             this.InitializeComponent();
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.Parameter == "Elev")

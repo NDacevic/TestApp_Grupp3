@@ -56,7 +56,9 @@ namespace TestApp.ViewModel
             Roles = new List<Role>(); //Storing roles from DB
             
         }
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public async void DisplayTests()
         {
             TestList = await ApiHelper.Instance.GetAllTests(); //Populating List with Test from DB
@@ -69,6 +71,11 @@ namespace TestApp.ViewModel
                 
             }
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="course"></param>
+        /// <param name="grade"></param>
         public void FilterTests(string course, int grade)
         {
             foreach (Test subject in TestList)
@@ -101,6 +108,10 @@ namespace TestApp.ViewModel
                 }
             }
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="course"></param>
         public void FilterListByCourse(string course)
         {
             foreach (Test subject in TestList)
@@ -118,9 +129,11 @@ namespace TestApp.ViewModel
                 }
             }
 
-        }
-     
-    
+        }     
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="id"></param>
         public void DeleteTest(int id) 
         {
 
@@ -134,6 +147,10 @@ namespace TestApp.ViewModel
                 }
             }
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="test"></param>
         public void DisplayQuestionsOnTest(Test test) //We go through the choosen Test and displays all the questions.
         {
             TestQuestions.Clear();
@@ -144,6 +161,9 @@ namespace TestApp.ViewModel
             }
            
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public async void DisplayStudents() //Displays all students. DONE
         {
             if(AllStudents.Count==0)
@@ -223,6 +243,11 @@ namespace TestApp.ViewModel
             }
 
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="chosenEmployee"></param>
+        /// <param name="password"></param>
         public async void EditPassword(Employee chosenEmployee, string password)
         {
             JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
@@ -234,6 +259,11 @@ namespace TestApp.ViewModel
                 await new MessageDialog("Lösenordet är ändrat").ShowAsync();
 
         }
+        /// <summary>
+        /// Todo: Comments
+        /// </summary>
+        /// <param name="chosenStudent"></param>
+        /// <param name="password"></param>
         public async void EditPassword(Student chosenStudent, string password)
         {
             JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
@@ -243,9 +273,7 @@ namespace TestApp.ViewModel
 
             if (success)
                 await new MessageDialog("Lösenordet är ändrat").ShowAsync();
-        }
-
-        
+        }        
 
         /// <summary>
         /// Used to streamline creation of the patchdoc for updating information on a student or employee
@@ -274,8 +302,10 @@ namespace TestApp.ViewModel
 
         }
 
-        
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="id"></param>
         public void DisplayStudentById(int id) //Displays student by searched Id. DONE
         {
             AllUsers.Clear();
@@ -287,6 +317,11 @@ namespace TestApp.ViewModel
                 }
             }
         }
+
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="id"></param>
         public void DisplayEmployeeById(int id) //Displays employee by searched Id
         {
             AllUsers.Clear();
@@ -298,6 +333,10 @@ namespace TestApp.ViewModel
                 }
             }
         }
+
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public async void DisplayEmployees() //Displays all employees
         {
             if(AllEmployees.Count==0)
@@ -313,7 +352,10 @@ namespace TestApp.ViewModel
                 }
             }
         }
-       
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="employee"></param>
         public void DeleteEmployee(Employee employee)
         {
             ApiHelper.Instance.DeleteEmployee(employee.EmployeeId);
@@ -327,6 +369,10 @@ namespace TestApp.ViewModel
                 }
             }
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="student"></param>
         public void DeleteStudent(Student student)
         {
             ApiHelper.Instance.DeleteStudent(student.StudentId);
@@ -422,7 +468,7 @@ namespace TestApp.ViewModel
         /// <param name="email"></param>
         /// <param name="password"></param>
         /// <param name="classId"></param>
-            public void SetValuesForStudent (string firstName, string lastName, string email, string password, int classId)
+        public void SetValuesForStudent (string firstName, string lastName, string email, string password, int classId)
         {
             TempStudent = new Student();
             try
@@ -453,6 +499,7 @@ namespace TestApp.ViewModel
                 }
         }
 
+        //Todo: Flytta metoderna till en annan viewmodel
         /////////OBS OBS OBS - Metoderna nedan ska flyttas till en annan viewmodel/////
         public void DeleteQuestion(Question question)
         {

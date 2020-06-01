@@ -90,6 +90,9 @@ namespace TestApp.ViewModel
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public async void GetCoursesForList() //Populating combobox with courses from DB
         {
             try
@@ -105,10 +108,12 @@ namespace TestApp.ViewModel
             {
                 await new MessageDialog(exc.Message).ShowAsync();
             }
-
-
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="course"></param>
         public async void GetQuestionsForTest(string course) 
         {
            QuestionsToFilter.Clear(); //Everytime we want to change subject on the Test we clear the list with questions to filter.
@@ -121,6 +126,9 @@ namespace TestApp.ViewModel
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public async void CreateTestToDB()
         {
             if (CreatedTest.Questions.Count != 0)
@@ -139,10 +147,11 @@ namespace TestApp.ViewModel
             else
             {
                 DisplayNoQuestionsOnTest();
-
             }
-
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public void ResetTest()//Method to reset the object after posting the Test to DB
         {
             CreatedTest.Questions.Clear();
@@ -150,22 +159,29 @@ namespace TestApp.ViewModel
             CreatedTest.Questions.Clear();
         }
     
-       
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="question"></param>
         public void AddQuestionToTest(Question question) //Adding question that the user choose
-        {
-          
+        {          
                 CreatedTest.Questions.Add(question);
                 QuestionsToFilter.Remove(question);
-                CreatedTest.MaxPoints += question.PointValue;
-            
-
+                CreatedTest.MaxPoints += question.PointValue;     
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="question"></param>
         public void RemoveQuestionFromTest(Question question) //Removing question that the user choose
         {
             CreatedTest.Questions.Remove(question);
             QuestionsToFilter.Add(question);
             CreatedTest.MaxPoints -= question.PointValue;
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public void ResetQuestionList()//Used when filtering the list
         {
             foreach (var subject in SubjectQuestions) //Going through our list with questions.
@@ -176,10 +192,11 @@ namespace TestApp.ViewModel
                 }
             }
         }
-        public void FilteringList(string type,string point)
-        {
-
-        }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="type"></param>
         public void FilterQuestionByPoint(string point, string type)
         {
             ResetQuestionList();
@@ -203,6 +220,11 @@ namespace TestApp.ViewModel
                 }
             }
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="point"></param>
         public void FilterQuestionByType(string type,string point)
         {
             ResetQuestionList();
@@ -246,9 +268,9 @@ namespace TestApp.ViewModel
                 return false;
             }
         }
-
-
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public async void DisplayInvalidTimeForTest() //Informs user that date or time is incorrect
         {
             ContentDialog warning = new ContentDialog
@@ -259,6 +281,9 @@ namespace TestApp.ViewModel
             };
             await warning.ShowAsync();
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public async void DisplayFieldsAreEmpty()//Informs user that it can´t continue untill all fields are filled out
         {
             ContentDialog warning = new ContentDialog
@@ -269,6 +294,9 @@ namespace TestApp.ViewModel
             };
             await warning.ShowAsync();
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public async void DisplayNoSubjectWarning() //Asks the user to choose a subject before trying to filter or adding a question.
         {
             ContentDialog warning = new ContentDialog
@@ -279,6 +307,9 @@ namespace TestApp.ViewModel
             };
             await warning.ShowAsync();
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         public async void DisplayNoQuestionsOnTest() //Asks the user to choose a subject before trying to filter or adding a question.
         {
             ContentDialog warning = new ContentDialog
@@ -289,11 +320,6 @@ namespace TestApp.ViewModel
             };
             await warning.ShowAsync();
         }
-
-
-
-
         #endregion
-
     }
 }

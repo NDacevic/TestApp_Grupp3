@@ -64,6 +64,11 @@ namespace TestApp
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="test"></param>
+        /// <returns></returns>
         public async Task PostCreatedTestAsync(Test test)
         {
             try
@@ -97,8 +102,7 @@ namespace TestApp
             catch(Exception exc)
             {
                 BasicNoConnectionMessage(exc);
-            }
-        
+            }        
         }
 
         /// <summary>
@@ -131,6 +135,10 @@ namespace TestApp
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="id"></param>
         public async void DeleteTest(int id)
         {
             try
@@ -153,7 +161,10 @@ namespace TestApp
                 BasicNoConnectionMessage(exc);
             }
         }
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="id"></param>
         public async void DeleteEmployee(int id)
         {
             try
@@ -175,6 +186,10 @@ namespace TestApp
                 BasicNoConnectionMessage(exc);
             }
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="id"></param>
         public async void DeleteStudent(int id)
         {
             try
@@ -285,6 +300,11 @@ namespace TestApp
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="course"></param>
+        /// <returns></returns>
         public async Task<ObservableCollection<Question>> GetQuestion(string course)
         {
             try
@@ -312,6 +332,10 @@ namespace TestApp
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="id"></param>
         public async void DeleteQuestion(int id)
         {
             try
@@ -333,7 +357,6 @@ namespace TestApp
                 BasicNoConnectionMessage(exc);
             }
         }
-
 
         /// <summary>
         /// Takes a TestResult object and posts it to the API
@@ -373,9 +396,8 @@ namespace TestApp
             }
         }
 
-
         /// <summary>
-        /// Gets all the entries from the StudentsQuestionsAnswers bridge table
+        /// Contacts the API and gets all student's answers to all questions
         /// </summary>
         /// <returns></returns>
         public async Task<List<StudentQuestionAnswer>> GetAllStudentQuestionAnswers()
@@ -404,6 +426,10 @@ namespace TestApp
             }
         }
 
+        /// <summary>
+        /// Contacts the API and writes a all answers to all questions on a specific test for a specific student
+        /// </summary>
+        /// <param name="questionAnswers"></param>
         public async void PostQuestionAnswers(List<StudentQuestionAnswer> questionAnswers)
         {
             try
@@ -459,6 +485,10 @@ namespace TestApp
 
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="student"></param>
         public async void PostStudent(Student student)
         {
             try
@@ -485,8 +515,13 @@ namespace TestApp
                 BasicNoConnectionMessage(exc);
             }
         }
-
         
+
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public async Task<Student> GetStudent(string email)
         {
             try
@@ -502,6 +537,10 @@ namespace TestApp
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <returns></returns>
         public async Task <List<Student>> GetAllStudents()
         {
             List<Student> studentList = new List<Student>();
@@ -532,8 +571,7 @@ namespace TestApp
         /// </summary>
         /// <returns></returns>
         public async Task<List<Student>> GetAllStudentsTestsQuestions()
-        {
-            
+        {            
             try
             {
                 List<Student> studentList = new List<Student>();
@@ -588,7 +626,7 @@ namespace TestApp
                 BasicNoConnectionMessage(exc);
             }
         }
-          
+
         /// <summary>
         /// Sends a PATCH request to the API with updated information for the Students table
         /// </summary>
@@ -629,7 +667,12 @@ namespace TestApp
                 return false;
             }
         }
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="patchDocEmployee"></param>
+        /// <returns></returns>
         public async Task<bool> PatchEmployeeAsync(int id, JsonPatchDocument<Person> patchDocEmployee)
         {
             //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter
@@ -664,7 +707,11 @@ namespace TestApp
                 return false;
             }
         }
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public async Task<Employee> GetEmployee(string email)
         {
             try
@@ -680,6 +727,11 @@ namespace TestApp
                 return new Employee();
             }
         }
+
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Employee>> GetAllEmployees()
         {
             try
@@ -702,6 +754,11 @@ namespace TestApp
             }
         }
 
+
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <returns></returns>
         public async Task<ObservableCollection<TestResult>> GetTestResults() //Get list of testresults
         {
             try
@@ -727,6 +784,10 @@ namespace TestApp
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<Course>> GetAllCourses()
         {
             try

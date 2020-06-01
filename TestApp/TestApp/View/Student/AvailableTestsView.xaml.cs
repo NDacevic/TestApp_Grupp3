@@ -73,7 +73,8 @@ namespace TestApp.View.Student
             {
                 Test selectedTest = Lv_AvailableTests.SelectedItem as Test;
                 TakeTestOrDont(selectedTest);
-            }catch (NullReferenceException)
+            }
+            catch (NullReferenceException)
             {
                 await new MessageDialog("Välj ett prov att skriva först").ShowAsync();
             }

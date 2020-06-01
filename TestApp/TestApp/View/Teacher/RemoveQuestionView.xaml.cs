@@ -30,11 +30,21 @@ namespace TestApp.View.Teacher
             this.InitializeComponent();
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChooseCourseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             teacherCVM.GetQuestionsForTest(ChooseCourseComboBox.SelectedValue.ToString());
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteQuestion_btn_Click(object sender, RoutedEventArgs e)
         {
             var selectedQuestion = DisplayQuestionsLV.SelectedItems;
@@ -44,6 +54,10 @@ namespace TestApp.View.Teacher
 
             }
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             teacherCVM.QuestionsToFilter.Clear();
