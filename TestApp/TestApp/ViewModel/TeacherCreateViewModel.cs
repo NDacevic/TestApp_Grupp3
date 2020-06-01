@@ -123,16 +123,25 @@ namespace TestApp.ViewModel
 
         public async void CreateTestToDB()
         {
-            try
+            if (CreatedTest.Questions.Count != 0)
             {
-                CreatedTest.IsActive = true;
-                await ApiHelper.Instance.PostCreatedTestAsync(CreatedTest);
-                ResetTest();
+                try
+                {
+                    CreatedTest.IsActive = true;
+                    await ApiHelper.Instance.PostCreatedTestAsync(CreatedTest);
+                    ResetTest();
+                }
+                catch (Exception exc)
+                {
+                    await new MessageDialog(exc.Message).ShowAsync();
+                }
             }
-            catch (Exception exc)
+            else
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                DisplayNoQuestionsOnTest();
+
             }
+
         }
         public void ResetTest()//Method to reset the object after posting the Test to DB
         {
@@ -270,7 +279,17 @@ namespace TestApp.ViewModel
             };
             await warning.ShowAsync();
         }
-        
+        public async void DisplayNoQuestionsOnTest() //Asks the user to choose a subject before trying to filter or adding a question.
+        {
+            ContentDialog warning = new ContentDialog
+            {
+                Title = "Varning",
+                Content = "Du måste lägga till frågor på provet",
+                CloseButtonText = "Ok"
+            };
+            await warning.ShowAsync();
+        }
+
 
 
 
