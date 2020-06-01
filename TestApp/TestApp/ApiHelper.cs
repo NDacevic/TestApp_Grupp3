@@ -320,7 +320,6 @@ namespace TestApp
                 if (response.IsSuccessStatusCode)
                 {
                     await new MessageDialog("Frågan har raderats").ShowAsync();
-
                 }
                 else
                 {
@@ -477,43 +476,7 @@ namespace TestApp
             }
         }
 
-        public async Task<bool> PatchStudentAsync(int id, JsonPatchDocument<Person> patchDocStudent)
-        {
-            //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter
-            try
-            {
-                //define method as PATCH
-                HttpMethod method = new HttpMethod("PATCH");
-             
-                //Make the json
-                jsonString = JsonConvert.SerializeObject(patchDocStudent);
-
-                //Configure the request by inputting the request method and the url.
-                HttpRequestMessage request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"students/{id}"));
-                
-                //Set the jsonString as the content. 
-                HttpContent content = new StringContent(jsonString);
-                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                request.Content = content;
-
-                //Send it off to the API and wait for the response
-                using (HttpResponseMessage response = await httpClient.SendAsync(request))
-                {
-                    if (response.IsSuccessStatusCode)
-                    {
-                        await new MessageDialog("Uppdaterad information sparad").ShowAsync();
-                        return true;
-                    }
-                    else
-                        throw new HttpRequestException($"Status: {response.StatusCode}, {response.ReasonPhrase}");
-                }
-            }
-            catch (Exception exc)
-            {
-                BasicNoConnectionMessage(exc);
-                return false;
-            }
-        }
+        
 
         public async Task<Student> GetStudent(string email)
         {
@@ -611,6 +574,41 @@ namespace TestApp
                 BasicNoConnectionMessage(exc);
             }
         }
+          
+        public async Task<bool> PatchStudentAsync(int id, JsonPatchDocument<Person> patchDocStudent)
+        {
+            //httpClient.PatchAsync doesn't exist as a predefined method so we have to use SendAsync() which requires a HttpRequestMessage as a parameter
+            try
+            {
+                //define method as PATCH
+                HttpMethod method = new HttpMethod("PATCH");
+
+                //Make the json
+                jsonString = JsonConvert.SerializeObject(patchDocStudent);
+
+                //Configure the request by inputting the request method and the url.
+                HttpRequestMessage request = new HttpRequestMessage(method, new Uri(httpClient.BaseAddress, $"students/{id}"));
+
+                //Set the jsonString as the content. 
+                HttpContent content = new StringContent(jsonString);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                request.Content = content;
+
+                //Send it off to the API and wait for the response
+                using (HttpResponseMessage response = await httpClient.SendAsync(request))
+                {
+                    if (response.IsSuccessStatusCode)
+                        return true;
+                    else
+                        throw new HttpRequestException($"Status: {response.StatusCode}, {response.ReasonPhrase}");
+                }
+            }
+            catch (Exception exc)
+            {
+                BasicNoConnectionMessage(exc);
+                return false;
+            }
+        }
 
         public async Task<bool> PatchEmployeeAsync(int id, JsonPatchDocument<Person> patchDocEmployee)
         {
@@ -635,10 +633,7 @@ namespace TestApp
                 using (HttpResponseMessage response = await httpClient.SendAsync(request))
                 {
                     if (response.IsSuccessStatusCode)
-                    {
-                        await new MessageDialog("Uppdaterad information sparad").ShowAsync();
                         return true;
-                    }
                     else
                         throw new HttpRequestException($"Status: {response.StatusCode}, {response.ReasonPhrase}");
                 }
