@@ -56,19 +56,25 @@ namespace TestApp.View.Student
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             //Saves the selected test from last page
-            selectedTest = (Test)e.Parameter;         
-            
-
-
+            selectedTest = (Test)e.Parameter;        
         }
 
         #endregion
-
+        /// <summary>
+        /// Stop test and submit test results using button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Bttn_SubmitTest_Click(object sender, RoutedEventArgs e)
         {
             StudentViewModel.Instance.StopAndSubmitTest();
         }
 
+        /// <summary>
+        /// Method that runs as soon as the page's elements have finished loading
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             TxtBl_TestTimer.Text = $"Tid kvar: {selectedTest.TestDuration} min";
@@ -76,6 +82,5 @@ namespace TestApp.View.Student
             //Starts the timer instantly after the page has been fully loaded
             StudentViewModel.Instance.DispatcherTimerSetup(TxtBl_TestTimer, Lv_AllQuestions, Bttn_SubmitTest);
         }
-    }
-   
+    }   
 }

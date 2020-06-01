@@ -37,7 +37,7 @@ namespace TestApp.View.Teacher
 
         TeacherCreateViewModel teacherCreateViewModel  = TeacherCreateViewModel.Instance;
 
-        //TO DO: Figure out how to filter list
+        //TODO: Figure out how to filter list
 
         public CreateTestView()
         {
@@ -48,9 +48,13 @@ namespace TestApp.View.Teacher
             foreach (var x in teacherCreateViewModel.Grades) //Make sure that our dropdown with Grades only contains digits
                 if (x.All(c => char.IsDigit(c)))
                     ChooseGrade.Items.Add(x);
-
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddQuestionToTest_Btn_Click(object sender, RoutedEventArgs e) //Adding the question the user choose from the list to the test.
         {
             if(ChooseCourseComboBox.SelectedValue==null)//Checking if the user have choosen an subject for the test
@@ -67,7 +71,11 @@ namespace TestApp.View.Teacher
             }
         }
 
-     
+         /// <summary>
+         /// Todo: Comments!
+         /// </summary>
+         /// <param name="sender"></param>
+         /// <param name="e"></param>
         private void CreateTest_btn_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -85,7 +93,11 @@ namespace TestApp.View.Teacher
                 teacherCreateViewModel.DisplayFieldsAreEmpty();
             }
         }
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RemoveQuestionFromTest_Btn_Click(object sender, RoutedEventArgs e)
         {
             var selected = DisplayAddedQuestionsListView.SelectedItems;
@@ -94,7 +106,11 @@ namespace TestApp.View.Teacher
                 teacherCreateViewModel.RemoveQuestionFromTest(selectedQuestion); //Method that removes the question from the object.
             }
         }
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChooseCourseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             teacherCreateViewModel.CreatedTest.Questions.Clear(); //If there are questions added to the test and user changes subject, the list is reset.
@@ -103,7 +119,11 @@ namespace TestApp.View.Teacher
 
         }
       
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FilterQuestionTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ChooseCourseComboBox.SelectedValue == null) //If we try to filter without choosing a course we get a warning
@@ -119,7 +139,11 @@ namespace TestApp.View.Teacher
 
             }
         }
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FilterQuestionPointComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ChooseCourseComboBox.SelectedValue == null)
@@ -134,6 +158,9 @@ namespace TestApp.View.Teacher
                     teacherCreateViewModel.FilterQuestionByPoint(FilterQuestionPointComboBox.SelectedValue.ToString(), FilterQuestionTypeComboBox.SelectedValue.ToString());
             }
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         private void AddDateAndTimeToTest()
         {
             //Setting date and time of when the Test starts.
@@ -159,7 +186,11 @@ namespace TestApp.View.Teacher
             ResetControllers();
         }
         
-  
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TestDatePicker_CalendarViewDayItemChanging(CalendarView sender, CalendarViewDayItemChangingEventArgs e)
         {
             //Greying out Sundays,Saturdays and days prior to today, so the user can´t set wrong date.
@@ -176,10 +207,17 @@ namespace TestApp.View.Teacher
                 e.Item.IsBlackout = true;
             }
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             teacherCreateViewModel.QuestionsToFilter.Clear();
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         private void ResetControllers()
         {
             teacherCreateViewModel.CreatedTest.MaxPoints = 0;

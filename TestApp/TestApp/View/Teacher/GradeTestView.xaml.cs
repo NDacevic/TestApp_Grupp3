@@ -118,6 +118,11 @@ namespace TestApp.View.Teacher
             }
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private async void ReloadAllStudentsTestsQuestionsClick(object sender, RoutedEventArgs args)
         {
             scrollViewer_QuestionsForStudentAndTest.Visibility = Visibility.Collapsed;
@@ -127,7 +132,11 @@ namespace TestApp.View.Teacher
             await gradeInstance.DownloadStudents();
             GetTests();
         }
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         private void PreviousListClick(object sender, RoutedEventArgs args)
         {
             if (scrollViewer_StudentsUngradedTestofType.Visibility == Visibility.Visible)
@@ -147,7 +156,11 @@ namespace TestApp.View.Teacher
                 textBlock_StudentTitle.Visibility = Visibility.Visible;
             }
         }
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             if (gradeInstance.allStudents == null)
@@ -157,6 +170,9 @@ namespace TestApp.View.Teacher
             GetTests();
         }
 
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         private void ResetView()
         {
             scrollViewer_InitialTestList.Visibility = Visibility.Visible;

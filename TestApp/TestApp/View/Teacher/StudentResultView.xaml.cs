@@ -29,12 +29,19 @@ namespace TestApp.View.Teacher
             this.InitializeComponent();
             GetAllTests();
         }
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
         private void GetAllTests()
         {
             TeacherStudentViewModel.Instance.GetTests();
         }
      
-
+        /// <summary>
+        /// Todo: Comments!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Bttn_SeeStudentResult_Click(object sender, RoutedEventArgs e) 
         {
             Test test = (Test)Lv_AllTests.SelectedItem;
