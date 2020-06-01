@@ -22,36 +22,36 @@
         <StackPanel Margin="40">
             <TextBlock 
                 Text="Lägg till elev" 
-                FontSize="32"/>
+                Style="{StaticResource HeaderTitle}"/>
             <StackPanel Orientation="Horizontal" Spacing="40">
                 <TextBlock 
-                    Text="Förnamn: " 
-                    FontSize="20" 
+                    Text="Förnamn: "  
                     Margin="0,50,0,0"
-                    Width="100"/>
+                    Width="100"
+                    Style="{StaticResource MediumTitle}"/>
                 <TextBox
                     x:Name="Tb_FirstName" 
                     Text=""
-                    FontSize="20"
                     Margin="0,50,0,0"
-                    Width="200"/>
+                    Width="200"
+                    Style="{StaticResource MediumTitleBox}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Spacing="40">
                 <TextBlock 
                     Text="Efternamn: " 
-                    FontSize="20"
-                    Width="100"/>
+                    Width="100"
+                    Style="{StaticResource MediumTitle}"/>
                 <TextBox
                     x:Name="Tb_LastName"
                     Text=""
-                    FontSize="20"
-                    Width="200"/>
+                    Width="200"
+                    Style="{StaticResource MediumTitleBox}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Spacing="40">
                 <TextBlock 
                     Text="Årskurs: " 
-                    FontSize="20"
-                    Width="100"/>
+                    Width="100"
+                    Style="{StaticResource MediumTitle}"/>
                 <ComboBox
                         x:Name="Cb_Grade"
                         PlaceholderText="Välj årskurs"
@@ -60,29 +60,29 @@
             <StackPanel Orientation="Horizontal" Spacing="40">
                 <TextBlock 
                     Text="Email: " 
-                    FontSize="20"
-                    Width="100"/>
+                    Width="100"
+                    Style="{StaticResource MediumTitle}"/>
                 <TextBox
                     x:Name="Tb_Email"
                     Text=""
-                    FontSize="20"
-                    Width="200"/>
+                    Width="200"
+                    Style="{StaticResource MediumTitleBox}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Spacing="40">
                 <TextBlock 
                     Text="Lösenord: " 
-                    FontSize="20"
-                    Width="100"/>
+                    Width="100"
+                    Style="{StaticResource MediumTitle}"/>
                 <PasswordBox
                     x:Name="Pb_Password"
-                    Width="200"/>
+                    Width="200"
+                    Style="{StaticResource PasswordTitle}"/>
 
             </StackPanel>
 
                 <Button
                     x:Name="Bttn_AddStudent"
                     Content="Lägg till elev" 
-                    Padding="15,10"
                     Margin="0,30,0,0"
                     Click="Bttn_AddStudent_Click"/>
 
