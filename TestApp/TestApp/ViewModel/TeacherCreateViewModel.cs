@@ -91,9 +91,9 @@ namespace TestApp.ViewModel
 
         #region Methods
         /// <summary>
-        /// Todo: Comments!
+        /// Gets all courses from DB for populating comboboxes 
         /// </summary>
-        public async void GetCoursesForList() //Populating combobox with courses from DB
+        public async void GetCoursesForList() 
         {
             try
             {

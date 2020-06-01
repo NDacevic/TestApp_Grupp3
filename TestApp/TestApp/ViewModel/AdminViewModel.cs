@@ -390,6 +390,7 @@ namespace TestApp.ViewModel
         /// </summary>
         public async void PostStudent(Student student) 
         {
+            //Checking if student (email) already exists in DB 
             AllStudents = await ApiHelper.Instance.GetAllStudents();
             foreach (Student stu in AllStudents)
             {
@@ -414,6 +415,7 @@ namespace TestApp.ViewModel
         /// <param name="employee"></param>
         public async void PostEmployee (Employee employee)
         {
+            //Checking if employee (email) already exists in DB 
             AllEmployees = await ApiHelper.Instance.GetAllEmployees();
             foreach (Employee emp in AllEmployees)
             {
