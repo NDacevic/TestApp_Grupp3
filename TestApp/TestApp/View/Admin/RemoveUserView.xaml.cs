@@ -4,10 +4,12 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.ServiceModel.Channels;
 using TestApp.Model;
 using TestApp.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -112,45 +114,43 @@ namespace TestApp.View.Admin
         {
             chosenPerson = (Person)e.ClickedItem;
 
-            if (e.ClickedItem.GetType() == typeof(Model.Student))
-                textBlock_Id.Text = ((Model.Student)e.ClickedItem).StudentId.ToString();
-            else if (e.ClickedItem.GetType() == typeof(Model.Employee))
-                textBlock_Id.Text = ((Model.Employee)e.ClickedItem).EmployeeId.ToString();
-
             textBox_FirstName.Text = ((Person)e.ClickedItem).FirstName;
             textBox_LastName.Text = ((Person)e.ClickedItem).LastName;
             textBox_Email.Text = ((Person)e.ClickedItem).Email;
         }
 
-        private void EditInformationClick(object sender, RoutedEventArgs args)
+        private async void EditInformationClick(object sender, RoutedEventArgs args)
         {
-
-            if(chosenPerson.GetType() ==  typeof(Model.Student))
-                adminViewModel.EditUserInfo
-                    (
-                    (Model.Student)chosenPerson,
-                    int.Parse(textBlock_Id.Text),
-                    textBox_FirstName.Text,
-                    textBox_LastName.Text,
-                    textBox_Email.Text
-                    );
-            else if(chosenPerson.GetType() == typeof(Model.Employee))
-                adminViewModel.EditUserInfo
-                    (
-                    (Model.Employee)chosenPerson,
-                    int.Parse(textBlock_Id.Text),
-                    textBox_FirstName.Text,
-                    textBox_LastName.Text,
-                    textBox_Email.Text
-                    );
-            
+            try
+            {
+                if (chosenPerson.GetType() == typeof(Model.Student))
+                    adminViewModel.EditUserInfo
+                        (
+                        (Model.Student)chosenPerson,
+                        textBox_FirstName.Text,
+                        textBox_LastName.Text,
+                        textBox_Email.Text
+                        );
+                else if (chosenPerson.GetType() == typeof(Model.Employee))
+                    adminViewModel.EditUserInfo
+                        (
+                        (Model.Employee)chosenPerson,
+                        textBox_FirstName.Text,
+                        textBox_LastName.Text,
+                        textBox_Email.Text
+                        );
+            }
+            catch
+            {
+                await new MessageDialog("Välj en person att redigera först").ShowAsync();
+            }
         }
+
         private void ResetControllers()
         {
             textBox_FirstName.Text = "";
             textBox_LastName.Text = "";
             textBox_Email.Text = "";
-            textBlock_Id.Text = "";
             textBox_Password.Text = "";
             textbox_repeatPassword.Text = "";
         }

@@ -45,11 +45,16 @@ namespace TestApp.View.Teacher
             {
                 int selectedPoint = int.Parse(comboBox_QuestionPoints.SelectedValue.ToString());
                 string selectedQuestionType = ((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString();
-
-                if (comboBox_CourseNames.SelectedIndex == -1)
-                    throw new Exception("Välj ett ämne först.");
-
                 string selectedCourse = comboBox_CourseNames.SelectedValue.ToString();
+
+                if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Flerval")
+                {
+                    if (textBox_CorrectAnswer.Text == "" || textBox_IncorrectAnswer1.Text == "" || textBox_IncorrectAnswer2.Text == "" || textBox_questionText.Text == "")
+                        throw new Exception();
+                }
+
+                if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Fritext" && textBox_questionText.Text == "")
+                    throw new Exception();
 
 
                 if (((ComboBoxItem)comboBox_QuestionType.SelectedValue).Content.ToString() == "Flerval")
@@ -60,9 +65,9 @@ namespace TestApp.View.Teacher
                 if (await createInstance.CreateQuestion())
                     ResetPage();
             }
-            catch (Exception exc)
+            catch
             {
-                await new MessageDialog(exc.Message).ShowAsync();
+                await new MessageDialog("Fyll i all information innan du skapar en fråga").ShowAsync();
             }
         }
 

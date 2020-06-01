@@ -39,7 +39,6 @@
                     Property="FontSize"
                     Value="{StaticResource MediumFontSize}"
                     />
-
             </Style>
 
             <Style
@@ -48,9 +47,8 @@
                 >
                 <Setter 
                     Property="FontSize"
-                    Value="{StaticResource LargeFontSize}"/>
-           
-
+                    Value="{StaticResource LargeFontSize}"
+                    />
                 <!--<Setter
                     Property="FontSize"
                     Value="{StaticResource HeaderFontSize}"

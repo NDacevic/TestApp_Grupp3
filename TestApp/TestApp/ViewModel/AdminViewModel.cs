@@ -167,7 +167,7 @@ namespace TestApp.ViewModel
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
         /// <param name="email"></param>
-        public async void EditUserInfo(Student chosenStudent, int id, string firstName, string lastName, string email)
+        public async void EditUserInfo(Student chosenStudent, string firstName, string lastName, string email)
         {
             //TODO: Add support for updating passwords
             try
@@ -175,7 +175,7 @@ namespace TestApp.ViewModel
                 JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
                 CreatePersonPatchDoc(chosenStudent, firstName, lastName, email, patchDoc);
 
-                bool success = await ApiHelper.Instance.PatchStudentAsync(id, patchDoc);
+                bool success = await ApiHelper.Instance.PatchStudentAsync(chosenStudent.StudentId, patchDoc);
 
                 if (success)
                 {
@@ -199,7 +199,7 @@ namespace TestApp.ViewModel
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
         /// <param name="email"></param>
-        public async void EditUserInfo(Employee chosenEmployee, int id, string firstName, string lastName, string email)
+        public async void EditUserInfo(Employee chosenEmployee, string firstName, string lastName, string email)
         {
             //TODO: Add support for updating passwords
             try
@@ -207,7 +207,7 @@ namespace TestApp.ViewModel
                 JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
                 CreatePersonPatchDoc(chosenEmployee, firstName, lastName, email, patchDoc);
 
-                bool success = await ApiHelper.Instance.PatchEmployeeAsync(id, patchDoc);
+                bool success = await ApiHelper.Instance.PatchEmployeeAsync(chosenEmployee.EmployeeId, patchDoc);
 
                 if (success)
                 {
