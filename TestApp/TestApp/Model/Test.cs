@@ -76,10 +76,11 @@ namespace TestApp.Model
         #endregion
 
         #region Methods
-        public bool ShouldSerializeId()
-        {
-            throw new NotImplementedException();
-        }
+        /// <summary>
+        /// Tells the Json converter that it shouldn't use the ID property when serializing.
+        /// </summary>
+        /// <returns></returns>
+        public bool ShouldSerializeTestId() => false;
         #endregion
     }
 }
