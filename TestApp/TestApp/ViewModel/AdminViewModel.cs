@@ -167,21 +167,21 @@ namespace TestApp.ViewModel
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
         /// <param name="email"></param>
-        public async void EditUserInfo(Student chosenStudent, int id, string firstName, string lastName, string email)
+        public async void EditUserInfo(Student chosenStudent, string firstName, string lastName, string email)
         {
-            //TODO: Add support for updating passwords
             try
             {
                 JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
                 CreatePersonPatchDoc(chosenStudent, firstName, lastName, email, patchDoc);
 
-                bool success = await ApiHelper.Instance.PatchStudentAsync(id, patchDoc);
+                bool success = await ApiHelper.Instance.PatchStudentAsync(chosenStudent.StudentId, patchDoc);
 
                 if (success)
                 {
                     chosenStudent.FirstName = firstName;
                     chosenStudent.LastName = lastName;
                     chosenStudent.Email = email;
+                    await new MessageDialog("Användarinformation ändrad").ShowAsync();
                 }
             }
             catch (FormatException exc)
@@ -199,21 +199,21 @@ namespace TestApp.ViewModel
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
         /// <param name="email"></param>
-        public async void EditUserInfo(Employee chosenEmployee, int id, string firstName, string lastName, string email)
+        public async void EditUserInfo(Employee chosenEmployee, string firstName, string lastName, string email)
         {
-            //TODO: Add support for updating passwords
             try
             {
                 JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
                 CreatePersonPatchDoc(chosenEmployee, firstName, lastName, email, patchDoc);
 
-                bool success = await ApiHelper.Instance.PatchEmployeeAsync(id, patchDoc);
+                bool success = await ApiHelper.Instance.PatchEmployeeAsync(chosenEmployee.EmployeeId, patchDoc);
 
                 if (success)
                 {
                     chosenEmployee.FirstName = firstName;
                     chosenEmployee.LastName = lastName;
                     chosenEmployee.Email = email;
+                    await new MessageDialog("Användarinformation ändrad").ShowAsync();
                 }
 
             }
@@ -221,8 +221,31 @@ namespace TestApp.ViewModel
             {
                 await new MessageDialog(exc.Message).ShowAsync();
             }
-            
+
         }
+        public async void EditPassword(Employee chosenEmployee, string password)
+        {
+            JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
+            patchDoc.Replace(x => x.Password, password);
+
+            bool success = await ApiHelper.Instance.PatchEmployeeAsync(chosenEmployee.EmployeeId, patchDoc);
+
+            if (success)
+                await new MessageDialog("Lösenordet är ändrat").ShowAsync();
+
+        }
+        public async void EditPassword(Student chosenStudent, string password)
+        {
+            JsonPatchDocument<Person> patchDoc = new JsonPatchDocument<Person>();
+            patchDoc.Replace(x => x.Password, password);
+
+            bool success = await ApiHelper.Instance.PatchStudentAsync(chosenStudent.StudentId, patchDoc);
+
+            if (success)
+                await new MessageDialog("Lösenordet är ändrat").ShowAsync();
+        }
+
+        
 
         /// <summary>
         /// Used to streamline creation of the patchdoc for updating information on a student or employee
@@ -250,6 +273,8 @@ namespace TestApp.ViewModel
                 throw new FormatException("Inga personuppgifter har ändrats!");
 
         }
+
+        
 
         public void DisplayStudentById(int id) //Displays student by searched Id. DONE
         {

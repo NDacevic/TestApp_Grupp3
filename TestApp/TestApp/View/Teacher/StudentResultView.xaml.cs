@@ -38,7 +38,8 @@ namespace TestApp.View.Teacher
         private void Bttn_SeeStudentResult_Click(object sender, RoutedEventArgs e) 
         {
             Test test = (Test)Lv_AllTests.SelectedItem;
-            TeacherStudentViewModel.Instance.GetStudentResult(test.TestId);
+            if(test != null)
+                TeacherStudentViewModel.Instance.GetStudentResult(test.TestId);
         }
     }
 }

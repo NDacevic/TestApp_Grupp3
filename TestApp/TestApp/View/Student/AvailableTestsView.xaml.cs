@@ -67,10 +67,16 @@ namespace TestApp.View.Student
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Bttn_TakeTest_Click(object sender, RoutedEventArgs e)
+        private async void Bttn_TakeTest_Click(object sender, RoutedEventArgs e)
         {
-            Test selectedTest = Lv_AvailableTests.SelectedItem as Test;
-            TakeTestOrDont(selectedTest);
+            try
+            {
+                Test selectedTest = Lv_AvailableTests.SelectedItem as Test;
+                TakeTestOrDont(selectedTest);
+            }catch (NullReferenceException)
+            {
+                await new MessageDialog("Välj ett prov att skriva först").ShowAsync();
+            }
         }
 
         /// <summary>
@@ -95,7 +101,5 @@ namespace TestApp.View.Student
             }
         }
         #endregion
-
-
     }
 }

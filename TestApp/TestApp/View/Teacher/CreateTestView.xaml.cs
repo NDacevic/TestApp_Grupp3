@@ -70,29 +70,20 @@ namespace TestApp.View.Teacher
      
         private void CreateTest_btn_Click(object sender, RoutedEventArgs e)
         {
-           
-           
-                try
-                {
-                    //Populates the Test with the given values and sends it to the DB
-                    teacherCreateViewModel.CreatedTest.CourseName = ChooseCourseComboBox.SelectedValue.ToString();
-                    teacherCreateViewModel.CreatedTest.Grade = int.Parse(ChooseGrade.SelectedValue.ToString());
-                    teacherCreateViewModel.CreatedTest.TestDuration = int.Parse(TestTime_txtBox.Text);
-                    AddDateAndTimeToTest();
-                }
-                catch (NullReferenceException)
-                {
-                    teacherCreateViewModel.DisplayFieldsAreEmpty();
-                }
-                catch (FormatException)
-                {
-                    teacherCreateViewModel.DisplayFieldsAreEmpty();
-                }
-            
-           
-   
-           
-           
+            try
+            {
+                //Populates the Test with the given values and sends it to the DB
+
+                teacherCreateViewModel.CreatedTest.CourseName = ChooseCourseComboBox.SelectedValue.ToString();
+                teacherCreateViewModel.CreatedTest.Grade = int.Parse(ChooseGrade.SelectedValue.ToString());
+                teacherCreateViewModel.CreatedTest.TestDuration = int.Parse(TestTime_txtBox.Text);
+                AddDateAndTimeToTest();
+                
+            }
+            catch(Exception)
+            {
+                teacherCreateViewModel.DisplayFieldsAreEmpty();
+            }
         }
 
         private void RemoveQuestionFromTest_Btn_Click(object sender, RoutedEventArgs e)
