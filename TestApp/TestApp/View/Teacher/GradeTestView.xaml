@@ -26,9 +26,8 @@
             x:Name="textBlock_TestTitle"
             Text="Prov att rätta"
             Grid.Row="0"
-            Style="{StaticResource MediumTitle}"
-            FontSize="48"
-            Margin="0,0,0,80"
+            Style="{StaticResource HeaderTitle}"
+            Margin="0,10,0,80"
             />
         <TextBlock
             x:Name="textBlock_StudentTitle"
@@ -51,14 +50,13 @@
         <ScrollViewer
             x:Name="scrollViewer_InitialTestList"
             Grid.Row="1"
-            BorderBrush="Gray"
+            BorderBrush="#202020"
             BorderThickness="2"
             >
             <Grid>
                 <ListView
                     x:Name="listView_InitialTestList"
-                    ItemClick="InitialTestListClick"
-            
+                    ItemClick="InitialTestListClick"            
                     ItemsSource="{x:Bind ungradedTests}"
                     SelectionMode="None"
                     IsItemClickEnabled="True"
@@ -88,7 +86,7 @@
             x:Name="scrollViewer_StudentsUngradedTestofType"
             Visibility="Collapsed"
             Grid.Row="1"
-            BorderBrush="Gray"
+            BorderBrush="#202020"
             BorderThickness="2"
             >
             <Grid>
@@ -125,7 +123,7 @@
             x:Name="scrollViewer_QuestionsForStudentAndTest"
             Visibility="Collapsed"
             Grid.Row="1"
-            BorderBrush="Gray"
+            BorderBrush="#202020"
             BorderThickness="2"
             >
             <ListView
@@ -191,13 +189,12 @@
         <StackPanel
             Orientation="Horizontal"
             Spacing="50"
-            Margin="0,0,0,50"
+            Margin="0,10,0,50"
             Grid.Row="2"
             >
             <Button
                 x:Name="bttn_FinishGrading"
                 Click="FinishGrading"
-                
                 Content="Färdig"
                 />
             <Button
