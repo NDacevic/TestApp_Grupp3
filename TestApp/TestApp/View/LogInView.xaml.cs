@@ -42,13 +42,10 @@ namespace TestApp.View
             CheckLogin();            
         }
 
-        /// <summary>
-        /// Todo: Comments!
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            //Save the frame when we have access to it so we can navigate back to which ever page
+            //we want at any time. (Currently it's only used for navigating back to the login page).
             NavigationHelper.Instance.GlobalFrame = Frame;
         }
 
@@ -98,13 +95,11 @@ namespace TestApp.View
                 await new MessageDialog("Inkorrekt data, försök igen.").ShowAsync();
             }
         }
-        /// <summary>
-        /// Todo: Comments!
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void TextBox_KeyDown(object sender, KeyRoutedEventArgs e)
         {
+            //You can hit enter if you're focused on either the username och password boxes
+            //and the app will check your login information. No need to click the login button
             if(e.Key == Windows.System.VirtualKey.Enter)
             {
                 CheckLogin();
@@ -126,7 +121,6 @@ namespace TestApp.View
             else if (Rb_Employee.IsChecked == true)
             {
                 EmployeeLogIn(password);
-
             }
         }
     }

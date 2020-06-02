@@ -244,7 +244,7 @@ namespace TestApp.ViewModel
 
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Sends the password to the API as a PATCH request
         /// </summary>
         /// <param name="chosenEmployee"></param>
         /// <param name="password"></param>
@@ -260,9 +260,9 @@ namespace TestApp.ViewModel
 
         }
         /// <summary>
-        /// Todo: Comments
+        /// Sends the password to the API as a PATCH request
         /// </summary>
-        /// <param name="chosenStudent"></param>
+        /// <param name="chosenEmployee"></param>
         /// <param name="password"></param>
         public async void EditPassword(Student chosenStudent, string password)
         {
