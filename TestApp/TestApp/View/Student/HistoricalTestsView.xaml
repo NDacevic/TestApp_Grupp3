@@ -16,12 +16,11 @@
 
         </Grid.ColumnDefinitions>
         <TextBlock Text="Testhistorik" 
-                   FontSize="48"
                    HorizontalAlignment="Left"
-                   Margin="40,0,0,0"/>
+                   Margin="40,0,0,0"
+                   Style="{StaticResource HeaderTitle}"/>
         
         <ListView 
-                  BorderThickness="2"
                   Margin="50,100,50,100"
                   ItemsSource="{x:Bind studentVM.StudentTestResult}"
                   x:Name="DisplayTestResultListView"

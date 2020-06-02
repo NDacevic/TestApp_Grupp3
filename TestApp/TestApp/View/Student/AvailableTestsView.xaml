@@ -26,7 +26,8 @@
             Grid.Row="0"
             Grid.Column="1"
             HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"/>
+            VerticalAlignment="Bottom"
+            Style="{StaticResource HeaderTitle}"/>
         
         <StackPanel 
             Grid.Row="1"
@@ -36,27 +37,30 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock 
                     Text="Kurs"
-                    Margin="12,0,0,0"/>
+                    Margin="12,0,0,0"
+                    Style="{StaticResource SmallTitle}"/>
                 <TextBlock 
                     Text="Årskurs"
-                    Margin="60,0,0,0"/>
+                    Margin="60,0,0,0"
+                    Style="{StaticResource SmallTitle}"/>
                 <TextBlock 
                     Text="Provstart"
-                    Margin="17,0,0,0"/>
+                    Margin="17,0,0,0"
+                    Style="{StaticResource SmallTitle}"/>
                 <TextBlock 
                     Text="Längd"
-                    Margin="103,0,0,0"/>
+                    Margin="103,0,0,0"
+                    Style="{StaticResource SmallTitle}"/>
                 <TextBlock 
                     Text="Maxpoäng"
-                    Margin="31,0,0,0"/>
+                    Margin="31,0,0,0"
+                    Style="{StaticResource SmallTitle}"/>
             </StackPanel>
 
             <ListView
                 Name="Lv_AvailableTests"
                 ItemsSource="{x:Bind viewModel:StudentViewModel.Instance.ActiveTests}" 
                 DoubleTapped="Lv_AvailableTests_DoubleTapped"
-                BorderBrush="Gray"
-                BorderThickness="1"
                 MinHeight="500"
                 Margin="0,10,0,0">
                 <ListView.ItemTemplate>
@@ -100,6 +104,7 @@
             Grid.Row="2"
             VerticalAlignment="Top"
             HorizontalAlignment="Right"
-            Margin="0,10,0,0" Click="Bttn_TakeTest_Click"/>
+            Margin="0,10,0,0" 
+            Click="Bttn_TakeTest_Click"/>
     </Grid>
 </Page>

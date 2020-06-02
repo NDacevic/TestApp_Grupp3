@@ -17,14 +17,15 @@
 
         <StackPanel>
             <TextBlock Text="Ta borta fråga" 
-                   FontSize="48"
+                   Style="{StaticResource HeaderTitle}"
                    HorizontalAlignment="Left"
                        Margin="20,0,0,0"/>
             <StackPanel Orientation="Horizontal"
                         Margin="20,0,0,0"
                         >
                 <TextBlock Text="Välj ämne för att få fram frågorna"
-                           Margin="0,10,0,0"/>
+                           Margin="0,10,0,0"
+                           Style="{StaticResource SmallTitle}"/>
             
             </StackPanel>
 
@@ -48,12 +49,9 @@
 
             </StackPanel>
 
-
-
         </StackPanel>
 
         <ListView
-                  BorderThickness="2"
                   Margin="20,140,0,150"
                   ItemsSource="{x:Bind teacherCVM.QuestionsToFilter}"
                   x:Name="DisplayQuestionsLV"

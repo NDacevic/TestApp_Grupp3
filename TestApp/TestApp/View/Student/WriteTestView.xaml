@@ -417,15 +417,19 @@
             Margin="0,20,0,0">
             <TextBlock
                 Text="Aktuellt prov:"
-                HorizontalAlignment="Left"/>
+                HorizontalAlignment="Left"
+                Style="{StaticResource SmallTitle}"/>
             <TextBlock
                 Margin="10,0,0,0"
-                Text="{x:Bind selectedTest.CourseName}"/>
+                Text="{x:Bind selectedTest.CourseName}"
+                Style="{StaticResource SmallTitle}"/>
             <TextBlock
                 Margin="5,0,0,0"
-                Text="Åk"/>
+                Text="Åk"
+                Style="{StaticResource SmallTitle}"/>
             <TextBlock
-                Text="{x:Bind selectedTest.Grade}"/>
+                Text="{x:Bind selectedTest.Grade}"
+                Style="{StaticResource SmallTitle}"/>
         </StackPanel>
         <TextBlock
             Name="TxtBl_TestTimer"
