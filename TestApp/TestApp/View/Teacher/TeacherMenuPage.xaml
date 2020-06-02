@@ -6,14 +6,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="Silver">
+    Background="#EEEAE6">
 
-    <Grid>
+    <Grid VerticalAlignment="Top" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <TextBlock Text=""
                    x:Name="displayName"
-                   Margin="20,100,0,0"/>
+                   Margin="20,40,0,40"
+                   Grid.Row="0"
+                   Style="{StaticResource SmallTitle}"/>
         <StackPanel Orientation="Vertical"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center"
+                    Grid.Row="1">
         
             <Button Content="Skapa fråga"
                     x:Name="createQuestion_btn"

@@ -6,12 +6,22 @@
 
     <Application.Resources>
         <ResourceDictionary>
-            
+
             <!--Här sätter jag värdet och ett namn för en brush. #FFFFFF är vit färg -->
             <SolidColorBrush
                 x:Key="primaryColor"
                 Color="#FFFFFF" 
                 />
+            <SolidColorBrush
+                x:Key="borderColor"
+                Color="#202020"/>
+
+            <!-- Font-storlekar kräver en double in som värde. Så vi kan skapa en double vi kan använda såhär-->
+            <x:Double x:Key="MediumFontSize">18</x:Double>
+            <x:Double x:Key="LargeFontSize">24</x:Double>
+            <x:Double x:Key="HeaderFontSize">40</x:Double>
+            <x:Double x:Key="SmallFontSize">14</x:Double>
+
 
             <!-- Sen använder vi den färgen för att färga bakgrunden på alla knappar via {StaticResource -namn på x:Key för färgen- } -->
             <Style
@@ -20,44 +30,138 @@
                     Property="Background"
                     Value="{StaticResource primaryColor}"
                     />
+                <Setter
+                    Property="CornerRadius"
+                    Value="3"/>
+                <Setter
+                    Property="BorderBrush"
+                    Value="{StaticResource borderColor}"/>
+                <Setter
+                    Property="Padding"
+                    Value="10,5"/>
+                <Setter
+                    Property="BorderThickness"
+                    Value="2"/>
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource SmallFontSize}"/>
+            </Style>
+            
+            <Style
+                TargetType="ListView">
+                <Setter
+                    Property="BorderBrush"
+                    Value="{StaticResource borderColor}"/>
+                <Setter
+                    Property="BorderThickness"
+                    Value="2"/>
             </Style>
 
-            <!-- Font-storlekar kräver en double in som värde. Så vi kan skapa en double vi kan använda såhär-->
-            <x:Double x:Key="MediumFontSize">14</x:Double>
+            <Style
+                TargetType="ComboBox">
+                <Setter
+                    Property="FontFamily"
+                    Value="Arial Nova"/>
+            </Style>
 
-            <x:Double x:Key="LargeFontSize">20</x:Double>
-            
-
-            <x:Double x:Key="HeaderFontSize">40</x:Double>
-            <x:Double x:Key="ColumnTitleFontSize">20</x:Double>
 
 
             <!-- Vi använder samma sätt att hämta värdet. fast denna gången är värdet 'FontSize'-->
             <Style
-                TargetType="TextBlock">
+                TargetType="Page"
+                x:Name="PageStyle">
                 <Setter
-                    Property="FontSize"
-                    Value="{StaticResource MediumFontSize}"
-                    />
+                    Property="RequestedTheme"
+                    Value="Light"/>
             </Style>
 
             <Style
                 TargetType="TextBlock"
-                x:Name="MediumTitle"
-                >
+                x:Name="MediumTitle">
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource MediumFontSize}"/>
+                <Setter
+                    Property="FontFamily"
+                    Value="Arial Nova"/>
+            </Style>
+            <Style
+                TargetType="TextBlock"
+                x:Name="SmallTitle">
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource SmallFontSize}"/>
+                <Setter
+                    Property="FontFamily"
+                    Value="Arial Nova"/>
+            </Style>
+
+
+            <Style
+                TargetType="TextBlock"
+                x:Name="LargeTitle">
                 <Setter 
                     Property="FontSize"
-                    Value="{StaticResource LargeFontSize}"
-                    />
-                <!--<Setter
+                    Value="{StaticResource LargeFontSize}"/>
+            </Style>
+
+            <Style
+                TargetType="TextBlock"
+                x:Name="HeaderTitle">
+                <Setter
                     Property="FontSize"
-                    Value="{StaticResource HeaderFontSize}"
-                    />-->
-                <!--<Setter
+                    Value="{StaticResource HeaderFontSize}"/>
+                <Setter
+                    Property="FontWeight"
+                    Value="Medium"/>
+                <Setter
+                    Property="FontStyle"
+                    Value="Normal"/>
+            </Style>
+
+            <Style
+                TargetType="TextBox"
+                x:Name="MediumTitleBox">
+                <Setter
                     Property="FontSize"
-                    Value="{StaticResource ColumnTitleFontSize}"
-                    />-->
-            </Style>          
+                    Value="{StaticResource MediumFontSize}"/>
+                <Setter
+                    Property="FontFamily"
+                    Value="Arial Nova"/>
+            </Style>
+            
+            <Style
+                TargetType="TextBox"
+                x:Name="SmallTitleBox">
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource SmallFontSize}"/>
+                <Setter
+                    Property="FontFamily"
+                    Value="Arial Nova"/>
+            </Style>
+            <Style
+                TargetType="PasswordBox"
+                x:Name="SmallPasswordTitle">
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource SmallFontSize}"/>
+                <Setter
+                    Property="FontFamily"
+                    Value="Arial Nova"/>
+            </Style>
+            
+            <Style
+                TargetType="PasswordBox"
+                x:Name="PasswordTitle">
+                <Setter
+                    Property="FontSize"
+                    Value="{StaticResource MediumFontSize}"/>
+                <Setter
+                    Property="FontFamily"
+                    Value="Arial Nova"/>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

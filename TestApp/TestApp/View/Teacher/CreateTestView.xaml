@@ -37,16 +37,19 @@
 
         <StackPanel>
             <TextBlock Text="Skapa prov" 
-                   FontSize="48"
                    HorizontalAlignment="Left"
-                       Margin="40,0,0,0"/>
+                       Margin="40,0,0,0"
+                       Style="{StaticResource HeaderTitle}"/>
             <StackPanel Orientation="Horizontal"
                         Margin="40,0,0,0">
-                <TextBlock Text="Ämne för prov"/>
+                <TextBlock Text="Ämne för prov"
+                           Style="{StaticResource SmallTitle}"/>
                 <TextBlock Text="Filtrera frågetyp"
-                           Margin="33,0,0,0"/>
+                           Margin="33,0,0,0"
+                           Style="{StaticResource SmallTitle}"/>
                 <TextBlock Text="Filtrera poäng"
-                           Margin="33,0,0,0"/>
+                           Margin="33,0,0,0"
+                           Style="{StaticResource SmallTitle}"/>
             </StackPanel>
             <StackPanel>
 
@@ -87,19 +90,24 @@
                         Margin="40,10,0,0"
                         >
                 <TextBlock  Text="Ämne"
-                        Margin="12,0,0,0"/>
+                        Margin="12,0,0,0"
+                            Style="{StaticResource SmallTitle}"/>
                 <TextBlock  Text="Frågetyp"
-                        Margin="44,0,0,0"/>
+                        Margin="44,0,0,0"
+                            Style="{StaticResource SmallTitle}"/>
                 <TextBlock  Text="Fråga"
-                        Margin="24,0,0,0"/>
+                        Margin="24,0,0,0"
+                            Style="{StaticResource SmallTitle}"/>
                 <TextBlock  Text="Poäng"
-                        Margin="280,0,0,0"/>
+                        Margin="280,0,0,0"
+                            Style="{StaticResource SmallTitle}"/>
              
             </StackPanel>
 
         </StackPanel>
 
-        <ListView BorderBrush="Black"
+
+        <ListView
                   BorderThickness="2"
                   Margin="40,145,0,200"
                   ItemsSource="{x:Bind teacherCreateViewModel.QuestionsToFilter}"
@@ -122,8 +130,6 @@
         </ListView>
 
         <ListView Grid.Column="2"
-                  BorderBrush="Black"
-                  BorderThickness="2"
                   Margin="0,145,20,200"
                   ItemsSource="{x:Bind teacherCreateViewModel.CreatedTest.Questions}"
                   x:Name="DisplayAddedQuestionsListView"
@@ -150,12 +156,15 @@
             <StackPanel Orientation="Horizontal" >
                 
                 <TextBlock Text="Årskurs"
-                           Margin="0,0,0,0"/>
+                           Margin="0,0,0,0"
+                           Style="{StaticResource SmallTitle}"/>
                
                 <TextBlock Text="Datum och tid för prov"
-                           Margin="78,0,0,0"/>
+                           Margin="78,0,0,0"
+                           Style="{StaticResource SmallTitle}"/>
                 <TextBlock Text="Provtid (min)"
-                           Margin="208,0,0,0"/>
+                           Margin="208,0,0,0"
+                           Style="{StaticResource SmallTitle}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <ComboBox Width="auto" 
@@ -189,13 +198,17 @@
                         Margin="0,7,0,0"
                         >
                 <TextBlock  Text="Ämne"
-                        Margin="12,0,0,0"/>
+                        Margin="12,0,0,0"
+                            Style="{StaticResource SmallTitle}"/>
                 <TextBlock  Text="Frågetyp"
-                        Margin="44,0,0,0"/>
+                        Margin="44,0,0,0"
+                            Style="{StaticResource SmallTitle}"/>
                 <TextBlock  Text="Fråga"
-                        Margin="24,0,0,0"/>
+                        Margin="24,0,0,0"
+                            Style="{StaticResource SmallTitle}"/>
                 <TextBlock  Text="Poäng"
-                        Margin="280,0,0,0"/>
+                        Margin="280,0,0,0"
+                            Style="{StaticResource SmallTitle}"/>
 
             </StackPanel>
         </StackPanel>
@@ -208,13 +221,15 @@
             
             <TextBlock Text="Maxpoäng"
                        VerticalAlignment="Center"
+                       Style="{StaticResource SmallTitle}"
                        />
             
             <TextBox x:Name="MaxPointTest"
                            Text="{x:Bind teacherCreateViewModel.CreatedTest.MaxPoints}"
                            PlaceholderText="0"
                            TextAlignment="Right"
-                           x:DefaultBindMode="TwoWay" IsReadOnly="True"/>
+                           x:DefaultBindMode="TwoWay" IsReadOnly="True"
+                           Style="{StaticResource SmallTitleBox}"/>
 
 
             <Button   x:Name="CreateTest_btn"

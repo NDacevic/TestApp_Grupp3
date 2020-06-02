@@ -20,63 +20,64 @@
             </Grid.RowDefinitions>
 
             <StackPanel Margin="40">
-                <TextBlock 
+                <TextBlock                 
                 Text="Lägg till personal" 
-                FontSize="32"/>
+                Style="{StaticResource HeaderTitle}"/>
                 
                 <StackPanel Orientation="Horizontal" Spacing="40">
                     <TextBlock 
-                    Text="Förnamn: " 
-                    FontSize="20" 
-                    Margin="0,50,0,0"
-                    Width="100"/>
+                        Text="Förnamn: " 
+                        Margin="0,50,0,0"
+                        Width="100"
+                        Style="{StaticResource MediumTitle}"/>
                     <TextBox
-                    x:Name="Tb_FirstName" 
-                    Text=""
-                    x:DefaultBindMode="TwoWay"
-                    FontSize="20"
-                    Margin="0,50,0,0"
-                    Width="200"/>
+                        x:Name="Tb_FirstName" 
+                        Text=""
+                        x:DefaultBindMode="TwoWay"
+                        Margin="0,50,0,0"
+                        Width="200"
+                        Style="{StaticResource MediumTitleBox}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="40">
                     <TextBlock 
                     Text="Efternamn: " 
-                    FontSize="20"
-                    Width="100"/>
+                    Width="100"
+                    Style="{StaticResource MediumTitle}"/>
                     <TextBox
                     x:Name="Tb_LastName"
                     Text=""
                     x:DefaultBindMode="TwoWay"
-                    FontSize="20"
-                    Width="200"/>
+                    Width="200"
+                    Style="{StaticResource MediumTitleBox}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="40">
                     <TextBlock 
                     Text="Email: " 
-                    FontSize="20"
-                    Width="100"/>
+                    Width="100"
+                    Style="{StaticResource MediumTitle}"/>
                     <TextBox
                     x:Name="Tb_Email"
                     Text=""
                     x:DefaultBindMode="TwoWay"
-                    FontSize="20"
-                    Width="200"/>
+                    Width="200"
+                    Style="{StaticResource MediumTitleBox}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="40">
                     <TextBlock 
                     Text="Lösenord: " 
-                    FontSize="20"
-                    Width="100"/>
+                    Width="100"
+                    Style="{StaticResource MediumTitle}"/>
                     <PasswordBox
                         x:Name="Pb_Password"
-                        Width="200"/>
+                        Width="200"
+                        Style="{StaticResource PasswordTitle}"/>
 
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Spacing="40">
                     <TextBlock 
                     Text="Roll: " 
-                    FontSize="20"
-                    Width="100"/>
+                    Width="100"
+                    Style="{StaticResource MediumTitle}"/>
                     <ComboBox
                         x:Name="Cb_EmployeeRole"
                         PlaceholderText="Välj roll"
@@ -87,7 +88,6 @@
                 <Button
                     x:Name="Bttn_AddEmployee"
                     Content="Lägg till personal" 
-                    Padding="15,10"
                     Margin="0,30,0,0"
                     Click="Bttn_AddEmployee_Click"/>
             </StackPanel>

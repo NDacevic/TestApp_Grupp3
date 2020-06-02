@@ -19,13 +19,14 @@
         <StackPanel>
             <TextBlock
                 Text="Ta bort användare" 
-                FontSize="48"
                 HorizontalAlignment="Left"
                 Margin="35,0,0,0"
+                Style="{StaticResource HeaderTitle}"
                 />
             <TextBlock
                 Text= "Var vänlig välj Anställd eller Elev för att få fram information. Sök även på ID för en direkt träff."
                 Margin="40,10,0,10"
+                Style="{StaticResource SmallTitle}"
                 />
             <StackPanel
                 Orientation="Horizontal"
@@ -48,10 +49,16 @@
                 x:Name="SearchIdTxtBox" 
                 KeyDown="SearchIdTxtBox_KeyDown"
                 />
+            <StackPanel Orientation="Horizontal"
+                        Margin="40,5,0,0">
+                <TextBlock Text="Epost"
+                           Margin="15,0,0,0"/>
+                <TextBlock Text="Namn"
+                           Margin="250,0,0,0"/>
+            </StackPanel>
         </StackPanel>
+     
         <ListView
-            BorderBrush="Black"
-            BorderThickness="2"
             Margin="40,190,40,200"
             ItemsSource="{x:Bind adminViewModel.AllUsers}"
             x:Name="DisplayUsersLV"
@@ -60,12 +67,21 @@
             ItemClick="listView_ChoosePersonClick"
             >
             <ListView.ItemTemplate>
-                <DataTemplate  x:Name="displayUsersLV" x:DataType="data:Person" x:DefaultBindMode="TwoWay" >
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{x:Bind FirstName}"/>
-                        <TextBlock Text="{x:Bind LastName}"/>
-                        <TextBlock Text="Epost:"/>
-                        <TextBlock Text="{x:Bind Email}"/>
+                <DataTemplate  x:Name="displayUsersLV" x:DataType="data:Person" 
+                               x:DefaultBindMode="TwoWay" >
+                    <StackPanel Orientation="Horizontal"
+                               Spacing="5">
+
+                        <TextBlock Text="{x:Bind Email}"
+                                       Width="220"/>
+                        <TextBlock Text="{Binding FirstName}"
+                                   Margin="62,0,0,0"/>
+                        <TextBlock Text="{x:Bind LastName}"
+                                   />
+
+
+
+
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -94,9 +110,9 @@
                 >
                 <TextBlock
                     Text="Redigera information" 
-                    FontSize="48"
                     HorizontalAlignment="Left"
                     Margin="0,0,0,75"
+                    Style="{StaticResource HeaderTitle}"
                 />
                 <TextBlock
                     Text="Användarinfo"
@@ -105,21 +121,27 @@
                     />
                 <TextBlock
                     Text="Förnamn"
+                    Style="{StaticResource SmallTitle}"
                     />
                 <TextBox
                     x:Name="textBox_FirstName"
+                    Style="{StaticResource SmallTitleBox}"
                     />
                 <TextBlock
                     Text="Efternamn"
+                    Style="{StaticResource SmallTitle}"
                     />
                 <TextBox
                     x:Name="textBox_LastName"
+                    Style="{StaticResource SmallTitleBox}"
                     />
                 <TextBlock
                     Text="Email"
+                    Style="{StaticResource SmallTitle}"
                     />
                 <TextBox
                     x:Name="textBox_Email"
+                    Style="{StaticResource SmallTitleBox}"
                     Text=""
                     />
                 <Button
@@ -132,19 +154,23 @@
                 <TextBlock
                     Text="Lösenord"
                     Style="{StaticResource MediumTitle}"
-                    Margin="0,84,0,15"
+                    Margin="0,55,0,15"
                     />
                 <TextBlock
                     Text="Lösenord"
+                    Style="{StaticResource SmallTitle}"
                     />
                 <PasswordBox
                     x:Name="passwordBox_Password"
+                    Style="{StaticResource SmallPasswordTitle}"
                     />
                 <TextBlock
                     Text="Repetera Lösenord"
+                    Style="{StaticResource SmallTitle}"
                     />
                 <PasswordBox
                     x:Name="passwordBox_repeatPassword"
+                    Style="{StaticResource SmallPasswordTitle}"
                     />
                 <Button
                     x:Name="bttn_EditPassword"

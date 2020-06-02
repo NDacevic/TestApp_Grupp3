@@ -35,7 +35,7 @@ namespace TestApp.View.Admin
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// When clicked, navigates to method that displays Employees in school
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -46,7 +46,7 @@ namespace TestApp.View.Admin
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// When clicked, navigates to method that displays Students in school
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -57,37 +57,46 @@ namespace TestApp.View.Admin
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Search and display user based on ID, instead of a button the user can press 'Enter'.
+        /// We also check if the user is a student or employee with radiobuttons.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SearchIdTxtBox_KeyDown(object sender, KeyRoutedEventArgs e) //Search person based on ID
+        private void SearchIdTxtBox_KeyDown(object sender, KeyRoutedEventArgs e) 
         {
-            if (e.Key==Windows.System.VirtualKey.Enter) //Instead of using a button for the textbox we can use 'Enter-key'
+            try
             {
-                if (StudentRadioBtn.IsChecked == true) //Check if it´s an employee or a student and displays on screen
+                if (e.Key == Windows.System.VirtualKey.Enter)
                 {
-                    if(SearchIdTxtBox.Text=="")
+                    if (StudentRadioBtn.IsChecked == true)
                     {
-                        adminViewModel.DisplayStudents();
+                        if (SearchIdTxtBox.Text == "")
+                        {
+                            adminViewModel.DisplayStudents();
+                        }
+                        else
+                            adminViewModel.DisplayStudentById(int.Parse(SearchIdTxtBox.Text));
                     }
-                    else
-                    adminViewModel.DisplayStudentById(int.Parse(SearchIdTxtBox.Text));
-                }
-                else if(EmployeeRadioBtn.IsChecked==true)
-                {
-                    if (SearchIdTxtBox.Text == "")
+                    else if (EmployeeRadioBtn.IsChecked == true)
                     {
-                        adminViewModel.DisplayEmployees();
+                        if (SearchIdTxtBox.Text == "")
+                        {
+                            adminViewModel.DisplayEmployees();
+                        }
+                        else
+                            adminViewModel.DisplayEmployeeById(int.Parse(SearchIdTxtBox.Text));
                     }
-                    else
-                        adminViewModel.DisplayEmployeeById(int.Parse(SearchIdTxtBox.Text));
                 }
             }
+            catch(FormatException)
+            {
+                
+            }
+           
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Gives the user a warning before deletion.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -111,11 +120,11 @@ namespace TestApp.View.Admin
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Checks if the picked user is a student or employee and sends further for deletion.
         /// </summary>
         public void DeleteUser()
         {
-            var selectedUser = DisplayUsersLV.SelectedItems; //The selected user is saved here
+            var selectedUser = DisplayUsersLV.SelectedItems;
             if (StudentRadioBtn.IsChecked == true)
             {
                 foreach (Model.Student student in selectedUser)
