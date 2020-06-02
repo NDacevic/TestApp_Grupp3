@@ -43,7 +43,6 @@ namespace TestApp.ViewModel
         {
 
             ActiveTests = new ObservableCollection<Test>();
-            //Todo: Remove later when a student can log in - MO
 
             StudentTestResult = new ObservableCollection<string>();
             AllTests = new List<Test>();
