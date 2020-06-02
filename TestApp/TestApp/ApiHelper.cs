@@ -486,7 +486,7 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Posting the created student to DB, returning message if/if not successfull
         /// </summary>
         /// <param name="student"></param>
         public async void PostStudent(Student student)
@@ -518,7 +518,7 @@ namespace TestApp
         
 
         /// <summary>
-        /// Todo: Comments!
+        /// Gets student based on email from DB, all email adresses are unique
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
@@ -538,7 +538,7 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Gets a list of all students from DB
         /// </summary>
         /// <returns></returns>
         public async Task <List<Student>> GetAllStudents()
@@ -595,9 +595,9 @@ namespace TestApp
                 return new List<Student>();
             }
         }
-        
+
         /// <summary>
-        /// Post new employee created by Admin 
+        /// Posting the created employee to both Employee table and the EmployeeRole table
         /// </summary>
         /// <param name="employee"></param>
         public async void PostEmployee(Employee employee)
@@ -708,7 +708,7 @@ namespace TestApp
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Get employee based on email from DB, all email adresses are unique
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
@@ -729,7 +729,7 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Gets a list of all employees from DB 
         /// </summary>
         /// <returns></returns>
         public async Task<List<Employee>> GetAllEmployees()
@@ -852,7 +852,7 @@ namespace TestApp
         }
 
         /// <summary>
-        /// Gets all roles from DB
+        /// Gets a list of all roles from DB
         /// </summary>
         /// <returns></returns>
         public async Task<List<Role>> GetRoles ()

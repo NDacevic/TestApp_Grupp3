@@ -50,7 +50,7 @@ namespace TestApp.ViewModel
 
         #region Methods
         /// <summary>
-        /// Todo: Comments
+        /// Get student based on inserted email when logging in
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
@@ -68,7 +68,7 @@ namespace TestApp.ViewModel
             
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Get employee based on inserted email when logging in
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
@@ -111,7 +111,7 @@ namespace TestApp.ViewModel
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Comparing inserted password with the password of the employee trying to log in 
         /// </summary>
         /// <param name="insertedPassword"></param>
         /// <returns></returns>
@@ -128,7 +128,7 @@ namespace TestApp.ViewModel
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Comparing inserted password with the password of the student trying to log in
         /// </summary>
         /// <param name="insertedPassword"></param>
         /// <returns></returns>
