@@ -81,8 +81,10 @@
 
         <ListView 
                   Margin="20,150,0,150"
-                  ItemsSource="{x:Bind adminViewModel.MyTests }"
+                  ItemsSource="{x:Bind adminViewModel.MyTests}"
                   x:Name="DisplayTestsLV"
+                  DoubleTapped="DisplayTestsLV_DoubleTapped"
+                  
                   >
             <ListView.ItemTemplate>
                 <DataTemplate x:Name="displayTestsLV" x:DataType="data:Test" >

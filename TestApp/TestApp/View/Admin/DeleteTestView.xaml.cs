@@ -131,5 +131,10 @@ namespace TestApp.View
             TestGrade.Text = "";
             TestCourse.Text = "";
         }
+
+        private void DisplayTestsLV_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            PickTestButton_Click(sender, e);
+        }
     }
 }
