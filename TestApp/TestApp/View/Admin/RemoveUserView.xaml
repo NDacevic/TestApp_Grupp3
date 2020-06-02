@@ -50,7 +50,7 @@
                 KeyDown="SearchIdTxtBox_KeyDown"
                 />
             <StackPanel Orientation="Horizontal"
-                        Margin="40,10,0,0">
+                        Margin="40,5,0,0">
                 <TextBlock Text="Epost"
                            Margin="15,0,0,0"/>
                 <TextBlock Text="Namn"
