@@ -75,7 +75,6 @@
                                 <Run Text="{x:Bind CourseName}"/>
                                 <Run Text=" åk "/>
                                 <Run Text="{x:Bind Grade}"/>
-                                <Run Text=", "/>
                             </TextBlock>
                         </DataTemplate>
                     </ListView.ItemTemplate>
