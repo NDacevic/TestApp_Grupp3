@@ -669,11 +669,12 @@ namespace TestApp
                 return false;
             }
         }
+
         /// <summary>
-        /// Todo: Comments!
+        /// Sends a PATCH request to the API with updated information for the Employee table
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="patchDocEmployee"></param>
+        /// <param name="patchDocStudent"></param>
         /// <returns></returns>
         public async Task<bool> PatchEmployeeAsync(int id, JsonPatchDocument<Person> patchDocEmployee)
         {

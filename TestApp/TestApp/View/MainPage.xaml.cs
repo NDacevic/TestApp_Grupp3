@@ -32,30 +32,26 @@ namespace TestApp
         {
             this.InitializeComponent();
         }
-        /// <summary>
-        /// Todo: Comments!
-        /// </summary>
-        /// <param name="e"></param>
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter == "Elev")
+            //When this page is navigated to it instantly navigates the 2 frames inside to different pages depending on what string value
+            //is passed along inside the NavigationEventArgs object.
+            if ((string)e.Parameter == "Elev")
             {
                 mainMenuFrame.Navigate(typeof(StudentMenuPage),mainFrame);
                 mainFrame.Navigate(typeof(AvailableTestsView));
             }
-            else if (e.Parameter == "Teacher")
+            else if ((string)e.Parameter == "Teacher")
             {
                 mainMenuFrame.Navigate(typeof(TeacherMenuPage), mainFrame);
                 mainFrame.Navigate(typeof(GradeTestView));
             }
-            else if (e.Parameter == "Admin")
+            else if ((string)e.Parameter == "Admin")
             {
                 mainMenuFrame.Navigate(typeof(AdminMenuPage), mainFrame);
                 mainFrame.Navigate(typeof(RemoveUserView)); //This is going to change to "AddUserPage" instead
             }
-
         }
-  
-
     }
 }
