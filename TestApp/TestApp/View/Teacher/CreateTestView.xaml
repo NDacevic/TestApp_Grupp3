@@ -106,7 +106,9 @@
 
         </StackPanel>
 
-        <ListView 
+
+        <ListView
+                  BorderThickness="2"
                   Margin="40,145,0,200"
                   ItemsSource="{x:Bind teacherCreateViewModel.QuestionsToFilter}"
                   x:Name="DisplayQuestionsListView"

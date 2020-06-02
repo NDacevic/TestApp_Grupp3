@@ -107,6 +107,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
+
         <GridView BorderBrush="#202020"
                   BorderThickness="2"
                   Margin="20,150,0,150"

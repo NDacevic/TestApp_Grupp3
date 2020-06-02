@@ -57,11 +57,11 @@ namespace TestApp.ViewModel
             
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Gets all test from DB and populates list
         /// </summary>
         public async void DisplayTests()
         {
-            TestList = await ApiHelper.Instance.GetAllTests(); //Populating List with Test from DB
+            TestList = await ApiHelper.Instance.GetAllTests(); 
             foreach (Test t in TestList)
             {
                 if(!MyTests.Contains(t))
@@ -72,7 +72,7 @@ namespace TestApp.ViewModel
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Filters our list of tests, based on the parameters that has been given by user.
         /// </summary>
         /// <param name="course"></param>
         /// <param name="grade"></param>
@@ -109,7 +109,7 @@ namespace TestApp.ViewModel
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Filters our list based on the given course. So we only displays tests related to the course.
         /// </summary>
         /// <param name="course"></param>
         public void FilterListByCourse(string course)
@@ -129,15 +129,15 @@ namespace TestApp.ViewModel
                 }
             }
 
-        }     
+        }
         /// <summary>
-        /// Todo: Comments!
+        /// Send Test.Id of the test to ApiHelper to delete it from db
         /// </summary>
         /// <param name="id"></param>
         public void DeleteTest(int id) 
         {
 
-            ApiHelper.Instance.DeleteTest(id); //Send Test.Id of the test to ApiHelper to delete it from db
+            ApiHelper.Instance.DeleteTest(id); 
             foreach(Test t in MyTests.ToList())
             {
                 if(t.TestId==id)
@@ -148,10 +148,10 @@ namespace TestApp.ViewModel
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// We go through the choosen Test and displays all the questions
         /// </summary>
         /// <param name="test"></param>
-        public void DisplayQuestionsOnTest(Test test) //We go through the choosen Test and displays all the questions.
+        public void DisplayQuestionsOnTest(Test test)
         {
             TestQuestions.Clear();
 
@@ -162,9 +162,9 @@ namespace TestApp.ViewModel
            
         }
         /// <summary>
-        /// Todo: Comments!
+        /// We get students from DB and populates list with students.
         /// </summary>
-        public async void DisplayStudents() //Displays all students. DONE
+        public async void DisplayStudents()
         {
             if(AllStudents.Count==0)
             {
@@ -303,10 +303,10 @@ namespace TestApp.ViewModel
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Displays student by searched Id.
         /// </summary>
         /// <param name="id"></param>
-        public void DisplayStudentById(int id) //Displays student by searched Id. DONE
+        public void DisplayStudentById(int id) 
         {
             AllUsers.Clear();
             foreach(Student p in AllStudents.ToList())
@@ -319,10 +319,10 @@ namespace TestApp.ViewModel
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Displays employee by searched Id
         /// </summary>
         /// <param name="id"></param>
-        public void DisplayEmployeeById(int id) //Displays employee by searched Id
+        public void DisplayEmployeeById(int id) 
         {
             AllUsers.Clear();
             foreach(Employee e in AllEmployees.ToList())
@@ -335,9 +335,9 @@ namespace TestApp.ViewModel
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// We get all employees from DB and populates list to display them.
         /// </summary>
-        public async void DisplayEmployees() //Displays all employees
+        public async void DisplayEmployees()
         {
             if(AllEmployees.Count==0)
             {
@@ -353,7 +353,7 @@ namespace TestApp.ViewModel
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// We get the picked employee and sends it to be deleted from DB
         /// </summary>
         /// <param name="employee"></param>
         public void DeleteEmployee(Employee employee)
@@ -370,7 +370,7 @@ namespace TestApp.ViewModel
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// We get the picked student and sends it to be deleted from DB
         /// </summary>
         /// <param name="student"></param>
         public void DeleteStudent(Student student)
@@ -501,8 +501,7 @@ namespace TestApp.ViewModel
                 }
         }
 
-        //Todo: Flytta metoderna till en annan viewmodel
-        /////////OBS OBS OBS - Metoderna nedan ska flyttas till en annan viewmodel/////
+        
         public void DeleteQuestion(Question question)
         {
             ApiHelper.Instance.DeleteQuestion(question.QuestionID);

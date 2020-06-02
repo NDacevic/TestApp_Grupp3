@@ -49,11 +49,9 @@
 
             </StackPanel>
 
-
-
         </StackPanel>
 
-        <ListView 
+        <ListView
                   Margin="20,140,0,150"
                   ItemsSource="{x:Bind teacherCVM.QuestionsToFilter}"
                   x:Name="DisplayQuestionsLV"

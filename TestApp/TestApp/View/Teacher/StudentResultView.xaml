@@ -43,6 +43,7 @@
             x:Name="Lv_AllTests"
             ItemsSource="{x:Bind model:TeacherStudentViewModel.Instance.GradedTests}"
             Grid.Row="1">
+
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel/>
@@ -78,6 +79,7 @@
             ItemsSource="{x:Bind model:TeacherStudentViewModel.Instance.DisplayResult}"
             Grid.Column="2" 
             Grid.Row="1">
+
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="x:String">
                     <StackPanel Orientation="Vertical"

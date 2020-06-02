@@ -30,7 +30,7 @@ namespace TestApp.View.Teacher
             GetAllTests();
         }
         /// <summary>
-        /// Todo: Comments!
+        /// We calls method to display all finished tests in a listview.
         /// </summary>
         private void GetAllTests()
         {
@@ -38,7 +38,7 @@ namespace TestApp.View.Teacher
         }
      
         /// <summary>
-        /// Todo: Comments!
+        /// When clicked, we send our test further to display the result of all students that have finished the choosen test.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

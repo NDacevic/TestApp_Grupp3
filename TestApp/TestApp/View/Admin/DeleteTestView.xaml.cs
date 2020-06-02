@@ -34,7 +34,7 @@ namespace TestApp.View
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Choosing course in combobox, sending further to filter list of tests.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -53,7 +53,7 @@ namespace TestApp.View
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Choosing grade in combobox, sending further to filter list of tests.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -81,7 +81,7 @@ namespace TestApp.View
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Sends the choosen test in listview to method for deletion.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -96,11 +96,11 @@ namespace TestApp.View
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Pickas a test and displays details about the choosen test.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void PickTestButton_Click(object sender, RoutedEventArgs e) //Pick a test and display its content
+        private void PickTestButton_Click(object sender, RoutedEventArgs e) 
         {
             var selected = DisplayTestsLV.SelectedItems;
             foreach (Test selectedTest in selected)
@@ -113,7 +113,7 @@ namespace TestApp.View
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Clearing list of questions when navigated to page.
         /// </summary>
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -122,7 +122,7 @@ namespace TestApp.View
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Resets the controlls after test have been deleted from DB
         /// </summary>
         private void ResetControlls()
         {
