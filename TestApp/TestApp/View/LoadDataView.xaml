@@ -8,6 +8,10 @@
     mc:Ignorable="d"
     Background="{x:Null}" BorderBrush="{x:Null}">
 
+    <ContentDialog.Shadow>
+        <ThemeShadow/>
+    </ContentDialog.Shadow>
+
     <Grid>
         <ProgressRing
             IsActive="True"
