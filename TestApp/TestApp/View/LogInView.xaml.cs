@@ -53,7 +53,8 @@ namespace TestApp.View
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Gets a student by inserted email, checking if inserted password is correct. If CheckStudentPassword
+        /// returns true we navigate to the mainpage for the student.
         /// </summary>
         /// <param name="password"></param>
         public async void StudentLogIn(string password)
@@ -72,7 +73,9 @@ namespace TestApp.View
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Gets an employee by inserted email, checking if inserted password is correct. If CheckEmployeePassword
+        /// returns true we check what role the employee is listed as. Depending on the role the program will navigate 
+        /// to different pages.
         /// </summary>
         /// <param name="password"></param>
         public async void EmployeeLogIn(string password)
@@ -109,7 +112,7 @@ namespace TestApp.View
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Checking if it's an employee or a student trying to log in
         /// </summary>
         private void CheckLogin()
         {
