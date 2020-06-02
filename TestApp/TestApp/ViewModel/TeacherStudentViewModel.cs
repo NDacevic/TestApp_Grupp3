@@ -64,7 +64,7 @@ namespace TestApp.ViewModel
         #region Methods
     
         /// <summary>
-        /// Displays all tests that is already graded
+        /// Used to get all TestResults and all Tests from DB
         /// </summary>
         
         public async void GetTests()
@@ -84,7 +84,7 @@ namespace TestApp.ViewModel
             DisplayAllTests();
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Displays all the tests that have been finished
         /// </summary>
         public void DisplayAllTests()
         {
@@ -102,7 +102,7 @@ namespace TestApp.ViewModel
             
         }
         /// <summary>
-        /// Displays the test results for one chosen test in the StudentResultView
+        /// Used to get all students from DB
         /// </summary>
         /// <param name="testId"></param>
 
@@ -122,7 +122,7 @@ namespace TestApp.ViewModel
 
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Displays all students test results for one chosen test in the StudentResultView
         /// </summary>
         /// <param name="testId"></param>
         public void DisplayStudentResult(int testId)

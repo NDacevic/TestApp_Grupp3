@@ -52,7 +52,7 @@
 
         </StackPanel>
 
-        <ListView BorderBrush="Black"
+        <ListView
                   BorderThickness="2"
                   Margin="20,140,0,150"
                   ItemsSource="{x:Bind teacherCVM.QuestionsToFilter}"

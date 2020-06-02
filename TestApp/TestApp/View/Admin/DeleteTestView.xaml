@@ -77,7 +77,7 @@
 
         </StackPanel>
 
-        <ListView BorderBrush="Black"
+        <ListView 
                   BorderThickness="2"
                   Margin="20,150,0,150"
                   ItemsSource="{x:Bind adminViewModel.MyTests }"
@@ -106,7 +106,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <GridView BorderBrush="Black"
+        <GridView 
                   BorderThickness="2"
                   Margin="20,150,0,150"
                   ItemsSource="{x:Bind adminViewModel.TestQuestions }"

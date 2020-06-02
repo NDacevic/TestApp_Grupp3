@@ -37,8 +37,6 @@ namespace TestApp.View.Teacher
 
         TeacherCreateViewModel teacherCreateViewModel  = TeacherCreateViewModel.Instance;
 
-        //TODO: Figure out how to filter list
-
         public CreateTestView()
         {
             this.InitializeComponent();
@@ -51,15 +49,16 @@ namespace TestApp.View.Teacher
         }
 
         /// <summary>
-        /// Todo: Comments!
+        /// Checking if the user have choosen an subject for the test.
+        /// If no subject is choosen we give the user a warning. Otherwise we send the question further and adds it to the test.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddQuestionToTest_Btn_Click(object sender, RoutedEventArgs e) //Adding the question the user choose from the list to the test.
+        private void AddQuestionToTest_Btn_Click(object sender, RoutedEventArgs e)
         {
-            if(ChooseCourseComboBox.SelectedValue==null)//Checking if the user have choosen an subject for the test
+            if(ChooseCourseComboBox.SelectedValue==null)
             {
-               teacherCreateViewModel.DisplayNoSubjectWarning(); //If no subject is choosen we give the user a warning.
+               teacherCreateViewModel.DisplayNoSubjectWarning(); 
             }
             else
             {
@@ -71,17 +70,16 @@ namespace TestApp.View.Teacher
             }
         }
 
-         /// <summary>
-         /// Todo: Comments!
-         /// </summary>
-         /// <param name="sender"></param>
-         /// <param name="e"></param>
+        /// <summary>
+        /// Populates the Test with the given values and sends it to method that adds it to DB
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateTest_btn_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //Populates the Test with the given values and sends it to the DB
-
+               
                 teacherCreateViewModel.CreatedTest.CourseName = ChooseCourseComboBox.SelectedValue.ToString();
                 teacherCreateViewModel.CreatedTest.Grade = int.Parse(ChooseGrade.SelectedValue.ToString());
                 teacherCreateViewModel.CreatedTest.TestDuration = int.Parse(TestTime_txtBox.Text);
@@ -94,7 +92,7 @@ namespace TestApp.View.Teacher
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Sends picked question and sends it further to remove it from the test.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -103,24 +101,26 @@ namespace TestApp.View.Teacher
             var selected = DisplayAddedQuestionsListView.SelectedItems;
             foreach (Question selectedQuestion in selected)
             {
-                teacherCreateViewModel.RemoveQuestionFromTest(selectedQuestion); //Method that removes the question from the object.
+                teacherCreateViewModel.RemoveQuestionFromTest(selectedQuestion); 
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// If there are questions added to the test and user changes subject, the list is reset.
+        /// Test Maxpoints are also reset if user changes subject.
+        /// We send the coursename further to only display questions related to that course.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ChooseCourseComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            teacherCreateViewModel.CreatedTest.Questions.Clear(); //If there are questions added to the test and user changes subject, the list is reset.
-            teacherCreateViewModel.CreatedTest.MaxPoints = 0; //Test Maxpoints are reset if user changes subject.
-            teacherCreateViewModel.GetQuestionsForTest(ChooseCourseComboBox.SelectedValue.ToString()); //Sending CourseName to method that´s gonna get all questions on that subject
+            teacherCreateViewModel.CreatedTest.Questions.Clear(); 
+            teacherCreateViewModel.CreatedTest.MaxPoints = 0; 
+            teacherCreateViewModel.GetQuestionsForTest(ChooseCourseComboBox.SelectedValue.ToString()); 
 
         }
-      
+
         /// <summary>
-        /// Todo: Comments!
+        /// Used to send different information further to filter the list of questions based on the users choice.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -140,7 +140,7 @@ namespace TestApp.View.Teacher
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Used to send different information further to filter the list of questions based on the users choice.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -159,7 +159,7 @@ namespace TestApp.View.Teacher
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// Assigning time and date to our test based on the users choice. 
         /// </summary>
         private void AddDateAndTimeToTest()
         {
@@ -187,13 +187,13 @@ namespace TestApp.View.Teacher
         }
         
         /// <summary>
-        /// Todo: Comments!
+        /// Give our calender datepicker some rules, so that the user can´t create a test on days prior to this and weekends.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void TestDatePicker_CalendarViewDayItemChanging(CalendarView sender, CalendarViewDayItemChangingEventArgs e)
         {
-            //Greying out Sundays,Saturdays and days prior to today, so the user can´t set wrong date.
+            
             if (e.Item.Date < DateTime.Today)
             {
                 e.Item.IsBlackout = true;
@@ -208,7 +208,7 @@ namespace TestApp.View.Teacher
             }
         }
         /// <summary>
-        /// Todo: Comments!
+        /// We clear the list of questions when user navigates to this, to make sure there is no old list saved.
         /// </summary>
         /// <param name="e"></param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -216,7 +216,7 @@ namespace TestApp.View.Teacher
             teacherCreateViewModel.QuestionsToFilter.Clear();
         }
         /// <summary>
-        /// Todo: Comments!
+        /// When a test is created, we reset all controlls.
         /// </summary>
         private void ResetControllers()
         {
