@@ -24,14 +24,16 @@
                           Height="180">
             
             <Button   x:Name="AddQuestionToTest_Btn"
-                          Content="Lägg till fråga --->"
-                          Click="AddQuestionToTest_Btn_Click" Width="151" 
-                          />
+                        Content="Lägg till fråga --->"
+                        Click="AddQuestionToTest_Btn_Click" 
+                        Width="135" 
+                        Margin="5,0"  />
 
             <Button   x:Name="RemoveQuestionFromTest_Btn"
-                          Content= " &lt;---Ta bort fråga"
-                      Margin="0,10,0,0"
-                          Click="RemoveQuestionFromTest_Btn_Click" Width="145"/>
+                      Content= " &lt;---Ta bort fråga"
+                      Click="RemoveQuestionFromTest_Btn_Click" 
+                      Width="135"
+                      Margin="5,5"/>
 
         </StackPanel>
 
@@ -56,7 +58,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal"
-                        Margin="40,0,0,0"
+                        Margin="40,0,0,10"
                         x:Name="leftSideControlls">
                 <ComboBox Width="104" 
                           x:Name="ChooseCourseComboBox"
@@ -109,7 +111,7 @@
 
         <ListView
                   BorderThickness="2"
-                  Margin="40,145,0,200"
+                  Margin="40,145,5,200"
                   ItemsSource="{x:Bind teacherCreateViewModel.QuestionsToFilter}"
                   x:Name="DisplayQuestionsListView"
                   >
@@ -130,7 +132,7 @@
         </ListView>
 
         <ListView Grid.Column="2"
-                  Margin="0,145,20,200"
+                  Margin="0,145,40,200"
                   ItemsSource="{x:Bind teacherCreateViewModel.CreatedTest.Questions}"
                   x:Name="DisplayAddedQuestionsListView"
                   >
