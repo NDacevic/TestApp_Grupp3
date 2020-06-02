@@ -41,6 +41,7 @@
         </StackPanel>
         <ListView 
             x:Name="Lv_AllTests"
+            DoubleTapped="Lv_AllTests_DoubleTapped"
             ItemsSource="{x:Bind model:TeacherStudentViewModel.Instance.GradedTests}"
             Grid.Row="1">
 

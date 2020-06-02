@@ -48,5 +48,10 @@ namespace TestApp.View.Teacher
             if(test != null)
                 TeacherStudentViewModel.Instance.GetStudentResult(test.TestId);
         }
+
+        private void Lv_AllTests_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            Bttn_SeeStudentResult_Click(sender, e);
+        }
     }
 }
