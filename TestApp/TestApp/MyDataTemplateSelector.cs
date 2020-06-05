@@ -23,7 +23,6 @@ namespace TestApp
         /// <returns></returns>
         protected override DataTemplate SelectTemplateCore(object item)
         {
-
             if (((Question)item).QuestionType == "Flerval")
             {
                 return MCA;
