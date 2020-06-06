@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Controls;
 
 namespace TestApp.Model
 {
@@ -30,6 +31,9 @@ namespace TestApp.Model
             IncorrectAnswer2 = incorrectAnswer2;
             CourseName = courseName;
             PointValue = point;
+
+           if (QuestionType=="Flerval")
+                RandomPositioningOfAnswers();
         }
         #endregion
 
@@ -61,9 +65,50 @@ namespace TestApp.Model
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RowInTest"));
             }
         } 
+
+        public string TopRadioButton { get; internal set; }
+        public string MiddleRadioButton { get; internal set; }
+        public string BottomRadioButton { get; internal set; }
         #endregion
 
         #region Methods
+
+        private void RandomPositioningOfAnswers()
+        {
+            Random r = new Random();
+            int randomNumber;
+            List<int> randomPositions = new List<int>();
+
+            while (randomPositions.Count<3)
+            {
+                randomNumber = r.Next(1, 4);
+                if (!randomPositions.Contains(randomNumber))
+                {
+                    randomPositions.Add(randomNumber);
+                }
+            }
+
+            TopRadioButton = GetTextContent(randomPositions[0]);
+            MiddleRadioButton = GetTextContent(randomPositions[1]);
+            BottomRadioButton = GetTextContent(randomPositions[2]);
+        } 
+
+        private string GetTextContent(int randomPosition)
+        {
+            switch (randomPosition)
+            {
+                case 1:
+                    return CorrectAnswer;
+                case 2:
+                    return IncorrectAnswer1;
+                case 3:
+                    return IncorrectAnswer2;
+                default:
+                    return null; //This will never happen
+            }
+        }
+
+
         /// <summary>
         /// Tells the Json converter that it shouldn't use the ID property when serializing.
         /// </summary>
