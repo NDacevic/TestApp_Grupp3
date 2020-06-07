@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
@@ -526,9 +527,15 @@ namespace TestApp
         {
             try
             {
-                jsonString = await httpClient.GetStringAsync("LogInStudents/" + email);
-                var student = JsonConvert.DeserializeObject<Student>(jsonString);
-                return student;
+                HttpResponseMessage httpResponse = await httpClient.GetAsync("LogInStudents/" + email);
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    jsonString = await httpResponse.Content.ReadAsStringAsync();
+                    var student = JsonConvert.DeserializeObject<Student>(jsonString);
+                    return student;
+                }
+                else
+                    return new Student();
             }
             catch (Exception exc)
             {
@@ -720,9 +727,14 @@ namespace TestApp
             try
             {
                 HttpResponseMessage httpResponse = await httpClient.GetAsync("LogInEmployees/" + email);
-                jsonString = await httpResponse.Content.ReadAsStringAsync();
-                var employee = JsonConvert.DeserializeObject<Employee>(jsonString);
-                return employee;
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    jsonString = await httpResponse.Content.ReadAsStringAsync();
+                    var employee = JsonConvert.DeserializeObject<Employee>(jsonString);
+                    return employee;
+                }
+                else
+                    return new Employee();
             }
             catch (Exception exc)
             {
